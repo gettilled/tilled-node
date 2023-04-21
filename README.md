@@ -31,6 +31,8 @@ import { PaymentIntentCreateParams } from '../tilled-api-client/model/paymentInt
 import { PaymentIntentConfirmParams } from '../tilled-api-client/model/paymentIntentConfirmParams';
 ```
 
+These examples only feature the PaymentIntentsApi, but this SDK is capable of making any of our other documented API calls. Our other APIs can be found in the [api](https://github.com/gettilled/tilled-node/tree/main/api) directory.
+
 ## Configuring Your Class Instance
 
 Once you have imported both modules, create a new class instance of the API module, set your secret key with the ApiKeys module, and set the `basePath` to the API:
