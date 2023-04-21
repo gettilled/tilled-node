@@ -75,3 +75,11 @@ npm run generate
 - Create a pull request
 
 ---
+
+## Versioning
+
+```bash
+npm version patch // 1.0.1
+npm version minor // 1.1.0
+npm version major // 2.0.0
+```
