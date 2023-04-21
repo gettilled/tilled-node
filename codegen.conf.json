@@ -1,0 +1,21 @@
+{
+  "packageName": "tilled-node",
+  "npmName": "tilled-node",
+  "npmVersion": "0.0.1",
+  "modelNamePrefix": "",
+  "modelNameSuffix": "",
+  "apiNameSuffix": "",
+  "useSingleRequestParameter": "true",
+  "supportES6": true,
+  "useInterfaces": true,
+  "enumNameSuffix": "",
+  "ensureUniqueParams": true,
+  "modelPropertyNaming": "original",
+  "enumPropertyNaming": "UPPERCASE",
+  "paramNaming": "original",
+  "usePromises": "true",
+  "typescriptThreePlus": "true",
+  "strictSpecBehavior": "false",
+  "sortParamsByRequiredFlag": true,
+  "sortModelPropertiesByRequiredFlag": true
+}
