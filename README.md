@@ -26,9 +26,9 @@ To use any of the modules in this SDK, will need to import an ApiKeys module in 
 import {
   PaymentIntentsApi,
   PaymentIntentsApiApiKeys,
-} from '../tilled-api-client/api/paymentIntentsApi';
-import { PaymentIntentCreateParams } from '../tilled-api-client/model/paymentIntentCreateParams';
-import { PaymentIntentConfirmParams } from '../tilled-api-client/model/paymentIntentConfirmParams';
+  PaymentIntentCreateParams,
+  PaymentIntentConfirmParams
+} from 'tilled-node';
 ```
 
 These examples only feature the PaymentIntentsApi, but this SDK is capable of making any of our other documented API calls. Our other APIs can be found in the [api](https://github.com/gettilled/tilled-node/tree/main/api) directory.
@@ -135,4 +135,4 @@ app.post(
 );
 ```
 
-This example assumes that you are creating a payment intent on the client with [Tilled.js](https://docs.tilled.com/docs/payment-methods/tilledjs/) and passing it your request body. If you meet the PCI requirments to use the [Create a Payment Method](https://docs.tilled.com/api/#tag/PaymentMethods/operation/CreatePaymentMethod) endpoint and choose to use it, you will need to import the modules for the `PaymentMethodsApi` and create your payment method with the `createPaymentMethod` method.
+This example assumes that you are creating a payment intent on the client with [Tilled.js](https://docs.tilled.com/docs/payment-methods/tilledjs/) and passing it your request body. If you meet the PCI requirements to use the [Create a Payment Method](https://docs.tilled.com/api/#tag/PaymentMethods/operation/CreatePaymentMethod) endpoint and choose to use it, you will need to import the modules for the `PaymentMethodsApi` and create your payment method with the `createPaymentMethod` method.
