@@ -1,6 +1,6 @@
 {
   "name": "tilled-node",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJS SDK client for Tilled's API",
   "files": [
     "dist"
@@ -15,11 +15,12 @@
     "clean": "rm -Rf node_modules/ *.js",
     "build": "tsc",
     "test": "npm run build && node dist/client.js",
-    "generate": "openapi-generator generate -i https://api.tilled.com/docs/spec3.json -g typescript-node -c ./codegen.conf.json --git-repo-id tilled-sdks --git-user-id gettilled --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm version patch --force"
+    "generate": "openapi-generator-cli generate -i https://api.tilled.com/docs/spec3.json -g typescript-node -c ./codegen.conf.json --git-repo-id tilled-sdks --git-user-id gettilled --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm version patch --force"
   },
   "author": "Tilled",
   "license": "Unlicense",
   "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "bluebird": "^3.5.0",
     "request": "^2.81.0",
     "rewire": "^6.0.0"
