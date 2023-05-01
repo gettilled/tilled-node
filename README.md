@@ -28,8 +28,6 @@ import {
 	PaymentIntentsApiApiKeys,
 	PaymentIntentCreateParams,
 	PaymentIntentConfirmParams,
-	PaymentIntentsApiCreatePaymentIntentRequest,
-	PaymentIntentsApiConfirmPaymentIntentRequest,
 } from 'tilled-node';
 ```
 
@@ -80,13 +78,12 @@ app.post(
 		}
 	) => {
 		const { tilled_account } = req.headers;
-		const request: PaymentIntentsApiCreatePaymentIntentRequest = {
-			tilled_account,
-			PaymentIntentCreateParams: req.body,
-		};
 
 		paymentIntentsApi
-			.createPaymentIntent(request)
+			.createPaymentIntent({
+				tilled_account,
+				PaymentIntentCreateParams: req.body,
+			})
 			.then((response) => {
 				return response.data;
 			})
@@ -130,14 +127,12 @@ app.post(
 		const { tilled_account } = req.headers;
 		const { id } = req.params;
 
-		const request: PaymentIntentsApiConfirmPaymentIntentRequest = {
-			tilled_account,
-			id,
-			PaymentIntentConfirmParams: req.body,
-		};
-
 		paymentIntentsApi
-			.confirmPaymentIntent(request)
+			.confirmPaymentIntent({
+				tilled_account,
+				id,
+				PaymentIntentConfirmParams: req.body,
+			})
 			.then((response) => {
 				return response.data;
 			})
