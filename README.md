@@ -8,7 +8,7 @@ This project is still in beta. It is generated and regenerated regularly when we
 
 ## Description
 
-This SDK was generated using the [Typescript-Node generator](https://openapi-generator.tech/docs/generators/typescript-node) with the following [codegen.conf.json](codegen.conf.json)
+This SDK was generated using the [Typescript-Axios generator](https://openapi-generator.tech/docs/generators/typescript-axios) with the following [codegen.conf.json](codegen.conf.json)
 
 ### Install the NPM Package
 
