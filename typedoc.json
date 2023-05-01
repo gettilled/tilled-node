@@ -1,12 +1,6 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
-	"entryPoints": [
-		// "./api.ts",
-		// "./models.ts",
-		"./index.ts"
-		// "./configuration.ts",
-		// "./base.ts"
-	],
+	"entryPoints": ["./index.ts"],
 	"out": "docs",
 	"navigationLinks": {
 		"Docs": "https://docs.tilled.com/",
