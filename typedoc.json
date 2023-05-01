@@ -3,9 +3,9 @@
 	"entryPoints": [
 		// "./api.ts",
 		// "./models.ts",
-		"./index.ts",
-		"./configuration.ts",
-		"./base.ts"
+		"./index.ts"
+		// "./configuration.ts",
+		// "./base.ts"
 	],
 	"out": "docs",
 	"navigationLinks": {
