@@ -1,5 +1,3 @@
-.npmignore
-README.md
 api.ts
 api/accounts-api.ts
 api/apikeys-api.ts

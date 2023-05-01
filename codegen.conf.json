@@ -1,7 +1,6 @@
 {
-	"packageName": "tilled-ts-node-sdk",
-	"npmName": "tilled-ts-node-sdk",
-	"npmVersion": "0.0.1",
+	"packageName": "tilled-node",
+	"npmName": "tilled-node",
 	"modelNamePrefix": "",
 	"modelNameSuffix": "",
 	"apiNameSuffix": "",
