@@ -35,4 +35,6 @@
 #!docs/README.md
 
 .gitignore
+.npmignore
+README.md
 package.json
