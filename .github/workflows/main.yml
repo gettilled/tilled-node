@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: node-modules-cache
+        with:
+          path: |
+            node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - run: npm ci --ignore-scripts
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+
+      - name: Build package and generate docs
+        run: npm run generate
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: docs
+          path: docs/
+          retention-days: 3
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: dist
+          path: dist/
+          retention-days: 3
+
+      - name: Setup Pages
+        if: always()
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v1
