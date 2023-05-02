@@ -18,7 +18,7 @@
     "build": "npm run prep && tsc ",
     "prepare": "npm run build",
     "document": "npx typedoc --options typedoc.json --darkHighlightTheme dark-plus --lightHighlightTheme light-plus",
-    "generate": "npx @openapitools/openapi-generator-cli generate -i https://api.tilled.com/docs/spec3.json -g typescript-axios -c ./codegen.conf.json --git-repo-id tilled-sdks --git-user-id gettilled --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm run document"
+    "generate": "npx @openapitools/openapi-generator-cli generate -i https://api.tilled.com/docs/spec3.json -g typescript-axios -c ./codegen.conf.json --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm run document"
   },
   "author": "Tilled",
   "license": "Unlicense",
