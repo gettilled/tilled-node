@@ -12,22 +12,24 @@
   "main": "dist/api.js",
   "types": "dist/api.d.ts",
   "scripts": {
-    "clean": "rm -Rf node_modules/ *.js",
-    "build": "tsc",
-    "test": "npm run build && node dist/client.js",
-    "generate": "openapi-generator generate -i https://api.tilled.com/docs/spec3.json -g typescript-node -c ./codegen.conf.json --git-repo-id tilled-sdks --git-user-id gettilled --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm version patch --force"
+    "prettier:check": "npx prettier --config .prettierrc --check .",
+    "prettier:write": "npx prettier --config .prettierrc --write .",
+    "prep": "bash sanitize_exports.sh",
+    "build": "npm run prep && tsc ",
+    "prepare": "npm run build",
+    "document": "npx typedoc --options typedoc.json --darkHighlightTheme dark-plus --lightHighlightTheme light-plus",
+    "generate": "npx @openapitools/openapi-generator-cli generate -i https://api.tilled.com/docs/spec3.json -g typescript-axios -c ./codegen.conf.json --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm run document"
   },
   "author": "Tilled",
   "license": "Unlicense",
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "request": "^2.81.0",
-    "rewire": "^6.0.0"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.33",
-    "@types/node": "^12",
-    "@types/request": "^2.48.8",
+    "@openapitools/openapi-generator-cli": "^2.6.0",
+    "@types/node": "^12.11.5",
+    "prettier": "2.8.8",
+    "typedoc": "^0.24.6",
     "typescript": "^4.0"
   }
 }

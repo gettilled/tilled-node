@@ -2,6 +2,17 @@ wwwroot/*.js
 node_modules
 typings
 dist
+
+## Ignore docs files
+docs/*.html
+docs/assets
+docs/classes/*.html
+docs/functions/*.html
+docs/interfaces/*.html
+docs/types/*.html
+docs/variables/*.html
+
+
 .DS_Store
 .cache
 .env
