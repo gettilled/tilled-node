@@ -6,15 +6,17 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pages: write
-
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
 
@@ -35,6 +37,11 @@ jobs:
 
       - name: Build package and generate docs
         run: npm run generate
+
+      - name: Publish NPM Package
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
 
       - name: Upload docs
         uses: actions/upload-artifact@v3
@@ -65,4 +72,4 @@ jobs:
       - name: Deploy to GitHub Pages
         if: always()
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
