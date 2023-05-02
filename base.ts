@@ -12,23 +12,23 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from "./configuration";
+import type { Configuration } from './configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from "axios";
-import globalAxios from "axios";
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 
-export const BASE_PATH = "https://api.tilled.com".replace(/\/+$/, "");
+export const BASE_PATH = 'https://api.tilled.com'.replace(/\/+$/, '');
 
 /**
  *
  * @export
  */
 export const COLLECTION_FORMATS = {
-  csv: ",",
-  ssv: " ",
-  tsv: "\t",
-  pipes: "|",
+  csv: ',',
+  ssv: ' ',
+  tsv: '\t',
+  pipes: '|'
 };
 
 /**
@@ -70,6 +70,6 @@ export class BaseAPI {
 export class RequiredError extends Error {
   constructor(public field: string, msg?: string) {
     super(msg);
-    this.name = "RequiredError";
+    this.name = 'RequiredError';
   }
 }

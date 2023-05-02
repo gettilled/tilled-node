@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>tilled-node</title>
-		<meta name="description" content="Documentation for tilled-node" />
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="./docs/favicons/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="./docs/favicons/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="./docs/favicons/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="./docs/favicons/site.webmanifest" />
-		<link
-			rel="mask-icon"
-			href="./docs/favicons/safari-pinned-tab.svg"
-			color="#004750"
-		/>
-		<link rel="shortcut icon" href="./docs/favicons/favicon.ico" />
-		<meta
-			name="msapplication-config"
-			content="./docs/favicons/browserconfig.xml"
-		/>
-		<link rel="stylesheet" href="./docs/assets/style.css" />
-		<link rel="stylesheet" href="./docs/assets/highlight.css" />
-		<script src="./docs/assets/main.js"></script>
-		<script src="./docs/assets/search.js"></script>
-		<!-- Start of Tilled Zendesk Widget script -->
-		<script
-			id="ze-snippet"
-			src="https://static.zdassets.com/ekr/snippet.js?key=dee71152-d848-4a68-8797-a445b589ae99"
-		></script>
-		<!-- End of Tilled Zendesk Widget script -->
-	</head>
-	<body>
-		<div w3-include-html="./docs/index.html"></div>
-		<script>
-			function addHTML() {
-				var el, i, domEl, fileName, xmlHttp;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tilled-node</title>
+    <meta name="description" content="Documentation for tilled-node" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./docs/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./docs/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./docs/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./docs/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./docs/favicons/safari-pinned-tab.svg"
+      color="#004750"
+    />
+    <link rel="shortcut icon" href="./docs/favicons/favicon.ico" />
+    <meta
+      name="msapplication-config"
+      content="./docs/favicons/browserconfig.xml"
+    />
+    <link rel="stylesheet" href="./docs/assets/style.css" />
+    <link rel="stylesheet" href="./docs/assets/highlight.css" />
+    <script src="./docs/assets/main.js"></script>
+    <script src="./docs/assets/search.js"></script>
+    <!-- Start of Tilled Zendesk Widget script -->
+    <script
+      id="ze-snippet"
+      src="https://static.zdassets.com/ekr/snippet.js?key=dee71152-d848-4a68-8797-a445b589ae99"
+    ></script>
+    <!-- End of Tilled Zendesk Widget script -->
+  </head>
+  <body>
+    <div w3-include-html="./docs/index.html"></div>
+    <script>
+      function addHTML() {
+        var el, i, domEl, fileName, xmlHttp;
 
-				/*Iterate all DOM*/
-				el = document.getElementsByTagName('*');
-				for (i = 0; i < el.length; i++) {
-					domEl = el[i];
+        /*Iterate all DOM*/
+        el = document.getElementsByTagName('*');
+        for (i = 0; i < el.length; i++) {
+          domEl = el[i];
 
-					/*find the element having w3-include-html attribute*/
-					fileName = domEl.getAttribute('w3-include-html');
-					if (fileName) {
-						/*http request with attribute value as file name*/
-						xmlHttp = new XMLHttpRequest();
-						xmlHttp.onreadystatechange = function () {
-							if (this.readyState == 4) {
-								if (this.status == 200) {
-									domEl.innerHTML = this.responseText;
-								}
-								if (this.status == 404) {
-									domEl.innerHTML = 'Page not found.';
-								}
+          /*find the element having w3-include-html attribute*/
+          fileName = domEl.getAttribute('w3-include-html');
+          if (fileName) {
+            /*http request with attribute value as file name*/
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+              if (this.readyState == 4) {
+                if (this.status == 200) {
+                  domEl.innerHTML = this.responseText;
+                }
+                if (this.status == 404) {
+                  domEl.innerHTML = 'Page not found.';
+                }
 
-								/* Remove the attribute and invoke the function again*/
-								domEl.removeAttribute('w3-include-html');
-								addHTML();
-							}
-						};
-						xmlHttp.open('GET', fileName, true);
-						xmlHttp.send();
+                /* Remove the attribute and invoke the function again*/
+                domEl.removeAttribute('w3-include-html');
+                addHTML();
+              }
+            };
+            xmlHttp.open('GET', fileName, true);
+            xmlHttp.send();
 
-						/*function ends*/
-						return;
-					}
-				}
-			}
-			addHTML();
-		</script>
-	</body>
+            /*function ends*/
+            return;
+          }
+        }
+      }
+      addHTML();
+    </script>
+  </body>
 </html>

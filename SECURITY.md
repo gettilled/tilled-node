@@ -17,4 +17,3 @@ _Note: A HackerOne account and report submission to our program is required to r
 Tilled's information security team will send a response outlining any next steps necessary in handling your report. After the initial reply to your report, we'll keep you informed of the progress towards a fix and/or disclosure (if applicable) and may ask for additional information or guidance regarding the issue.
 
 _NOTE: Please report security bugs in any third-party modules, libraries, and/or dependencies to the person, organization, or team that owns and/or supports those resources._
-

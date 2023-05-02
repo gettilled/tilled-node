@@ -24,10 +24,10 @@ To use any of the modules in this SDK, will need to import an ApiKeys module in 
 
 ```typescript
 import {
-	PaymentIntentsApi,
-	PaymentIntentsApiApiKeys,
-	PaymentIntentCreateParams,
-	PaymentIntentConfirmParams,
+  PaymentIntentsApi,
+  PaymentIntentsApiApiKeys,
+  PaymentIntentCreateParams,
+  PaymentIntentConfirmParams
 } from 'tilled-node';
 ```
 
@@ -39,9 +39,9 @@ Once you have imported both modules, Set This SDK [Axios](https://axios-http.com
 
 ```typescript
 const config = new Configuration({
-	apiKey: process.env.TILLED_SECRET_KEY,
-	basePath: 'https://sandbox-api.tilled.com', // defaults to https://api.tilled.com
-	baseOptions: { timeout: 2000 }, // overide default settings with an Axios config
+  apiKey: process.env.TILLED_SECRET_KEY,
+  basePath: 'https://sandbox-api.tilled.com', // defaults to https://api.tilled.com
+  baseOptions: { timeout: 2000 } // overide default settings with an Axios config
 });
 ```
 
@@ -63,39 +63,39 @@ We are now ready to make a payment. First, we need to [create a payment intent](
 
 ```typescript
 app.post(
-	'/payment-intents',
-	(
-		req: Request & {
-			headers: {
-				tilled_account: string;
-			};
-			body: PaymentIntentCreateParams;
-		},
-		res: Response & {
-			json: any;
-			send: any;
-			status: any;
-		}
-	) => {
-		const { tilled_account } = req.headers;
+  '/payment-intents',
+  (
+    req: Request & {
+      headers: {
+        tilled_account: string;
+      };
+      body: PaymentIntentCreateParams;
+    },
+    res: Response & {
+      json: any;
+      send: any;
+      status: any;
+    }
+  ) => {
+    const { tilled_account } = req.headers;
 
-		paymentIntentsApi
-			.createPaymentIntent({
-				tilled_account,
-				PaymentIntentCreateParams: req.body,
-			})
-			.then((response) => {
-				return response.data;
-			})
-			.then((data) => {
-				res.json(data);
-				console.log(data);
-			})
-			.catch((error) => {
-				console.error(error);
-				res.status(404).json(error);
-			});
-	}
+    paymentIntentsApi
+      .createPaymentIntent({
+        tilled_account,
+        PaymentIntentCreateParams: req.body
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        res.json(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(404).json(error);
+      });
+  }
 );
 ```
 
@@ -107,44 +107,44 @@ Now that we have a payment intent, let's [confirm](https://docs.tilled.com/api#t
 
 ```typescript
 app.post(
-	'/payment-intents/:id/confirm',
-	(
-		req: Request & {
-			headers: {
-				tilled_account: string;
-			};
-			params: {
-				id: string;
-			};
-			body: PaymentIntentConfirmParams;
-		},
-		res: Response & {
-			json: any;
-			send: any;
-			status: any;
-		}
-	) => {
-		const { tilled_account } = req.headers;
-		const { id } = req.params;
+  '/payment-intents/:id/confirm',
+  (
+    req: Request & {
+      headers: {
+        tilled_account: string;
+      };
+      params: {
+        id: string;
+      };
+      body: PaymentIntentConfirmParams;
+    },
+    res: Response & {
+      json: any;
+      send: any;
+      status: any;
+    }
+  ) => {
+    const { tilled_account } = req.headers;
+    const { id } = req.params;
 
-		paymentIntentsApi
-			.confirmPaymentIntent({
-				tilled_account,
-				id,
-				PaymentIntentConfirmParams: req.body,
-			})
-			.then((response) => {
-				return response.data;
-			})
-			.then((data) => {
-				res.json(data);
-				console.log(data);
-			})
-			.catch((error) => {
-				console.error(error);
-				res.status(404).json(error);
-			});
-	}
+    paymentIntentsApi
+      .confirmPaymentIntent({
+        tilled_account,
+        id,
+        PaymentIntentConfirmParams: req.body
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        res.json(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(404).json(error);
+      });
+  }
 );
 ```
 

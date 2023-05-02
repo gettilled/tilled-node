@@ -1,9 +1,9 @@
 {
-	"$schema": "https://typedoc.org/schema.json",
-	"entryPoints": ["./index.ts"],
-	"out": "docs",
-	"navigationLinks": {
-		"Docs": "https://docs.tilled.com/",
-		"API": "https://docs.tilled.com/api"
-	}
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./index.ts"],
+  "out": "docs",
+  "navigationLinks": {
+    "Docs": "https://docs.tilled.com/",
+    "API": "https://docs.tilled.com/api"
+  }
 }
