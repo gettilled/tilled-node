@@ -9,8 +9,8 @@
     "type": "git",
     "url": "https://github.com/gettilled/tilled-node.git"
   },
-  "main": "dist/api.js",
-  "types": "dist/api.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prettier:check": "npx prettier --config .prettierrc --check .",
     "prettier:write": "npx prettier --config .prettierrc --write .",
