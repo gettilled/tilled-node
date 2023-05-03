@@ -41,7 +41,7 @@ Once you have imported both modules, Set This SDK [Axios](https://axios-http.com
 const config = new Configuration({
   apiKey: process.env.TILLED_SECRET_KEY,
   basePath: 'https://sandbox-api.tilled.com', // defaults to https://api.tilled.com
-  baseOptions: { timeout: 2000 } // overide default settings with an Axios config
+  baseOptions: { timeout: 2000 } // override default settings with an Axios config
 });
 ```
 
@@ -59,7 +59,7 @@ const paymentIntentsApi = new PaymentIntentsApi(config);
 
 ### Creating a Payment Intent
 
-We are now ready to make a payment. First, we need to [create a payment intent](https://docs.tilled.com/api#tag/PaymentIntents/operation/CreatePaymentIntent). This should be done as soon as your checkout page or componet is loaded. You can set up the endpoint for your frontend like so:
+We are now ready to make a payment. First, we need to [create a payment intent](https://docs.tilled.com/api#tag/PaymentIntents/operation/CreatePaymentIntent). This should be done as soon as your checkout page or component is loaded. You can set up the endpoint for your frontend like so:
 
 ```typescript
 app.post(
