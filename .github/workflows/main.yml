@@ -39,6 +39,7 @@ jobs:
         run: npm run generate
 
       - name: Publish NPM Package
+        id: publish
         uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.NPM_TOKEN }}
@@ -73,3 +74,13 @@ jobs:
         if: always()
         id: deployment
         uses: actions/deploy-pages@v2
+
+      - name: Notify in Slack sdk-builds channel if new changes are published
+        if: ${{ steps.publish.outputs.type }}
+        uses: 8398a7/action-slack@v3
+        with:
+          text: '${{ steps.publish.outputs.id }} has been published. See the latest here https://www.npmjs.com/package/tilled-node'
+          status: ${{ job.status }}
+          fields: workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SDK }}
