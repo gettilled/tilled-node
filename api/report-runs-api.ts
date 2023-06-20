@@ -138,14 +138,14 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
          * @param {Array<'queued' | 'finished' | 'failed'>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listReportRuns: async (tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listReportRuns: async (tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listReportRuns', 'tilled_account', tilled_account)
             // verify required parameter 'ReportRunRetrieveParams' is not null or undefined
@@ -242,14 +242,14 @@ export const ReportRunsApiFp = function(configuration?: Configuration) {
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
          * @param {Array<'queued' | 'finished' | 'failed'>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listReportRuns(tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListReportRuns200Response>> {
+        async listReportRuns(tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListReportRuns200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listReportRuns(tilled_account, ReportRunRetrieveParams, type, status, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -360,10 +360,10 @@ export interface ReportRunsApiListReportRunsRequest {
 
     /**
      * Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
-     * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>}
+     * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>}
      * @memberof ReportRunsApiListReportRuns
      */
-    readonly type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1'>
+    readonly type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1'>
 
     /**
      * Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.

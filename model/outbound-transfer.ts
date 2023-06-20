@@ -17,119 +17,127 @@
 /**
  * 
  * @export
- * @interface ApiKey
+ * @interface OutboundTransfer
  */
-export interface ApiKey {
+export interface OutboundTransfer {
     /**
      * Time at which the object was last updated.
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransfer
      */
     'updated_at': string;
     /**
      * Time at which the object was created.
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransfer
      */
     'created_at': string;
     /**
      * Unique identifier for the object.
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransfer
      */
     'id': string;
     /**
-     * The actual value of the API key to be included in the `tilled-api-key` header for authentication. `secret` keys will have a redacted value except when initially created.
+     * The ID of the account for this outbound transfer.
      * @type {string}
-     * @memberof ApiKey
-     */
-    'value': string;
-    /**
-     * The string that you assign to describe the resource. It defaults to \'`type` Key\' (e.g. \'Secret Key\' and \'Publishable Key\')
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'name': string;
-    /**
-     * The type of API key.  `secret` can be used to authenticate all endpoints. `publishable` is used in your frontend application and can only access a handful of endpoints (e.g. confirm a Payment Intent).
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'type': ApiKeyType;
-    /**
-     * The id of the associated account.
-     * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransfer
      */
     'account_id': string;
     /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` to enable all scopes, except those that require explicit selection.
-     * @type {Array<string>}
-     * @memberof ApiKey
+     * Amount of the outbound transfer, in currency minor units.
+     * @type {number}
+     * @memberof OutboundTransfer
      */
-    'scopes': Array<ApiKeyScopes>;
+    'amount': number;
     /**
-     * Time at which the key was last used to authenticate with the API.
+     * The status of the outbound transfer.
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransfer
      */
-    'last_used'?: string;
+    'status': OutboundTransferStatus;
+    /**
+     * The ID of destination [payment method](#tag/PaymentMethods) to send the outbound transfer to.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'destination_payment_method_id': string;
+    /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'currency': OutboundTransferCurrency;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof OutboundTransfer
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
+     * Populated when `status` is `canceled`, this is the time at which the Outbound Transfer was canceled.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'canceled_at'?: string;
+    /**
+     * Message to user further explaining the reason for the outbound transfer failure.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'failure_message'?: string;
+    /**
+     * Error code explaining reason for outbound transfer failure.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'failure_code'?: OutboundTransferFailureCode;
 }
 
-export const ApiKeyType = {
-    PUBLISHABLE: 'publishable',
-    SECRET: 'secret'
+export const OutboundTransferStatus = {
+    CANCELED: 'canceled',
+    FAILED: 'failed',
+    PENDING: 'pending',
+    SUCCEEDED: 'succeeded'
 } as const;
 
-export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
-export const ApiKeyScopes = {
-    STAR: '*',
-    ACCOUNTSREAD: 'accounts:read',
-    ACCOUNTSWRITE: 'accounts:write',
-    ACCOUNTSDELETE: 'accounts:delete',
-    API_KEYSREAD: 'api_keys:read',
-    API_KEYSWRITE: 'api_keys:write',
-    AUTH_LINKSREAD: 'auth_links:read',
-    AUTH_LINKSWRITE: 'auth_links:write',
-    BALANCE_TRANSACTIONSREAD: 'balance_transactions:read',
-    CHARGESREAD: 'charges:read',
-    CUSTOMERSREAD: 'customers:read',
-    CUSTOMERSWRITE: 'customers:write',
-    EVENTSREAD: 'events:read',
-    PAYMENT_INTENTSREAD: 'payment_intents:read',
-    PAYMENT_INTENTSWRITE: 'payment_intents:write',
-    PAYMENT_METHODSREAD: 'payment_methods:read',
-    PAYMENT_METHODSWRITE: 'payment_methods:write',
-    PAYOUTSREAD: 'payouts:read',
-    PAYOUTSWRITE: 'payouts:write',
-    PLATFORM_FEESREAD: 'platform_fees:read',
-    PRODUCT_CODESREAD: 'product_codes:read',
-    REFUNDSREAD: 'refunds:read',
-    REFUNDSWRITE: 'refunds:write',
-    USERSREAD: 'users:read',
-    USERSWRITE: 'users:write',
-    WEBHOOK_ENDPOINTSREAD: 'webhook_endpoints:read',
-    WEBHOOK_ENDPOINTSWRITE: 'webhook_endpoints:write',
-    APPLE_PAY_DOMAINSREAD: 'apple_pay_domains:read',
-    APPLE_PAY_DOMAINSWRITE: 'apple_pay_domains:write',
-    BANK_ACCOUNTSREAD: 'bank_accounts:read',
-    BANK_ACCOUNTSWRITE: 'bank_accounts:write',
-    FILESREAD: 'files:read',
-    FILESWRITE: 'files:write',
-    USER_INVITATIONSREAD: 'user_invitations:read',
-    USER_INVITATIONSWRITE: 'user_invitations:write',
-    SUBSCRIPTIONSREAD: 'subscriptions:read',
-    SUBSCRIPTIONSWRITE: 'subscriptions:write',
-    DISPUTESREAD: 'disputes:read',
-    DISPUTESWRITE: 'disputes:write',
-    PRICING_TEMPLATESREAD: 'pricing_templates:read',
-    PRICING_TEMPLATESWRITE: 'pricing_templates:write',
-    CHECKOUT_SESSIONSREAD: 'checkout_sessions:read',
-    CHECKOUT_SESSIONSWRITE: 'checkout_sessions:write',
-    OUTBOUND_TRANSFERSREAD: 'outbound_transfers:read',
-    OUTBOUND_TRANSFERSWRITE: 'outbound_transfers:write'
+export type OutboundTransferStatus = typeof OutboundTransferStatus[keyof typeof OutboundTransferStatus];
+export const OutboundTransferCurrency = {
+    AUD: 'aud',
+    CAD: 'cad',
+    DKK: 'dkk',
+    EUR: 'eur',
+    HKD: 'hkd',
+    JPY: 'jpy',
+    NZD: 'nzd',
+    NOK: 'nok',
+    GBP: 'gbp',
+    ZAR: 'zar',
+    SEK: 'sek',
+    CHF: 'chf',
+    USD: 'usd'
 } as const;
 
-export type ApiKeyScopes = typeof ApiKeyScopes[keyof typeof ApiKeyScopes];
+export type OutboundTransferCurrency = typeof OutboundTransferCurrency[keyof typeof OutboundTransferCurrency];
+export const OutboundTransferFailureCode = {
+    ACCOUNT_CLOSED: 'account_closed',
+    ACCOUNT_FROZEN: 'account_frozen',
+    ACCOUNT_NUMBER_INVALID: 'account_number_invalid',
+    AUTHORIZATION_REVOKED: 'authorization_revoked',
+    BANK_ACCOUNT_BLOCKED: 'bank_account_blocked',
+    FRAUDULENT: 'fraudulent',
+    INSUFFICIENT_FUNDS: 'insufficient_funds',
+    INVALID_FIELD: 'invalid_field',
+    LIMIT_EXCEEDED: 'limit_exceeded',
+    NO_ACCOUNT: 'no_account',
+    NOT_AUTHORIZED: 'not_authorized',
+    NOT_PERMITTED: 'not_permitted',
+    PROCESSING_ERROR: 'processing_error',
+    NOT_RECOGNIZED: 'not_recognized',
+    RISK_BLOCKED: 'risk_blocked',
+    STOP_PAYMENT: 'stop_payment'
+} as const;
+
+export type OutboundTransferFailureCode = typeof OutboundTransferFailureCode[keyof typeof OutboundTransferFailureCode];
 
 

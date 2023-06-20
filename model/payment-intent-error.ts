@@ -65,6 +65,7 @@ export const PaymentIntentErrorCode = {
     NOT_RECOGNIZED: 'not_recognized',
     PICKUP_CARD: 'pickup_card',
     RESTRICTED_CARD: 'restricted_card',
+    RISK_BLOCKED: 'risk_blocked',
     SERVICE_NOT_ALLOWED: 'service_not_allowed',
     STOP_PAYMENT: 'stop_payment',
     INTERNAL_ERROR: 'internal_error'

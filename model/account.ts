@@ -72,6 +72,13 @@ export interface Account {
      */
     'terminal_readers': Array<TerminalReader>;
     /**
+     * Whether Tilled is providing support for this account.
+     * @type {boolean}
+     * @memberof Account
+     * @deprecated
+     */
+    'merchant_support'?: boolean;
+    /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
      * @type {{ [key: string]: string; }}
      * @memberof Account
@@ -113,12 +120,6 @@ export interface Account {
      * @memberof Account
      */
     'white_label_domain'?: string;
-    /**
-     * Whether Tilled is providing support for this account.
-     * @type {boolean}
-     * @memberof Account
-     */
-    'merchant_support'?: boolean;
 }
 
 export const AccountType = {

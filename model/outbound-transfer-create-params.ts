@@ -17,119 +17,51 @@
 /**
  * 
  * @export
- * @interface ApiKey
+ * @interface OutboundTransferCreateParams
  */
-export interface ApiKey {
+export interface OutboundTransferCreateParams {
     /**
-     * Time at which the object was last updated.
+     * Amount intended to be transferred by this OutboundTransfer. A positive integer representing how much to transfer in the smallest currency unit (e.g., 100 cents to transfer $1.00)
+     * @type {number}
+     * @memberof OutboundTransferCreateParams
+     */
+    'amount': number;
+    /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransferCreateParams
      */
-    'updated_at': string;
+    'currency': OutboundTransferCreateParamsCurrency;
     /**
-     * Time at which the object was created.
+     * ID of the destination [PaymentMethod](#tag/PaymentMethods) to attach to this OutboundTransfer. [PaymentMethod](#tag/PaymentMethods) must be of type `ach_debit` or `eft_debit`
      * @type {string}
-     * @memberof ApiKey
+     * @memberof OutboundTransferCreateParams
      */
-    'created_at': string;
+    'destination_payment_method_id': string;
     /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof ApiKey
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof OutboundTransferCreateParams
      */
-    'id': string;
-    /**
-     * The actual value of the API key to be included in the `tilled-api-key` header for authentication. `secret` keys will have a redacted value except when initially created.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'value': string;
-    /**
-     * The string that you assign to describe the resource. It defaults to \'`type` Key\' (e.g. \'Secret Key\' and \'Publishable Key\')
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'name': string;
-    /**
-     * The type of API key.  `secret` can be used to authenticate all endpoints. `publishable` is used in your frontend application and can only access a handful of endpoints (e.g. confirm a Payment Intent).
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'type': ApiKeyType;
-    /**
-     * The id of the associated account.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'account_id': string;
-    /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` to enable all scopes, except those that require explicit selection.
-     * @type {Array<string>}
-     * @memberof ApiKey
-     */
-    'scopes': Array<ApiKeyScopes>;
-    /**
-     * Time at which the key was last used to authenticate with the API.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'last_used'?: string;
+    'metadata'?: { [key: string]: string; };
 }
 
-export const ApiKeyType = {
-    PUBLISHABLE: 'publishable',
-    SECRET: 'secret'
+export const OutboundTransferCreateParamsCurrency = {
+    AUD: 'aud',
+    CAD: 'cad',
+    DKK: 'dkk',
+    EUR: 'eur',
+    HKD: 'hkd',
+    JPY: 'jpy',
+    NZD: 'nzd',
+    NOK: 'nok',
+    GBP: 'gbp',
+    ZAR: 'zar',
+    SEK: 'sek',
+    CHF: 'chf',
+    USD: 'usd'
 } as const;
 
-export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
-export const ApiKeyScopes = {
-    STAR: '*',
-    ACCOUNTSREAD: 'accounts:read',
-    ACCOUNTSWRITE: 'accounts:write',
-    ACCOUNTSDELETE: 'accounts:delete',
-    API_KEYSREAD: 'api_keys:read',
-    API_KEYSWRITE: 'api_keys:write',
-    AUTH_LINKSREAD: 'auth_links:read',
-    AUTH_LINKSWRITE: 'auth_links:write',
-    BALANCE_TRANSACTIONSREAD: 'balance_transactions:read',
-    CHARGESREAD: 'charges:read',
-    CUSTOMERSREAD: 'customers:read',
-    CUSTOMERSWRITE: 'customers:write',
-    EVENTSREAD: 'events:read',
-    PAYMENT_INTENTSREAD: 'payment_intents:read',
-    PAYMENT_INTENTSWRITE: 'payment_intents:write',
-    PAYMENT_METHODSREAD: 'payment_methods:read',
-    PAYMENT_METHODSWRITE: 'payment_methods:write',
-    PAYOUTSREAD: 'payouts:read',
-    PAYOUTSWRITE: 'payouts:write',
-    PLATFORM_FEESREAD: 'platform_fees:read',
-    PRODUCT_CODESREAD: 'product_codes:read',
-    REFUNDSREAD: 'refunds:read',
-    REFUNDSWRITE: 'refunds:write',
-    USERSREAD: 'users:read',
-    USERSWRITE: 'users:write',
-    WEBHOOK_ENDPOINTSREAD: 'webhook_endpoints:read',
-    WEBHOOK_ENDPOINTSWRITE: 'webhook_endpoints:write',
-    APPLE_PAY_DOMAINSREAD: 'apple_pay_domains:read',
-    APPLE_PAY_DOMAINSWRITE: 'apple_pay_domains:write',
-    BANK_ACCOUNTSREAD: 'bank_accounts:read',
-    BANK_ACCOUNTSWRITE: 'bank_accounts:write',
-    FILESREAD: 'files:read',
-    FILESWRITE: 'files:write',
-    USER_INVITATIONSREAD: 'user_invitations:read',
-    USER_INVITATIONSWRITE: 'user_invitations:write',
-    SUBSCRIPTIONSREAD: 'subscriptions:read',
-    SUBSCRIPTIONSWRITE: 'subscriptions:write',
-    DISPUTESREAD: 'disputes:read',
-    DISPUTESWRITE: 'disputes:write',
-    PRICING_TEMPLATESREAD: 'pricing_templates:read',
-    PRICING_TEMPLATESWRITE: 'pricing_templates:write',
-    CHECKOUT_SESSIONSREAD: 'checkout_sessions:read',
-    CHECKOUT_SESSIONSWRITE: 'checkout_sessions:write',
-    OUTBOUND_TRANSFERSREAD: 'outbound_transfers:read',
-    OUTBOUND_TRANSFERSWRITE: 'outbound_transfers:write'
-} as const;
-
-export type ApiKeyScopes = typeof ApiKeyScopes[keyof typeof ApiKeyScopes];
+export type OutboundTransferCreateParamsCurrency = typeof OutboundTransferCreateParamsCurrency[keyof typeof OutboundTransferCreateParamsCurrency];
 
 

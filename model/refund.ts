@@ -116,6 +116,7 @@ export const RefundFailureCode = {
     EXPIRED_OR_CANCELED_CARD: 'expired_or_canceled_card',
     LOST_OR_STOLEN_CARD: 'lost_or_stolen_card',
     FRAUDULENT: 'fraudulent',
+    RISK_BLOCKED: 'risk_blocked',
     DECLINED: 'declined',
     PROPRIETARY_CARD_ACTIVITY_REGULATIONS: 'proprietary_card_activity_regulations',
     BLACKLISTED_CARD: 'blacklisted_card',

@@ -13,123 +13,21 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { OutboundTransfer } from './outbound-transfer';
 
 /**
  * 
  * @export
- * @interface ApiKey
+ * @interface ListOutboundTransfers200ResponseAllOf
  */
-export interface ApiKey {
+export interface ListOutboundTransfers200ResponseAllOf {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof ApiKey
+     * 
+     * @type {Array<OutboundTransfer>}
+     * @memberof ListOutboundTransfers200ResponseAllOf
      */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'id': string;
-    /**
-     * The actual value of the API key to be included in the `tilled-api-key` header for authentication. `secret` keys will have a redacted value except when initially created.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'value': string;
-    /**
-     * The string that you assign to describe the resource. It defaults to \'`type` Key\' (e.g. \'Secret Key\' and \'Publishable Key\')
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'name': string;
-    /**
-     * The type of API key.  `secret` can be used to authenticate all endpoints. `publishable` is used in your frontend application and can only access a handful of endpoints (e.g. confirm a Payment Intent).
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'type': ApiKeyType;
-    /**
-     * The id of the associated account.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'account_id': string;
-    /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` to enable all scopes, except those that require explicit selection.
-     * @type {Array<string>}
-     * @memberof ApiKey
-     */
-    'scopes': Array<ApiKeyScopes>;
-    /**
-     * Time at which the key was last used to authenticate with the API.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'last_used'?: string;
+    'items': Array<OutboundTransfer>;
 }
-
-export const ApiKeyType = {
-    PUBLISHABLE: 'publishable',
-    SECRET: 'secret'
-} as const;
-
-export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
-export const ApiKeyScopes = {
-    STAR: '*',
-    ACCOUNTSREAD: 'accounts:read',
-    ACCOUNTSWRITE: 'accounts:write',
-    ACCOUNTSDELETE: 'accounts:delete',
-    API_KEYSREAD: 'api_keys:read',
-    API_KEYSWRITE: 'api_keys:write',
-    AUTH_LINKSREAD: 'auth_links:read',
-    AUTH_LINKSWRITE: 'auth_links:write',
-    BALANCE_TRANSACTIONSREAD: 'balance_transactions:read',
-    CHARGESREAD: 'charges:read',
-    CUSTOMERSREAD: 'customers:read',
-    CUSTOMERSWRITE: 'customers:write',
-    EVENTSREAD: 'events:read',
-    PAYMENT_INTENTSREAD: 'payment_intents:read',
-    PAYMENT_INTENTSWRITE: 'payment_intents:write',
-    PAYMENT_METHODSREAD: 'payment_methods:read',
-    PAYMENT_METHODSWRITE: 'payment_methods:write',
-    PAYOUTSREAD: 'payouts:read',
-    PAYOUTSWRITE: 'payouts:write',
-    PLATFORM_FEESREAD: 'platform_fees:read',
-    PRODUCT_CODESREAD: 'product_codes:read',
-    REFUNDSREAD: 'refunds:read',
-    REFUNDSWRITE: 'refunds:write',
-    USERSREAD: 'users:read',
-    USERSWRITE: 'users:write',
-    WEBHOOK_ENDPOINTSREAD: 'webhook_endpoints:read',
-    WEBHOOK_ENDPOINTSWRITE: 'webhook_endpoints:write',
-    APPLE_PAY_DOMAINSREAD: 'apple_pay_domains:read',
-    APPLE_PAY_DOMAINSWRITE: 'apple_pay_domains:write',
-    BANK_ACCOUNTSREAD: 'bank_accounts:read',
-    BANK_ACCOUNTSWRITE: 'bank_accounts:write',
-    FILESREAD: 'files:read',
-    FILESWRITE: 'files:write',
-    USER_INVITATIONSREAD: 'user_invitations:read',
-    USER_INVITATIONSWRITE: 'user_invitations:write',
-    SUBSCRIPTIONSREAD: 'subscriptions:read',
-    SUBSCRIPTIONSWRITE: 'subscriptions:write',
-    DISPUTESREAD: 'disputes:read',
-    DISPUTESWRITE: 'disputes:write',
-    PRICING_TEMPLATESREAD: 'pricing_templates:read',
-    PRICING_TEMPLATESWRITE: 'pricing_templates:write',
-    CHECKOUT_SESSIONSREAD: 'checkout_sessions:read',
-    CHECKOUT_SESSIONSWRITE: 'checkout_sessions:write',
-    OUTBOUND_TRANSFERSREAD: 'outbound_transfers:read',
-    OUTBOUND_TRANSFERSWRITE: 'outbound_transfers:write'
-} as const;
-
-export type ApiKeyScopes = typeof ApiKeyScopes[keyof typeof ApiKeyScopes];
-
 

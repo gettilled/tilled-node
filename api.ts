@@ -25,6 +25,7 @@ export * from './api/events-api';
 export * from './api/files-api';
 export * from './api/health-api';
 export * from './api/onboarding-api';
+export * from './api/outbound-transfers-api';
 export * from './api/payment-intents-api';
 export * from './api/payment-methods-api';
 export * from './api/payouts-api';

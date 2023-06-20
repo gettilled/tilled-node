@@ -124,6 +124,9 @@ export const DisputeCurrency = {
 
 export type DisputeCurrency = typeof DisputeCurrency[keyof typeof DisputeCurrency];
 export const DisputeStatus = {
+    WARNING_NEEDS_RESPONSE: 'warning_needs_response',
+    WARNING_UNDER_REVIEW: 'warning_under_review',
+    WARNING_CLOSED: 'warning_closed',
     NEEDS_RESPONSE: 'needs_response',
     UNDER_REVIEW: 'under_review',
     CLOSED: 'closed',

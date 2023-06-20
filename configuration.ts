@@ -12,6 +12,8 @@
  * Do not edit the class manually.
  */
 
+import { version as versionNum } from './package.json';
+
 export interface ConfigurationParameters {
   apiKey?:
     | string
@@ -94,7 +96,14 @@ export class Configuration {
     this.username = param.username;
     this.password = param.password;
     this.accessToken = param.accessToken;
-    this.basePath = param.basePath;
+    this.baseOptions = {
+      // placing headers first allows users to overwrite if they want to include custom headers of their own
+      headers: {
+        'tilled-client-name': 'tilled-node',
+        'tilled-client-version': versionNum
+      },
+      ...param.baseOptions
+    };
     this.baseOptions = param.baseOptions;
     this.formDataCtor = param.formDataCtor;
   }

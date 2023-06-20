@@ -83,16 +83,13 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
          * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
          * @summary List all Pricing Templates
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'active' | 'archived' | 'pending'>} [status] String indicating the status to filter the result by.
          * @param {'card' | 'ach_debit' | 'eft_debit'} [type] String indicating the type to filter the result by.
-         * @param {string} [merchant_account_id] A merchant accountId using pricing templates associated with the provided partner accountId. If provided, the returned pricing templates will be ones that are applied to the merchant accountId provided, if any.
-         * @param {'active' | 'pending' | 'cancelled'} [merchant_activation_status] If a merchant accountId is provided, the query will return pricing templates associated with the merchant that have this activation status.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingTemplates: async (tilled_account: string, status?: Array<'active' | 'archived' | 'pending'>, type?: 'card' | 'ach_debit' | 'eft_debit', merchant_account_id?: string, merchant_activation_status?: 'active' | 'pending' | 'cancelled', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPricingTemplates: async (tilled_account: string, type?: 'card' | 'ach_debit' | 'eft_debit', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPricingTemplates', 'tilled_account', tilled_account)
             const localVarPath = `/v1/pricing-templates`;
@@ -114,20 +111,8 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
-            if (status) {
-                localVarQueryParameter['status'] = status;
-            }
-
             if (type !== undefined) {
                 localVarQueryParameter['type'] = type;
-            }
-
-            if (merchant_account_id !== undefined) {
-                localVarQueryParameter['merchant_account_id'] = merchant_account_id;
-            }
-
-            if (merchant_activation_status !== undefined) {
-                localVarQueryParameter['merchant_activation_status'] = merchant_activation_status;
             }
 
             if (offset !== undefined) {
@@ -179,17 +164,14 @@ export const PricingTemplatesApiFp = function(configuration?: Configuration) {
          * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
          * @summary List all Pricing Templates
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'active' | 'archived' | 'pending'>} [status] String indicating the status to filter the result by.
          * @param {'card' | 'ach_debit' | 'eft_debit'} [type] String indicating the type to filter the result by.
-         * @param {string} [merchant_account_id] A merchant accountId using pricing templates associated with the provided partner accountId. If provided, the returned pricing templates will be ones that are applied to the merchant accountId provided, if any.
-         * @param {'active' | 'pending' | 'cancelled'} [merchant_activation_status] If a merchant accountId is provided, the query will return pricing templates associated with the merchant that have this activation status.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPricingTemplates(tilled_account: string, status?: Array<'active' | 'archived' | 'pending'>, type?: 'card' | 'ach_debit' | 'eft_debit', merchant_account_id?: string, merchant_activation_status?: 'active' | 'pending' | 'cancelled', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPricingTemplates200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingTemplates(tilled_account, status, type, merchant_account_id, merchant_activation_status, offset, limit, options);
+        async listPricingTemplates(tilled_account: string, type?: 'card' | 'ach_debit' | 'eft_debit', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPricingTemplates200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingTemplates(tilled_account, type, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -220,7 +202,7 @@ export const PricingTemplatesApiFactory = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig): AxiosPromise<ListPricingTemplates200Response> {
-            return localVarFp.listPricingTemplates(requestParameters.tilled_account, requestParameters.status, requestParameters.type, requestParameters.merchant_account_id, requestParameters.merchant_activation_status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -260,32 +242,11 @@ export interface PricingTemplatesApiListPricingTemplatesRequest {
     readonly tilled_account: string
 
     /**
-     * String indicating the status to filter the result by.
-     * @type {Array<'active' | 'archived' | 'pending'>}
-     * @memberof PricingTemplatesApiListPricingTemplates
-     */
-    readonly status?: Array<'active' | 'archived' | 'pending'>
-
-    /**
      * String indicating the type to filter the result by.
      * @type {'card' | 'ach_debit' | 'eft_debit'}
      * @memberof PricingTemplatesApiListPricingTemplates
      */
     readonly type?: 'card' | 'ach_debit' | 'eft_debit'
-
-    /**
-     * A merchant accountId using pricing templates associated with the provided partner accountId. If provided, the returned pricing templates will be ones that are applied to the merchant accountId provided, if any.
-     * @type {string}
-     * @memberof PricingTemplatesApiListPricingTemplates
-     */
-    readonly merchant_account_id?: string
-
-    /**
-     * If a merchant accountId is provided, the query will return pricing templates associated with the merchant that have this activation status.
-     * @type {'active' | 'pending' | 'cancelled'}
-     * @memberof PricingTemplatesApiListPricingTemplates
-     */
-    readonly merchant_activation_status?: 'active' | 'pending' | 'cancelled'
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -330,6 +291,6 @@ export class PricingTemplatesApi extends BaseAPI {
      * @memberof PricingTemplatesApi
      */
     public listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig) {
-        return PricingTemplatesApiFp(this.configuration).listPricingTemplates(requestParameters.tilled_account, requestParameters.status, requestParameters.type, requestParameters.merchant_account_id, requestParameters.merchant_activation_status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return PricingTemplatesApiFp(this.configuration).listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -38,3 +38,5 @@
 .npmignore
 README.md
 package.json
+configuration.ts
+tsconfig.json
