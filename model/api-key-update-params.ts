@@ -77,7 +77,9 @@ export const ApiKeyUpdateParamsScopes = {
     PRICING_TEMPLATESREAD: 'pricing_templates:read',
     PRICING_TEMPLATESWRITE: 'pricing_templates:write',
     CHECKOUT_SESSIONSREAD: 'checkout_sessions:read',
-    CHECKOUT_SESSIONSWRITE: 'checkout_sessions:write'
+    CHECKOUT_SESSIONSWRITE: 'checkout_sessions:write',
+    OUTBOUND_TRANSFERSREAD: 'outbound_transfers:read',
+    OUTBOUND_TRANSFERSWRITE: 'outbound_transfers:write'
 } as const;
 
 export type ApiKeyUpdateParamsScopes = typeof ApiKeyUpdateParamsScopes[keyof typeof ApiKeyUpdateParamsScopes];

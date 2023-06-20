@@ -167,7 +167,8 @@ export const BalanceTransactionSourceType = {
     PLATFORM_FEE: 'platform_fee',
     PLATFORM_FEE_REFUND: 'platform_fee_refund',
     DISPUTE: 'dispute',
-    ACCOUNT: 'account'
+    ACCOUNT: 'account',
+    OUTBOUND_TRANSFER: 'outbound_transfer'
 } as const;
 
 export type BalanceTransactionSourceType = typeof BalanceTransactionSourceType[keyof typeof BalanceTransactionSourceType];
@@ -186,6 +187,9 @@ export const BalanceTransactionType = {
     FEE: 'fee',
     PLATFORM_FEE: 'platform_fee',
     PLATFORM_FEE_REFUND: 'platform_fee_refund',
+    OUTBOUND_TRANSFER: 'outbound_transfer',
+    OUTBOUND_TRANSFER_CANCEL: 'outbound_transfer_cancel',
+    OUTBOUND_TRANSFER_FAILURE: 'outbound_transfer_failure',
     CHARGE_FEE: 'charge_fee',
     REFUND_FEE: 'refund_fee',
     ACCOUNT_FEE: 'account_fee',
@@ -249,7 +253,8 @@ export const BalanceTransactionFeeType = {
     CHARGEBACK: 'chargeback',
     ADMINISTRATIVE: 'administrative',
     TAX: 'tax',
-    ROUNDING_ADJUSTMENT: 'rounding_adjustment',
+    NEGATIVE_ROUNDING_ADJUSTMENT: 'negative_rounding_adjustment',
+    POSITIVE_ROUNDING_ADJUSTMENT: 'positive_rounding_adjustment',
     UNKNOWN: 'unknown'
 } as const;
 

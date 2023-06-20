@@ -75,7 +75,11 @@ export const WebhookEndpointUpdateParamsEnabledEvents = {
     SUBSCRIPTION_CANCELED: 'subscription.canceled',
     SUBSCRIPTION_UPDATED: 'subscription.updated',
     REPORT_RUN_SUCCEEDED: 'report_run.succeeded',
-    REPORT_RUN_FAILED: 'report_run.failed'
+    REPORT_RUN_FAILED: 'report_run.failed',
+    OUTBOUND_TRANSFER_PENDING: 'outbound_transfer.pending',
+    OUTBOUND_TRANSFER_FAILED: 'outbound_transfer.failed',
+    OUTBOUND_TRANSFER_CANCELED: 'outbound_transfer.canceled',
+    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded'
 } as const;
 
 export type WebhookEndpointUpdateParamsEnabledEvents = typeof WebhookEndpointUpdateParamsEnabledEvents[keyof typeof WebhookEndpointUpdateParamsEnabledEvents];

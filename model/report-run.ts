@@ -84,7 +84,8 @@ export const ReportRunType = {
     PAYOUTS_SUMMARY_1: 'payouts_summary_1',
     PAYOUTS_SUMMARY_2: 'payouts_summary_2',
     FEES_SUMMARY_1: 'fees_summary_1',
-    PROCESSING_SUMMARY_1: 'processing_summary_1'
+    PROCESSING_SUMMARY_1: 'processing_summary_1',
+    DISPUTES_SUMMARY_1: 'disputes_summary_1'
 } as const;
 
 export type ReportRunType = typeof ReportRunType[keyof typeof ReportRunType];

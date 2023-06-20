@@ -121,6 +121,12 @@ export interface Charge {
      */
     'balance_transaction'?: ChargeBalanceTransaction;
     /**
+     * Time at which the charge failed.
+     * @type {string}
+     * @memberof Charge
+     */
+    'failed_at'?: string;
+    /**
      * Message to user further explaining the reason for the charge failure.
      * @type {string}
      * @memberof Charge
@@ -160,6 +166,7 @@ export const ChargeFailureCode = {
     NOT_RECOGNIZED: 'not_recognized',
     PICKUP_CARD: 'pickup_card',
     RESTRICTED_CARD: 'restricted_card',
+    RISK_BLOCKED: 'risk_blocked',
     SERVICE_NOT_ALLOWED: 'service_not_allowed',
     STOP_PAYMENT: 'stop_payment',
     INTERNAL_ERROR: 'internal_error'

@@ -22,35 +22,79 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { Dispute } from '../model';
+import { ListOutboundTransfers200Response } from '../model';
 // @ts-ignore
-import { DisputeEvidenceCreateParams } from '../model';
+import { OutboundTransfer } from '../model';
 // @ts-ignore
-import { ListDisputes200Response } from '../model';
+import { OutboundTransferCreateParams } from '../model';
 /**
- * DisputesApi - axios parameter creator
+ * OutboundTransfersApi - axios parameter creator
  * @export
  */
-export const DisputesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const OutboundTransfersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Provide evidence to challenge a dispute.
-         * @summary Create Dispute Evidence
+         * An outbound transfer can be canceled only if its status is `pending` and funds have not yet been batched or paid out.  If the cancellation is successful, the OutboundTransfer object is returned.  If the outbound transfer cannot be canceled, an error is returned.
+         * @summary Cancel an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {DisputeEvidenceCreateParams} DisputeEvidenceCreateParams 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDisputeEvidence: async (tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelOutboundTransfer: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('createDisputeEvidence', 'tilled_account', tilled_account)
+            assertParamExists('cancelOutboundTransfer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('createDisputeEvidence', 'id', id)
-            // verify required parameter 'DisputeEvidenceCreateParams' is not null or undefined
-            assertParamExists('createDisputeEvidence', 'DisputeEvidenceCreateParams', DisputeEvidenceCreateParams)
-            const localVarPath = `/v1/disputes/{id}`
+            assertParamExists('cancelOutboundTransfer', 'id', id)
+            const localVarPath = `/v1/outbound-transfers/{id}/cancel`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * @summary Create an Outbound Transfer
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {OutboundTransferCreateParams} OutboundTransferCreateParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createOutboundTransfer: async (tilled_account: string, OutboundTransferCreateParams: OutboundTransferCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('createOutboundTransfer', 'tilled_account', tilled_account)
+            // verify required parameter 'OutboundTransferCreateParams' is not null or undefined
+            assertParamExists('createOutboundTransfer', 'OutboundTransferCreateParams', OutboundTransferCreateParams)
+            const localVarPath = `/v1/outbound-transfers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -80,7 +124,7 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(DisputeEvidenceCreateParams, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(OutboundTransferCreateParams, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -88,19 +132,19 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Retrieves the details of an existing dispute with the given ID.
-         * @summary Get a Dispute
+         * Retrieves the details of an outbound transfer.
+         * @summary Get an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDispute: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOutboundTransfer: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('getDispute', 'tilled_account', tilled_account)
+            assertParamExists('getOutboundTransfer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getDispute', 'id', id)
-            const localVarPath = `/v1/disputes/{id}`
+            assertParamExists('getOutboundTransfer', 'id', id)
+            const localVarPath = `/v1/outbound-transfers/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -136,22 +180,23 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
-         * @summary List all Disputes
+         * Returns a list of outbound transfers.
+         * @summary List all Outbound Transfers
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+         * @param {Array<'canceled' | 'failed' | 'pending' | 'succeeded'>} [status] Only return OutboundTransfers whose status is included by this array. Example: &#x60;/v1/outbound-transfers?status&#x3D;succeeded&#x60;
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>} [status] String indicating the status to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDisputes: async (tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listOutboundTransfers: async (tilled_account: string, metadata?: { [key: string]: string; }, status?: Array<'canceled' | 'failed' | 'pending' | 'succeeded'>, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('listDisputes', 'tilled_account', tilled_account)
-            const localVarPath = `/v1/disputes`;
+            assertParamExists('listOutboundTransfers', 'tilled_account', tilled_account)
+            const localVarPath = `/v1/outbound-transfers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -170,6 +215,14 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
+            if (metadata !== undefined) {
+                localVarQueryParameter['metadata'] = metadata;
+            }
+
+            if (status) {
+                localVarQueryParameter['status'] = status;
+            }
+
             if (include_connected_accounts !== undefined) {
                 localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
             }
@@ -184,10 +237,6 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['created_at_lte'] = (created_at_lte as any instanceof Date) ?
                     (created_at_lte as any).toISOString() :
                     created_at_lte;
-            }
-
-            if (status) {
-                localVarQueryParameter['status'] = status;
             }
 
             if (offset !== undefined) {
@@ -217,242 +266,297 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
 };
 
 /**
- * DisputesApi - functional programming interface
+ * OutboundTransfersApi - functional programming interface
  * @export
  */
-export const DisputesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = DisputesApiAxiosParamCreator(configuration)
+export const OutboundTransfersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OutboundTransfersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Provide evidence to challenge a dispute.
-         * @summary Create Dispute Evidence
-         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
-         * @param {DisputeEvidenceCreateParams} DisputeEvidenceCreateParams 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createDisputeEvidence(tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createDisputeEvidence(tilled_account, id, DisputeEvidenceCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Retrieves the details of an existing dispute with the given ID.
-         * @summary Get a Dispute
+         * An outbound transfer can be canceled only if its status is `pending` and funds have not yet been batched or paid out.  If the cancellation is successful, the OutboundTransfer object is returned.  If the outbound transfer cannot be canceled, an error is returned.
+         * @summary Cancel an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDispute(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDispute(tilled_account, id, options);
+        async cancelOutboundTransfer(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OutboundTransfer>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelOutboundTransfer(tilled_account, id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
-         * @summary List all Disputes
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * @summary Create an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {OutboundTransferCreateParams} OutboundTransferCreateParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createOutboundTransfer(tilled_account: string, OutboundTransferCreateParams: OutboundTransferCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OutboundTransfer>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createOutboundTransfer(tilled_account, OutboundTransferCreateParams, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Retrieves the details of an outbound transfer.
+         * @summary Get an Outbound Transfer
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOutboundTransfer(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OutboundTransfer>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOutboundTransfer(tilled_account, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of outbound transfers.
+         * @summary List all Outbound Transfers
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+         * @param {Array<'canceled' | 'failed' | 'pending' | 'succeeded'>} [status] Only return OutboundTransfers whose status is included by this array. Example: &#x60;/v1/outbound-transfers?status&#x3D;succeeded&#x60;
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>} [status] String indicating the status to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDisputes(tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listDisputes(tilled_account, include_connected_accounts, created_at_gte, created_at_lte, status, offset, limit, options);
+        async listOutboundTransfers(tilled_account: string, metadata?: { [key: string]: string; }, status?: Array<'canceled' | 'failed' | 'pending' | 'succeeded'>, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListOutboundTransfers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listOutboundTransfers(tilled_account, metadata, status, include_connected_accounts, created_at_gte, created_at_lte, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * DisputesApi - factory interface
+ * OutboundTransfersApi - factory interface
  * @export
  */
-export const DisputesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = DisputesApiFp(configuration)
+export const OutboundTransfersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OutboundTransfersApiFp(configuration)
     return {
         /**
-         * Provide evidence to challenge a dispute.
-         * @summary Create Dispute Evidence
-         * @param {DisputesApiCreateDisputeEvidenceRequest} requestParameters Request parameters.
+         * An outbound transfer can be canceled only if its status is `pending` and funds have not yet been batched or paid out.  If the cancellation is successful, the OutboundTransfer object is returned.  If the outbound transfer cannot be canceled, an error is returned.
+         * @summary Cancel an Outbound Transfer
+         * @param {OutboundTransfersApiCancelOutboundTransferRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
-            return localVarFp.createDisputeEvidence(requestParameters.tilled_account, requestParameters.id, requestParameters.DisputeEvidenceCreateParams, options).then((request) => request(axios, basePath));
+        cancelOutboundTransfer(requestParameters: OutboundTransfersApiCancelOutboundTransferRequest, options?: AxiosRequestConfig): AxiosPromise<OutboundTransfer> {
+            return localVarFp.cancelOutboundTransfer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves the details of an existing dispute with the given ID.
-         * @summary Get a Dispute
-         * @param {DisputesApiGetDisputeRequest} requestParameters Request parameters.
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * @summary Create an Outbound Transfer
+         * @param {OutboundTransfersApiCreateOutboundTransferRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: AxiosRequestConfig): AxiosPromise<Dispute> {
-            return localVarFp.getDispute(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        createOutboundTransfer(requestParameters: OutboundTransfersApiCreateOutboundTransferRequest, options?: AxiosRequestConfig): AxiosPromise<OutboundTransfer> {
+            return localVarFp.createOutboundTransfer(requestParameters.tilled_account, requestParameters.OutboundTransferCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
-         * @summary List all Disputes
-         * @param {DisputesApiListDisputesRequest} requestParameters Request parameters.
+         * Retrieves the details of an outbound transfer.
+         * @summary Get an Outbound Transfer
+         * @param {OutboundTransfersApiGetOutboundTransferRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
-            return localVarFp.listDisputes(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+        getOutboundTransfer(requestParameters: OutboundTransfersApiGetOutboundTransferRequest, options?: AxiosRequestConfig): AxiosPromise<OutboundTransfer> {
+            return localVarFp.getOutboundTransfer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of outbound transfers.
+         * @summary List all Outbound Transfers
+         * @param {OutboundTransfersApiListOutboundTransfersRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listOutboundTransfers(requestParameters: OutboundTransfersApiListOutboundTransfersRequest, options?: AxiosRequestConfig): AxiosPromise<ListOutboundTransfers200Response> {
+            return localVarFp.listOutboundTransfers(requestParameters.tilled_account, requestParameters.metadata, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for createDisputeEvidence operation in DisputesApi.
+ * Request parameters for cancelOutboundTransfer operation in OutboundTransfersApi.
  * @export
- * @interface DisputesApiCreateDisputeEvidenceRequest
+ * @interface OutboundTransfersApiCancelOutboundTransferRequest
  */
-export interface DisputesApiCreateDisputeEvidenceRequest {
+export interface OutboundTransfersApiCancelOutboundTransferRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof DisputesApiCreateDisputeEvidence
+     * @memberof OutboundTransfersApiCancelOutboundTransfer
      */
     readonly tilled_account: string
 
     /**
      * 
      * @type {string}
-     * @memberof DisputesApiCreateDisputeEvidence
-     */
-    readonly id: string
-
-    /**
-     * 
-     * @type {DisputeEvidenceCreateParams}
-     * @memberof DisputesApiCreateDisputeEvidence
-     */
-    readonly DisputeEvidenceCreateParams: DisputeEvidenceCreateParams
-}
-
-/**
- * Request parameters for getDispute operation in DisputesApi.
- * @export
- * @interface DisputesApiGetDisputeRequest
- */
-export interface DisputesApiGetDisputeRequest {
-    /**
-     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-     * @type {string}
-     * @memberof DisputesApiGetDispute
-     */
-    readonly tilled_account: string
-
-    /**
-     * 
-     * @type {string}
-     * @memberof DisputesApiGetDispute
+     * @memberof OutboundTransfersApiCancelOutboundTransfer
      */
     readonly id: string
 }
 
 /**
- * Request parameters for listDisputes operation in DisputesApi.
+ * Request parameters for createOutboundTransfer operation in OutboundTransfersApi.
  * @export
- * @interface DisputesApiListDisputesRequest
+ * @interface OutboundTransfersApiCreateOutboundTransferRequest
  */
-export interface DisputesApiListDisputesRequest {
+export interface OutboundTransfersApiCreateOutboundTransferRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiCreateOutboundTransfer
      */
     readonly tilled_account: string
+
+    /**
+     * 
+     * @type {OutboundTransferCreateParams}
+     * @memberof OutboundTransfersApiCreateOutboundTransfer
+     */
+    readonly OutboundTransferCreateParams: OutboundTransferCreateParams
+}
+
+/**
+ * Request parameters for getOutboundTransfer operation in OutboundTransfersApi.
+ * @export
+ * @interface OutboundTransfersApiGetOutboundTransferRequest
+ */
+export interface OutboundTransfersApiGetOutboundTransferRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OutboundTransfersApiGetOutboundTransfer
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OutboundTransfersApiGetOutboundTransfer
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for listOutboundTransfers operation in OutboundTransfersApi.
+ * @export
+ * @interface OutboundTransfersApiListOutboundTransfersRequest
+ */
+export interface OutboundTransfersApiListOutboundTransfersRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OutboundTransfersApiListOutboundTransfers
+     */
+    readonly tilled_account: string
+
+    /**
+     * &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+     * @type {{ [key: string]: string; }}
+     * @memberof OutboundTransfersApiListOutboundTransfers
+     */
+    readonly metadata?: { [key: string]: string; }
+
+    /**
+     * Only return OutboundTransfers whose status is included by this array. Example: &#x60;/v1/outbound-transfers?status&#x3D;succeeded&#x60;
+     * @type {Array<'canceled' | 'failed' | 'pending' | 'succeeded'>}
+     * @memberof OutboundTransfersApiListOutboundTransfers
+     */
+    readonly status?: Array<'canceled' | 'failed' | 'pending' | 'succeeded'>
 
     /**
      * Whether or not to include the results from any connected accounts.
      * @type {boolean}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiListOutboundTransfers
      */
     readonly include_connected_accounts?: boolean
 
     /**
      * Minimum &#x60;created_at&#x60; value to filter by (inclusive).
      * @type {string}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiListOutboundTransfers
      */
     readonly created_at_gte?: string
 
     /**
      * Maximum &#x60;created_at&#x60; value to filter by (inclusive).
      * @type {string}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiListOutboundTransfers
      */
     readonly created_at_lte?: string
 
     /**
-     * String indicating the status to filter the result by.
-     * @type {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>}
-     * @memberof DisputesApiListDisputes
-     */
-    readonly status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>
-
-    /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiListOutboundTransfers
      */
     readonly offset?: number
 
     /**
      * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
      * @type {number}
-     * @memberof DisputesApiListDisputes
+     * @memberof OutboundTransfersApiListOutboundTransfers
      */
     readonly limit?: number
 }
 
 /**
- * DisputesApi - object-oriented interface
+ * OutboundTransfersApi - object-oriented interface
  * @export
- * @class DisputesApi
+ * @class OutboundTransfersApi
  * @extends {BaseAPI}
  */
-export class DisputesApi extends BaseAPI {
+export class OutboundTransfersApi extends BaseAPI {
     /**
-     * Provide evidence to challenge a dispute.
-     * @summary Create Dispute Evidence
-     * @param {DisputesApiCreateDisputeEvidenceRequest} requestParameters Request parameters.
+     * An outbound transfer can be canceled only if its status is `pending` and funds have not yet been batched or paid out.  If the cancellation is successful, the OutboundTransfer object is returned.  If the outbound transfer cannot be canceled, an error is returned.
+     * @summary Cancel an Outbound Transfer
+     * @param {OutboundTransfersApiCancelOutboundTransferRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DisputesApi
+     * @memberof OutboundTransfersApi
      */
-    public createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig) {
-        return DisputesApiFp(this.configuration).createDisputeEvidence(requestParameters.tilled_account, requestParameters.id, requestParameters.DisputeEvidenceCreateParams, options).then((request) => request(this.axios, this.basePath));
+    public cancelOutboundTransfer(requestParameters: OutboundTransfersApiCancelOutboundTransferRequest, options?: AxiosRequestConfig) {
+        return OutboundTransfersApiFp(this.configuration).cancelOutboundTransfer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Retrieves the details of an existing dispute with the given ID.
-     * @summary Get a Dispute
-     * @param {DisputesApiGetDisputeRequest} requestParameters Request parameters.
+     * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+     * @summary Create an Outbound Transfer
+     * @param {OutboundTransfersApiCreateOutboundTransferRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DisputesApi
+     * @memberof OutboundTransfersApi
      */
-    public getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: AxiosRequestConfig) {
-        return DisputesApiFp(this.configuration).getDispute(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public createOutboundTransfer(requestParameters: OutboundTransfersApiCreateOutboundTransferRequest, options?: AxiosRequestConfig) {
+        return OutboundTransfersApiFp(this.configuration).createOutboundTransfer(requestParameters.tilled_account, requestParameters.OutboundTransferCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
-     * @summary List all Disputes
-     * @param {DisputesApiListDisputesRequest} requestParameters Request parameters.
+     * Retrieves the details of an outbound transfer.
+     * @summary Get an Outbound Transfer
+     * @param {OutboundTransfersApiGetOutboundTransferRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DisputesApi
+     * @memberof OutboundTransfersApi
      */
-    public listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig) {
-        return DisputesApiFp(this.configuration).listDisputes(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+    public getOutboundTransfer(requestParameters: OutboundTransfersApiGetOutboundTransferRequest, options?: AxiosRequestConfig) {
+        return OutboundTransfersApiFp(this.configuration).getOutboundTransfer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of outbound transfers.
+     * @summary List all Outbound Transfers
+     * @param {OutboundTransfersApiListOutboundTransfersRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OutboundTransfersApi
+     */
+    public listOutboundTransfers(requestParameters: OutboundTransfersApiListOutboundTransfersRequest, options?: AxiosRequestConfig) {
+        return OutboundTransfersApiFp(this.configuration).listOutboundTransfers(requestParameters.tilled_account, requestParameters.metadata, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
