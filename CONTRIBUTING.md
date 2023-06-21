@@ -78,9 +78,9 @@ npm version major // 2.0.0
 - Push your changes to your fork
 - Create a pull request
 
- NOTE: There is no need to run npm run generate on your local machine in order to publish the latest, as the CI/CD pipeline will automatically generate the SDK and publish it to NPM.
+### Testing Locally
 
-- For local testing
+- Run the `npm run generate` command to generate the SDK
 
 ```bash
 npm run generate
