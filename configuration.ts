@@ -104,7 +104,6 @@ export class Configuration {
       },
       ...param.baseOptions
     };
-    this.baseOptions = param.baseOptions;
     this.formDataCtor = param.formDataCtor;
   }
 
