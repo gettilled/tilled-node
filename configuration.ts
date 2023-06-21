@@ -99,6 +99,7 @@ export class Configuration {
     this.baseOptions = {
       ...param.baseOptions,
       headers: {
+        ...param.baseOptions?.headers,
         'tilled-client-name': 'tilled-node',
         'tilled-client-version': versionNum
       }
