@@ -16,17 +16,17 @@ import { version as versionNum } from './package.json';
 
 export interface ConfigurationParameters {
   apiKey?:
-    | string
-    | Promise<string>
-    | ((name: string) => string)
-    | ((name: string) => Promise<string>);
+  | string
+  | Promise<string>
+  | ((name: string) => string)
+  | ((name: string) => Promise<string>);
   username?: string;
   password?: string;
   accessToken?:
-    | string
-    | Promise<string>
-    | ((name?: string, scopes?: string[]) => string)
-    | ((name?: string, scopes?: string[]) => Promise<string>);
+  | string
+  | Promise<string>
+  | ((name?: string, scopes?: string[]) => string)
+  | ((name?: string, scopes?: string[]) => Promise<string>);
   basePath?: string;
   baseOptions?: any;
   formDataCtor?: new () => any;
@@ -97,12 +97,11 @@ export class Configuration {
     this.password = param.password;
     this.accessToken = param.accessToken;
     this.baseOptions = {
-      // placing headers first allows users to overwrite if they want to include custom headers of their own
+      ...param.baseOptions,
       headers: {
         'tilled-client-name': 'tilled-node',
         'tilled-client-version': versionNum
-      },
-      ...param.baseOptions
+      }
     };
     this.formDataCtor = param.formDataCtor;
   }
