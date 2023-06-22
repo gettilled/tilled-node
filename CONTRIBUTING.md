@@ -2,12 +2,14 @@
 
 ## Prerequisites
 
+### Local Development
+
 - **[OpenAPI Generator](https://openapi-generator.tech/docs/installation)** - Required to generate the SDK. For Mac, users we recommend installation using Homebrew.
 - **[Prettier](https://prettier.io/docs/en/install.html)** - Optional, but it's used for formatting the generated code.
 
 ---
 
-## Generating the SDK
+### Generating the SDK
 
 For users that have installed the generator using Homebrew, run the following command from the root directory:
 
@@ -47,7 +49,7 @@ openapi-generator-cli generate
 
 ---
 
-## Publishing the SDK
+## Manually Publishing the SDK
 
 To publish the SDK to NPM, run the following command:
 
@@ -57,29 +59,39 @@ npm publish
 
 ---
 
-## Contribute to the SDK
+### Contribute to the SDK
 
 If you would like to contribute to this SDK, please follow the steps below:
 
 - Fork the repository
 - Create a new branch
 - Make your changes
-- Run the following command to generate the SDK:
+- Run the appropriate `npm version` command to bump the version number.
 
 ```bash
-npm run generate
+npm version patch // 1.0.1
+npm version minor // 1.1.0
+npm version major // 2.0.0
 ```
 
 - Commit your changes
 - Push your changes to your fork
 - Create a pull request
 
----
+### Testing Locally
 
-## Versioning
+- Run the `npm run generate` command to generate the SDK
 
 ```bash
-npm version patch // 1.0.1
-npm version minor // 1.1.0
-npm version major // 2.0.0
+npm run generate
+```
+
+- Within your project you can use this to test locally.
+
+```json
+
+"dependencies": {
+    "tilled-node": "file:../tilled-node/dist"
+  }
+
 ```
