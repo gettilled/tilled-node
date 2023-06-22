@@ -96,6 +96,7 @@ export class Configuration {
     this.username = param.username;
     this.password = param.password;
     this.accessToken = param.accessToken;
+    this.basePath = param.basePath;
     this.baseOptions = {
       ...param.baseOptions,
       headers: {
