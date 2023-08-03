@@ -21,12 +21,6 @@
  */
 export interface Address {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof Address
-     */
-    'updated_at': string;
-    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof Address
@@ -39,23 +33,23 @@ export interface Address {
      */
     'id': string;
     /**
-     * Address line 1 (e.g., street, PO Box, or company name).
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof Address
      */
-    'street'?: string;
-    /**
-     * Address line 2 (e.g., apartment, suite, unit, or building).
-     * @type {string}
-     * @memberof Address
-     */
-    'street2'?: string;
+    'updated_at': string;
     /**
      * City, district, suburb, town, or village.
      * @type {string}
      * @memberof Address
      */
     'city'?: string;
+    /**
+     * Country.
+     * @type {string}
+     * @memberof Address
+     */
+    'country'?: string;
     /**
      * ZIP or postal code.
      * @type {string}
@@ -69,10 +63,16 @@ export interface Address {
      */
     'state'?: string;
     /**
-     * Country.
+     * Address line 1 (e.g., street, PO Box, or company name).
      * @type {string}
      * @memberof Address
      */
-    'country'?: string;
+    'street'?: string;
+    /**
+     * Address line 2 (e.g., apartment, suite, unit, or building).
+     * @type {string}
+     * @memberof Address
+     */
+    'street2'?: string;
 }
 

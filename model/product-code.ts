@@ -21,23 +21,17 @@
  */
 export interface ProductCode {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof ProductCode
-     */
-    'updated_at': string;
-    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof ProductCode
      */
     'created_at': string;
     /**
-     * Unique identifier for the object.
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
      * @memberof ProductCode
      */
-    'id': string;
+    'currency': ProductCodeCurrency;
     /**
      * The user friendly description. Example: *2.90% | $0.30 TXN | $10 CHBK/Reversals/Retrievals | $0 Monthly*
      * @type {string}
@@ -45,17 +39,23 @@ export interface ProductCode {
      */
     'description': string;
     /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof ProductCode
+     */
+    'id': string;
+    /**
      * The payment method type that this product code is valid for.
      * @type {string}
      * @memberof ProductCode
      */
     'payment_method_type': ProductCodePaymentMethodType;
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof ProductCode
      */
-    'currency': ProductCodeCurrency;
+    'updated_at': string;
     /**
      * The Region in which the product code is usable
      * @type {string}
@@ -64,14 +64,6 @@ export interface ProductCode {
     'region'?: ProductCodeRegion;
 }
 
-export const ProductCodePaymentMethodType = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    CARD_PRESENT: 'card_present',
-    EFT_DEBIT: 'eft_debit'
-} as const;
-
-export type ProductCodePaymentMethodType = typeof ProductCodePaymentMethodType[keyof typeof ProductCodePaymentMethodType];
 export const ProductCodeCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -89,6 +81,14 @@ export const ProductCodeCurrency = {
 } as const;
 
 export type ProductCodeCurrency = typeof ProductCodeCurrency[keyof typeof ProductCodeCurrency];
+export const ProductCodePaymentMethodType = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    CARD_PRESENT: 'card_present',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type ProductCodePaymentMethodType = typeof ProductCodePaymentMethodType[keyof typeof ProductCodePaymentMethodType];
 export const ProductCodeRegion = {
     US: 'US',
     CA: 'CA'

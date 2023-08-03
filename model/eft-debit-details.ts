@@ -27,6 +27,12 @@ export interface EftDebitDetails {
      */
     'bank_name'?: string;
     /**
+     * The sequence of three-digits used by banks to identify specific financial institutions
+     * @type {string}
+     * @memberof EftDebitDetails
+     */
+    'institution_id'?: string;
+    /**
      * The last 2 digits of the bank account number.
      * @type {string}
      * @memberof EftDebitDetails
@@ -38,11 +44,5 @@ export interface EftDebitDetails {
      * @memberof EftDebitDetails
      */
     'transit_number'?: string;
-    /**
-     * The sequence of three-digits used by banks to identify specific financial institutions
-     * @type {string}
-     * @memberof EftDebitDetails
-     */
-    'institution_id'?: string;
 }
 

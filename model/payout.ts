@@ -24,24 +24,6 @@ import { PayoutBalanceTransaction } from './payout-balance-transaction';
  */
 export interface Payout {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof Payout
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof Payout
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof Payout
-     */
-    'id': string;
-    /**
      * 
      * @type {string}
      * @memberof Payout
@@ -54,11 +36,30 @@ export interface Payout {
      */
     'amount': number;
     /**
+     * 
+     * @type {PayoutBalanceTransaction}
+     * @memberof Payout
+     * @deprecated
+     */
+    'balance_transaction': PayoutBalanceTransaction;
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof Payout
+     */
+    'created_at': string;
+    /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
      * @memberof Payout
      */
     'currency': PayoutCurrency;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof Payout
+     */
+    'id': string;
     /**
      * Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`. A payout is `pending` until it is submitted to the bank, when it becomes `in_transit`. The status then changes to `paid` if the transaction goes through, or to `failed` or `canceled` (within 5 business days). Some failed payouts may initially show as `paid` but then change to `failed`.
      * @type {string}
@@ -66,12 +67,11 @@ export interface Payout {
      */
     'status': PayoutStatus;
     /**
-     * 
-     * @type {PayoutBalanceTransaction}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof Payout
-     * @deprecated
      */
-    'balance_transaction': PayoutBalanceTransaction;
+    'updated_at': string;
     /**
      * An arbitrary string attached to the object. Often useful for displaying to users.
      * @type {string}

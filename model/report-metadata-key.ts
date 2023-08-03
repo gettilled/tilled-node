@@ -25,13 +25,13 @@ export interface ReportMetadataKey {
      * @type {string}
      * @memberof ReportMetadataKey
      */
-    'metadata_type': ReportMetadataKeyMetadataType;
+    'metadata_key': string;
     /**
      * 
      * @type {string}
      * @memberof ReportMetadataKey
      */
-    'metadata_key': string;
+    'metadata_type': ReportMetadataKeyMetadataType;
 }
 
 export const ReportMetadataKeyMetadataType = {

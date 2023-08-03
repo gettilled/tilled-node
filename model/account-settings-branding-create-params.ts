@@ -21,6 +21,12 @@
  */
 export interface AccountSettingsBrandingCreateParams {
     /**
+     * Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
+     * @type {boolean}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'global_email_notifications'?: boolean;
+    /**
      * The File ID of an uploaded [File](#tag/Files) of type `logo`
      * @type {string}
      * @memberof AccountSettingsBrandingCreateParams

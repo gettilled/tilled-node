@@ -27,18 +27,6 @@ import { BusinessRepresentative } from './business-representative';
  */
 export interface BusinessProfile {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof BusinessProfile
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof BusinessProfile
-     */
-    'created_at': string;
-    /**
      * 
      * @type {BusinessProfileAddress}
      * @memberof BusinessProfile
@@ -50,6 +38,12 @@ export interface BusinessProfile {
      * @memberof BusinessProfile
      */
     'category': BusinessProfileCategory;
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof BusinessProfile
+     */
+    'created_at': string;
     /**
      * The legal name for the business.
      * @type {string}
@@ -75,6 +69,12 @@ export interface BusinessProfile {
      */
     'region': BusinessProfileRegion;
     /**
+     * A list of Representatives included in the onboarding application.
+     * @type {Array<BusinessRepresentative>}
+     * @memberof BusinessProfile
+     */
+    'representatives': Array<BusinessRepresentative>;
+    /**
      * The structure of the business (LLC, Corp, etc.).
      * @type {string}
      * @memberof BusinessProfile
@@ -87,11 +87,11 @@ export interface BusinessProfile {
      */
     'tax_identification_number': string;
     /**
-     * A list of Representatives included in the onboarding application.
-     * @type {Array<BusinessRepresentative>}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof BusinessProfile
      */
-    'representatives': Array<BusinessRepresentative>;
+    'updated_at': string;
     /**
      * The website of the business.
      * @type {string}

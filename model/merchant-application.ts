@@ -33,13 +33,6 @@ import { TermsAndConditionsDetail } from './terms-and-conditions-detail';
  */
 export interface MerchantApplication {
     /**
-     * *Deprecated: See `pricing_template` for account details.*  The product codes applied to/associated with this merchant application.
-     * @type {Array<ProductCode>}
-     * @memberof MerchantApplication
-     * @deprecated
-     */
-    'product_codes': Array<ProductCode>;
-    /**
      * Indicates whether or not the merchant has accepted the terms and conditions.
      * @type {boolean}
      * @memberof MerchantApplication
@@ -52,17 +45,12 @@ export interface MerchantApplication {
      */
     'pricing_templates': Array<PricingTemplate>;
     /**
-     * Links to terms and conditions for a merchant application.
-     * @type {Array<TermsAndConditionsDetail>}
+     * *Deprecated: See `pricing_template` for account details.*  The product codes applied to/associated with this merchant application.
+     * @type {Array<ProductCode>}
      * @memberof MerchantApplication
+     * @deprecated
      */
-    'terms_and_conditions_links'?: Array<TermsAndConditionsDetail>;
-    /**
-     * If an application contains any validation errors they will appear here. If they are not addressed before submission then the submission will fail.
-     * @type {Array<string>}
-     * @memberof MerchantApplication
-     */
-    'validation_errors'?: Array<string>;
+    'product_codes': Array<ProductCode>;
     /**
      * 
      * @type {MerchantApplicationBusinessLegalEntity}
@@ -70,10 +58,22 @@ export interface MerchantApplication {
      */
     'business_legal_entity'?: MerchantApplicationBusinessLegalEntity;
     /**
+     * Links to terms and conditions for a merchant application.
+     * @type {Array<TermsAndConditionsDetail>}
+     * @memberof MerchantApplication
+     */
+    'terms_and_conditions_links'?: Array<TermsAndConditionsDetail>;
+    /**
      * Time at which the object was last updated.
      * @type {string}
      * @memberof MerchantApplication
      */
     'updated_at'?: string;
+    /**
+     * If an application contains any validation errors they will appear here. If they are not addressed before submission then the submission will fail.
+     * @type {Array<string>}
+     * @memberof MerchantApplication
+     */
+    'validation_errors'?: Array<string>;
 }
 

@@ -28,12 +28,6 @@ import { RegisterDtoUser } from './register-dto-user';
 export interface RegisterDto {
     /**
      * 
-     * @type {RegisterDtoUser}
-     * @memberof RegisterDto
-     */
-    'user': RegisterDtoUser;
-    /**
-     * 
      * @type {RegisterDtoAccount}
      * @memberof RegisterDto
      */
@@ -44,5 +38,11 @@ export interface RegisterDto {
      * @memberof RegisterDto
      */
     'token': string;
+    /**
+     * 
+     * @type {RegisterDtoUser}
+     * @memberof RegisterDto
+     */
+    'user': RegisterDtoUser;
 }
 

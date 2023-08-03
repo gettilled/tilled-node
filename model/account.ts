@@ -36,11 +36,11 @@ import { TerminalReader } from './terminal-reader';
  */
 export interface Account {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
+     * Bank accounts attached to this account. Primarily used for payouts.
+     * @type {Array<BankAccount>}
      * @memberof Account
      */
-    'updated_at': string;
+    'bank_accounts': Array<BankAccount>;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -54,23 +54,41 @@ export interface Account {
      */
     'id': string;
     /**
+     * Terminal Readers attached to this account.
+     * @type {Array<TerminalReader>}
+     * @memberof Account
+     */
+    'terminal_readers': Array<TerminalReader>;
+    /**
      * The Tilled account type. Can be `partner` or `merchant`.
      * @type {string}
      * @memberof Account
      */
     'type': AccountType;
     /**
-     * Bank accounts attached to this account. Primarily used for payouts.
-     * @type {Array<BankAccount>}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof Account
      */
-    'bank_accounts': Array<BankAccount>;
+    'updated_at': string;
     /**
-     * Terminal Readers attached to this account.
-     * @type {Array<TerminalReader>}
+     * 
+     * @type {AccountBusinessProfile}
      * @memberof Account
      */
-    'terminal_readers': Array<TerminalReader>;
+    'business_profile'?: AccountBusinessProfile;
+    /**
+     * Capabilities represent the assigned product codes to a given merchant account and their status.
+     * @type {Array<AccountCapability>}
+     * @memberof Account
+     */
+    'capabilities'?: Array<AccountCapability>;
+    /**
+     * The primary user\'s email address.
+     * @type {string}
+     * @memberof Account
+     */
+    'email'?: string;
     /**
      * Whether Tilled is providing support for this account.
      * @type {boolean}
@@ -85,29 +103,11 @@ export interface Account {
      */
     'metadata'?: { [key: string]: string; };
     /**
-     * Capabilities represent the assigned product codes to a given merchant account and their status.
-     * @type {Array<AccountCapability>}
-     * @memberof Account
-     */
-    'capabilities'?: Array<AccountCapability>;
-    /**
      * The business name or individual name.
      * @type {string}
      * @memberof Account
      */
     'name'?: string;
-    /**
-     * The primary user\'s email address.
-     * @type {string}
-     * @memberof Account
-     */
-    'email'?: string;
-    /**
-     * 
-     * @type {AccountBusinessProfile}
-     * @memberof Account
-     */
-    'business_profile'?: AccountBusinessProfile;
     /**
      * 
      * @type {AccountSettings}

@@ -21,11 +21,11 @@
  */
 export interface UserInvitation {
     /**
-     * Time at which the object was last updated.
+     * The ID of the Account associated with this pending user.
      * @type {string}
      * @memberof UserInvitation
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -33,23 +33,17 @@ export interface UserInvitation {
      */
     'created_at': string;
     /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof UserInvitation
-     */
-    'id': string;
-    /**
      * The pending user\'s email.
      * @type {string}
      * @memberof UserInvitation
      */
     'email': string;
     /**
-     * The ID of the Account associated with this pending user.
+     * Unique identifier for the object.
      * @type {string}
      * @memberof UserInvitation
      */
-    'account_id': string;
+    'id': string;
     /**
      * The pending user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.
      * @type {string}
@@ -57,11 +51,17 @@ export interface UserInvitation {
      */
     'role': UserInvitationRole;
     /**
-     * Time at which the invitation was last sent.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof UserInvitation
      */
-    'sent_at'?: string;
+    'updated_at': string;
+    /**
+     * Frontend link for the user invitation.
+     * @type {string}
+     * @memberof UserInvitation
+     */
+    'invitation_url'?: string;
     /**
      * The ID of the user who sent the invitation.
      * @type {string}
@@ -69,11 +69,11 @@ export interface UserInvitation {
      */
     'inviter_user_id'?: string;
     /**
-     * Frontend link for the user invitation.
+     * Time at which the invitation was last sent.
      * @type {string}
      * @memberof UserInvitation
      */
-    'invitation_url'?: string;
+    'sent_at'?: string;
 }
 
 export const UserInvitationRole = {

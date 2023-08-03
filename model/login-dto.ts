@@ -24,11 +24,11 @@ import { LoginDtoUser } from './login-dto-user';
  */
 export interface LoginDto {
     /**
-     * 
-     * @type {LoginDtoUser}
+     * JSON Web Token used to refresh access tokens.
+     * @type {string}
      * @memberof LoginDto
      */
-    'user': LoginDtoUser;
+    'refresh_token': string;
     /**
      * JSON Web Token used for authentication (i.e. access token).
      * @type {string}
@@ -36,10 +36,10 @@ export interface LoginDto {
      */
     'token': string;
     /**
-     * JSON Web Token used to refresh access tokens.
-     * @type {string}
+     * 
+     * @type {LoginDtoUser}
      * @memberof LoginDto
      */
-    'refresh_token': string;
+    'user': LoginDtoUser;
 }
 

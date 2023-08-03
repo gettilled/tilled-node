@@ -24,23 +24,29 @@ import { LineItem } from './line-item';
  */
 export interface Level3 {
     /**
+     * Duty associated with the import of the purchased goods on the total amount for the order, in minor units.
+     * @type {number}
+     * @memberof Level3
+     */
+    'duty_amount': number;
+    /**
      * More detailed information about the items being purchased. Max length is 25.
      * @type {Array<LineItem>}
      * @memberof Level3
      */
     'line_items': Array<LineItem>;
     /**
-     * Postal/zip code of the address to which the purchased goods will be delivered. This field can be identical to the `shipping_from_zip` if the customer is present and takes immediate possession of the goods.
-     * @type {string}
-     * @memberof Level3
-     */
-    'shipping_address_zip': string;
-    /**
      * 2-digit Country code (e.g. \'US\', \'CA\') of the address to which the purchased goods will be delivered.
      * @type {string}
      * @memberof Level3
      */
     'shipping_address_country': string;
+    /**
+     * Postal/zip code of the address to which the purchased goods will be delivered. This field can be identical to the `shipping_from_zip` if the customer is present and takes immediate possession of the goods.
+     * @type {string}
+     * @memberof Level3
+     */
+    'shipping_address_zip': string;
     /**
      * The shipping or freight portion of the total transaction amount, in minor units.
      * @type {number}
@@ -53,11 +59,5 @@ export interface Level3 {
      * @memberof Level3
      */
     'shipping_from_zip': string;
-    /**
-     * Duty associated with the import of the purchased goods on the total amount for the order, in minor units.
-     * @type {number}
-     * @memberof Level3
-     */
-    'duty_amount': number;
 }
 

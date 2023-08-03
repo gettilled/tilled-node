@@ -24,17 +24,17 @@ import { ReportRunCreateParamsParameters } from './report-run-create-params-para
  */
 export interface ReportRunCreateParams {
     /**
-     * The type of a Report Run.
-     * @type {string}
-     * @memberof ReportRunCreateParams
-     */
-    'type': ReportRunCreateParamsType;
-    /**
      * 
      * @type {ReportRunCreateParamsParameters}
      * @memberof ReportRunCreateParams
      */
     'parameters': ReportRunCreateParamsParameters;
+    /**
+     * The type of a Report Run.
+     * @type {string}
+     * @memberof ReportRunCreateParams
+     */
+    'type': ReportRunCreateParamsType;
     /**
      * The name of the report. Can only be alphanumeric, and include hyphens (-), underscores (_), and periods (.)
      * @type {string}

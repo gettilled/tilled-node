@@ -24,17 +24,17 @@ import { AchDebitSingleUseTokenDetails } from './ach-debit-single-use-token-deta
  */
 export interface AchDebitSingleUseToken {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof AchDebitSingleUseToken
-     */
-    'updated_at': string;
-    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof AchDebitSingleUseToken
      */
     'created_at': string;
+    /**
+     * The time at which the token expires and is no longer available.
+     * @type {string}
+     * @memberof AchDebitSingleUseToken
+     */
+    'expires_at': string;
     /**
      * The single-use token that is capable of being used to generate an `ach_debit` Payment Method. It represents bank account details.
      * @type {string}
@@ -42,11 +42,11 @@ export interface AchDebitSingleUseToken {
      */
     'payment_token': string;
     /**
-     * The time at which the token expires and is no longer available.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof AchDebitSingleUseToken
      */
-    'expires_at': string;
+    'updated_at': string;
     /**
      * 
      * @type {AchDebitSingleUseTokenDetails}

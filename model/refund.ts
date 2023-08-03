@@ -24,11 +24,24 @@ import { PlatformFeeRefundBalanceTransaction } from './platform-fee-refund-balan
  */
 export interface Refund {
     /**
-     * Time at which the object was last updated.
+     * Amount (in the smallest currency unit) refunded.
+     * @type {number}
+     * @memberof Refund
+     */
+    'amount': number;
+    /**
+     * 
+     * @type {PlatformFeeRefundBalanceTransaction}
+     * @memberof Refund
+     * @deprecated
+     */
+    'balance_transaction': PlatformFeeRefundBalanceTransaction;
+    /**
+     * ID of the Charge that was refunded.
      * @type {string}
      * @memberof Refund
      */
-    'updated_at': string;
+    'charge_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -42,23 +55,11 @@ export interface Refund {
      */
     'id': string;
     /**
-     * Amount (in the smallest currency unit) refunded.
-     * @type {number}
-     * @memberof Refund
-     */
-    'amount': number;
-    /**
      * ID of the PaymentIntent that was refunded.
      * @type {string}
      * @memberof Refund
      */
     'payment_intent_id': string;
-    /**
-     * ID of the Charge that was refunded.
-     * @type {string}
-     * @memberof Refund
-     */
-    'charge_id': string;
     /**
      * Status of the refund, one of `pending`, `succeeded`, `failed`, or `canceled`.
      * @type {string}
@@ -66,18 +67,23 @@ export interface Refund {
      */
     'status': RefundStatus;
     /**
-     * 
-     * @type {PlatformFeeRefundBalanceTransaction}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof Refund
-     * @deprecated
      */
-    'balance_transaction': PlatformFeeRefundBalanceTransaction;
+    'updated_at': string;
     /**
      * Error code explaining reason for refund failure.
      * @type {string}
      * @memberof Refund
      */
     'failure_code'?: RefundFailureCode;
+    /**
+     * Message to user further explaining the reason for the refund failure.
+     * @type {string}
+     * @memberof Refund
+     */
+    'failure_message'?: string;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
      * @type {{ [key: string]: string; }}
@@ -96,12 +102,6 @@ export interface Refund {
      * @memberof Refund
      */
     'reason'?: RefundReason;
-    /**
-     * Message to user further explaining the reason for the refund failure.
-     * @type {string}
-     * @memberof Refund
-     */
-    'failure_message'?: string;
 }
 
 export const RefundStatus = {

@@ -19,6 +19,9 @@ import { BalanceTransaction } from './balance-transaction';
 // May contain unused imports in some cases
 // @ts-ignore
 import { DisputeEvidence } from './dispute-evidence';
+// May contain unused imports in some cases
+// @ts-ignore
+import { DisputeStatusHistory } from './dispute-status-history';
 
 /**
  * 
@@ -27,35 +30,11 @@ import { DisputeEvidence } from './dispute-evidence';
  */
 export interface Dispute {
     /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof Dispute
-     */
-    'created_at': string;
-    /**
-     * Time at which the object was updated.
-     * @type {string}
-     * @memberof Dispute
-     */
-    'updated_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof Dispute
-     */
-    'id': string;
-    /**
      * The ID of the Account associated with this dispute.
      * @type {string}
      * @memberof Dispute
      */
     'account_id': string;
-    /**
-     * The ID of the Charge associated with this dispute.
-     * @type {string}
-     * @memberof Dispute
-     */
-    'charge_id': string;
     /**
      * Amount of the charge that is in dispute in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). If the dispute is type `chargeback` the amount has already been deducted from your account balance and can only be restored by submitting evidence proving the validity of the charge.
      * @type {number}
@@ -63,11 +42,35 @@ export interface Dispute {
      */
     'amount': number;
     /**
+     * The balance transactions that describes the impact of this dispute on your account balance.
+     * @type {Array<BalanceTransaction>}
+     * @memberof Dispute
+     */
+    'balance_transactions': Array<BalanceTransaction>;
+    /**
+     * The ID of the Charge associated with this dispute.
+     * @type {string}
+     * @memberof Dispute
+     */
+    'charge_id': string;
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof Dispute
+     */
+    'created_at': string;
+    /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
      * @memberof Dispute
      */
     'currency': DisputeCurrency;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof Dispute
+     */
+    'id': string;
     /**
      * Current status of the dispute.
      * @type {string}
@@ -75,11 +78,17 @@ export interface Dispute {
      */
     'status': DisputeStatus;
     /**
-     * The balance transactions that describes the impact of this dispute on your account balance.
-     * @type {Array<BalanceTransaction>}
+     * Status history of the dispute.
+     * @type {Array<DisputeStatusHistory>}
      * @memberof Dispute
      */
-    'balance_transactions': Array<BalanceTransaction>;
+    'status_history': Array<DisputeStatusHistory>;
+    /**
+     * Time at which the object was updated.
+     * @type {string}
+     * @memberof Dispute
+     */
+    'updated_at': string;
     /**
      * Time at which the supporting evidence is due and the dispute will be closed with no response.
      * @type {string}
@@ -87,11 +96,11 @@ export interface Dispute {
      */
     'closing_at'?: string;
     /**
-     * Time at which the dispute was reversed.
-     * @type {string}
+     * 
+     * @type {DisputeEvidence}
      * @memberof Dispute
      */
-    'reversed_at'?: string;
+    'evidence'?: DisputeEvidence;
     /**
      * Description explaining the reason for a dispute
      * @type {string}
@@ -99,11 +108,11 @@ export interface Dispute {
      */
     'reason_description'?: string;
     /**
-     * 
-     * @type {DisputeEvidence}
+     * Time at which the dispute was reversed.
+     * @type {string}
      * @memberof Dispute
      */
-    'evidence'?: DisputeEvidence;
+    'reversed_at'?: string;
 }
 
 export const DisputeCurrency = {

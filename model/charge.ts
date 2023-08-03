@@ -30,11 +30,23 @@ import { Refund } from './refund';
  */
 export interface Charge {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
+     * Amount (in the smallest currency unit) captured. Can be less than the `amount` on the PaymentIntent if a partial capture was made.
+     * @type {number}
      * @memberof Charge
      */
-    'updated_at': string;
+    'amount_captured': number;
+    /**
+     * Amount (in the smallest currency unit) refunded. Can be less than the `amount` on the PaymentIntent if a partial refund was made.
+     * @type {number}
+     * @memberof Charge
+     */
+    'amount_refunded': number;
+    /**
+     * If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.
+     * @type {boolean}
+     * @memberof Charge
+     */
+    'captured': boolean;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -54,29 +66,11 @@ export interface Charge {
      */
     'payment_intent_id': string;
     /**
-     * The status of the payment.
+     * The id of the PaymentMethod at the time of the transaction.
      * @type {string}
      * @memberof Charge
      */
-    'status': ChargeStatus;
-    /**
-     * Amount (in the smallest currency unit) captured. Can be less than the `amount` on the PaymentIntent if a partial capture was made.
-     * @type {number}
-     * @memberof Charge
-     */
-    'amount_captured': number;
-    /**
-     * Amount (in the smallest currency unit) refunded. Can be less than the `amount` on the PaymentIntent if a partial refund was made.
-     * @type {number}
-     * @memberof Charge
-     */
-    'amount_refunded': number;
-    /**
-     * If the charge was created without capturing, this Boolean represents whether it is still uncaptured or has since been captured.
-     * @type {boolean}
-     * @memberof Charge
-     */
-    'captured': boolean;
+    'payment_method_id': string;
     /**
      * Whether the charge has been fully refunded. If the charge is only partially refunded, this attribute will be false.
      * @type {boolean}
@@ -90,29 +84,17 @@ export interface Charge {
      */
     'refunds': Array<Refund>;
     /**
-     * The id of the PaymentMethod at the time of the transaction.
+     * The status of the payment.
      * @type {string}
      * @memberof Charge
      */
-    'payment_method_id': string;
+    'status': ChargeStatus;
     /**
-     * Error code explaining reason for charge failure.
+     * Time at which the object was updated.
      * @type {string}
      * @memberof Charge
      */
-    'failure_code'?: ChargeFailureCode;
-    /**
-     * Time at which the charge was captured.
-     * @type {string}
-     * @memberof Charge
-     */
-    'captured_at'?: string;
-    /**
-     * 
-     * @type {ChargePlatformFee}
-     * @memberof Charge
-     */
-    'platform_fee'?: ChargePlatformFee;
+    'updated_at': string;
     /**
      * 
      * @type {ChargeBalanceTransaction}
@@ -121,17 +103,35 @@ export interface Charge {
      */
     'balance_transaction'?: ChargeBalanceTransaction;
     /**
+     * Time at which the charge was captured.
+     * @type {string}
+     * @memberof Charge
+     */
+    'captured_at'?: string;
+    /**
      * Time at which the charge failed.
      * @type {string}
      * @memberof Charge
      */
     'failed_at'?: string;
     /**
+     * Error code explaining reason for charge failure.
+     * @type {string}
+     * @memberof Charge
+     */
+    'failure_code'?: ChargeFailureCode;
+    /**
      * Message to user further explaining the reason for the charge failure.
      * @type {string}
      * @memberof Charge
      */
     'failure_message'?: string;
+    /**
+     * 
+     * @type {ChargePlatformFee}
+     * @memberof Charge
+     */
+    'platform_fee'?: ChargePlatformFee;
 }
 
 export const ChargeStatus = {

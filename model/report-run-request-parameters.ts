@@ -24,23 +24,17 @@ import { ReportMetadataKey } from './report-metadata-key';
  */
 export interface ReportRunRequestParameters {
     /**
-     * Date of the start of the data to include in the Report Run
-     * @type {string}
-     * @memberof ReportRunRequestParameters
-     */
-    'start_at': string;
-    /**
      * Date of the end of the data to include in the Report Run
      * @type {string}
      * @memberof ReportRunRequestParameters
      */
     'end_at': string;
     /**
-     * Timezone of the Report Run
+     * Date of the start of the data to include in the Report Run
      * @type {string}
      * @memberof ReportRunRequestParameters
      */
-    'time_zone'?: ReportRunRequestParametersTimeZone;
+    'start_at': string;
     /**
      * The specific child Account Id to run a report on
      * @type {string}
@@ -53,6 +47,12 @@ export interface ReportRunRequestParameters {
      * @memberof ReportRunRequestParameters
      */
     'metadata_keys_to_include'?: Array<ReportMetadataKey>;
+    /**
+     * Timezone of the Report Run
+     * @type {string}
+     * @memberof ReportRunRequestParameters
+     */
+    'time_zone'?: ReportRunRequestParametersTimeZone;
 }
 
 export const ReportRunRequestParametersTimeZone = {

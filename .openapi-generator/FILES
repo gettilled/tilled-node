@@ -40,6 +40,7 @@ model/account-create-params-bank-account.ts
 model/account-create-params-settings.ts
 model/account-create-params.ts
 model/account-requirements-error.ts
+model/account-role.ts
 model/account-settings-branding-create-params.ts
 model/account-settings-branding.ts
 model/account-settings-create-params-branding.ts
@@ -99,6 +100,7 @@ model/dispute-evidence.ts
 model/dispute-file-create-params.ts
 model/dispute-file-file.ts
 model/dispute-file.ts
+model/dispute-status-history.ts
 model/dispute.ts
 model/eft-debit-details.ts
 model/event.ts
@@ -230,10 +232,13 @@ model/subscription.ts
 model/terminal-reader.ts
 model/terms-and-conditions-detail.ts
 model/user-create-params.ts
+model/user-email-settings-update-params.ts
+model/user-email-settings.ts
 model/user-invitation-check.ts
 model/user-invitation-create-params.ts
 model/user-invitation.ts
 model/user-reset-password-params.ts
+model/user-update-params-email-settings.ts
 model/user-update-params.ts
 model/user.ts
 model/webhook-endpoint-create-params.ts

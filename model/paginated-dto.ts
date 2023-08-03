@@ -27,17 +27,17 @@ export interface PaginatedDto {
      */
     'has_more': boolean;
     /**
-     * The (zero-based) offset of the first item in the collection to return.
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    'offset'?: number;
-    /**
      * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
      * @type {number}
      * @memberof PaginatedDto
      */
     'limit'?: number;
+    /**
+     * The (zero-based) offset of the first item in the collection to return.
+     * @type {number}
+     * @memberof PaginatedDto
+     */
+    'offset'?: number;
     /**
      * The total items count.
      * @type {number}

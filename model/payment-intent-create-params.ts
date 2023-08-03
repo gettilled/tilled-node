@@ -24,12 +24,6 @@ import { PaymentIntentLevel3 } from './payment-intent-level3';
  */
 export interface PaymentIntentCreateParams {
     /**
-     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
-     * @type {Array<string>}
-     * @memberof PaymentIntentCreateParams
-     */
-    'payment_method_types': Array<PaymentIntentCreateParamsPaymentMethodTypes>;
-    /**
      * Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00)
      * @type {number}
      * @memberof PaymentIntentCreateParams
@@ -42,29 +36,11 @@ export interface PaymentIntentCreateParams {
      */
     'currency': PaymentIntentCreateParamsCurrency;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
+     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
+     * @type {Array<string>}
      * @memberof PaymentIntentCreateParams
      */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
-     * @type {string}
-     * @memberof PaymentIntentCreateParams
-     */
-    'statement_descriptor_suffix'?: string;
-    /**
-     * The amount of the platform fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped at the total payment amount.
-     * @type {number}
-     * @memberof PaymentIntentCreateParams
-     */
-    'platform_fee_amount'?: number;
-    /**
-     * ID of the PaymentMethod to attach to this PaymentIntent.
-     * @type {string}
-     * @memberof PaymentIntentCreateParams
-     */
-    'payment_method_id'?: string;
+    'payment_method_types': Array<PaymentIntentCreateParamsPaymentMethodTypes>;
     /**
      * Controls when the funds will be captured from the customer’s account.  `automatic` (Default) Tilled automatically captures funds when the customer authorizes the payment.  `manual` Place a hold on funds when the customer authorizes the payment, but don\'t capture the funds until later.
      * @type {string}
@@ -78,26 +54,43 @@ export interface PaymentIntentCreateParams {
      */
     'confirm'?: boolean;
     /**
+     * 
+     * @type {PaymentIntentLevel3}
+     * @memberof PaymentIntentCreateParams
+     */
+    'level3'?: PaymentIntentLevel3;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentIntentCreateParams
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
      * Used to identify authorization requests that use stored credentials to improve authorization rates and reduce fraud.  `consumer_ad_hoc` Ad hoc consumer-initiated request  `merchant_ad_hoc` Unscheduled merchant-initiated request  `merchant_recurring` Scheduled, merchant-initiated recurring request
      * @type {string}
      * @memberof PaymentIntentCreateParams
      */
     'occurrence_type'?: PaymentIntentCreateParamsOccurrenceType;
     /**
-     * 
-     * @type {PaymentIntentLevel3}
+     * ID of the PaymentMethod to attach to this PaymentIntent.
+     * @type {string}
      * @memberof PaymentIntentCreateParams
      */
-    'level3'?: PaymentIntentLevel3;
+    'payment_method_id'?: string;
+    /**
+     * The amount of the platform fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped at the total payment amount.
+     * @type {number}
+     * @memberof PaymentIntentCreateParams
+     */
+    'platform_fee_amount'?: number;
+    /**
+     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
+     * @type {string}
+     * @memberof PaymentIntentCreateParams
+     */
+    'statement_descriptor_suffix'?: string;
 }
 
-export const PaymentIntentCreateParamsPaymentMethodTypes = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
-} as const;
-
-export type PaymentIntentCreateParamsPaymentMethodTypes = typeof PaymentIntentCreateParamsPaymentMethodTypes[keyof typeof PaymentIntentCreateParamsPaymentMethodTypes];
 export const PaymentIntentCreateParamsCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -115,6 +108,13 @@ export const PaymentIntentCreateParamsCurrency = {
 } as const;
 
 export type PaymentIntentCreateParamsCurrency = typeof PaymentIntentCreateParamsCurrency[keyof typeof PaymentIntentCreateParamsCurrency];
+export const PaymentIntentCreateParamsPaymentMethodTypes = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type PaymentIntentCreateParamsPaymentMethodTypes = typeof PaymentIntentCreateParamsPaymentMethodTypes[keyof typeof PaymentIntentCreateParamsPaymentMethodTypes];
 export const PaymentIntentCreateParamsCaptureMethod = {
     AUTOMATIC: 'automatic',
     MANUAL: 'manual'

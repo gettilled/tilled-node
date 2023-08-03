@@ -27,23 +27,11 @@ import { AccountCreateParamsSettings } from './account-create-params-settings';
  */
 export interface AccountUpdateParams {
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
+     * 
+     * @type {AccountCreateParamsBankAccount}
      * @memberof AccountUpdateParams
      */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * The custom domain the `partner` chooses to reflect on all of its `merchant` accounts as part of the white label settings. It requires `paymentsonline.io` to be appended to the string to be accepted as a valid URL (i.e. `https://customdomain.paymentsonline.io`).  *Note: This feature is only available to `Partner` accounts.*
-     * @type {string}
-     * @memberof AccountUpdateParams
-     */
-    'white_label_domain'?: string;
-    /**
-     * The business name or individual name.
-     * @type {string}
-     * @memberof AccountUpdateParams
-     */
-    'name'?: string;
+    'bank_account'?: AccountCreateParamsBankAccount;
     /**
      * The primary user\'s email address.
      * @type {string}
@@ -51,16 +39,28 @@ export interface AccountUpdateParams {
      */
     'email'?: string;
     /**
-     * 
-     * @type {AccountCreateParamsBankAccount}
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
      * @memberof AccountUpdateParams
      */
-    'bank_account'?: AccountCreateParamsBankAccount;
+    'metadata'?: { [key: string]: string; };
+    /**
+     * The business name or individual name.
+     * @type {string}
+     * @memberof AccountUpdateParams
+     */
+    'name'?: string;
     /**
      * 
      * @type {AccountCreateParamsSettings}
      * @memberof AccountUpdateParams
      */
     'settings'?: AccountCreateParamsSettings;
+    /**
+     * The custom domain the `partner` chooses to reflect on all of its `merchant` accounts as part of the white label settings. It requires `paymentsonline.io` to be appended to the string to be accepted as a valid URL (i.e. `https://customdomain.paymentsonline.io`).  *Note: This feature is only available to `Partner` accounts.*
+     * @type {string}
+     * @memberof AccountUpdateParams
+     */
+    'white_label_domain'?: string;
 }
 

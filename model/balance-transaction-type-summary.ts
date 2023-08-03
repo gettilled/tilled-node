@@ -21,23 +21,23 @@
  */
 export interface BalanceTransactionTypeSummary {
     /**
-     * The transaction type of each of the balance transactions grouped in this summary.
-     * @type {string}
+     * The sum of the `amount` value on the balance transactions grouped in this summary.
+     * @type {number}
      * @memberof BalanceTransactionTypeSummary
      */
-    'type': BalanceTransactionTypeSummaryType;
+    'amount': number;
+    /**
+     * Total number of balance transactions grouped in this summary.
+     * @type {number}
+     * @memberof BalanceTransactionTypeSummary
+     */
+    'count': number;
     /**
      * The currency of each of the balance transactions grouped in this summary.
      * @type {string}
      * @memberof BalanceTransactionTypeSummary
      */
     'currency': BalanceTransactionTypeSummaryCurrency;
-    /**
-     * The sum of the `amount` value on the balance transactions grouped in this summary.
-     * @type {number}
-     * @memberof BalanceTransactionTypeSummary
-     */
-    'amount': number;
     /**
      * The sum of the `fee` value on the balance transactions grouped in this summary.
      * @type {number}
@@ -51,13 +51,30 @@ export interface BalanceTransactionTypeSummary {
      */
     'net': number;
     /**
-     * Total number of balance transactions grouped in this summary.
-     * @type {number}
+     * The transaction type of each of the balance transactions grouped in this summary.
+     * @type {string}
      * @memberof BalanceTransactionTypeSummary
      */
-    'count': number;
+    'type': BalanceTransactionTypeSummaryType;
 }
 
+export const BalanceTransactionTypeSummaryCurrency = {
+    AUD: 'aud',
+    CAD: 'cad',
+    DKK: 'dkk',
+    EUR: 'eur',
+    HKD: 'hkd',
+    JPY: 'jpy',
+    NZD: 'nzd',
+    NOK: 'nok',
+    GBP: 'gbp',
+    ZAR: 'zar',
+    SEK: 'sek',
+    CHF: 'chf',
+    USD: 'usd'
+} as const;
+
+export type BalanceTransactionTypeSummaryCurrency = typeof BalanceTransactionTypeSummaryCurrency[keyof typeof BalanceTransactionTypeSummaryCurrency];
 export const BalanceTransactionTypeSummaryType = {
     CHARGE: 'charge',
     CHARGE_FAILURE_REFUND: 'charge_failure_refund',
@@ -84,22 +101,5 @@ export const BalanceTransactionTypeSummaryType = {
 } as const;
 
 export type BalanceTransactionTypeSummaryType = typeof BalanceTransactionTypeSummaryType[keyof typeof BalanceTransactionTypeSummaryType];
-export const BalanceTransactionTypeSummaryCurrency = {
-    AUD: 'aud',
-    CAD: 'cad',
-    DKK: 'dkk',
-    EUR: 'eur',
-    HKD: 'hkd',
-    JPY: 'jpy',
-    NZD: 'nzd',
-    NOK: 'nok',
-    GBP: 'gbp',
-    ZAR: 'zar',
-    SEK: 'sek',
-    CHF: 'chf',
-    USD: 'usd'
-} as const;
-
-export type BalanceTransactionTypeSummaryCurrency = typeof BalanceTransactionTypeSummaryCurrency[keyof typeof BalanceTransactionTypeSummaryCurrency];
 
 

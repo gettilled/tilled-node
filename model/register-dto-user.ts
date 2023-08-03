@@ -15,7 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountRole } from './account-role';
+// May contain unused imports in some cases
+// @ts-ignore
 import { User } from './user';
+// May contain unused imports in some cases
+// @ts-ignore
+import { UserEmailSettings } from './user-email-settings';
 
 /**
  * @type RegisterDtoUser

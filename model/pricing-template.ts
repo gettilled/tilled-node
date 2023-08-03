@@ -30,35 +30,11 @@ import { PricingTemplateEftDebit } from './pricing-template-eft-debit';
  */
 export interface PricingTemplate {
     /**
-     * The payment method type this pricing template applies to.
-     * @type {string}
-     * @memberof PricingTemplate
-     */
-    'payment_method_type': PricingTemplatePaymentMethodType;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof PricingTemplate
-     */
-    'id': string;
-    /**
      * The ID of the Account associated with this pricing template.
      * @type {string}
      * @memberof PricingTemplate
      */
     'account_id': string;
-    /**
-     * The name of this pricing template.
-     * @type {string}
-     * @memberof PricingTemplate
-     */
-    'name': string;
-    /**
-     * The currency this pricing template applies to.
-     * @type {string}
-     * @memberof PricingTemplate
-     */
-    'currency': PricingTemplateCurrency;
     /**
      * The account monthly fee configured for this pricing template, in currency minor units.
      * @type {number}
@@ -72,17 +48,41 @@ export interface PricingTemplate {
      */
     'account_monthly_minimum_fee': number;
     /**
-     * The status of this pricing template
-     * @type {string}
-     * @memberof PricingTemplate
-     */
-    'status': PricingTemplateStatus;
-    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof PricingTemplate
      */
     'created_at': string;
+    /**
+     * The currency this pricing template applies to.
+     * @type {string}
+     * @memberof PricingTemplate
+     */
+    'currency': PricingTemplateCurrency;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof PricingTemplate
+     */
+    'id': string;
+    /**
+     * The name of this pricing template.
+     * @type {string}
+     * @memberof PricingTemplate
+     */
+    'name': string;
+    /**
+     * The payment method type this pricing template applies to.
+     * @type {string}
+     * @memberof PricingTemplate
+     */
+    'payment_method_type': PricingTemplatePaymentMethodType;
+    /**
+     * The status of this pricing template
+     * @type {string}
+     * @memberof PricingTemplate
+     */
+    'status': PricingTemplateStatus;
     /**
      * Time at which the object was last updated.
      * @type {string}
@@ -91,16 +91,16 @@ export interface PricingTemplate {
     'updated_at': string;
     /**
      * 
-     * @type {PricingTemplateCard}
-     * @memberof PricingTemplate
-     */
-    'card'?: PricingTemplateCard;
-    /**
-     * 
      * @type {PricingTemplateAchDebit}
      * @memberof PricingTemplate
      */
     'ach_debit'?: PricingTemplateAchDebit;
+    /**
+     * 
+     * @type {PricingTemplateCard}
+     * @memberof PricingTemplate
+     */
+    'card'?: PricingTemplateCard;
     /**
      * 
      * @type {PricingTemplateEftDebit}
@@ -109,13 +109,6 @@ export interface PricingTemplate {
     'eft_debit'?: PricingTemplateEftDebit;
 }
 
-export const PricingTemplatePaymentMethodType = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
-} as const;
-
-export type PricingTemplatePaymentMethodType = typeof PricingTemplatePaymentMethodType[keyof typeof PricingTemplatePaymentMethodType];
 export const PricingTemplateCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -133,6 +126,13 @@ export const PricingTemplateCurrency = {
 } as const;
 
 export type PricingTemplateCurrency = typeof PricingTemplateCurrency[keyof typeof PricingTemplateCurrency];
+export const PricingTemplatePaymentMethodType = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type PricingTemplatePaymentMethodType = typeof PricingTemplatePaymentMethodType[keyof typeof PricingTemplatePaymentMethodType];
 export const PricingTemplateStatus = {
     ACTIVE: 'active',
     ARCHIVED: 'archived',

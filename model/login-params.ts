@@ -21,16 +21,16 @@
  */
 export interface LoginParams {
     /**
-     * Password
-     * @type {string}
-     * @memberof LoginParams
-     */
-    'password': string;
-    /**
      * Email
      * @type {string}
      * @memberof LoginParams
      */
     'email': string;
+    /**
+     * Password
+     * @type {string}
+     * @memberof LoginParams
+     */
+    'password': string;
 }
 

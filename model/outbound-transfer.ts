@@ -21,24 +21,6 @@
  */
 export interface OutboundTransfer {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof OutboundTransfer
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof OutboundTransfer
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof OutboundTransfer
-     */
-    'id': string;
-    /**
      * The ID of the account for this outbound transfer.
      * @type {string}
      * @memberof OutboundTransfer
@@ -51,17 +33,11 @@ export interface OutboundTransfer {
      */
     'amount': number;
     /**
-     * The status of the outbound transfer.
+     * Time at which the object was created.
      * @type {string}
      * @memberof OutboundTransfer
      */
-    'status': OutboundTransferStatus;
-    /**
-     * The ID of destination [payment method](#tag/PaymentMethods) to send the outbound transfer to.
-     * @type {string}
-     * @memberof OutboundTransfer
-     */
-    'destination_payment_method_id': string;
+    'created_at': string;
     /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
@@ -69,11 +45,29 @@ export interface OutboundTransfer {
      */
     'currency': OutboundTransferCurrency;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
+     * The ID of destination [payment method](#tag/PaymentMethods) to send the outbound transfer to.
+     * @type {string}
      * @memberof OutboundTransfer
      */
-    'metadata'?: { [key: string]: string; };
+    'destination_payment_method_id': string;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'id': string;
+    /**
+     * The status of the outbound transfer.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'status': OutboundTransferStatus;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'updated_at': string;
     /**
      * Populated when `status` is `canceled`, this is the time at which the Outbound Transfer was canceled.
      * @type {string}
@@ -81,27 +75,25 @@ export interface OutboundTransfer {
      */
     'canceled_at'?: string;
     /**
+     * Error code explaining reason for outbound transfer failure.
+     * @type {string}
+     * @memberof OutboundTransfer
+     */
+    'failure_code'?: OutboundTransferFailureCode;
+    /**
      * Message to user further explaining the reason for the outbound transfer failure.
      * @type {string}
      * @memberof OutboundTransfer
      */
     'failure_message'?: string;
     /**
-     * Error code explaining reason for outbound transfer failure.
-     * @type {string}
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
      * @memberof OutboundTransfer
      */
-    'failure_code'?: OutboundTransferFailureCode;
+    'metadata'?: { [key: string]: string; };
 }
 
-export const OutboundTransferStatus = {
-    CANCELED: 'canceled',
-    FAILED: 'failed',
-    PENDING: 'pending',
-    SUCCEEDED: 'succeeded'
-} as const;
-
-export type OutboundTransferStatus = typeof OutboundTransferStatus[keyof typeof OutboundTransferStatus];
 export const OutboundTransferCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -119,6 +111,14 @@ export const OutboundTransferCurrency = {
 } as const;
 
 export type OutboundTransferCurrency = typeof OutboundTransferCurrency[keyof typeof OutboundTransferCurrency];
+export const OutboundTransferStatus = {
+    CANCELED: 'canceled',
+    FAILED: 'failed',
+    PENDING: 'pending',
+    SUCCEEDED: 'succeeded'
+} as const;
+
+export type OutboundTransferStatus = typeof OutboundTransferStatus[keyof typeof OutboundTransferStatus];
 export const OutboundTransferFailureCode = {
     ACCOUNT_CLOSED: 'account_closed',
     ACCOUNT_FROZEN: 'account_frozen',

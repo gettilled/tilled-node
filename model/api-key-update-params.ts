@@ -21,17 +21,17 @@
  */
 export interface ApiKeyUpdateParams {
     /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` (default) to enable all scopes, except those that require explicit selection. Scopes are ignored for keys of type `publishable`.
-     * @type {Array<string>}
-     * @memberof ApiKeyUpdateParams
-     */
-    'scopes'?: Array<ApiKeyUpdateParamsScopes>;
-    /**
      * A brief name or description of the API that will help you remember what it is used for.
      * @type {string}
      * @memberof ApiKeyUpdateParams
      */
     'name'?: string;
+    /**
+     * The list of scopes to define the access for this key. You may specify `[\'*\']` (default) to enable all scopes, except those that require explicit selection. Scopes are ignored for keys of type `publishable`.
+     * @type {Array<string>}
+     * @memberof ApiKeyUpdateParams
+     */
+    'scopes'?: Array<ApiKeyUpdateParamsScopes>;
 }
 
 export const ApiKeyUpdateParamsScopes = {

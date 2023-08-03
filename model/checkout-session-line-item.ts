@@ -24,16 +24,16 @@ import { CheckoutSessionLineItemPriceData } from './checkout-session-line-item-p
  */
 export interface CheckoutSessionLineItem {
     /**
-     * Quantity of the item. Maximum decimal places 4.
-     * @type {number}
-     * @memberof CheckoutSessionLineItem
-     */
-    'quantity': number;
-    /**
      * 
      * @type {CheckoutSessionLineItemPriceData}
      * @memberof CheckoutSessionLineItem
      */
     'price_data': CheckoutSessionLineItemPriceData;
+    /**
+     * Quantity of the item. Maximum decimal places 4.
+     * @type {number}
+     * @memberof CheckoutSessionLineItem
+     */
+    'quantity': number;
 }
 

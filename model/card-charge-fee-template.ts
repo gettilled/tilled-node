@@ -24,29 +24,17 @@ import { Markup } from './markup';
  */
 export interface CardChargeFeeTemplate {
     /**
-     * The type of transaction fee this pricing template applies.
-     * @type {string}
-     * @memberof CardChargeFeeTemplate
-     */
-    'transaction_fee_type': CardChargeFeeTemplateTransactionFeeType;
-    /**
-     * The amount of the transaction fee applied to each transaction, in currency minor units.
+     * The amount of the fee applied per chargeback, in currency minor units.
      * @type {number}
      * @memberof CardChargeFeeTemplate
      */
-    'transaction_fee': number;
+    'chargeback_fee': number;
     /**
      * The list of additional markups applied to a given card type.
      * @type {Array<Markup>}
      * @memberof CardChargeFeeTemplate
      */
     'markups': Array<Markup>;
-    /**
-     * The amount of the fee applied per chargeback, in currency minor units.
-     * @type {number}
-     * @memberof CardChargeFeeTemplate
-     */
-    'chargeback_fee': number;
     /**
      * The amount of the fee applied per retrieval, in currency minor units.
      * @type {number}
@@ -59,6 +47,18 @@ export interface CardChargeFeeTemplate {
      * @memberof CardChargeFeeTemplate
      */
     'reversal_fee': number;
+    /**
+     * The amount of the transaction fee applied to each transaction, in currency minor units.
+     * @type {number}
+     * @memberof CardChargeFeeTemplate
+     */
+    'transaction_fee': number;
+    /**
+     * The type of transaction fee this pricing template applies.
+     * @type {string}
+     * @memberof CardChargeFeeTemplate
+     */
+    'transaction_fee_type': CardChargeFeeTemplateTransactionFeeType;
 }
 
 export const CardChargeFeeTemplateTransactionFeeType = {

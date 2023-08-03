@@ -33,59 +33,11 @@ import { Principal } from './principal';
  */
 export interface BusinessLegalEntity {
     /**
-     * Type of business. * `CHARITY` = Charity * `CIC` = Community Interest Company * `CORP` = Corporation * `LTD` = Limited * `LLC` = Limited Liability Company * `LLP` = Limited Liability Partnership * `NPCORP` = Non-Profit * `PARTNERSHIP` = Partnership * `PLC` = Public Limited Company * `GOV` = Public Sector/Governmental * `SOLEPROP` = Sole Proprietorship/Sole Trader * `TRUST` = Trust
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'type': BusinessLegalEntityType;
-    /**
-     * The merchant name
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'name': string;
-    /**
-     * Registered business legal/trading name (e.g. \"ACME CA\")
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'legal_name': string;
-    /**
-     * Company\'s Tax Identification Number
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'tax_identification_number': string;
-    /**
      * 
      * @type {BusinessLegalEntityAddress}
      * @memberof BusinessLegalEntity
      */
     'address': BusinessLegalEntityAddress;
-    /**
-     * Category code of the business. * `ACCT` = Accounting * `ART` = Artist Supply and Craft Stores * `BEAUTY` = Barber & Beauty Shop * `CATERING` = Catering * `CHARITY` = Charity * `CLEANING` = Cleaning Services * `CONSULTANT` = Consultant * `CONTRACTOR` = Trade Contractor * `DENTIST` = Dentistry * `EDU` = Schools & Education * `FOOD` = Food/Grocery * `LANDSCAPING` = Landscaping * `LEGAL` = Legal Services * `MEDICAL_PRACT` = Medical Practitioner * `MEDICAL_SERV` = Health Services * `MEMBERSHIP` = Membership Org. * `MISC_FOOD_STORES` = Misc. Food Stores * `MISC_MERCH` = Misc General Merchandise * `MISC_SERV` = Services * `MUSIC` = Music/Entertainment * `PC` = Computer Services * `PHOTO_FILM` = Photo/FILM * `PROF_SERV` = Professional Services * `REAL_ESTATE` = Real Estate * `RECREATION` = Recreation Services * `REPAIR` = Repair Services * `RESTO` = Restaurant/Bar * `RETAIL` = Direct Marketing Retail (MOTO) * `TAXI` = Taxi/Limo * `VET` = Veterinary * `WEB_DEV` = Web Design * `WEB_HOSTING` = Web Hosting
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'category': BusinessLegalEntityCategory;
-    /**
-     * Customer support phone number of the business. Cannot contain special characters.
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'phone': string;
-    /**
-     * Single currency used for processing and settlement for this merchant account.
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'currency': BusinessLegalEntityCurrency;
-    /**
-     * Estimated yearly volume of transactions of the business. * `LOW` = 0-50k * `MEDIUM` = 50-100k * `HIGH` = 100-250k * `VERY_HIGH` = 250k+
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'yearly_volume_range': BusinessLegalEntityYearlyVolumeRange;
     /**
      * Average transaction amount, in minor units. (e.g. $100.00 = 10000 minor units)
      * @type {number}
@@ -93,11 +45,23 @@ export interface BusinessLegalEntity {
      */
     'average_transaction_amount': number;
     /**
-     * Region for the merchant account
+     * Category code of the business. * `ACCT` = Accounting * `ART` = Artist Supply and Craft Stores * `BEAUTY` = Barber & Beauty Shop * `CATERING` = Catering * `CHARITY` = Charity * `CLEANING` = Cleaning Services * `CONSULTANT` = Consultant * `CONTRACTOR` = Trade Contractor * `DENTIST` = Dentistry * `EDU` = Schools & Education * `FOOD` = Food/Grocery * `LANDSCAPING` = Landscaping * `LEGAL` = Legal Services * `MEDICAL_PRACT` = Medical Practitioner * `MEDICAL_SERV` = Health Services * `MEMBERSHIP` = Membership Org. * `MISC_FOOD_STORES` = Misc. Food Stores * `MISC_MERCH` = Misc General Merchandise * `MISC_SERV` = Services * `MUSIC` = Music/Entertainment * `PC` = Computer Services * `PHOTO_FILM` = Photo/FILM * `PROF_SERV` = Professional Services * `REAL_ESTATE` = Real Estate * `RECREATION` = Recreation Services * `REPAIR` = Repair Services * `RESTO` = Restaurant/Bar * `RETAIL` = Direct Marketing Retail (MOTO) * `TAXI` = Taxi/Limo * `VET` = Veterinary * `WEB_DEV` = Web Design * `WEB_HOSTING` = Web Hosting
      * @type {string}
      * @memberof BusinessLegalEntity
      */
-    'region': BusinessLegalEntityRegion;
+    'category': BusinessLegalEntityCategory;
+    /**
+     * Single currency used for processing and settlement for this merchant account.
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'currency': BusinessLegalEntityCurrency;
+    /**
+     * Registered business legal/trading name (e.g. \"ACME CA\")
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'legal_name': string;
     /**
      * The locale value used for the merchant account. Values depend on the region.
      * @type {string}
@@ -105,11 +69,17 @@ export interface BusinessLegalEntity {
      */
     'locale': BusinessLegalEntityLocale;
     /**
-     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
+     * The merchant name
      * @type {string}
      * @memberof BusinessLegalEntity
      */
-    'statement_descriptor': string;
+    'name': string;
+    /**
+     * Customer support phone number of the business. Cannot contain special characters.
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'phone': string;
     /**
      * Array of Principals (ie Business Owners).
      * @type {Array<Principal>}
@@ -117,24 +87,42 @@ export interface BusinessLegalEntity {
      */
     'principals': Array<Principal>;
     /**
+     * Region for the merchant account
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'region': BusinessLegalEntityRegion;
+    /**
+     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'statement_descriptor': string;
+    /**
+     * Company\'s Tax Identification Number
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'tax_identification_number': string;
+    /**
+     * Type of business. * `CHARITY` = Charity * `CIC` = Community Interest Company * `CORP` = Corporation * `LTD` = Limited * `LLC` = Limited Liability Company * `LLP` = Limited Liability Partnership * `NPCORP` = Non-Profit * `PARTNERSHIP` = Partnership * `PLC` = Public Limited Company * `GOV` = Public Sector/Governmental * `SOLEPROP` = Sole Proprietorship/Sole Trader * `TRUST` = Trust
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'type': BusinessLegalEntityType;
+    /**
+     * Estimated yearly volume of transactions of the business. * `LOW` = 0-50k * `MEDIUM` = 50-100k * `HIGH` = 100-250k * `VERY_HIGH` = 250k+
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'yearly_volume_range': BusinessLegalEntityYearlyVolumeRange;
+    /**
      * 
      * @type {BusinessLegalEntityAchBankAccount}
      * @memberof BusinessLegalEntity
      * @deprecated
      */
     'ach_bank_account'?: BusinessLegalEntityAchBankAccount;
-    /**
-     * Company\'s business description
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'description'?: string;
-    /**
-     * Email of the business.
-     * @type {string}
-     * @memberof BusinessLegalEntity
-     */
-    'company_email'?: string;
     /**
      * Average number of transactions per month
      * @type {number}
@@ -148,6 +136,18 @@ export interface BusinessLegalEntity {
      */
     'bank_account'?: BusinessLegalEntityBankAccount;
     /**
+     * Email of the business.
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'company_email'?: string;
+    /**
+     * Company\'s business description
+     * @type {string}
+     * @memberof BusinessLegalEntity
+     */
+    'description'?: string;
+    /**
      * Website of the business.
      * @type {string}
      * @memberof BusinessLegalEntity
@@ -155,22 +155,6 @@ export interface BusinessLegalEntity {
     'website'?: string;
 }
 
-export const BusinessLegalEntityType = {
-    CHARITY: 'CHARITY',
-    CIC: 'CIC',
-    CORP: 'CORP',
-    LTD: 'LTD',
-    LLC: 'LLC',
-    LLP: 'LLP',
-    NPCORP: 'NPCORP',
-    PARTNERSHIP: 'PARTNERSHIP',
-    PLC: 'PLC',
-    GOV: 'GOV',
-    SOLEPROP: 'SOLEPROP',
-    TRUST: 'TRUST'
-} as const;
-
-export type BusinessLegalEntityType = typeof BusinessLegalEntityType[keyof typeof BusinessLegalEntityType];
 export const BusinessLegalEntityCategory = {
     ACCT: 'ACCT',
     ART: 'ART',
@@ -226,20 +210,6 @@ export const BusinessLegalEntityCurrency = {
 } as const;
 
 export type BusinessLegalEntityCurrency = typeof BusinessLegalEntityCurrency[keyof typeof BusinessLegalEntityCurrency];
-export const BusinessLegalEntityYearlyVolumeRange = {
-    LOW: 'LOW',
-    MEDIUM: 'MEDIUM',
-    HIGH: 'HIGH',
-    VERY_HIGH: 'VERY_HIGH'
-} as const;
-
-export type BusinessLegalEntityYearlyVolumeRange = typeof BusinessLegalEntityYearlyVolumeRange[keyof typeof BusinessLegalEntityYearlyVolumeRange];
-export const BusinessLegalEntityRegion = {
-    US: 'US',
-    CA: 'CA'
-} as const;
-
-export type BusinessLegalEntityRegion = typeof BusinessLegalEntityRegion[keyof typeof BusinessLegalEntityRegion];
 export const BusinessLegalEntityLocale = {
     EN_US: 'en_US',
     EN_CA: 'en_CA',
@@ -248,5 +218,35 @@ export const BusinessLegalEntityLocale = {
 } as const;
 
 export type BusinessLegalEntityLocale = typeof BusinessLegalEntityLocale[keyof typeof BusinessLegalEntityLocale];
+export const BusinessLegalEntityRegion = {
+    US: 'US',
+    CA: 'CA'
+} as const;
+
+export type BusinessLegalEntityRegion = typeof BusinessLegalEntityRegion[keyof typeof BusinessLegalEntityRegion];
+export const BusinessLegalEntityType = {
+    CHARITY: 'CHARITY',
+    CIC: 'CIC',
+    CORP: 'CORP',
+    LTD: 'LTD',
+    LLC: 'LLC',
+    LLP: 'LLP',
+    NPCORP: 'NPCORP',
+    PARTNERSHIP: 'PARTNERSHIP',
+    PLC: 'PLC',
+    GOV: 'GOV',
+    SOLEPROP: 'SOLEPROP',
+    TRUST: 'TRUST'
+} as const;
+
+export type BusinessLegalEntityType = typeof BusinessLegalEntityType[keyof typeof BusinessLegalEntityType];
+export const BusinessLegalEntityYearlyVolumeRange = {
+    LOW: 'LOW',
+    MEDIUM: 'MEDIUM',
+    HIGH: 'HIGH',
+    VERY_HIGH: 'VERY_HIGH'
+} as const;
+
+export type BusinessLegalEntityYearlyVolumeRange = typeof BusinessLegalEntityYearlyVolumeRange[keyof typeof BusinessLegalEntityYearlyVolumeRange];
 
 

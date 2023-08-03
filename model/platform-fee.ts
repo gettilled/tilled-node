@@ -27,17 +27,42 @@ import { PlatformFeeRefund } from './platform-fee-refund';
  */
 export interface PlatformFee {
     /**
-     * Time at which the object was last updated.
+     * Amount earned, in minor currency units.
+     * @type {number}
+     * @memberof PlatformFee
+     */
+    'amount': number;
+    /**
+     * Amount refunded, in minor currency units. Can be less than the amount attribute if a partial refund was issued.
+     * @type {number}
+     * @memberof PlatformFee
+     */
+    'amount_refunded': number;
+    /**
+     * 
+     * @type {PlatformFeeBalanceTransaction}
+     * @memberof PlatformFee
+     * @deprecated
+     */
+    'balance_transaction': PlatformFeeBalanceTransaction;
+    /**
+     * Id of the charge this fee was taken from.
      * @type {string}
      * @memberof PlatformFee
      */
-    'updated_at': string;
+    'charge_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
      * @memberof PlatformFee
      */
     'created_at': string;
+    /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+     * @type {string}
+     * @memberof PlatformFee
+     */
+    'currency': PlatformFeeCurrency;
     /**
      * Unique identifier for the object.
      * @type {string}
@@ -57,30 +82,6 @@ export interface PlatformFee {
      */
     'payer_account_id': string;
     /**
-     * Amount earned, in minor currency units.
-     * @type {number}
-     * @memberof PlatformFee
-     */
-    'amount': number;
-    /**
-     * Amount refunded, in minor currency units. Can be less than the amount attribute if a partial refund was issued.
-     * @type {number}
-     * @memberof PlatformFee
-     */
-    'amount_refunded': number;
-    /**
-     * Id of the charge this fee was taken from.
-     * @type {string}
-     * @memberof PlatformFee
-     */
-    'charge_id': string;
-    /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
-     * @type {string}
-     * @memberof PlatformFee
-     */
-    'currency': PlatformFeeCurrency;
-    /**
      * Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will be false.
      * @type {boolean}
      * @memberof PlatformFee
@@ -93,12 +94,11 @@ export interface PlatformFee {
      */
     'refunds': Array<PlatformFeeRefund>;
     /**
-     * 
-     * @type {PlatformFeeBalanceTransaction}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof PlatformFee
-     * @deprecated
      */
-    'balance_transaction': PlatformFeeBalanceTransaction;
+    'updated_at': string;
 }
 
 export const PlatformFeeCurrency = {

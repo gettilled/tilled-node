@@ -21,6 +21,12 @@
  */
 export interface AchDebitDetails {
     /**
+     * Account type
+     * @type {string}
+     * @memberof AchDebitDetails
+     */
+    'account_type'?: AchDebitDetailsAccountType;
+    /**
      * Name of the bank associated to this Ach Debit.
      * @type {string}
      * @memberof AchDebitDetails
@@ -38,12 +44,6 @@ export interface AchDebitDetails {
      * @memberof AchDebitDetails
      */
     'routing_number'?: string;
-    /**
-     * Account type
-     * @type {string}
-     * @memberof AchDebitDetails
-     */
-    'account_type'?: AchDebitDetailsAccountType;
 }
 
 export const AchDebitDetailsAccountType = {

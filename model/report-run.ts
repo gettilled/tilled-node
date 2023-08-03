@@ -24,11 +24,11 @@ import { ReportRunRequestParameters } from './report-run-request-parameters';
  */
 export interface ReportRun {
     /**
-     * Time at which the object was last updated.
+     * The id of the associated account.
      * @type {string}
      * @memberof ReportRun
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -36,29 +36,17 @@ export interface ReportRun {
      */
     'created_at': string;
     /**
-     * 
-     * @type {ReportRunRequestParameters}
-     * @memberof ReportRun
-     */
-    'parameters': ReportRunRequestParameters;
-    /**
      * Unique identifier for the object.
      * @type {string}
      * @memberof ReportRun
      */
     'id': string;
     /**
-     * The id of the associated account.
-     * @type {string}
+     * 
+     * @type {ReportRunRequestParameters}
      * @memberof ReportRun
      */
-    'account_id': string;
-    /**
-     * The type of a report run.
-     * @type {string}
-     * @memberof ReportRun
-     */
-    'type': ReportRunType;
+    'parameters': ReportRunRequestParameters;
     /**
      * The status of a report run.
      * @type {string}
@@ -66,19 +54,38 @@ export interface ReportRun {
      */
     'status': ReportRunStatus;
     /**
-     * 
-     * @type {any}
+     * The type of a report run.
+     * @type {string}
      * @memberof ReportRun
      */
-    'result'?: any;
+    'type': ReportRunType;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof ReportRun
+     */
+    'updated_at': string;
     /**
      * The failure message of the report run, if status is \'failed\'.
      * @type {string}
      * @memberof ReportRun
      */
     'failure_message'?: string;
+    /**
+     * 
+     * @type {any}
+     * @memberof ReportRun
+     */
+    'result'?: any;
 }
 
+export const ReportRunStatus = {
+    QUEUED: 'queued',
+    FINISHED: 'finished',
+    FAILED: 'failed'
+} as const;
+
+export type ReportRunStatus = typeof ReportRunStatus[keyof typeof ReportRunStatus];
 export const ReportRunType = {
     PAYMENTS_SUMMARY_1: 'payments_summary_1',
     PAYOUTS_SUMMARY_1: 'payouts_summary_1',
@@ -89,12 +96,5 @@ export const ReportRunType = {
 } as const;
 
 export type ReportRunType = typeof ReportRunType[keyof typeof ReportRunType];
-export const ReportRunStatus = {
-    QUEUED: 'queued',
-    FINISHED: 'finished',
-    FAILED: 'failed'
-} as const;
-
-export type ReportRunStatus = typeof ReportRunStatus[keyof typeof ReportRunStatus];
 
 

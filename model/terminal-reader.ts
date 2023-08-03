@@ -21,11 +21,11 @@
  */
 export interface TerminalReader {
     /**
-     * Time at which the object was last updated.
+     * The Account that owns this terminal reader.
      * @type {string}
      * @memberof TerminalReader
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -39,11 +39,11 @@ export interface TerminalReader {
      */
     'id': string;
     /**
-     * The Account that owns this terminal reader.
+     * The serial number of the terminal reader.
      * @type {string}
      * @memberof TerminalReader
      */
-    'account_id': string;
+    'serial_number': string;
     /**
      * The type of the terminal reader. Currently only Handpoint powered terminal readers are supported. https://www.handpoint.com/docs/device/Basics
      * @type {string}
@@ -51,11 +51,11 @@ export interface TerminalReader {
      */
     'type': TerminalReaderType;
     /**
-     * The serial number of the terminal reader.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof TerminalReader
      */
-    'serial_number': string;
+    'updated_at': string;
     /**
      * The merchant provided description of the terminal reader
      * @type {string}

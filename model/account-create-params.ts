@@ -33,18 +33,17 @@ export interface AccountCreateParams {
      */
     'email': string;
     /**
+     * 
+     * @type {AccountCreateParamsBankAccount}
+     * @memberof AccountCreateParams
+     */
+    'bank_account'?: AccountCreateParamsBankAccount;
+    /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}
      * @memberof AccountCreateParams
      */
     'metadata'?: { [key: string]: string; };
-    /**
-     * *Deprecated: Use `pricing_template_ids` to specify merchant pricing.*  An array of ProductCode ids to associate with the `merchant` account. This is ignored for `partner` accounts. Only 1 product code per `payment_method_type` is allowed. For example, only 1 `card` and 1 `ach_debit` may be submitted for a given merchant. You cannot specify 2 product codes of type `card` for a single merchant. You should create a separate merchant account in that case.  *Note: If your account contains multiple product codes for a given payment method type, then you must explicitly specify the one you want to use. If your account only contains a single product code per payment method type then those values will be the default. If your account is enabled to process in both the United States and Canada, new merchant accounts will be configured with US product codes if no value is specified for `product_code_ids`.*
-     * @type {Array<string>}
-     * @memberof AccountCreateParams
-     * @deprecated
-     */
-    'product_code_ids'?: Array<string>;
     /**
      * The business name or individual name.
      * @type {string}
@@ -58,11 +57,12 @@ export interface AccountCreateParams {
      */
     'pricing_template_ids'?: Array<string>;
     /**
-     * 
-     * @type {AccountCreateParamsBankAccount}
+     * *Deprecated: Use `pricing_template_ids` to specify merchant pricing.*  An array of ProductCode ids to associate with the `merchant` account. This is ignored for `partner` accounts. Only 1 product code per `payment_method_type` is allowed. For example, only 1 `card` and 1 `ach_debit` may be submitted for a given merchant. You cannot specify 2 product codes of type `card` for a single merchant. You should create a separate merchant account in that case.  *Note: If your account contains multiple product codes for a given payment method type, then you must explicitly specify the one you want to use. If your account only contains a single product code per payment method type then those values will be the default. If your account is enabled to process in both the United States and Canada, new merchant accounts will be configured with US product codes if no value is specified for `product_code_ids`.*
+     * @type {Array<string>}
      * @memberof AccountCreateParams
+     * @deprecated
      */
-    'bank_account'?: AccountCreateParamsBankAccount;
+    'product_code_ids'?: Array<string>;
     /**
      * 
      * @type {AccountCreateParamsSettings}

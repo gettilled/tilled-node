@@ -27,16 +27,16 @@ import { BalanceTransactionsSummaryParameters } from './balance-transactions-sum
  */
 export interface BalanceTransactionsSummary {
     /**
-     * 
-     * @type {BalanceTransactionsSummaryParameters}
-     * @memberof BalanceTransactionsSummary
-     */
-    'parameters': BalanceTransactionsSummaryParameters;
-    /**
      * The list of aggregate balance transaction data, grouped by unit of time, type, and currency.
      * @type {Array<BalanceTransactionTypeSummaries>}
      * @memberof BalanceTransactionsSummary
      */
     'data': Array<BalanceTransactionTypeSummaries>;
+    /**
+     * 
+     * @type {BalanceTransactionsSummaryParameters}
+     * @memberof BalanceTransactionsSummary
+     */
+    'parameters': BalanceTransactionsSummaryParameters;
 }
 

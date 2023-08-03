@@ -97,6 +97,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {UserCreateParams} UserCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createUser: async (tilled_account: string, UserCreateParams: UserCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -192,7 +193,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Permanently deletes a user. It cannot be undone.
+         * Removes user access to the specified account. If this is the user\'s only account, the user is permanently deleted. This cannot be undone.
          * @summary Delete a User
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
@@ -479,10 +480,11 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers: async (tilled_account: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUsers: async (tilled_account: string, offset?: number, limit?: number, include_connected_accounts?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listUsers', 'tilled_account', tilled_account)
             const localVarPath = `/v1/users`;
@@ -510,6 +512,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (include_connected_accounts !== undefined) {
+                localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
             }
 
             if (tilled_account != null) {
@@ -834,6 +840,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {UserCreateParams} UserCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createUser(tilled_account: string, UserCreateParams: UserCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
@@ -853,7 +860,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Permanently deletes a user. It cannot be undone.
+         * Removes user access to the specified account. If this is the user\'s only account, the user is permanently deleted. This cannot be undone.
          * @summary Delete a User
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
@@ -872,7 +879,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUserInvitation(id: string, tilled_account: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteUserInvitation(id: string, tilled_account: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUserInvitation(id, tilled_account, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -930,11 +937,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUsers(tilled_account: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsers200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(tilled_account, offset, limit, options);
+        async listUsers(tilled_account: string, offset?: number, limit?: number, include_connected_accounts?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(tilled_account, offset, limit, include_connected_accounts, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1041,6 +1049,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @summary Create a User
          * @param {UsersApiCreateUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createUser(requestParameters: UsersApiCreateUserRequest, options?: AxiosRequestConfig): AxiosPromise<User> {
@@ -1057,7 +1066,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createUserInvitation(requestParameters.tilled_account, requestParameters.UserInvitationCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
-         * Permanently deletes a user. It cannot be undone.
+         * Removes user access to the specified account. If this is the user\'s only account, the user is permanently deleted. This cannot be undone.
          * @summary Delete a User
          * @param {UsersApiDeleteUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1073,7 +1082,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUserInvitation(requestParameters: UsersApiDeleteUserInvitationRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        deleteUserInvitation(requestParameters: UsersApiDeleteUserInvitationRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteUserInvitation(requestParameters.id, requestParameters.tilled_account, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1124,7 +1133,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         listUsers(requestParameters: UsersApiListUsersRequest, options?: AxiosRequestConfig): AxiosPromise<ListUsers200Response> {
-            return localVarFp.listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, requestParameters.include_connected_accounts, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a JSON Web Token with email and password.
@@ -1406,6 +1415,13 @@ export interface UsersApiListUsersRequest {
      * @memberof UsersApiListUsers
      */
     readonly limit?: number
+
+    /**
+     * Whether or not to include the results from any connected accounts.
+     * @type {boolean}
+     * @memberof UsersApiListUsers
+     */
+    readonly include_connected_accounts?: boolean
 }
 
 /**
@@ -1537,6 +1553,7 @@ export class UsersApi extends BaseAPI {
      * @summary Create a User
      * @param {UsersApiCreateUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof UsersApi
      */
@@ -1557,7 +1574,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Permanently deletes a user. It cannot be undone.
+     * Removes user access to the specified account. If this is the user\'s only account, the user is permanently deleted. This cannot be undone.
      * @summary Delete a User
      * @param {UsersApiDeleteUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1637,7 +1654,7 @@ export class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     public listUsers(requestParameters: UsersApiListUsersRequest, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, requestParameters.include_connected_accounts, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -139,6 +139,7 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
          * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
          * @summary List all Disputes
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} [charge_id] Only returns disputes for the charge specified by this charge ID.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
@@ -148,7 +149,7 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDisputes: async (tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listDisputes: async (tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listDisputes', 'tilled_account', tilled_account)
             const localVarPath = `/v1/disputes`;
@@ -169,6 +170,10 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
 
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (charge_id !== undefined) {
+                localVarQueryParameter['charge_id'] = charge_id;
+            }
 
             if (include_connected_accounts !== undefined) {
                 localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
@@ -232,7 +237,7 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createDisputeEvidence(tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
+        async createDisputeEvidence(tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDisputeEvidence(tilled_account, id, DisputeEvidenceCreateParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -252,6 +257,7 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * Returns a list of existing disputes. The disputes are returned in sorted order, with the most recent disputes appearing first.
          * @summary List all Disputes
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} [charge_id] Only returns disputes for the charge specified by this charge ID.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
@@ -261,8 +267,8 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDisputes(tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listDisputes(tilled_account, include_connected_accounts, created_at_gte, created_at_lte, status, offset, limit, options);
+        async listDisputes(tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDisputes(tilled_account, charge_id, include_connected_accounts, created_at_gte, created_at_lte, status, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -282,7 +288,7 @@ export const DisputesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
+        createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig): AxiosPromise<Dispute> {
             return localVarFp.createDisputeEvidence(requestParameters.tilled_account, requestParameters.id, requestParameters.DisputeEvidenceCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -303,7 +309,7 @@ export const DisputesApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
-            return localVarFp.listDisputes(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listDisputes(requestParameters.tilled_account, requestParameters.charge_id, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -369,6 +375,13 @@ export interface DisputesApiListDisputesRequest {
      * @memberof DisputesApiListDisputes
      */
     readonly tilled_account: string
+
+    /**
+     * Only returns disputes for the charge specified by this charge ID.
+     * @type {string}
+     * @memberof DisputesApiListDisputes
+     */
+    readonly charge_id?: string
 
     /**
      * Whether or not to include the results from any connected accounts.
@@ -453,6 +466,6 @@ export class DisputesApi extends BaseAPI {
      * @memberof DisputesApi
      */
     public listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig) {
-        return DisputesApiFp(this.configuration).listDisputes(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return DisputesApiFp(this.configuration).listDisputes(requestParameters.tilled_account, requestParameters.charge_id, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }

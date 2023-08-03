@@ -27,6 +27,24 @@ import { PrincipalPreviousAddress } from './principal-previous-address';
  */
 export interface Principal {
     /**
+     * 
+     * @type {PrincipalAddress}
+     * @memberof Principal
+     */
+    'address': PrincipalAddress;
+    /**
+     * Date of birth of the principal. Format must be ISO8601 (e.g. \'2000-01-25\'; format \'YYYY-MM-DD\'). Currently the principal must be older than 18 years of age.
+     * @type {string}
+     * @memberof Principal
+     */
+    'date_of_birth': string;
+    /**
+     * First name of the principal.
+     * @type {string}
+     * @memberof Principal
+     */
+    'first_name': string;
+    /**
      * Indicates whether this principal is the applicant for the merchant account. For US merchant accounts (`region = US`) it is required that _exactly_ one of the principals is specified as the applicant.
      * @type {boolean}
      * @memberof Principal
@@ -39,17 +57,17 @@ export interface Principal {
      */
     'job_title': string;
     /**
-     * First name of the principal.
-     * @type {string}
-     * @memberof Principal
-     */
-    'first_name': string;
-    /**
      * Last name of the principal.
      * @type {string}
      * @memberof Principal
      */
     'last_name': string;
+    /**
+     * Percentage of ownership of the company.
+     * @type {number}
+     * @memberof Principal
+     */
+    'percentage_shareholding': number;
     /**
      * Phone number of the principal.
      * @type {string}
@@ -57,23 +75,11 @@ export interface Principal {
      */
     'phone': string;
     /**
-     * Date of birth of the principal. Format must be ISO8601 (e.g. \'2000-01-25\'; format \'YYYY-MM-DD\'). Currently the principal must be older than 18 years of age.
+     * Email address of the principal
      * @type {string}
      * @memberof Principal
      */
-    'date_of_birth': string;
-    /**
-     * 
-     * @type {PrincipalAddress}
-     * @memberof Principal
-     */
-    'address': PrincipalAddress;
-    /**
-     * Percentage of ownership of the company.
-     * @type {number}
-     * @memberof Principal
-     */
-    'percentage_shareholding': number;
+    'email'?: string;
     /**
      * The unique identifier for this principal. It is not required upon initial submission. The `ssn` property is redacted in any responses, so if the principal needs to be updated then provide this identifier that was generated during the initial request.
      * @type {string}
@@ -93,17 +99,11 @@ export interface Principal {
      */
     'middle_name'?: string;
     /**
-     * Email address of the principal
+     * Nationality of the principal
      * @type {string}
      * @memberof Principal
      */
-    'email'?: string;
-    /**
-     * Social Security Number (US) or Social Insurance Number (CA). Optional when business type is `NPCORP`, `CHARITY`, or `GOV`. Expected format: 9-digit string of numbers (e.g. \"111444777\"). Optional in CA.
-     * @type {string}
-     * @memberof Principal
-     */
-    'ssn'?: string;
+    'nationality'?: PrincipalNationality;
     /**
      * 
      * @type {PrincipalPreviousAddress}
@@ -111,11 +111,11 @@ export interface Principal {
      */
     'previous_address'?: PrincipalPreviousAddress;
     /**
-     * Nationality of the principal
+     * Social Security Number (US) or Social Insurance Number (CA). Optional when business type is `NPCORP`, `CHARITY`, or `GOV`. Expected format: 9-digit string of numbers (e.g. \"111444777\"). Optional in CA.
      * @type {string}
      * @memberof Principal
      */
-    'nationality'?: PrincipalNationality;
+    'ssn'?: string;
     /**
      * Type of representative. Ex. shareholder, director, officer, merchant rep
      * @type {string}
