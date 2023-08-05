@@ -24,11 +24,11 @@ import { Address } from './address';
  */
 export interface BusinessRepresentative {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
+     * 
+     * @type {Array<Address>}
      * @memberof BusinessRepresentative
      */
-    'updated_at': string;
+    'addresses': Array<Address>;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -42,11 +42,17 @@ export interface BusinessRepresentative {
      */
     'id': string;
     /**
-     * 
-     * @type {Array<Address>}
+     * If this associate is the one completing the application.
+     * @type {boolean}
      * @memberof BusinessRepresentative
      */
-    'addresses': Array<Address>;
+    'is_applicant': boolean;
+    /**
+     * If this associate has a controlling interest.
+     * @type {boolean}
+     * @memberof BusinessRepresentative
+     */
+    'is_control_prong': boolean;
     /**
      * The representative\'s title at the company.
      * @type {string}
@@ -60,23 +66,23 @@ export interface BusinessRepresentative {
      */
     'phone': string;
     /**
-     * If this associate is the one completing the application.
-     * @type {boolean}
-     * @memberof BusinessRepresentative
-     */
-    'is_applicant': boolean;
-    /**
-     * If this associate has a controlling interest.
-     * @type {boolean}
-     * @memberof BusinessRepresentative
-     */
-    'is_control_prong': boolean;
-    /**
      * Type of representative. Ex. shareholder, director, officer, merchant rep
      * @type {string}
      * @memberof BusinessRepresentative
      */
     'type': BusinessRepresentativeType;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof BusinessRepresentative
+     */
+    'updated_at': string;
+    /**
+     * The email address of the representative.
+     * @type {string}
+     * @memberof BusinessRepresentative
+     */
+    'email'?: string;
     /**
      * The representative\'s first name.
      * @type {string}
@@ -84,23 +90,17 @@ export interface BusinessRepresentative {
      */
     'first_name'?: string;
     /**
-     * The representative\'s middle name.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'middle_name'?: string;
-    /**
      * The representative\'s last name.
      * @type {string}
      * @memberof BusinessRepresentative
      */
     'last_name'?: string;
     /**
-     * The email address of the representative.
+     * The representative\'s middle name.
      * @type {string}
      * @memberof BusinessRepresentative
      */
-    'email'?: string;
+    'middle_name'?: string;
 }
 
 export const BusinessRepresentativeType = {

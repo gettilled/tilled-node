@@ -24,17 +24,17 @@ import { DisputeFileFile } from './dispute-file-file';
  */
 export interface DisputeFile {
     /**
-     * The type of evidence provided in the file.
-     * @type {string}
-     * @memberof DisputeFile
-     */
-    'type': DisputeFileType;
-    /**
      * 
      * @type {DisputeFileFile}
      * @memberof DisputeFile
      */
     'file': DisputeFileFile;
+    /**
+     * The type of evidence provided in the file.
+     * @type {string}
+     * @memberof DisputeFile
+     */
+    'type': DisputeFileType;
 }
 
 export const DisputeFileType = {

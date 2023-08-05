@@ -21,35 +21,11 @@
  */
 export interface ModelFile {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof ModelFile
-     */
-    'updated_at': string;
-    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof ModelFile
      */
     'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof ModelFile
-     */
-    'id': string;
-    /**
-     * The file type.
-     * @type {string}
-     * @memberof ModelFile
-     */
-    'type': ModelFileType;
-    /**
-     * The file purpose.
-     * @type {string}
-     * @memberof ModelFile
-     */
-    'purpose': ModelFilePurpose;
     /**
      * The filename.
      * @type {string}
@@ -57,17 +33,41 @@ export interface ModelFile {
      */
     'filename': string;
     /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof ModelFile
+     */
+    'id': string;
+    /**
+     * The file purpose.
+     * @type {string}
+     * @memberof ModelFile
+     */
+    'purpose': ModelFilePurpose;
+    /**
      * The file size.
      * @type {number}
      * @memberof ModelFile
      */
     'size': number;
     /**
-     * The URL for the file.
+     * The file type.
      * @type {string}
      * @memberof ModelFile
      */
-    'url'?: string;
+    'type': ModelFileType;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof ModelFile
+     */
+    'updated_at': string;
+    /**
+     * Time at which the file should no longer be accessible.
+     * @type {string}
+     * @memberof ModelFile
+     */
+    'expires_at'?: string;
     /**
      * The user friendly title.
      * @type {string}
@@ -75,22 +75,13 @@ export interface ModelFile {
      */
     'title'?: string;
     /**
-     * Time at which the file should no longer be accessible.
+     * The URL for the file.
      * @type {string}
      * @memberof ModelFile
      */
-    'expires_at'?: string;
+    'url'?: string;
 }
 
-export const ModelFileType = {
-    PNG: 'png',
-    JPG: 'jpg',
-    PDF: 'pdf',
-    CSV: 'csv',
-    TIFF: 'tiff'
-} as const;
-
-export type ModelFileType = typeof ModelFileType[keyof typeof ModelFileType];
 export const ModelFilePurpose = {
     LOGO: 'logo',
     ICON: 'icon',
@@ -101,5 +92,14 @@ export const ModelFilePurpose = {
 } as const;
 
 export type ModelFilePurpose = typeof ModelFilePurpose[keyof typeof ModelFilePurpose];
+export const ModelFileType = {
+    PNG: 'png',
+    JPG: 'jpg',
+    PDF: 'pdf',
+    CSV: 'csv',
+    TIFF: 'tiff'
+} as const;
+
+export type ModelFileType = typeof ModelFileType[keyof typeof ModelFileType];
 
 

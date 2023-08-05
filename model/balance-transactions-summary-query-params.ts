@@ -21,18 +21,6 @@
  */
 export interface BalanceTransactionsSummaryQueryParams {
     /**
-     * String indicating the unit of time to aggregate the summary of data.
-     * @type {string}
-     * @memberof BalanceTransactionsSummaryQueryParams
-     */
-    'time_unit'?: BalanceTransactionsSummaryQueryParamsTimeUnit;
-    /**
-     * Time Zone by which to aggregate the results.
-     * @type {string}
-     * @memberof BalanceTransactionsSummaryQueryParams
-     */
-    'time_zone'?: BalanceTransactionsSummaryQueryParamsTimeZone;
-    /**
      * Minimum `created_at` value to filter by (inclusive). Defaults to the beginning of the current month.
      * @type {string}
      * @memberof BalanceTransactionsSummaryQueryParams
@@ -45,17 +33,29 @@ export interface BalanceTransactionsSummaryQueryParams {
      */
     'created_at_lte'?: string;
     /**
-     * An array containing specific balance transaction types. The data will be filtered to include only transactions with a matching type property.
-     * @type {Array<string>}
-     * @memberof BalanceTransactionsSummaryQueryParams
-     */
-    'types'?: Array<BalanceTransactionsSummaryQueryParamsTypes>;
-    /**
      * Whether or not to include the results from any connected accounts.
      * @type {boolean}
      * @memberof BalanceTransactionsSummaryQueryParams
      */
     'include_connected_accounts'?: boolean;
+    /**
+     * String indicating the unit of time to aggregate the summary of data.
+     * @type {string}
+     * @memberof BalanceTransactionsSummaryQueryParams
+     */
+    'time_unit'?: BalanceTransactionsSummaryQueryParamsTimeUnit;
+    /**
+     * Time Zone by which to aggregate the results.
+     * @type {string}
+     * @memberof BalanceTransactionsSummaryQueryParams
+     */
+    'time_zone'?: BalanceTransactionsSummaryQueryParamsTimeZone;
+    /**
+     * An array containing specific balance transaction types. The data will be filtered to include only transactions with a matching type property.
+     * @type {Array<string>}
+     * @memberof BalanceTransactionsSummaryQueryParams
+     */
+    'types'?: Array<BalanceTransactionsSummaryQueryParamsTypes>;
 }
 
 export const BalanceTransactionsSummaryQueryParamsTimeUnit = {

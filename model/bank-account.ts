@@ -21,41 +21,11 @@
  */
 export interface BankAccount {
     /**
-     * Time at which the object was last updated.
+     * The name of the person or business that owns the bank account.
      * @type {string}
      * @memberof BankAccount
      */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof BankAccount
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof BankAccount
-     */
-    'id': string;
-    /**
-     * The bank account type
-     * @type {string}
-     * @memberof BankAccount
-     */
-    'type': BankAccountType;
-    /**
-     * The US bank account routing number.
-     * @type {string}
-     * @memberof BankAccount
-     */
-    'routing_number': string;
-    /**
-     * Whether this bank account is the default account for its currency.
-     * @type {boolean}
-     * @memberof BankAccount
-     */
-    'default_for_currency': boolean;
+    'account_holder_name': string;
     /**
      * The ID of the Account associated with the bank account.
      * @type {string}
@@ -63,17 +33,11 @@ export interface BankAccount {
      */
     'account_id': string;
     /**
-     * The last 4 digits of the bank account number.
+     * Time at which the object was created.
      * @type {string}
      * @memberof BankAccount
      */
-    'last4': string;
-    /**
-     * The name of the person or business that owns the bank account.
-     * @type {string}
-     * @memberof BankAccount
-     */
-    'account_holder_name': string;
+    'created_at': string;
     /**
      * The currency the bank account is in. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
@@ -81,11 +45,47 @@ export interface BankAccount {
      */
     'currency': BankAccountCurrency;
     /**
+     * Whether this bank account is the default account for its currency.
+     * @type {boolean}
+     * @memberof BankAccount
+     */
+    'default_for_currency': boolean;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof BankAccount
+     */
+    'id': string;
+    /**
+     * The last 4 digits of the bank account number.
+     * @type {string}
+     * @memberof BankAccount
+     */
+    'last4': string;
+    /**
+     * The US bank account routing number.
+     * @type {string}
+     * @memberof BankAccount
+     */
+    'routing_number': string;
+    /**
      * Bank account status
      * @type {string}
      * @memberof BankAccount
      */
     'status': BankAccountStatus;
+    /**
+     * The bank account type
+     * @type {string}
+     * @memberof BankAccount
+     */
+    'type': BankAccountType;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof BankAccount
+     */
+    'updated_at': string;
     /**
      * Name of the bank associated with the routing number (e.g. `WELLS FARGO`).
      * @type {string}
@@ -94,12 +94,6 @@ export interface BankAccount {
     'bank_name'?: string;
 }
 
-export const BankAccountType = {
-    CHECKING: 'checking',
-    SAVINGS: 'savings'
-} as const;
-
-export type BankAccountType = typeof BankAccountType[keyof typeof BankAccountType];
 export const BankAccountCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -126,5 +120,11 @@ export const BankAccountStatus = {
 } as const;
 
 export type BankAccountStatus = typeof BankAccountStatus[keyof typeof BankAccountStatus];
+export const BankAccountType = {
+    CHECKING: 'checking',
+    SAVINGS: 'savings'
+} as const;
+
+export type BankAccountType = typeof BankAccountType[keyof typeof BankAccountType];
 
 

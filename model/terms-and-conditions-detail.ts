@@ -25,12 +25,6 @@ export interface TermsAndConditionsDetail {
      * @type {string}
      * @memberof TermsAndConditionsDetail
      */
-    'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TermsAndConditionsDetail
-     */
     'description': string;
     /**
      * 
@@ -38,5 +32,11 @@ export interface TermsAndConditionsDetail {
      * @memberof TermsAndConditionsDetail
      */
     'link': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TermsAndConditionsDetail
+     */
+    'name': string;
 }
 

@@ -21,17 +21,17 @@
  */
 export interface DisputeFileCreateParams {
     /**
-     * The type of evidence provided in the file.
-     * @type {string}
-     * @memberof DisputeFileCreateParams
-     */
-    'type': DisputeFileCreateParamsType;
-    /**
      * The id of the file.
      * @type {string}
      * @memberof DisputeFileCreateParams
      */
     'file_id': string;
+    /**
+     * The type of evidence provided in the file.
+     * @type {string}
+     * @memberof DisputeFileCreateParams
+     */
+    'type': DisputeFileCreateParamsType;
 }
 
 export const DisputeFileCreateParamsType = {

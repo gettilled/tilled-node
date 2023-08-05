@@ -24,37 +24,6 @@ import { BalanceTransactionFeeDetail } from './balance-transaction-fee-detail';
  */
 export interface BalanceTransaction {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof BalanceTransaction
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof BalanceTransaction
-     */
-    'created_at': string;
-    /**
-     * Detailed breakdown of the fees paid for this transaction. Note: Fees are now portrayed as individual balance transactions of `type = fee`. Refer to `fee_type` and `fee_subtype` for details.
-     * @type {Array<BalanceTransactionFeeDetail>}
-     * @memberof BalanceTransaction
-     * @deprecated
-     */
-    'fee_details': Array<BalanceTransactionFeeDetail>;
-    /**
-     * If the transaction’s net funds are available in the Tilled balance yet. Either `available` or `pending`.
-     * @type {string}
-     * @memberof BalanceTransaction
-     */
-    'status': BalanceTransactionStatus;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof BalanceTransaction
-     */
-    'id': string;
-    /**
      * 
      * @type {string}
      * @memberof BalanceTransaction
@@ -66,6 +35,18 @@ export interface BalanceTransaction {
      * @memberof BalanceTransaction
      */
     'amount': number;
+    /**
+     * The date the transaction\'s net funds will become available in the Tilled balance.
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'available_on': string;
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'created_at': string;
     /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
@@ -80,6 +61,19 @@ export interface BalanceTransaction {
      */
     'fee': number;
     /**
+     * Detailed breakdown of the fees paid for this transaction. Note: Fees are now portrayed as individual balance transactions of `type = fee`. Refer to `fee_type` and `fee_subtype` for details.
+     * @type {Array<BalanceTransactionFeeDetail>}
+     * @memberof BalanceTransaction
+     * @deprecated
+     */
+    'fee_details': Array<BalanceTransactionFeeDetail>;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'id': string;
+    /**
      * Net amount of the transaction, in smallest currency unit. Note: Fees are now portrayed as individual balance transactions of `type = fee`. `net` will no longer differ from `amount`.
      * @type {number}
      * @memberof BalanceTransaction
@@ -87,17 +81,23 @@ export interface BalanceTransaction {
      */
     'net': number;
     /**
+     * Tilled id to which this transaction is related
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'source_id': string;
+    /**
      * Tilled resource type of `source_id`.
      * @type {string}
      * @memberof BalanceTransaction
      */
     'source_type': BalanceTransactionSourceType;
     /**
-     * Tilled id to which this transaction is related
+     * If the transaction’s net funds are available in the Tilled balance yet. Either `available` or `pending`.
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'source_id': string;
+    'status': BalanceTransactionStatus;
     /**
      * Transaction type.
      * @type {string}
@@ -105,23 +105,23 @@ export interface BalanceTransaction {
      */
     'type': BalanceTransactionType;
     /**
-     * The date the transaction\'s net funds will become available in the Tilled balance.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof BalanceTransaction
      */
-    'available_on': string;
-    /**
-     * Fee subtype, if this transaction represents a fee (i.e. type = fee).
-     * @type {string}
-     * @memberof BalanceTransaction
-     */
-    'fee_subtype'?: BalanceTransactionFeeSubtype;
+    'updated_at': string;
     /**
      * An arbitrary string attached to the object. Often useful for displaying to users.
      * @type {string}
      * @memberof BalanceTransaction
      */
     'description'?: string;
+    /**
+     * Fee subtype, if this transaction represents a fee (i.e. type = fee).
+     * @type {string}
+     * @memberof BalanceTransaction
+     */
+    'fee_subtype'?: BalanceTransactionFeeSubtype;
     /**
      * Fee type, if this transaction represents a fee (i.e. type = fee).
      * @type {string}
@@ -136,12 +136,6 @@ export interface BalanceTransaction {
     'payout_id'?: string;
 }
 
-export const BalanceTransactionStatus = {
-    AVAILABLE: 'available',
-    PENDING: 'pending'
-} as const;
-
-export type BalanceTransactionStatus = typeof BalanceTransactionStatus[keyof typeof BalanceTransactionStatus];
 export const BalanceTransactionCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -172,6 +166,12 @@ export const BalanceTransactionSourceType = {
 } as const;
 
 export type BalanceTransactionSourceType = typeof BalanceTransactionSourceType[keyof typeof BalanceTransactionSourceType];
+export const BalanceTransactionStatus = {
+    AVAILABLE: 'available',
+    PENDING: 'pending'
+} as const;
+
+export type BalanceTransactionStatus = typeof BalanceTransactionStatus[keyof typeof BalanceTransactionStatus];
 export const BalanceTransactionType = {
     CHARGE: 'charge',
     CHARGE_FAILURE_REFUND: 'charge_failure_refund',

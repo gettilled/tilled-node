@@ -21,17 +21,17 @@
  */
 export interface AuthLinkDto {
     /**
+     * The account id of the user that can authenticate with this auth link.
+     * @type {string}
+     * @memberof AuthLinkDto
+     */
+    'account_id': string;
+    /**
      * Time at which the auth link was created.
      * @type {string}
      * @memberof AuthLinkDto
      */
     'created_at': string;
-    /**
-     * Time at which the auth link was last updated.
-     * @type {string}
-     * @memberof AuthLinkDto
-     */
-    'updated_at': string;
     /**
      * The id of the auth link.
      * @type {string}
@@ -39,23 +39,17 @@ export interface AuthLinkDto {
      */
     'id': string;
     /**
-     * The account id of the user that can authenticate with this auth link.
-     * @type {string}
-     * @memberof AuthLinkDto
-     */
-    'account_id': string;
-    /**
-     * The id of the user that can authenticate with this auth link.
-     * @type {string}
-     * @memberof AuthLinkDto
-     */
-    'user_id': string;
-    /**
      * Indicates whether this auth link has been redeemed.
      * @type {boolean}
      * @memberof AuthLinkDto
      */
     'redeemed': boolean;
+    /**
+     * Time at which the auth link was last updated.
+     * @type {string}
+     * @memberof AuthLinkDto
+     */
+    'updated_at': string;
     /**
      * The url to use for authenticating via auth link.
      * @type {string}
@@ -63,17 +57,23 @@ export interface AuthLinkDto {
      */
     'url': string;
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.\"
-     * @type {{ [key: string]: string; }}
+     * The id of the user that can authenticate with this auth link.
+     * @type {string}
      * @memberof AuthLinkDto
      */
-    'metadata'?: { [key: string]: string; };
+    'user_id': string;
     /**
      * The expiration date of this auth link.
      * @type {string}
      * @memberof AuthLinkDto
      */
     'expires_at'?: string;
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.\"
+     * @type {{ [key: string]: string; }}
+     * @memberof AuthLinkDto
+     */
+    'metadata'?: { [key: string]: string; };
     /**
      * The console url to redirect the user to after authenticating. Defaults to /dashboard if not provided.
      * @type {string}

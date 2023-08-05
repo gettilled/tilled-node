@@ -21,17 +21,11 @@
  */
 export interface BankAccountCreateParams {
     /**
-     * The bank account type
+     * The name of the person or business that owns the bank account.
      * @type {string}
      * @memberof BankAccountCreateParams
      */
-    'type': BankAccountCreateParamsType;
-    /**
-     * The US bank account routing number.
-     * @type {string}
-     * @memberof BankAccountCreateParams
-     */
-    'routing_number': string;
+    'account_holder_name': string;
     /**
      * The account number for the bank account, in string form.
      * @type {string}
@@ -39,17 +33,23 @@ export interface BankAccountCreateParams {
      */
     'account_number': string;
     /**
-     * The name of the person or business that owns the bank account.
-     * @type {string}
-     * @memberof BankAccountCreateParams
-     */
-    'account_holder_name': string;
-    /**
      * The currency the bank account is in. Three-letter ISO currency code, in lowercase.
      * @type {string}
      * @memberof BankAccountCreateParams
      */
     'currency': BankAccountCreateParamsCurrency;
+    /**
+     * The US bank account routing number.
+     * @type {string}
+     * @memberof BankAccountCreateParams
+     */
+    'routing_number': string;
+    /**
+     * The bank account type
+     * @type {string}
+     * @memberof BankAccountCreateParams
+     */
+    'type': BankAccountCreateParamsType;
     /**
      * Name of the financial institution.
      * @type {string}
@@ -64,12 +64,6 @@ export interface BankAccountCreateParams {
     'phone'?: string;
 }
 
-export const BankAccountCreateParamsType = {
-    CHECKING: 'checking',
-    SAVINGS: 'savings'
-} as const;
-
-export type BankAccountCreateParamsType = typeof BankAccountCreateParamsType[keyof typeof BankAccountCreateParamsType];
 export const BankAccountCreateParamsCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -87,5 +81,11 @@ export const BankAccountCreateParamsCurrency = {
 } as const;
 
 export type BankAccountCreateParamsCurrency = typeof BankAccountCreateParamsCurrency[keyof typeof BankAccountCreateParamsCurrency];
+export const BankAccountCreateParamsType = {
+    CHECKING: 'checking',
+    SAVINGS: 'savings'
+} as const;
+
+export type BankAccountCreateParamsType = typeof BankAccountCreateParamsType[keyof typeof BankAccountCreateParamsType];
 
 

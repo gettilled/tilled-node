@@ -39,29 +39,23 @@ export interface SubscriptionCreateParams {
      */
     'customer_id': string;
     /**
-     * The id of the PaymentMethod used for this subscription. It must belong to the customer associated with the subscription.
-     * @type {string}
-     * @memberof SubscriptionCreateParams
-     */
-    'payment_method_id': string;
-    /**
      * The frequency at which a subscription is billed. One of `week`, `month` or `year`.
      * @type {string}
      * @memberof SubscriptionCreateParams
      */
     'interval_unit': SubscriptionCreateParamsIntervalUnit;
     /**
+     * The id of the PaymentMethod used for this subscription. It must belong to the customer associated with the subscription.
+     * @type {string}
+     * @memberof SubscriptionCreateParams
+     */
+    'payment_method_id': string;
+    /**
      * Amount intended to be collected by this subscription. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
      * @type {number}
      * @memberof SubscriptionCreateParams
      */
     'price': number;
-    /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
-     * @memberof SubscriptionCreateParams
-     */
-    'metadata'?: { [key: string]: string; };
     /**
      * A date in the future at which the subscription will automatically get canceled.
      * @type {string}
@@ -74,6 +68,12 @@ export interface SubscriptionCreateParams {
      * @memberof SubscriptionCreateParams
      */
     'interval_count'?: number;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof SubscriptionCreateParams
+     */
+    'metadata'?: { [key: string]: string; };
     /**
      * The amount of the fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped a the total payment amount.
      * @type {number}

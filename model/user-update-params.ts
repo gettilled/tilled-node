@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { UserUpdateParamsEmailSettings } from './user-update-params-email-settings';
 
 /**
  * 
@@ -21,12 +24,6 @@
  */
 export interface UserUpdateParams {
     /**
-     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.
-     * @type {string}
-     * @memberof UserUpdateParams
-     */
-    'role'?: UserUpdateParamsRole;
-    /**
      * Email address
      * @type {string}
      * @memberof UserUpdateParams
@@ -34,11 +31,23 @@ export interface UserUpdateParams {
      */
     'email'?: string;
     /**
+     * 
+     * @type {UserUpdateParamsEmailSettings}
+     * @memberof UserUpdateParams
+     */
+    'email_settings'?: UserUpdateParamsEmailSettings;
+    /**
      * Full name
      * @type {string}
      * @memberof UserUpdateParams
      */
     'name'?: string;
+    /**
+     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.
+     * @type {string}
+     * @memberof UserUpdateParams
+     */
+    'role'?: UserUpdateParamsRole;
 }
 
 export const UserUpdateParamsRole = {

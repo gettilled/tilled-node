@@ -21,6 +21,18 @@
  */
 export interface UserCreateParams {
     /**
+     * Email address
+     * @type {string}
+     * @memberof UserCreateParams
+     */
+    'email': string;
+    /**
+     * Full name
+     * @type {string}
+     * @memberof UserCreateParams
+     */
+    'name': string;
+    /**
      * Password. Requires 1 alphabetic and 1 numeric character and a minimum length of 7.
      * @type {string}
      * @memberof UserCreateParams
@@ -32,18 +44,6 @@ export interface UserCreateParams {
      * @memberof UserCreateParams
      */
     'role': UserCreateParamsRole;
-    /**
-     * Full name
-     * @type {string}
-     * @memberof UserCreateParams
-     */
-    'name': string;
-    /**
-     * Email address
-     * @type {string}
-     * @memberof UserCreateParams
-     */
-    'email': string;
 }
 
 export const UserCreateParamsRole = {

@@ -30,11 +30,23 @@ import { AccountRequirementsError } from './account-requirements-error';
  */
 export interface AccountCapability {
     /**
-     * Status of the associated product code as part of the onboarding process. Only the `active` status represents that payments can be handled by this account for this given product code.  `created` The capability has been created but no further action taken. Generally, this is the state of all capabilities when a merchant has been created but the onboarding process has not yet started.  `started` The onboarding process has been started but not yet submitted.  `submitted` The onboarding process for this product code has been submitted.  `active` This associated product code is active for payments on this account.  `disabled` This associated product code is not valid for payments on this account.
+     * Unique identifier for the object.
      * @type {string}
      * @memberof AccountCapability
      */
-    'status': AccountCapabilityStatus;
+    'id': string;
+    /**
+     * The percentage of required fields completed in the onboarding application.
+     * @type {number}
+     * @memberof AccountCapability
+     */
+    'onboarding_application_progress': number;
+    /**
+     * 
+     * @type {AccountCapabilityPricingTemplate}
+     * @memberof AccountCapability
+     */
+    'pricing_template': AccountCapabilityPricingTemplate;
     /**
      * 
      * @type {AccountCapabilityProductCode}
@@ -43,29 +55,17 @@ export interface AccountCapability {
      */
     'product_code': AccountCapabilityProductCode;
     /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof AccountCapability
-     */
-    'id': string;
-    /**
-     * 
-     * @type {AccountCapabilityPricingTemplate}
-     * @memberof AccountCapability
-     */
-    'pricing_template': AccountCapabilityPricingTemplate;
-    /**
      * The fields that need to be collected again because validation failed for some reason.
      * @type {Array<AccountRequirementsError>}
      * @memberof AccountCapability
      */
     'requirements_errors': Array<AccountRequirementsError>;
     /**
-     * The percentage of required fields completed in the onboarding application.
-     * @type {number}
+     * Status of the associated product code as part of the onboarding process. Only the `active` status represents that payments can be handled by this account for this given product code.  `created` The capability has been created but no further action taken. Generally, this is the state of all capabilities when a merchant has been created but the onboarding process has not yet started.  `started` The onboarding process has been started but not yet submitted.  `submitted` The onboarding process for this product code has been submitted.  `active` This associated product code is active for payments on this account.  `disabled` This associated product code is not valid for payments on this account.
+     * @type {string}
      * @memberof AccountCapability
      */
-    'onboarding_application_progress': number;
+    'status': AccountCapabilityStatus;
     /**
      * The URL for the merchant\'s onboarding application.
      * @type {string}

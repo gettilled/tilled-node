@@ -27,11 +27,11 @@ export interface HealthOutput {
      */
     'status': HealthOutputStatus;
     /**
-     * Public version of the API.
+     * Human-friendly description of the API.
      * @type {string}
      * @memberof HealthOutput
      */
-    'version'?: string;
+    'description'?: string;
     /**
      * Array of notes relevant to the current state of health.
      * @type {Array<string>}
@@ -39,11 +39,11 @@ export interface HealthOutput {
      */
     'notes'?: Array<string>;
     /**
-     * Human-friendly description of the API.
+     * Public version of the API.
      * @type {string}
      * @memberof HealthOutput
      */
-    'description'?: string;
+    'version'?: string;
 }
 
 export const HealthOutputStatus = {

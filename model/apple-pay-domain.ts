@@ -21,11 +21,11 @@
  */
 export interface ApplePayDomain {
     /**
-     * Time at which the object was last updated.
+     * The ID of the Account associated with the domain.
      * @type {string}
      * @memberof ApplePayDomain
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -33,22 +33,22 @@ export interface ApplePayDomain {
      */
     'created_at': string;
     /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof ApplePayDomain
-     */
-    'id': string;
-    /**
      * The apple pay domain hostname.
      * @type {string}
      * @memberof ApplePayDomain
      */
     'hostname': string;
     /**
-     * The ID of the Account associated with the domain.
+     * Unique identifier for the object.
      * @type {string}
      * @memberof ApplePayDomain
      */
-    'account_id': string;
+    'id': string;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof ApplePayDomain
+     */
+    'updated_at': string;
 }
 

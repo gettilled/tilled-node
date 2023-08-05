@@ -24,11 +24,18 @@ import { PlatformFeeRefundBalanceTransaction } from './platform-fee-refund-balan
  */
 export interface PlatformFeeRefund {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
+     * Amount in the smallest currency unit.
+     * @type {number}
      * @memberof PlatformFeeRefund
      */
-    'updated_at': string;
+    'amount': number;
+    /**
+     * 
+     * @type {PlatformFeeRefundBalanceTransaction}
+     * @memberof PlatformFeeRefund
+     * @deprecated
+     */
+    'balance_transaction': PlatformFeeRefundBalanceTransaction;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -42,23 +49,16 @@ export interface PlatformFeeRefund {
      */
     'id': string;
     /**
-     * Amount in the smallest currency unit.
-     * @type {number}
-     * @memberof PlatformFeeRefund
-     */
-    'amount': number;
-    /**
      * ID of the platform fee that was refunded.
      * @type {string}
      * @memberof PlatformFeeRefund
      */
     'platform_fee_id': string;
     /**
-     * 
-     * @type {PlatformFeeRefundBalanceTransaction}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof PlatformFeeRefund
-     * @deprecated
      */
-    'balance_transaction': PlatformFeeRefundBalanceTransaction;
+    'updated_at': string;
 }
 

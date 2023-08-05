@@ -21,17 +21,17 @@
  */
 export interface UserInvitationCreateParams {
     /**
-     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.
-     * @type {string}
-     * @memberof UserInvitationCreateParams
-     */
-    'role': UserInvitationCreateParamsRole;
-    /**
      * Email address
      * @type {string}
      * @memberof UserInvitationCreateParams
      */
     'email': string;
+    /**
+     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.
+     * @type {string}
+     * @memberof UserInvitationCreateParams
+     */
+    'role': UserInvitationCreateParamsRole;
     /**
      * The type of email, if any, that should be sent to the new user. Defaults to `console_invitation` if one is not provided.  `merchant_application` \"You\'ve been invited by {partner name} to complete the setup of your payment processing account. To create your account and access your application follow the link below. {user invitation link}\"  `none` No email sent.  `console_invitation` \"You have been invited to access your merchant account with {partner name}. To get started, accept the invite below: {user invitation link}. Joining the team will give you access to your merchant dashboard, including information about payments, customers, payouts, and more\".
      * @type {string}

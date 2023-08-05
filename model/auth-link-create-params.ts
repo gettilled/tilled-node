@@ -21,17 +21,17 @@
  */
 export interface AuthLinkCreateParams {
     /**
-     * The id of the user.
-     * @type {string}
-     * @memberof AuthLinkCreateParams
-     */
-    'user_id': string;
-    /**
      * Expiration of the Auth Link (i.e.. 1d, 7d, 30d)
      * @type {string}
      * @memberof AuthLinkCreateParams
      */
     'expiration': string;
+    /**
+     * The id of the user.
+     * @type {string}
+     * @memberof AuthLinkCreateParams
+     */
+    'user_id': string;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}

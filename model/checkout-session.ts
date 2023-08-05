@@ -27,53 +27,11 @@ import { CheckoutSessionLineItem } from './checkout-session-line-item';
  */
 export interface CheckoutSession {
     /**
-     * A list of the types of payment methods (e.g. card) this checkout session is allowed to accept.
-     * @type {Array<string>}
-     * @memberof CheckoutSession
-     */
-    'payment_method_types': Array<CheckoutSessionPaymentMethodTypes>;
-    /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof CheckoutSession
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof CheckoutSession
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof CheckoutSession
-     */
-    'id': string;
-    /**
      * The ID of the account for this checkout session.
      * @type {string}
      * @memberof CheckoutSession
      */
     'account_id': string;
-    /**
-     * The ID of the payment intent for checkout session.
-     * @type {string}
-     * @memberof CheckoutSession
-     */
-    'payment_intent_id': string;
-    /**
-     * The URL to the checkout session. Redirect customers to this URL to take them to checkout.
-     * @type {string}
-     * @memberof CheckoutSession
-     */
-    'url': string;
-    /**
-     * A list of items the customer is purchasing. The maximum is 100 line items, however it is recommended to consolidate line items if there are more than a few dozen.
-     * @type {Array<CheckoutSessionLineItem>}
-     * @memberof CheckoutSession
-     */
-    'line_items': Array<CheckoutSessionLineItem>;
     /**
      * Total of all items, in currency minor units.
      * @type {number}
@@ -81,11 +39,41 @@ export interface CheckoutSession {
      */
     'amount_total': number;
     /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'created_at': string;
+    /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
      * @memberof CheckoutSession
      */
     'currency': CheckoutSessionCurrency;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'id': string;
+    /**
+     * A list of items the customer is purchasing. The maximum is 100 line items, however it is recommended to consolidate line items if there are more than a few dozen.
+     * @type {Array<CheckoutSessionLineItem>}
+     * @memberof CheckoutSession
+     */
+    'line_items': Array<CheckoutSessionLineItem>;
+    /**
+     * The ID of the payment intent for checkout session.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'payment_intent_id': string;
+    /**
+     * A list of the types of payment methods (e.g. card) this checkout session is allowed to accept.
+     * @type {Array<string>}
+     * @memberof CheckoutSession
+     */
+    'payment_method_types': Array<CheckoutSessionPaymentMethodTypes>;
     /**
      * The status of the checkout session, one of `open`, `complete` or `expired`.  `open` The checkout session is still in progress. Payment processing has not started.  `complete` The checkout session is complete. Payment processing may still be in progress.  `expired` The checkout session has expired. No further processing will occur.
      * @type {string}
@@ -93,17 +81,23 @@ export interface CheckoutSession {
      */
     'status': CheckoutSessionStatus;
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.\"
-     * @type {{ [key: string]: string; }}
-     * @memberof CheckoutSession
-     */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * The ID of the customer for this checkout session.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof CheckoutSession
      */
-    'customer_id'?: string;
+    'updated_at': string;
+    /**
+     * The URL to the checkout session. Redirect customers to this URL to take them to checkout.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'url': string;
+    /**
+     * If set, checkout will display a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'cancel_url'?: string;
     /**
      * 
      * @type {CheckoutSessionCustomerDetails}
@@ -111,17 +105,23 @@ export interface CheckoutSession {
      */
     'customer_details'?: CheckoutSessionCustomerDetails;
     /**
+     * The ID of the customer for this checkout session.
+     * @type {string}
+     * @memberof CheckoutSession
+     */
+    'customer_id'?: string;
+    /**
      * The due date for the checkout session. After this date the customer will no longer be able to complete the checkout session.
      * @type {string}
      * @memberof CheckoutSession
      */
     'expires_at'?: string;
     /**
-     * If set, checkout will display a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
-     * @type {string}
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.\"
+     * @type {{ [key: string]: string; }}
      * @memberof CheckoutSession
      */
-    'cancel_url'?: string;
+    'metadata'?: { [key: string]: string; };
     /**
      * The URL to which we should send customers when payment is complete. It is recommended that you supply this value, but if none is provided, a generic success landing page will be used.
      * @type {string}
@@ -130,13 +130,6 @@ export interface CheckoutSession {
     'success_url'?: string;
 }
 
-export const CheckoutSessionPaymentMethodTypes = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
-} as const;
-
-export type CheckoutSessionPaymentMethodTypes = typeof CheckoutSessionPaymentMethodTypes[keyof typeof CheckoutSessionPaymentMethodTypes];
 export const CheckoutSessionCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -154,6 +147,13 @@ export const CheckoutSessionCurrency = {
 } as const;
 
 export type CheckoutSessionCurrency = typeof CheckoutSessionCurrency[keyof typeof CheckoutSessionCurrency];
+export const CheckoutSessionPaymentMethodTypes = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type CheckoutSessionPaymentMethodTypes = typeof CheckoutSessionPaymentMethodTypes[keyof typeof CheckoutSessionPaymentMethodTypes];
 export const CheckoutSessionStatus = {
     OPEN: 'open',
     COMPLETE: 'complete',

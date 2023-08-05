@@ -39,17 +39,11 @@ export interface CheckoutSessionCreateParams {
      */
     'payment_intent_data': CheckoutSessionCreateParamsPaymentIntentData;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
-     * @memberof CheckoutSessionCreateParams
-     */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * The ID of the customer for this checkout session.
+     * If set, checkout will display a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
      * @type {string}
      * @memberof CheckoutSessionCreateParams
      */
-    'customer_id'?: string;
+    'cancel_url'?: string;
     /**
      * If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once a session is complete, use the customer_id field to fetch the customer.
      * @type {string}
@@ -57,17 +51,23 @@ export interface CheckoutSessionCreateParams {
      */
     'customer_email'?: string;
     /**
+     * The ID of the customer for this checkout session.
+     * @type {string}
+     * @memberof CheckoutSessionCreateParams
+     */
+    'customer_id'?: string;
+    /**
      * The due date for the checkout session. After this date the customer will no longer be able to complete the checkout session.
      * @type {string}
      * @memberof CheckoutSessionCreateParams
      */
     'expires_at'?: string;
     /**
-     * If set, checkout will display a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
-     * @type {string}
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
      * @memberof CheckoutSessionCreateParams
      */
-    'cancel_url'?: string;
+    'metadata'?: { [key: string]: string; };
     /**
      * The URL to which we should send customers when payment is complete. It is recommended that you supply this value, but if none is provided, a generic success landing page will be used.
      * @type {string}

@@ -13,6 +13,12 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { AccountRole } from './account-role';
+// May contain unused imports in some cases
+// @ts-ignore
+import { UserEmailSettings } from './user-email-settings';
 
 /**
  * 
@@ -21,17 +27,36 @@
  */
 export interface User {
     /**
-     * Time at which the object was last updated.
+     * If this user is associated with multiple accounts then this value will be one of those accounts.
      * @type {string}
      * @memberof User
+     * @deprecated
      */
-    'updated_at': string;
+    'account_id': string;
+    /**
+     * The user\'s role within a specific account.
+     * @type {Array<AccountRole>}
+     * @memberof User
+     */
+    'account_roles': Array<AccountRole>;
     /**
      * Time at which the object was created.
      * @type {string}
      * @memberof User
      */
     'created_at': string;
+    /**
+     * The user email.
+     * @type {string}
+     * @memberof User
+     */
+    'email': string;
+    /**
+     * 
+     * @type {UserEmailSettings}
+     * @memberof User
+     */
+    'email_settings': UserEmailSettings;
     /**
      * Unique identifier for the object.
      * @type {string}
@@ -45,23 +70,18 @@ export interface User {
      */
     'name': string;
     /**
-     * The user email.
+     * If this user is associated with multiple accounts then this value will be the role associated with the account_id property. The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.
      * @type {string}
      * @memberof User
-     */
-    'email': string;
-    /**
-     * The ID of the Account associated with this user.
-     * @type {string}
-     * @memberof User
-     */
-    'account_id': string;
-    /**
-     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.
-     * @type {string}
-     * @memberof User
+     * @deprecated
      */
     'role': UserRole;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof User
+     */
+    'updated_at': string;
     /**
      * Time at which the user last successfully logged in via the API.
      * @type {string}

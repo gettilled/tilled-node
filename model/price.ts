@@ -30,17 +30,17 @@ export interface Price {
      */
     'currency': PriceCurrency;
     /**
-     * A non-negative integer in minor units (i.e. cents) representing how much to charge.
-     * @type {number}
-     * @memberof Price
-     */
-    'unit_amount': number;
-    /**
      * 
      * @type {PriceProductData}
      * @memberof Price
      */
     'product_data': PriceProductData;
+    /**
+     * A non-negative integer in minor units (i.e. cents) representing how much to charge.
+     * @type {number}
+     * @memberof Price
+     */
+    'unit_amount': number;
 }
 
 export const PriceCurrency = {

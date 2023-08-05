@@ -21,11 +21,11 @@
  */
 export interface WebhookEndpoint {
     /**
-     * Time at which the object was last updated.
+     * The id of the associated account.
      * @type {string}
      * @memberof WebhookEndpoint
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -45,11 +45,11 @@ export interface WebhookEndpoint {
      */
     'id': string;
     /**
-     * The id of the associated account.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof WebhookEndpoint
      */
-    'account_id': string;
+    'updated_at': string;
     /**
      * The URL of the webhook endpoint.
      * @type {string}

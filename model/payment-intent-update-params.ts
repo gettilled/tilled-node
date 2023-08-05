@@ -24,47 +24,11 @@ import { PaymentIntentLevel3 } from './payment-intent-level3';
  */
 export interface PaymentIntentUpdateParams {
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
-     * @type {{ [key: string]: string; }}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
-     * @type {Array<string>}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'payment_method_types'?: Array<PaymentIntentUpdateParamsPaymentMethodTypes>;
-    /**
-     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
-     * @type {string}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'statement_descriptor_suffix'?: string;
-    /**
      * Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00)
      * @type {number}
      * @memberof PaymentIntentUpdateParams
      */
     'amount'?: number;
-    /**
-     * The amount of the platform fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped at the total payment amount.
-     * @type {number}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'platform_fee_amount'?: number;
-    /**
-     * Three-letter ISO currency code, in lowercase.
-     * @type {string}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'currency'?: PaymentIntentUpdateParamsCurrency;
-    /**
-     * ID of the PaymentMethod to attach to this PaymentIntent.
-     * @type {string}
-     * @memberof PaymentIntentUpdateParams
-     */
-    'payment_method_id'?: string;
     /**
      * Controls when the funds will be captured from the customer’s account.  `automatic` (Default) Tilled automatically captures funds when the customer authorizes the payment.  `manual` Place a hold on funds when the customer authorizes the payment, but don\'t capture the funds until later.
      * @type {string}
@@ -72,26 +36,61 @@ export interface PaymentIntentUpdateParams {
      */
     'capture_method'?: PaymentIntentUpdateParamsCaptureMethod;
     /**
-     * Used to identify authorization requests that use stored credentials to improve authorization rates and reduce fraud.  `consumer_ad_hoc` Ad hoc consumer-initiated request  `merchant_ad_hoc` Unscheduled merchant-initiated request  `merchant_recurring` Scheduled, merchant-initiated recurring request
+     * Three-letter ISO currency code, in lowercase.
      * @type {string}
      * @memberof PaymentIntentUpdateParams
      */
-    'occurrence_type'?: PaymentIntentUpdateParamsOccurrenceType;
+    'currency'?: PaymentIntentUpdateParamsCurrency;
     /**
      * 
      * @type {PaymentIntentLevel3}
      * @memberof PaymentIntentUpdateParams
      */
     'level3'?: PaymentIntentLevel3;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
+     * Used to identify authorization requests that use stored credentials to improve authorization rates and reduce fraud.  `consumer_ad_hoc` Ad hoc consumer-initiated request  `merchant_ad_hoc` Unscheduled merchant-initiated request  `merchant_recurring` Scheduled, merchant-initiated recurring request
+     * @type {string}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'occurrence_type'?: PaymentIntentUpdateParamsOccurrenceType;
+    /**
+     * ID of the PaymentMethod to attach to this PaymentIntent.
+     * @type {string}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'payment_method_id'?: string;
+    /**
+     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
+     * @type {Array<string>}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'payment_method_types'?: Array<PaymentIntentUpdateParamsPaymentMethodTypes>;
+    /**
+     * The amount of the platform fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped at the total payment amount.
+     * @type {number}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'platform_fee_amount'?: number;
+    /**
+     * Provides information about a payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 20 characters for the concatenated descriptor.
+     * @type {string}
+     * @memberof PaymentIntentUpdateParams
+     */
+    'statement_descriptor_suffix'?: string;
 }
 
-export const PaymentIntentUpdateParamsPaymentMethodTypes = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+export const PaymentIntentUpdateParamsCaptureMethod = {
+    AUTOMATIC: 'automatic',
+    MANUAL: 'manual'
 } as const;
 
-export type PaymentIntentUpdateParamsPaymentMethodTypes = typeof PaymentIntentUpdateParamsPaymentMethodTypes[keyof typeof PaymentIntentUpdateParamsPaymentMethodTypes];
+export type PaymentIntentUpdateParamsCaptureMethod = typeof PaymentIntentUpdateParamsCaptureMethod[keyof typeof PaymentIntentUpdateParamsCaptureMethod];
 export const PaymentIntentUpdateParamsCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -109,12 +108,6 @@ export const PaymentIntentUpdateParamsCurrency = {
 } as const;
 
 export type PaymentIntentUpdateParamsCurrency = typeof PaymentIntentUpdateParamsCurrency[keyof typeof PaymentIntentUpdateParamsCurrency];
-export const PaymentIntentUpdateParamsCaptureMethod = {
-    AUTOMATIC: 'automatic',
-    MANUAL: 'manual'
-} as const;
-
-export type PaymentIntentUpdateParamsCaptureMethod = typeof PaymentIntentUpdateParamsCaptureMethod[keyof typeof PaymentIntentUpdateParamsCaptureMethod];
 export const PaymentIntentUpdateParamsOccurrenceType = {
     CONSUMER_AD_HOC: 'consumer_ad_hoc',
     MERCHANT_AD_HOC: 'merchant_ad_hoc',
@@ -122,5 +115,12 @@ export const PaymentIntentUpdateParamsOccurrenceType = {
 } as const;
 
 export type PaymentIntentUpdateParamsOccurrenceType = typeof PaymentIntentUpdateParamsOccurrenceType[keyof typeof PaymentIntentUpdateParamsOccurrenceType];
+export const PaymentIntentUpdateParamsPaymentMethodTypes = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type PaymentIntentUpdateParamsPaymentMethodTypes = typeof PaymentIntentUpdateParamsPaymentMethodTypes[keyof typeof PaymentIntentUpdateParamsPaymentMethodTypes];
 
 

@@ -21,11 +21,11 @@
  */
 export interface Event {
     /**
-     * Time at which the object was last updated.
+     * The id of the account that originated the event.
      * @type {string}
      * @memberof Event
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -33,17 +33,17 @@ export interface Event {
      */
     'created_at': string;
     /**
+     * Object containing the API resource relevant to the event. For example, a `charge.succeeded` event will have a full charge object as the value.
+     * @type {object}
+     * @memberof Event
+     */
+    'data': object;
+    /**
      * Unique identifier for the object.
      * @type {string}
      * @memberof Event
      */
     'id': string;
-    /**
-     * The id of the account that originated the event.
-     * @type {string}
-     * @memberof Event
-     */
-    'account_id': string;
     /**
      * Description of the event (e.g. `charge.succeeded` or `charge.refunded`).  `account.updated` Occurs whenever an account status or property has changed. This includes capability statuses.  `charge.captured` Occurs whenever a previously uncaptured charge is captured.  `charge.expired` Occurs whenever an uncaptured charge expires.  `charge.failed` Occurs whenever a failed charge attempt occurs.  `charge.succeeded` Occurs whenever a new charge is created and is successful.  `charge.pending` Occurs whenever a pending charge is created.  `charge.refunded` occurs whenever a charge is refunded, including partial refunds  `charge.refund.updated` Occurs whenever a refund is updated, on selected payment methods.  `charge.updated` Occurs when a charge description is updated  `customer.created` Occurs whenever a new customer is created.  `customer.deleted` Occurs whenever a customer is deleted.  `customer.updated` Occurs whenever any property of a customer changes.  `payment_intent.canceled` Occurs when a PaymentIntent is canceled.  `payment_intent.created` Occurs when a new PaymentIntent is created.  `payment_intent.payment_failed` Occurs when a PaymentIntent has failed the attempt to create a payment method or a payment.  `payment_intent.processing` Occurs when a PaymentIntent has started processing.  `payment_intent.requires_action` Occurs when a PaymentIntent transitions to requires_action state  `payment_intent.succeeded` Occurs when a PaymentIntent has successfully completed payment.  `payment_method.attached` Occurs whenever a new payment method is attached to a customer.  `payment_method.detached` Occurs whenever a payment method is detached from a customer.  `report_run.succeeded` Occurs whenever a report run has successfully been uploaded to S3 and our File system.  `report_run.failed` Occurs whenever a report run has failed to be uploaded to S3 or our File system.
      * @type {string}
@@ -51,11 +51,11 @@ export interface Event {
      */
     'type': EventType;
     /**
-     * Object containing the API resource relevant to the event. For example, a `charge.succeeded` event will have a full charge object as the value.
-     * @type {object}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof Event
      */
-    'data': object;
+    'updated_at': string;
 }
 
 export const EventType = {

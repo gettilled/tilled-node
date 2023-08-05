@@ -28,15 +28,15 @@ import { PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails } from '.
 export interface PaymentMethodCreateAchDebitSingleUseTokenParams {
     /**
      * 
-     * @type {PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails}
-     * @memberof PaymentMethodCreateAchDebitSingleUseTokenParams
-     */
-    'billing_details': PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails;
-    /**
-     * 
      * @type {PaymentMethodCreateAchDebitSingleUseTokenParamsAchDebit}
      * @memberof PaymentMethodCreateAchDebitSingleUseTokenParams
      */
     'ach_debit': PaymentMethodCreateAchDebitSingleUseTokenParamsAchDebit;
+    /**
+     * 
+     * @type {PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails}
+     * @memberof PaymentMethodCreateAchDebitSingleUseTokenParams
+     */
+    'billing_details': PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails;
 }
 

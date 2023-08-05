@@ -21,11 +21,11 @@
  */
 export interface Customer {
     /**
-     * Time at which the object was last updated.
+     * The id of the associated account.
      * @type {string}
      * @memberof Customer
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -39,17 +39,17 @@ export interface Customer {
      */
     'id': string;
     /**
-     * The id of the associated account.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof Customer
      */
-    'account_id': string;
+    'updated_at': string;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-     * @type {{ [key: string]: string; }}
+     * The customer\'s email address.
+     * @type {string}
      * @memberof Customer
      */
-    'metadata'?: { [key: string]: string; };
+    'email'?: string;
     /**
      * The customer\'s first name.
      * @type {string}
@@ -57,23 +57,23 @@ export interface Customer {
      */
     'first_name'?: string;
     /**
-     * The customer\'s middle name.
-     * @type {string}
-     * @memberof Customer
-     */
-    'middle_name'?: string;
-    /**
      * The customer\'s last name.
      * @type {string}
      * @memberof Customer
      */
     'last_name'?: string;
     /**
-     * The customer\'s email address.
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * @type {{ [key: string]: string; }}
+     * @memberof Customer
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
+     * The customer\'s middle name.
      * @type {string}
      * @memberof Customer
      */
-    'email'?: string;
+    'middle_name'?: string;
     /**
      * The customer\'s phone number.
      * @type {string}

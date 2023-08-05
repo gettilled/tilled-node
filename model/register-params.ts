@@ -21,11 +21,11 @@
  */
 export interface RegisterParams {
     /**
-     * Password. Requires 1 alphabetic and 1 numeric character and a minimum length of 7.
+     * Email address
      * @type {string}
      * @memberof RegisterParams
      */
-    'password': string;
+    'email': string;
     /**
      * Full name
      * @type {string}
@@ -33,11 +33,11 @@ export interface RegisterParams {
      */
     'name': string;
     /**
-     * Email address
+     * Password. Requires 1 alphabetic and 1 numeric character and a minimum length of 7.
      * @type {string}
      * @memberof RegisterParams
      */
-    'email': string;
+    'password': string;
     /**
      * The business name or individual name.
      * @type {string}

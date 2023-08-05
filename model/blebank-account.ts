@@ -33,12 +33,6 @@ export interface BLEBankAccount {
      */
     'routing_number': string;
     /**
-     * The bank account type
-     * @type {string}
-     * @memberof BLEBankAccount
-     */
-    'type'?: BLEBankAccountType;
-    /**
      * The name of the person or business that owns the bank account.
      * @type {string}
      * @memberof BLEBankAccount
@@ -50,6 +44,12 @@ export interface BLEBankAccount {
      * @memberof BLEBankAccount
      */
     'bank_name'?: string;
+    /**
+     * The bank account type
+     * @type {string}
+     * @memberof BLEBankAccount
+     */
+    'type'?: BLEBankAccountType;
 }
 
 export const BLEBankAccountType = {

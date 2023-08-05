@@ -21,6 +21,12 @@
  */
 export interface SubscriptionUpdateParams {
     /**
+     * A date in the future at which the subscription will automatically get canceled.
+     * @type {string}
+     * @memberof SubscriptionUpdateParams
+     */
+    'cancel_at'?: string;
+    /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}
      * @memberof SubscriptionUpdateParams
@@ -32,18 +38,6 @@ export interface SubscriptionUpdateParams {
      * @memberof SubscriptionUpdateParams
      */
     'pause_at'?: string;
-    /**
-     * The date in the future at which the subscription will automatically return to active.
-     * @type {string}
-     * @memberof SubscriptionUpdateParams
-     */
-    'resume_at'?: string;
-    /**
-     * A date in the future at which the subscription will automatically get canceled.
-     * @type {string}
-     * @memberof SubscriptionUpdateParams
-     */
-    'cancel_at'?: string;
     /**
      * The id of the PaymentMethod used for this subscription. It must belong to the customer associated with the subscription.
      * @type {string}
@@ -62,5 +56,11 @@ export interface SubscriptionUpdateParams {
      * @memberof SubscriptionUpdateParams
      */
     'price'?: number;
+    /**
+     * The date in the future at which the subscription will automatically return to active.
+     * @type {string}
+     * @memberof SubscriptionUpdateParams
+     */
+    'resume_at'?: string;
 }
 

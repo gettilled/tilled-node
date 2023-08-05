@@ -21,11 +21,11 @@
  */
 export interface ApiKey {
     /**
-     * Time at which the object was last updated.
+     * The id of the associated account.
      * @type {string}
      * @memberof ApiKey
      */
-    'updated_at': string;
+    'account_id': string;
     /**
      * Time at which the object was created.
      * @type {string}
@@ -39,17 +39,17 @@ export interface ApiKey {
      */
     'id': string;
     /**
-     * The actual value of the API key to be included in the `tilled-api-key` header for authentication. `secret` keys will have a redacted value except when initially created.
-     * @type {string}
-     * @memberof ApiKey
-     */
-    'value': string;
-    /**
      * The string that you assign to describe the resource. It defaults to \'`type` Key\' (e.g. \'Secret Key\' and \'Publishable Key\')
      * @type {string}
      * @memberof ApiKey
      */
     'name': string;
+    /**
+     * The list of scopes to define the access for this key. You may specify `[\'*\']` to enable all scopes, except those that require explicit selection.
+     * @type {Array<string>}
+     * @memberof ApiKey
+     */
+    'scopes': Array<ApiKeyScopes>;
     /**
      * The type of API key.  `secret` can be used to authenticate all endpoints. `publishable` is used in your frontend application and can only access a handful of endpoints (e.g. confirm a Payment Intent).
      * @type {string}
@@ -57,17 +57,17 @@ export interface ApiKey {
      */
     'type': ApiKeyType;
     /**
-     * The id of the associated account.
+     * Time at which the object was last updated.
      * @type {string}
      * @memberof ApiKey
      */
-    'account_id': string;
+    'updated_at': string;
     /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` to enable all scopes, except those that require explicit selection.
-     * @type {Array<string>}
+     * The actual value of the API key to be included in the `tilled-api-key` header for authentication. `secret` keys will have a redacted value except when initially created.
+     * @type {string}
      * @memberof ApiKey
      */
-    'scopes': Array<ApiKeyScopes>;
+    'value': string;
     /**
      * Time at which the key was last used to authenticate with the API.
      * @type {string}
@@ -76,12 +76,6 @@ export interface ApiKey {
     'last_used'?: string;
 }
 
-export const ApiKeyType = {
-    PUBLISHABLE: 'publishable',
-    SECRET: 'secret'
-} as const;
-
-export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
 export const ApiKeyScopes = {
     STAR: '*',
     ACCOUNTSREAD: 'accounts:read',
@@ -131,5 +125,11 @@ export const ApiKeyScopes = {
 } as const;
 
 export type ApiKeyScopes = typeof ApiKeyScopes[keyof typeof ApiKeyScopes];
+export const ApiKeyType = {
+    PUBLISHABLE: 'publishable',
+    SECRET: 'secret'
+} as const;
+
+export type ApiKeyType = typeof ApiKeyType[keyof typeof ApiKeyType];
 
 

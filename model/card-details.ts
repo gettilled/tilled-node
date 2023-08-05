@@ -24,17 +24,23 @@ import { CardDetailsChecks } from './card-details-checks';
  */
 export interface CardDetails {
     /**
+     * Whether or not the card is an apple pay card
+     * @type {boolean}
+     * @memberof CardDetails
+     */
+    'apple_pay'?: boolean;
+    /**
      * Type of card.
      * @type {string}
      * @memberof CardDetails
      */
     'brand'?: CardDetailsBrand;
     /**
-     * Last 4 digits of the card.
-     * @type {string}
+     * 
+     * @type {CardDetailsChecks}
      * @memberof CardDetails
      */
-    'last4'?: string;
+    'checks'?: CardDetailsChecks;
     /**
      * Two-digit number representing the card\'s expiration month.
      * @type {number}
@@ -48,11 +54,11 @@ export interface CardDetails {
      */
     'exp_year'?: number;
     /**
-     * 
-     * @type {CardDetailsChecks}
+     * Card funding type.
+     * @type {string}
      * @memberof CardDetails
      */
-    'checks'?: CardDetailsChecks;
+    'funding'?: CardDetailsFunding;
     /**
      * The card holder\'s name.
      * @type {string}
@@ -60,11 +66,11 @@ export interface CardDetails {
      */
     'holder_name'?: string;
     /**
-     * Card funding type.
+     * Last 4 digits of the card.
      * @type {string}
      * @memberof CardDetails
      */
-    'funding'?: CardDetailsFunding;
+    'last4'?: string;
 }
 
 export const CardDetailsBrand = {

@@ -27,17 +27,17 @@ export interface ApiKeyCreateParams {
      */
     'type': ApiKeyCreateParamsType;
     /**
-     * The list of scopes to define the access for this key. You may specify `[\'*\']` (default) to enable all scopes, except those that require explicit selection. Scopes are ignored for keys of type `publishable`.
-     * @type {Array<string>}
-     * @memberof ApiKeyCreateParams
-     */
-    'scopes'?: Array<ApiKeyCreateParamsScopes>;
-    /**
      * A brief name or description of the API that will help you remember what it is used for.
      * @type {string}
      * @memberof ApiKeyCreateParams
      */
     'name'?: string;
+    /**
+     * The list of scopes to define the access for this key. You may specify `[\'*\']` (default) to enable all scopes, except those that require explicit selection. Scopes are ignored for keys of type `publishable`.
+     * @type {Array<string>}
+     * @memberof ApiKeyCreateParams
+     */
+    'scopes'?: Array<ApiKeyCreateParamsScopes>;
 }
 
 export const ApiKeyCreateParamsType = {

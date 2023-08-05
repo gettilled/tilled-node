@@ -21,6 +21,12 @@
  */
 export interface WebhookEndpointUpdateParams {
     /**
+     * An optional description of what the webhook is used for.
+     * @type {string}
+     * @memberof WebhookEndpointUpdateParams
+     */
+    'description'?: string;
+    /**
      * The list of events to enable for this endpoint. You may specify `[\'*\']` to enable all events, except those that require explicit selection.
      * @type {Array<string>}
      * @memberof WebhookEndpointUpdateParams
@@ -32,12 +38,6 @@ export interface WebhookEndpointUpdateParams {
      * @memberof WebhookEndpointUpdateParams
      */
     'url'?: string;
-    /**
-     * An optional description of what the webhook is used for.
-     * @type {string}
-     * @memberof WebhookEndpointUpdateParams
-     */
-    'description'?: string;
 }
 
 export const WebhookEndpointUpdateParamsEnabledEvents = {

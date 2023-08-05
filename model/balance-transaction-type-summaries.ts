@@ -24,11 +24,11 @@ import { BalanceTransactionTypeSummary } from './balance-transaction-type-summar
  */
 export interface BalanceTransactionTypeSummaries {
     /**
-     * String indicating the unit of time to aggregate the summary of data.
+     * All `balance_transaction.created_at` values included in this summary are less than this value.
      * @type {string}
      * @memberof BalanceTransactionTypeSummaries
      */
-    'time_unit': BalanceTransactionTypeSummariesTimeUnit;
+    'end_time': string;
     /**
      * All `balance_transaction.created_at` values included in this summary are greater than or equal to this value.
      * @type {string}
@@ -36,17 +36,17 @@ export interface BalanceTransactionTypeSummaries {
      */
     'start_time': string;
     /**
-     * All `balance_transaction.created_at` values included in this summary are less than this value.
-     * @type {string}
-     * @memberof BalanceTransactionTypeSummaries
-     */
-    'end_time': string;
-    /**
      * 
      * @type {Array<BalanceTransactionTypeSummary>}
      * @memberof BalanceTransactionTypeSummaries
      */
     'summary': Array<BalanceTransactionTypeSummary>;
+    /**
+     * String indicating the unit of time to aggregate the summary of data.
+     * @type {string}
+     * @memberof BalanceTransactionTypeSummaries
+     */
+    'time_unit': BalanceTransactionTypeSummariesTimeUnit;
 }
 
 export const BalanceTransactionTypeSummariesTimeUnit = {

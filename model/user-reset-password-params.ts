@@ -21,6 +21,12 @@
  */
 export interface UserResetPasswordParams {
     /**
+     * Email address
+     * @type {string}
+     * @memberof UserResetPasswordParams
+     */
+    'email': string;
+    /**
      * Password. Requires 1 alphabetic and 1 numeric character and a minimum length of 7.
      * @type {string}
      * @memberof UserResetPasswordParams
@@ -32,11 +38,5 @@ export interface UserResetPasswordParams {
      * @memberof UserResetPasswordParams
      */
     'password_reset_token': string;
-    /**
-     * Email address
-     * @type {string}
-     * @memberof UserResetPasswordParams
-     */
-    'email': string;
 }
 

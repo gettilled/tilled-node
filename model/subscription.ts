@@ -21,24 +21,6 @@
  */
 export interface Subscription {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof Subscription
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof Subscription
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof Subscription
-     */
-    'id': string;
-    /**
      * The id of the associated account.
      * @type {string}
      * @memberof Subscription
@@ -51,6 +33,12 @@ export interface Subscription {
      */
     'billing_cycle_anchor': string;
     /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof Subscription
+     */
+    'created_at': string;
+    /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
      * @type {string}
      * @memberof Subscription
@@ -62,6 +50,12 @@ export interface Subscription {
      * @memberof Subscription
      */
     'customer_id': string;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof Subscription
+     */
+    'id': string;
     /**
      * The number of intervals (specified in the `interval_unit` attribute) between subscription billings. For example, `interval_unit=month` and `interval_count=3` bills every 3 months.
      * @type {number}
@@ -93,11 +87,11 @@ export interface Subscription {
      */
     'status': SubscriptionStatus;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. This `metadata` will be copied to the `payment_intent.metadata` field when a payment is attempted.
-     * @type {{ [key: string]: string; }}
+     * Time at which the object was last updated.
+     * @type {string}
      * @memberof Subscription
      */
-    'metadata'?: { [key: string]: string; };
+    'updated_at': string;
     /**
      * A date in the future at which the subscription will automatically get canceled.
      * @type {string}
@@ -110,6 +104,12 @@ export interface Subscription {
      * @memberof Subscription
      */
     'canceled_at'?: string;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. This `metadata` will be copied to the `payment_intent.metadata` field when a payment is attempted.
+     * @type {{ [key: string]: string; }}
+     * @memberof Subscription
+     */
+    'metadata'?: { [key: string]: string; };
     /**
      * The date at which payment will next be attempted. The value will be `null` when no more payments are to be attempted. Examples: `canceled` and `paused` statuses or `cancel_at` is prior to what would be the next payment date. When a payment fails and the status changes to `past_due` this value can be manually updated to determine the next attempt.
      * @type {string}

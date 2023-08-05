@@ -36,30 +36,6 @@ import { PaymentIntentPaymentMethod } from './payment-intent-payment-method';
  */
 export interface PaymentIntent {
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof PaymentIntent
-     */
-    'updated_at': string;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof PaymentIntent
-     */
-    'created_at': string;
-    /**
-     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
-     * @type {Array<string>}
-     * @memberof PaymentIntent
-     */
-    'payment_method_types': Array<PaymentIntentPaymentMethodTypes>;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof PaymentIntent
-     */
-    'id': string;
-    /**
      * ID of the Tilled account for which the funds of this PaymentIntent are intended.
      * @type {string}
      * @memberof PaymentIntent
@@ -84,18 +60,6 @@ export interface PaymentIntent {
      */
     'amount_received': number;
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
-     * @type {string}
-     * @memberof PaymentIntent
-     */
-    'currency': PaymentIntentCurrency;
-    /**
-     * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
-     * @type {string}
-     * @memberof PaymentIntent
-     */
-    'status': PaymentIntentStatus;
-    /**
      * Controls when the funds will be captured from the customer’s account.  `automatic` (Default) Tilled automatically captures funds when the customer authorizes the payment.  `manual` Place a hold on funds when the customer authorizes the payment, but don\'t capture the funds until later.
      * @type {string}
      * @memberof PaymentIntent
@@ -114,47 +78,41 @@ export interface PaymentIntent {
      */
     'client_secret': string;
     /**
-     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-     * @type {{ [key: string]: string; }}
-     * @memberof PaymentIntent
-     */
-    'metadata'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {PaymentIntentLevel3}
-     * @memberof PaymentIntent
-     */
-    'level3'?: PaymentIntentLevel3;
-    /**
-     * Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor
+     * Time at which the object was created.
      * @type {string}
      * @memberof PaymentIntent
      */
-    'statement_descriptor_suffix'?: string;
+    'created_at': string;
     /**
-     * 
-     * @type {PaymentIntentPaymentMethod}
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase.
+     * @type {string}
      * @memberof PaymentIntent
      */
-    'payment_method'?: PaymentIntentPaymentMethod;
+    'currency': PaymentIntentCurrency;
     /**
-     * 
-     * @type {PaymentIntentCustomer}
+     * Unique identifier for the object.
+     * @type {string}
      * @memberof PaymentIntent
      */
-    'customer'?: PaymentIntentCustomer;
+    'id': string;
     /**
-     * The amount of the fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped a the total payment amount.
-     * @type {number}
+     * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
+     * @type {Array<string>}
      * @memberof PaymentIntent
      */
-    'platform_fee_amount'?: number;
+    'payment_method_types': Array<PaymentIntentPaymentMethodTypes>;
     /**
-     * 
-     * @type {PaymentIntentLastPaymentError}
+     * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
+     * @type {string}
      * @memberof PaymentIntent
      */
-    'last_payment_error'?: PaymentIntentLastPaymentError;
+    'status': PaymentIntentStatus;
+    /**
+     * Time at which the object was updated.
+     * @type {string}
+     * @memberof PaymentIntent
+     */
+    'updated_at': string;
     /**
      * Populated when `status` is `canceled`, this is the time at which the PaymentIntent was canceled.
      * @type {string}
@@ -168,11 +126,53 @@ export interface PaymentIntent {
      */
     'cancellation_reason'?: PaymentIntentCancellationReason;
     /**
+     * 
+     * @type {PaymentIntentCustomer}
+     * @memberof PaymentIntent
+     */
+    'customer'?: PaymentIntentCustomer;
+    /**
+     * 
+     * @type {PaymentIntentLastPaymentError}
+     * @memberof PaymentIntent
+     */
+    'last_payment_error'?: PaymentIntentLastPaymentError;
+    /**
+     * 
+     * @type {PaymentIntentLevel3}
+     * @memberof PaymentIntent
+     */
+    'level3'?: PaymentIntentLevel3;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentIntent
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
      * Used to identify authorization requests that use stored credentials to improve authorization rates and reduce fraud.  `consumer_ad_hoc` Ad hoc consumer-initiated request  `merchant_ad_hoc` Unscheduled merchant-initiated request  `merchant_recurring` Scheduled, merchant-initiated recurring request
      * @type {string}
      * @memberof PaymentIntent
      */
     'occurrence_type'?: PaymentIntentOccurrenceType;
+    /**
+     * 
+     * @type {PaymentIntentPaymentMethod}
+     * @memberof PaymentIntent
+     */
+    'payment_method'?: PaymentIntentPaymentMethod;
+    /**
+     * The amount of the fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped a the total payment amount.
+     * @type {number}
+     * @memberof PaymentIntent
+     */
+    'platform_fee_amount'?: number;
+    /**
+     * Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor
+     * @type {string}
+     * @memberof PaymentIntent
+     */
+    'statement_descriptor_suffix'?: string;
     /**
      * ID of the subscription related to this PaymentIntent (if any).
      * @type {string}
@@ -181,13 +181,12 @@ export interface PaymentIntent {
     'subscription_id'?: string;
 }
 
-export const PaymentIntentPaymentMethodTypes = {
-    CARD: 'card',
-    ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+export const PaymentIntentCaptureMethod = {
+    AUTOMATIC: 'automatic',
+    MANUAL: 'manual'
 } as const;
 
-export type PaymentIntentPaymentMethodTypes = typeof PaymentIntentPaymentMethodTypes[keyof typeof PaymentIntentPaymentMethodTypes];
+export type PaymentIntentCaptureMethod = typeof PaymentIntentCaptureMethod[keyof typeof PaymentIntentCaptureMethod];
 export const PaymentIntentCurrency = {
     AUD: 'aud',
     CAD: 'cad',
@@ -205,6 +204,13 @@ export const PaymentIntentCurrency = {
 } as const;
 
 export type PaymentIntentCurrency = typeof PaymentIntentCurrency[keyof typeof PaymentIntentCurrency];
+export const PaymentIntentPaymentMethodTypes = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+
+export type PaymentIntentPaymentMethodTypes = typeof PaymentIntentPaymentMethodTypes[keyof typeof PaymentIntentPaymentMethodTypes];
 export const PaymentIntentStatus = {
     CANCELED: 'canceled',
     PROCESSING: 'processing',
@@ -216,12 +222,6 @@ export const PaymentIntentStatus = {
 } as const;
 
 export type PaymentIntentStatus = typeof PaymentIntentStatus[keyof typeof PaymentIntentStatus];
-export const PaymentIntentCaptureMethod = {
-    AUTOMATIC: 'automatic',
-    MANUAL: 'manual'
-} as const;
-
-export type PaymentIntentCaptureMethod = typeof PaymentIntentCaptureMethod[keyof typeof PaymentIntentCaptureMethod];
 export const PaymentIntentCancellationReason = {
     DUPLICATE: 'duplicate',
     FRAUDULENT: 'fraudulent',

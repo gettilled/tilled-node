@@ -21,17 +21,17 @@
  */
 export interface UserInvitationCheck {
     /**
-     * The ID of the invitation.
-     * @type {string}
-     * @memberof UserInvitationCheck
-     */
-    'id': string;
-    /**
      * The pending user\'s email.
      * @type {string}
      * @memberof UserInvitationCheck
      */
     'email': string;
+    /**
+     * The ID of the invitation.
+     * @type {string}
+     * @memberof UserInvitationCheck
+     */
+    'id': string;
     /**
      * The email address of the user who sent the invitation.
      * @type {string}

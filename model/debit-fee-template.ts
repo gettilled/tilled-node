@@ -21,11 +21,11 @@
  */
 export interface DebitFeeTemplate {
     /**
-     * The type of transaction fee this pricing template applies.
-     * @type {string}
+     * The amount of the fee applied per return, in currency minor units.
+     * @type {number}
      * @memberof DebitFeeTemplate
      */
-    'transaction_fee_type': DebitFeeTemplateTransactionFeeType;
+    'return_fee': number;
     /**
      * The amount of the transaction fee applied to each transaction, in currency minor units or hundredths of a percent depending on the transaction_fee_type selected.
      * @type {number}
@@ -33,11 +33,11 @@ export interface DebitFeeTemplate {
      */
     'transaction_fee': number;
     /**
-     * The amount of the fee applied per return, in currency minor units.
-     * @type {number}
+     * The type of transaction fee this pricing template applies.
+     * @type {string}
      * @memberof DebitFeeTemplate
      */
-    'return_fee': number;
+    'transaction_fee_type': DebitFeeTemplateTransactionFeeType;
 }
 
 export const DebitFeeTemplateTransactionFeeType = {
