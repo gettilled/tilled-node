@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
+    "strict": true,
     "declaration": true,
     "target": "ES5",
     "module": "commonjs",
-    "noImplicitAny": false,
     "outDir": "dist",
     "rootDir": ".",
     "lib": ["es6", "dom"],
