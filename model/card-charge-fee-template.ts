@@ -59,6 +59,12 @@ export interface CardChargeFeeTemplate {
      * @memberof CardChargeFeeTemplate
      */
     'transaction_fee_type': CardChargeFeeTemplateTransactionFeeType;
+    /**
+     * The amount of the fee applied per card updated, in currency minor units.
+     * @type {number}
+     * @memberof CardChargeFeeTemplate
+     */
+    'card_update_fee'?: number;
 }
 
 export const CardChargeFeeTemplateTransactionFeeType = {
