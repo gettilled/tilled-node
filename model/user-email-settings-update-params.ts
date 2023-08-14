@@ -31,7 +31,7 @@ export interface UserEmailSettingsUpdateParams {
 export const UserEmailSettingsUpdateParamsDisputes = {
     TRUE: true,
     FALSE: false,
-    NULL: null as any
+    NULL: null
 } as const;
 
 export type UserEmailSettingsUpdateParamsDisputes = typeof UserEmailSettingsUpdateParamsDisputes[keyof typeof UserEmailSettingsUpdateParamsDisputes];
