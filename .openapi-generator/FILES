@@ -23,6 +23,7 @@ api/product-codes-api.ts
 api/refunds-api.ts
 api/report-runs-api.ts
 api/subscriptions-api.ts
+api/terminal-readers-api.ts
 api/users-api.ts
 api/webhook-endpoints-api.ts
 base.ts
@@ -81,6 +82,7 @@ model/card-charge-fee-template.ts
 model/card-checks.ts
 model/card-details-checks.ts
 model/card-details.ts
+model/card-present-charge-fee-template.ts
 model/charge-balance-transaction.ts
 model/charge-platform-fee.ts
 model/charge.ts
@@ -147,6 +149,8 @@ model/list-report-runs200-response-all-of.ts
 model/list-report-runs200-response.ts
 model/list-subscriptions200-response-all-of.ts
 model/list-subscriptions200-response.ts
+model/list-terminal-readers200-response-all-of.ts
+model/list-terminal-readers200-response.ts
 model/list-user-invitations200-response-all-of.ts
 model/list-user-invitations200-response.ts
 model/list-users200-response-all-of.ts
@@ -193,6 +197,7 @@ model/payment-method-create-params-card.ts
 model/payment-method-create-params-eft-debit.ts
 model/payment-method-create-params.ts
 model/payment-method-eft-debit.ts
+model/payment-method-terminal-reader.ts
 model/payment-method-update-params.ts
 model/payment-method.ts
 model/payout-balance-transaction.ts
@@ -204,6 +209,7 @@ model/platform-fee.ts
 model/price-product-data.ts
 model/price.ts
 model/pricing-template-ach-debit.ts
+model/pricing-template-card-present.ts
 model/pricing-template-card.ts
 model/pricing-template-eft-debit.ts
 model/pricing-template.ts

@@ -296,7 +296,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * Returns a list of PaymentMethods for a given Customer.
          * @summary List a Customer\'s Payment Methods
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'eft_debit'} type Only return payment methods of the given type.
+         * @param {'card' | 'ach_debit' | 'eft_debit' | 'card_present'} type Only return payment methods of the given type.
          * @param {string} customer_id Customer identifier
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -304,7 +304,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentMethods: async (tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPaymentMethods: async (tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPaymentMethods', 'tilled_account', tilled_account)
             // verify required parameter 'type' is not null or undefined
@@ -495,7 +495,7 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * Returns a list of PaymentMethods for a given Customer.
          * @summary List a Customer\'s Payment Methods
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'eft_debit'} type Only return payment methods of the given type.
+         * @param {'card' | 'ach_debit' | 'eft_debit' | 'card_present'} type Only return payment methods of the given type.
          * @param {string} customer_id Customer identifier
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -503,7 +503,7 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPaymentMethods(tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentMethods200Response>> {
+        async listPaymentMethods(tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentMethods200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPaymentMethods(tilled_account, type, customer_id, metadata, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -731,10 +731,10 @@ export interface PaymentMethodsApiListPaymentMethodsRequest {
 
     /**
      * Only return payment methods of the given type.
-     * @type {'card' | 'ach_debit' | 'eft_debit'}
+     * @type {'card' | 'ach_debit' | 'eft_debit' | 'card_present'}
      * @memberof PaymentMethodsApiListPaymentMethods
      */
-    readonly type: 'card' | 'ach_debit' | 'eft_debit'
+    readonly type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present'
 
     /**
      * Customer identifier

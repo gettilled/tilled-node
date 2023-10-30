@@ -33,6 +33,18 @@ export interface AccountSettingsBrandingCreateParams {
      */
     'logo_file_id'?: string;
     /**
+     * Optional customized Support Center title
+     * @type {string}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'merchant_support_center_name'?: string;
+    /**
+     * Optional customized Support Center URL
+     * @type {string}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'merchant_support_center_url'?: string;
+    /**
      * A string indicating a hexadecimal color.
      * @type {string}
      * @memberof AccountSettingsBrandingCreateParams

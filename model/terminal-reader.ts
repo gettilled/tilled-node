@@ -39,13 +39,7 @@ export interface TerminalReader {
      */
     'id': string;
     /**
-     * The serial number of the terminal reader.
-     * @type {string}
-     * @memberof TerminalReader
-     */
-    'serial_number': string;
-    /**
-     * The type of the terminal reader. Currently only Handpoint powered terminal readers are supported. https://www.handpoint.com/docs/device/Basics
+     * The type of the terminal reader.
      * @type {string}
      * @memberof TerminalReader
      */
@@ -62,14 +56,17 @@ export interface TerminalReader {
      * @memberof TerminalReader
      */
     'description'?: string;
+    /**
+     * The serial number of the terminal reader.
+     * @type {string}
+     * @memberof TerminalReader
+     */
+    'serial_number'?: string;
 }
 
 export const TerminalReaderType = {
-    A920: 'pax_a920',
-    A920_PRO: 'pax_a920_pro',
-    A60: 'pax_a60',
-    A77: 'pax_a77',
-    A80: 'pax_a80'
+    _100: 'vl_100',
+    _110: 'vl_110'
 } as const;
 
 export type TerminalReaderType = typeof TerminalReaderType[keyof typeof TerminalReaderType];

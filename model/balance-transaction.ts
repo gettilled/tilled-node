@@ -238,6 +238,7 @@ export const BalanceTransactionFeeSubtype = {
     ACH_RETURN: 'ach_return',
     MONTHLY_ACCOUNT: 'monthly_account',
     MONTHLY_MINIMUM_PROCESSING: 'monthly_minimum_processing',
+    CARD_ACCOUNT_UPDATE: 'card_account_update',
     RETRIEVAL: 'retrieval',
     GOODS_AND_SERVICES: 'goods_and_services',
     HARMONIZED_SALES: 'harmonized_sales'

@@ -28,6 +28,9 @@ import { PaymentMethodCard } from './payment-method-card';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaymentMethodEftDebit } from './payment-method-eft-debit';
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentMethodTerminalReader } from './payment-method-terminal-reader';
 
 /**
  * @type PaymentIntentPaymentMethod

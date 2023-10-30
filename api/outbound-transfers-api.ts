@@ -82,7 +82,7 @@ export const OutboundTransfersApiAxiosParamCreator = function (configuration?: C
             };
         },
         /**
-         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be returned.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
          * @summary Create an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {OutboundTransferCreateParams} OutboundTransferCreateParams 
@@ -285,7 +285,7 @@ export const OutboundTransfersApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be returned.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
          * @summary Create an Outbound Transfer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {OutboundTransferCreateParams} OutboundTransferCreateParams 
@@ -347,7 +347,7 @@ export const OutboundTransfersApiFactory = function (configuration?: Configurati
             return localVarFp.cancelOutboundTransfer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+         * If the creation request is successful, an OutboundTransfer object of status `pending` will be returned.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
          * @summary Create an Outbound Transfer
          * @param {OutboundTransfersApiCreateOutboundTransferRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -525,7 +525,7 @@ export class OutboundTransfersApi extends BaseAPI {
     }
 
     /**
-     * If the creation request is successful, an OutboundTransfer object of status `pending` will be return.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
+     * If the creation request is successful, an OutboundTransfer object of status `pending` will be returned.  If there is an error, an OutboundTransfer object with the status `failed` or an error is returned.
      * @summary Create an Outbound Transfer
      * @param {OutboundTransfersApiCreateOutboundTransferRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

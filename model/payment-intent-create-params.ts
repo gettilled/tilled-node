@@ -111,7 +111,8 @@ export type PaymentIntentCreateParamsCurrency = typeof PaymentIntentCreateParams
 export const PaymentIntentCreateParamsPaymentMethodTypes = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
 } as const;
 
 export type PaymentIntentCreateParamsPaymentMethodTypes = typeof PaymentIntentCreateParamsPaymentMethodTypes[keyof typeof PaymentIntentCreateParamsPaymentMethodTypes];

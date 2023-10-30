@@ -27,7 +27,7 @@ export interface Subscription {
      */
     'account_id': string;
     /**
-     * Determines the date of the first payment and the day of week/month/year for subsequent payments. If a month doesn\'t have the anchor day, the subscription will be billed on the last day of the month. For example, a monthly subscription starting on January 31 bills on Feb 28/29, then March 31, April 30, etc.
+     * Determines the date of the first payment and the day of week/month/year for subsequent payments. If a month doesn\'t have the anchor day, the subscription will be billed on the last day of the month. For example, a monthly subscription starting on January 31 bills on Feb 28/29, then March 31, April 30, etc. The subscription will be billed close to (typically within 30 minutes) the time portion of this date-time field. Note: if no time portion was specified during the creation of the subscription (i.e. \'2022-04-01\') then the time is defaulted to midnight UTC (00:00:00) and the subscription will be billed around 7PM Eastern on the *previous* day.
      * @type {string}
      * @memberof Subscription
      */
