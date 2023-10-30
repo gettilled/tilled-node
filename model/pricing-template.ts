@@ -21,6 +21,9 @@ import { PricingTemplateAchDebit } from './pricing-template-ach-debit';
 import { PricingTemplateCard } from './pricing-template-card';
 // May contain unused imports in some cases
 // @ts-ignore
+import { PricingTemplateCardPresent } from './pricing-template-card-present';
+// May contain unused imports in some cases
+// @ts-ignore
 import { PricingTemplateEftDebit } from './pricing-template-eft-debit';
 
 /**
@@ -103,6 +106,12 @@ export interface PricingTemplate {
     'card'?: PricingTemplateCard;
     /**
      * 
+     * @type {PricingTemplateCardPresent}
+     * @memberof PricingTemplate
+     */
+    'card_present'?: PricingTemplateCardPresent;
+    /**
+     * 
      * @type {PricingTemplateEftDebit}
      * @memberof PricingTemplate
      */
@@ -129,6 +138,7 @@ export type PricingTemplateCurrency = typeof PricingTemplateCurrency[keyof typeo
 export const PricingTemplatePaymentMethodType = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
+    CARD_PRESENT: 'card_present',
     EFT_DEBIT: 'eft_debit'
 } as const;
 

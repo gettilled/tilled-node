@@ -36,5 +36,6 @@ export * from './api/product-codes-api';
 export * from './api/refunds-api';
 export * from './api/report-runs-api';
 export * from './api/subscriptions-api';
+export * from './api/terminal-readers-api';
 export * from './api/users-api';
 export * from './api/webhook-endpoints-api';

@@ -93,6 +93,12 @@ export interface BusinessProfile {
      */
     'updated_at': string;
     /**
+     * 
+     * @type {string}
+     * @memberof BusinessProfile
+     */
+    'id'?: string;
+    /**
      * The website of the business.
      * @type {string}
      * @memberof BusinessProfile

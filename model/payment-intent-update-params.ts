@@ -118,7 +118,8 @@ export type PaymentIntentUpdateParamsOccurrenceType = typeof PaymentIntentUpdate
 export const PaymentIntentUpdateParamsPaymentMethodTypes = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
 } as const;
 
 export type PaymentIntentUpdateParamsPaymentMethodTypes = typeof PaymentIntentUpdateParamsPaymentMethodTypes[keyof typeof PaymentIntentUpdateParamsPaymentMethodTypes];

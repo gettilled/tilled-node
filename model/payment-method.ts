@@ -25,6 +25,9 @@ import { PaymentMethodCard } from './payment-method-card';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaymentMethodEftDebit } from './payment-method-eft-debit';
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentMethodTerminalReader } from './payment-method-terminal-reader';
 
 /**
  * 
@@ -110,12 +113,19 @@ export interface PaymentMethod {
      * @memberof PaymentMethod
      */
     'nick_name'?: string;
+    /**
+     * 
+     * @type {PaymentMethodTerminalReader}
+     * @memberof PaymentMethod
+     */
+    'terminal_reader'?: PaymentMethodTerminalReader;
 }
 
 export const PaymentMethodType = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
 } as const;
 
 export type PaymentMethodType = typeof PaymentMethodType[keyof typeof PaymentMethodType];

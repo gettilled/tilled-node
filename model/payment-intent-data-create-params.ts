@@ -43,7 +43,8 @@ export interface PaymentIntentDataCreateParams {
 export const PaymentIntentDataCreateParamsPaymentMethodTypes = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
 } as const;
 
 export type PaymentIntentDataCreateParamsPaymentMethodTypes = typeof PaymentIntentDataCreateParamsPaymentMethodTypes[keyof typeof PaymentIntentDataCreateParamsPaymentMethodTypes];

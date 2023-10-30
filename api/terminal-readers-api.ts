@@ -22,29 +22,29 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ListPricingTemplates200Response } from '../model';
+import { ListTerminalReaders200Response } from '../model';
 // @ts-ignore
-import { PricingTemplate } from '../model';
+import { TerminalReader } from '../model';
 /**
- * PricingTemplatesApi - axios parameter creator
+ * TerminalReadersApi - axios parameter creator
  * @export
  */
-export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const TerminalReadersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Retrieves the details of the pricing template with the given ID.
-         * @summary Get a Pricing Template
+         * Retrieves the terminal reader with the given ID.
+         * @summary Get a Terminal Reader
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPricingTemplate: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTerminal: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('getPricingTemplate', 'tilled_account', tilled_account)
+            assertParamExists('getTerminal', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getPricingTemplate', 'id', id)
-            const localVarPath = `/v1/pricing-templates/{id}`
+            assertParamExists('getTerminal', 'id', id)
+            const localVarPath = `/v1/terminal-readers/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -80,19 +80,18 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
-         * @summary List all Pricing Templates
+         * Returns a list of a merchant\'s terminal readers.
+         * @summary List all Terminal Readers
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'card_present' | 'eft_debit'} [type] String indicating the type to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingTemplates: async (tilled_account: string, type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listTerminalReaders: async (tilled_account: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('listPricingTemplates', 'tilled_account', tilled_account)
-            const localVarPath = `/v1/pricing-templates`;
+            assertParamExists('listTerminalReaders', 'tilled_account', tilled_account)
+            const localVarPath = `/v1/terminal-readers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -110,10 +109,6 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
 
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
-
-            if (type !== undefined) {
-                localVarQueryParameter['type'] = type;
-            }
 
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
@@ -142,155 +137,147 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * PricingTemplatesApi - functional programming interface
+ * TerminalReadersApi - functional programming interface
  * @export
  */
-export const PricingTemplatesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PricingTemplatesApiAxiosParamCreator(configuration)
+export const TerminalReadersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TerminalReadersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Retrieves the details of the pricing template with the given ID.
-         * @summary Get a Pricing Template
+         * Retrieves the terminal reader with the given ID.
+         * @summary Get a Terminal Reader
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPricingTemplate(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricingTemplate>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPricingTemplate(tilled_account, id, options);
+        async getTerminal(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTerminal(tilled_account, id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
-         * @summary List all Pricing Templates
+         * Returns a list of a merchant\'s terminal readers.
+         * @summary List all Terminal Readers
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'card_present' | 'eft_debit'} [type] String indicating the type to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPricingTemplates(tilled_account: string, type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPricingTemplates200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingTemplates(tilled_account, type, offset, limit, options);
+        async listTerminalReaders(tilled_account: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * PricingTemplatesApi - factory interface
+ * TerminalReadersApi - factory interface
  * @export
  */
-export const PricingTemplatesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PricingTemplatesApiFp(configuration)
+export const TerminalReadersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TerminalReadersApiFp(configuration)
     return {
         /**
-         * Retrieves the details of the pricing template with the given ID.
-         * @summary Get a Pricing Template
-         * @param {PricingTemplatesApiGetPricingTemplateRequest} requestParameters Request parameters.
+         * Retrieves the terminal reader with the given ID.
+         * @summary Get a Terminal Reader
+         * @param {TerminalReadersApiGetTerminalRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: AxiosRequestConfig): AxiosPromise<PricingTemplate> {
-            return localVarFp.getPricingTemplate(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReader> {
+            return localVarFp.getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
-         * @summary List all Pricing Templates
-         * @param {PricingTemplatesApiListPricingTemplatesRequest} requestParameters Request parameters.
+         * Returns a list of a merchant\'s terminal readers.
+         * @summary List all Terminal Readers
+         * @param {TerminalReadersApiListTerminalReadersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig): AxiosPromise<ListPricingTemplates200Response> {
-            return localVarFp.listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+        listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
+            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for getPricingTemplate operation in PricingTemplatesApi.
+ * Request parameters for getTerminal operation in TerminalReadersApi.
  * @export
- * @interface PricingTemplatesApiGetPricingTemplateRequest
+ * @interface TerminalReadersApiGetTerminalRequest
  */
-export interface PricingTemplatesApiGetPricingTemplateRequest {
+export interface TerminalReadersApiGetTerminalRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof PricingTemplatesApiGetPricingTemplate
+     * @memberof TerminalReadersApiGetTerminal
      */
     readonly tilled_account: string
 
     /**
      * 
      * @type {string}
-     * @memberof PricingTemplatesApiGetPricingTemplate
+     * @memberof TerminalReadersApiGetTerminal
      */
     readonly id: string
 }
 
 /**
- * Request parameters for listPricingTemplates operation in PricingTemplatesApi.
+ * Request parameters for listTerminalReaders operation in TerminalReadersApi.
  * @export
- * @interface PricingTemplatesApiListPricingTemplatesRequest
+ * @interface TerminalReadersApiListTerminalReadersRequest
  */
-export interface PricingTemplatesApiListPricingTemplatesRequest {
+export interface TerminalReadersApiListTerminalReadersRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof PricingTemplatesApiListPricingTemplates
+     * @memberof TerminalReadersApiListTerminalReaders
      */
     readonly tilled_account: string
 
     /**
-     * String indicating the type to filter the result by.
-     * @type {'card' | 'ach_debit' | 'card_present' | 'eft_debit'}
-     * @memberof PricingTemplatesApiListPricingTemplates
-     */
-    readonly type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit'
-
-    /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
-     * @memberof PricingTemplatesApiListPricingTemplates
+     * @memberof TerminalReadersApiListTerminalReaders
      */
     readonly offset?: number
 
     /**
      * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
      * @type {number}
-     * @memberof PricingTemplatesApiListPricingTemplates
+     * @memberof TerminalReadersApiListTerminalReaders
      */
     readonly limit?: number
 }
 
 /**
- * PricingTemplatesApi - object-oriented interface
+ * TerminalReadersApi - object-oriented interface
  * @export
- * @class PricingTemplatesApi
+ * @class TerminalReadersApi
  * @extends {BaseAPI}
  */
-export class PricingTemplatesApi extends BaseAPI {
+export class TerminalReadersApi extends BaseAPI {
     /**
-     * Retrieves the details of the pricing template with the given ID.
-     * @summary Get a Pricing Template
-     * @param {PricingTemplatesApiGetPricingTemplateRequest} requestParameters Request parameters.
+     * Retrieves the terminal reader with the given ID.
+     * @summary Get a Terminal Reader
+     * @param {TerminalReadersApiGetTerminalRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PricingTemplatesApi
+     * @memberof TerminalReadersApi
      */
-    public getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: AxiosRequestConfig) {
-        return PricingTemplatesApiFp(this.configuration).getPricingTemplate(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig) {
+        return TerminalReadersApiFp(this.configuration).getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns a list of pricing templates. These are the pricing templates that are available to be assigned to `merchant` accounts during onboarding.
-     * @summary List all Pricing Templates
-     * @param {PricingTemplatesApiListPricingTemplatesRequest} requestParameters Request parameters.
+     * Returns a list of a merchant\'s terminal readers.
+     * @summary List all Terminal Readers
+     * @param {TerminalReadersApiListTerminalReadersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PricingTemplatesApi
+     * @memberof TerminalReadersApi
      */
-    public listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig) {
-        return PricingTemplatesApiFp(this.configuration).listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+    public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig) {
+        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }

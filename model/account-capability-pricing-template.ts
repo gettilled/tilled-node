@@ -24,6 +24,9 @@ import { PricingTemplateAchDebit } from './pricing-template-ach-debit';
 import { PricingTemplateCard } from './pricing-template-card';
 // May contain unused imports in some cases
 // @ts-ignore
+import { PricingTemplateCardPresent } from './pricing-template-card-present';
+// May contain unused imports in some cases
+// @ts-ignore
 import { PricingTemplateEftDebit } from './pricing-template-eft-debit';
 
 /**

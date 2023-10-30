@@ -15,101 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Address } from './address';
+import { TerminalReader } from './terminal-reader';
 
 /**
  * 
  * @export
- * @interface BusinessRepresentative
+ * @interface ListTerminalReaders200ResponseAllOf
  */
-export interface BusinessRepresentative {
+export interface ListTerminalReaders200ResponseAllOf {
     /**
-     * Registered *residential* address for this principal
-     * @type {Array<Address>}
-     * @memberof BusinessRepresentative
+     * 
+     * @type {Array<TerminalReader>}
+     * @memberof ListTerminalReaders200ResponseAllOf
      */
-    'addresses': Array<Address>;
-    /**
-     * Time at which the object was created.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'created_at': string;
-    /**
-     * Unique identifier for the object.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'id': string;
-    /**
-     * If this associate is the one completing the application.
-     * @type {boolean}
-     * @memberof BusinessRepresentative
-     */
-    'is_applicant': boolean;
-    /**
-     * If this associate has a controlling interest.
-     * @type {boolean}
-     * @memberof BusinessRepresentative
-     */
-    'is_control_prong': boolean;
-    /**
-     * The representative\'s title at the company.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'job_title': string;
-    /**
-     * The phone number for the representative.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'phone': string;
-    /**
-     * Type of representative. Ex. shareholder, director, merchant rep, contact
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'type': BusinessRepresentativeType;
-    /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'updated_at': string;
-    /**
-     * The email address of the representative.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'email'?: string;
-    /**
-     * The representative\'s first name.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'first_name'?: string;
-    /**
-     * The representative\'s last name.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'last_name'?: string;
-    /**
-     * The representative\'s middle name.
-     * @type {string}
-     * @memberof BusinessRepresentative
-     */
-    'middle_name'?: string;
+    'items': Array<TerminalReader>;
 }
-
-export const BusinessRepresentativeType = {
-    DIRECTOR: 'director',
-    SHAREHOLDER: 'shareholder',
-    MERCHANT_REP: 'merchant_rep',
-    CONTACT: 'contact'
-} as const;
-
-export type BusinessRepresentativeType = typeof BusinessRepresentativeType[keyof typeof BusinessRepresentativeType];
-
 

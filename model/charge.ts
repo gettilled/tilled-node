@@ -169,6 +169,7 @@ export const ChargeFailureCode = {
     RISK_BLOCKED: 'risk_blocked',
     SERVICE_NOT_ALLOWED: 'service_not_allowed',
     STOP_PAYMENT: 'stop_payment',
+    TRY_AGAIN_LATER: 'try_again_later',
     INTERNAL_ERROR: 'internal_error'
 } as const;
 

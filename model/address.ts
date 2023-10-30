@@ -27,7 +27,7 @@ export interface Address {
      */
     'created_at': string;
     /**
-     * Unique identifier for the object.
+     * 
      * @type {string}
      * @memberof Address
      */
@@ -45,19 +45,19 @@ export interface Address {
      */
     'city'?: string;
     /**
-     * Country.
+     * 2-digit Country code (e.g. \'US\', \'CA\') [See ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
      * @type {string}
      * @memberof Address
      */
     'country'?: string;
     /**
-     * ZIP or postal code.
+     * Zip code or postal code of the address. No special characters.
      * @type {string}
      * @memberof Address
      */
     'postal_code'?: string;
     /**
-     * State or province.
+     * State/province/region of the address. For US and CA use 2-digit state/province codes (e.g. \'AL\', \'AK\', \'BC\', \'ON\', \'etc\'.)
      * @type {string}
      * @memberof Address
      */

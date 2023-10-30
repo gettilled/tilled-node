@@ -33,7 +33,7 @@ import { PaymentMethodCreateParamsEftDebit } from './payment-method-create-param
  */
 export interface PaymentMethodCreateParams {
     /**
-     * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
+     * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type. If the selected type is `card_present`, then `terminal_reader_id` is required.
      * @type {string}
      * @memberof PaymentMethodCreateParams
      */
@@ -80,12 +80,19 @@ export interface PaymentMethodCreateParams {
      * @memberof PaymentMethodCreateParams
      */
     'payment_token'?: string;
+    /**
+     * If this is a `card_present` PaymentMethod, this is the id of terminal reader you want to use to collect card information. Starts with a prefix `term_`
+     * @type {string}
+     * @memberof PaymentMethodCreateParams
+     */
+    'terminal_reader_id'?: string;
 }
 
 export const PaymentMethodCreateParamsType = {
     CARD: 'card',
     ACH_DEBIT: 'ach_debit',
-    EFT_DEBIT: 'eft_debit'
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
 } as const;
 
 export type PaymentMethodCreateParamsType = typeof PaymentMethodCreateParamsType[keyof typeof PaymentMethodCreateParamsType];
