@@ -12,8 +12,6 @@ docs/interfaces/*.html
 docs/types/*.html
 docs/variables/*.html
 
-
 .DS_Store
 .cache
 .env
-openapitools.json
