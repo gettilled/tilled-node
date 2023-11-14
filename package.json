@@ -1,6 +1,6 @@
 {
   "name": "tilled-node",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "NodeJS SDK client for Tilled's API",
   "files": [
     "dist"
@@ -23,7 +23,7 @@
   "author": "Tilled",
   "license": "Unlicense",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.6.0",
