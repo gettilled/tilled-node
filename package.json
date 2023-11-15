@@ -1,6 +1,6 @@
 {
   "name": "tilled-node",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "NodeJS SDK client for Tilled's API",
   "files": [
     "dist"
@@ -31,5 +31,11 @@
     "prettier": "2.8.8",
     "typedoc": "^0.24.6",
     "typescript": "^4.0"
+  },
+  "overrides": {
+    "@openapitools/openapi-generator-cli": {
+      "@nestjs/axios": "3.0.1",
+      "@nestjs/common": "10.2.8"
+    }
   }
 }
