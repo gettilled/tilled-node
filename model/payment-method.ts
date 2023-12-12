@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { CardDetails } from './card-details';
+// May contain unused imports in some cases
+// @ts-ignore
 import { PaymentMethodAchDebit } from './payment-method-ach-debit';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -83,6 +86,12 @@ export interface PaymentMethod {
      * @memberof PaymentMethod
      */
     'card'?: PaymentMethodCard;
+    /**
+     * 
+     * @type {CardDetails}
+     * @memberof PaymentMethod
+     */
+    'card_present'?: CardDetails;
     /**
      * The ID of the Customer to which this PaymentMethod is saved.
      * @type {string}

@@ -13,33 +13,78 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface AccountDocument
  */
-export type RegisterDtoAccount = Account;
+export interface AccountDocument {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'status': AccountDocumentStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'subtype': AccountDocumentSubtype;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'type': AccountDocumentType;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'requestNotes'?: string;
+}
+
+export const AccountDocumentStatus = {
+    REQUESTED: 'requested',
+    SUBMITTED: 'submitted',
+    REJECTED: 'rejected',
+    VERIFIED: 'verified'
+} as const;
+
+export type AccountDocumentStatus = typeof AccountDocumentStatus[keyof typeof AccountDocumentStatus];
+export const AccountDocumentSubtype = {
+    BANK_LETTER_VOIDED_CHECK: 'bank_letter_voided_check',
+    EIN_LETTER: 'ein_letter',
+    ARTICLES_OF_INCORP: 'articles_of_incorp',
+    BUSINESS_LICENSE: 'business_license',
+    UTILITY_BILL: 'utility_bill',
+    PROCESSING_STATEMENT: 'processing_statement',
+    FINANCIAL_STATEMENT: 'financial_statement',
+    _501C3: '501c3',
+    TAX_RETURN: 'tax_return',
+    DL_PASSPORT: 'dl_passport',
+    DL_BACK: 'dl_back',
+    BUSINESS_MODEL: 'business_model',
+    PRICING_MODEL: 'pricing_model',
+    WEBSITE: 'website',
+    SHOPPING_CART: 'shopping_cart',
+    OTHER: 'other'
+} as const;
+
+export type AccountDocumentSubtype = typeof AccountDocumentSubtype[keyof typeof AccountDocumentSubtype];
+export const AccountDocumentType = {
+    FILE: 'file',
+    WRITTEN: 'written'
+} as const;
+
+export type AccountDocumentType = typeof AccountDocumentType[keyof typeof AccountDocumentType];
 
 

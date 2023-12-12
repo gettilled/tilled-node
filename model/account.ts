@@ -21,6 +21,9 @@ import { AccountBusinessProfile } from './account-business-profile';
 import { AccountCapability } from './account-capability';
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountDocument } from './account-document';
+// May contain unused imports in some cases
+// @ts-ignore
 import { AccountSettings } from './account-settings';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -47,6 +50,12 @@ export interface Account {
      * @memberof Account
      */
     'created_at': string;
+    /**
+     * Documents that have been requested for an account, which are either in the `requested` or `submitted` status
+     * @type {Array<AccountDocument>}
+     * @memberof Account
+     */
+    'document_requests': Array<AccountDocument>;
     /**
      * Unique identifier for the object.
      * @type {string}

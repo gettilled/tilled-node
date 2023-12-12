@@ -8,6 +8,7 @@ api/charges-api.ts
 api/checkout-sessions-api.ts
 api/customers-api.ts
 api/disputes-api.ts
+api/documents-api.ts
 api/events-api.ts
 api/files-api.ts
 api/health-api.ts
@@ -40,6 +41,7 @@ model/account-capability.ts
 model/account-create-params-bank-account.ts
 model/account-create-params-settings.ts
 model/account-create-params.ts
+model/account-document.ts
 model/account-requirements-error.ts
 model/account-role.ts
 model/account-settings-branding-create-params.ts
@@ -104,6 +106,8 @@ model/dispute-file-file.ts
 model/dispute-file.ts
 model/dispute-status-history.ts
 model/dispute.ts
+model/document-dto.ts
+model/document-submit-request-params.ts
 model/eft-debit-details.ts
 model/event.ts
 model/forgot-password-params.ts
@@ -125,6 +129,8 @@ model/list-customers200-response-all-of.ts
 model/list-customers200-response.ts
 model/list-disputes200-response-all-of.ts
 model/list-disputes200-response.ts
+model/list-documents200-response-all-of.ts
+model/list-documents200-response.ts
 model/list-events200-response-all-of.ts
 model/list-events200-response.ts
 model/list-files200-response-all-of.ts
@@ -235,6 +241,8 @@ model/subscription-pause-params.ts
 model/subscription-retry-params.ts
 model/subscription-update-params.ts
 model/subscription.ts
+model/terminal-reader-connection-status.ts
+model/terminal-reader-update-params.ts
 model/terminal-reader.ts
 model/terms-and-conditions-detail.ts
 model/user-create-params.ts

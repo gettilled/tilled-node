@@ -13,33 +13,32 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface TerminalReaderConnectionStatus
  */
-export type RegisterDtoAccount = Account;
+export interface TerminalReaderConnectionStatus {
+    /**
+     * The connection status of the terminal reader.
+     * @type {string}
+     * @memberof TerminalReaderConnectionStatus
+     */
+    'connection_status': TerminalReaderConnectionStatusConnectionStatus;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof TerminalReaderConnectionStatus
+     */
+    'id': string;
+}
+
+export const TerminalReaderConnectionStatusConnectionStatus = {
+    ONLINE: 'online',
+    OFFLINE: 'offline'
+} as const;
+
+export type TerminalReaderConnectionStatusConnectionStatus = typeof TerminalReaderConnectionStatusConnectionStatus[keyof typeof TerminalReaderConnectionStatusConnectionStatus];
 
 
