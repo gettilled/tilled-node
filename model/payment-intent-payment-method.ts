@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { CardDetails } from './card-details';
+// May contain unused imports in some cases
+// @ts-ignore
 import { PaymentMethod } from './payment-method';
 // May contain unused imports in some cases
 // @ts-ignore

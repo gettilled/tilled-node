@@ -15,31 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
+import { DocumentDto } from './document-dto';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface ListDocuments200ResponseAllOf
  */
-export type RegisterDtoAccount = Account;
-
+export interface ListDocuments200ResponseAllOf {
+    /**
+     * 
+     * @type {Array<DocumentDto>}
+     * @memberof ListDocuments200ResponseAllOf
+     */
+    'items': Array<DocumentDto>;
+}
 

@@ -13,33 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface TerminalReaderUpdateParams
  */
-export type RegisterDtoAccount = Account;
-
+export interface TerminalReaderUpdateParams {
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalReaderUpdateParams
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalReaderUpdateParams
+     */
+    'serial_number'?: string;
+}
 

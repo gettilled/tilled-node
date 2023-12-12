@@ -13,33 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface DocumentSubmitRequestParams
  */
-export type RegisterDtoAccount = Account;
-
+export interface DocumentSubmitRequestParams {
+    /**
+     * The file ID of an uploaded [File](#tag/Files) for the document. File type must be `onboarding_documentation`. Required when document type is `file`
+     * @type {string}
+     * @memberof DocumentSubmitRequestParams
+     */
+    'file_id'?: string;
+    /**
+     * Written response to a document that has been requested, alternative to a [File](#tag/Files). Required when document type is `written`
+     * @type {string}
+     * @memberof DocumentSubmitRequestParams
+     */
+    'written_response'?: string;
+}
 

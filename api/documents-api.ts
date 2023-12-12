@@ -22,33 +22,31 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ListTerminalReaders200Response } from '../model';
+import { DocumentDto } from '../model';
 // @ts-ignore
-import { TerminalReader } from '../model';
+import { DocumentSubmitRequestParams } from '../model';
 // @ts-ignore
-import { TerminalReaderConnectionStatus } from '../model';
-// @ts-ignore
-import { TerminalReaderUpdateParams } from '../model';
+import { ListDocuments200Response } from '../model';
 /**
- * TerminalReadersApi - axios parameter creator
+ * DocumentsApi - axios parameter creator
  * @export
  */
-export const TerminalReadersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const DocumentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Retrieves the terminal reader with the given ID.
-         * @summary Get a Terminal Reader
+         * Retrieves the details of an existing document with the given ID.
+         * @summary Get a Document
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
+         * @param {string} id The id of the document to be retrieved.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminal: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDocument: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('getTerminal', 'tilled_account', tilled_account)
+            assertParamExists('getDocument', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getTerminal', 'id', id)
-            const localVarPath = `/v1/terminal-readers/{id}`
+            assertParamExists('getDocument', 'id', id)
+            const localVarPath = `/v1/documents/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -84,69 +82,19 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * Retrieves the network connection status of a terminal reader.
-         * @summary Get a Terminal Reader status
+         * Returns a list of existing documents. The documents are returned sorted by creation date, with the most recent documents appearing first.
+         * @summary List all Documents
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTerminalStatus: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('getTerminalStatus', 'tilled_account', tilled_account)
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getTerminalStatus', 'id', id)
-            const localVarPath = `/v1/terminal-readers/{id}/status`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication JWT required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication TilledApiKey required
-            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
-
-            if (tilled_account != null) {
-                localVarHeaderParameter['tilled-account'] = String(tilled_account);
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of an account\'s terminal readers.
-         * @summary List all Terminal Readers
-         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
-         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
+         * @param {'requested' | 'submitted' | 'rejected' | 'verified'} [status] 
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders: async (tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listDocuments: async (tilled_account: string, status?: 'requested' | 'submitted' | 'rejected' | 'verified', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('listTerminalReaders', 'tilled_account', tilled_account)
-            const localVarPath = `/v1/terminal-readers`;
+            assertParamExists('listDocuments', 'tilled_account', tilled_account)
+            const localVarPath = `/v1/documents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -165,20 +113,8 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
-            if (include_connected_accounts !== undefined) {
-                localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
-            }
-
-            if (created_at_gte !== undefined) {
-                localVarQueryParameter['created_at_gte'] = (created_at_gte as any instanceof Date) ?
-                    (created_at_gte as any).toISOString() :
-                    created_at_gte;
-            }
-
-            if (created_at_lte !== undefined) {
-                localVarQueryParameter['created_at_lte'] = (created_at_lte as any instanceof Date) ?
-                    (created_at_lte as any).toISOString() :
-                    created_at_lte;
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
             if (offset !== undefined) {
@@ -205,22 +141,22 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * Updates the terminal reader. Any parameters not provided will be left unchanged.
-         * @summary Update a Terminal Reader
+         * To submit a document, update the corresponding document with either a file ID or a written response. A document of type `file` requires a file ID, and that [File](#tag/Files)\'s type must be of `onboarding_documentation`. A document of type `written` requires a written response. Note that only document\'s with status `requested` can be submitted.
+         * @summary Submit a Document
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
-         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams 
+         * @param {string} id The id of the document to be updated.
+         * @param {DocumentSubmitRequestParams} DocumentSubmitRequestParams 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTerminal: async (tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        submitDocument: async (tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
-            assertParamExists('updateTerminal', 'tilled_account', tilled_account)
+            assertParamExists('submitDocument', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateTerminal', 'id', id)
-            // verify required parameter 'TerminalReaderUpdateParams' is not null or undefined
-            assertParamExists('updateTerminal', 'TerminalReaderUpdateParams', TerminalReaderUpdateParams)
-            const localVarPath = `/v1/terminal-readers/{id}`
+            assertParamExists('submitDocument', 'id', id)
+            // verify required parameter 'DocumentSubmitRequestParams' is not null or undefined
+            assertParamExists('submitDocument', 'DocumentSubmitRequestParams', DocumentSubmitRequestParams)
+            const localVarPath = `/v1/documents/{id}/submit`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -251,7 +187,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(TerminalReaderUpdateParams, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(DocumentSubmitRequestParams, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -262,289 +198,218 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
 };
 
 /**
- * TerminalReadersApi - functional programming interface
+ * DocumentsApi - functional programming interface
  * @export
  */
-export const TerminalReadersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TerminalReadersApiAxiosParamCreator(configuration)
+export const DocumentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DocumentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Retrieves the terminal reader with the given ID.
-         * @summary Get a Terminal Reader
+         * Retrieves the details of an existing document with the given ID.
+         * @summary Get a Document
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
+         * @param {string} id The id of the document to be retrieved.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTerminal(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTerminal(tilled_account, id, options);
+        async getDocument(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDocument(tilled_account, id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Retrieves the network connection status of a terminal reader.
-         * @summary Get a Terminal Reader status
+         * Returns a list of existing documents. The documents are returned sorted by creation date, with the most recent documents appearing first.
+         * @summary List all Documents
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTerminalStatus(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReaderConnectionStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTerminalStatus(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Returns a list of an account\'s terminal readers.
-         * @summary List all Terminal Readers
-         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
-         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
+         * @param {'requested' | 'submitted' | 'rejected' | 'verified'} [status] 
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTerminalReaders(tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, include_connected_accounts, created_at_gte, created_at_lte, offset, limit, options);
+        async listDocuments(tilled_account: string, status?: 'requested' | 'submitted' | 'rejected' | 'verified', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDocuments200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDocuments(tilled_account, status, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Updates the terminal reader. Any parameters not provided will be left unchanged.
-         * @summary Update a Terminal Reader
+         * To submit a document, update the corresponding document with either a file ID or a written response. A document of type `file` requires a file ID, and that [File](#tag/Files)\'s type must be of `onboarding_documentation`. A document of type `written` requires a written response. Note that only document\'s with status `requested` can be submitted.
+         * @summary Submit a Document
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} id 
-         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams 
+         * @param {string} id The id of the document to be updated.
+         * @param {DocumentSubmitRequestParams} DocumentSubmitRequestParams 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTerminal(tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTerminal(tilled_account, id, TerminalReaderUpdateParams, options);
+        async submitDocument(tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.submitDocument(tilled_account, id, DocumentSubmitRequestParams, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * TerminalReadersApi - factory interface
+ * DocumentsApi - factory interface
  * @export
  */
-export const TerminalReadersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TerminalReadersApiFp(configuration)
+export const DocumentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DocumentsApiFp(configuration)
     return {
         /**
-         * Retrieves the terminal reader with the given ID.
-         * @summary Get a Terminal Reader
-         * @param {TerminalReadersApiGetTerminalRequest} requestParameters Request parameters.
+         * Retrieves the details of an existing document with the given ID.
+         * @summary Get a Document
+         * @param {DocumentsApiGetDocumentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReader> {
-            return localVarFp.getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentDto> {
+            return localVarFp.getDocument(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves the network connection status of a terminal reader.
-         * @summary Get a Terminal Reader status
-         * @param {TerminalReadersApiGetTerminalStatusRequest} requestParameters Request parameters.
+         * Returns a list of existing documents. The documents are returned sorted by creation date, with the most recent documents appearing first.
+         * @summary List all Documents
+         * @param {DocumentsApiListDocumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReaderConnectionStatus> {
-            return localVarFp.getTerminalStatus(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: AxiosRequestConfig): AxiosPromise<ListDocuments200Response> {
+            return localVarFp.listDocuments(requestParameters.tilled_account, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of an account\'s terminal readers.
-         * @summary List all Terminal Readers
-         * @param {TerminalReadersApiListTerminalReadersRequest} requestParameters Request parameters.
+         * To submit a document, update the corresponding document with either a file ID or a written response. A document of type `file` requires a file ID, and that [File](#tag/Files)\'s type must be of `onboarding_documentation`. A document of type `written` requires a written response. Note that only document\'s with status `requested` can be submitted.
+         * @summary Submit a Document
+         * @param {DocumentsApiSubmitDocumentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
-            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Updates the terminal reader. Any parameters not provided will be left unchanged.
-         * @summary Update a Terminal Reader
-         * @param {TerminalReadersApiUpdateTerminalRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReader> {
-            return localVarFp.updateTerminal(requestParameters.tilled_account, requestParameters.id, requestParameters.TerminalReaderUpdateParams, options).then((request) => request(axios, basePath));
+        submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentDto> {
+            return localVarFp.submitDocument(requestParameters.tilled_account, requestParameters.id, requestParameters.DocumentSubmitRequestParams, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for getTerminal operation in TerminalReadersApi.
+ * Request parameters for getDocument operation in DocumentsApi.
  * @export
- * @interface TerminalReadersApiGetTerminalRequest
+ * @interface DocumentsApiGetDocumentRequest
  */
-export interface TerminalReadersApiGetTerminalRequest {
+export interface DocumentsApiGetDocumentRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof TerminalReadersApiGetTerminal
+     * @memberof DocumentsApiGetDocument
      */
     readonly tilled_account: string
 
     /**
-     * 
+     * The id of the document to be retrieved.
      * @type {string}
-     * @memberof TerminalReadersApiGetTerminal
+     * @memberof DocumentsApiGetDocument
      */
     readonly id: string
 }
 
 /**
- * Request parameters for getTerminalStatus operation in TerminalReadersApi.
+ * Request parameters for listDocuments operation in DocumentsApi.
  * @export
- * @interface TerminalReadersApiGetTerminalStatusRequest
+ * @interface DocumentsApiListDocumentsRequest
  */
-export interface TerminalReadersApiGetTerminalStatusRequest {
+export interface DocumentsApiListDocumentsRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof TerminalReadersApiGetTerminalStatus
+     * @memberof DocumentsApiListDocuments
      */
     readonly tilled_account: string
 
     /**
      * 
-     * @type {string}
-     * @memberof TerminalReadersApiGetTerminalStatus
+     * @type {'requested' | 'submitted' | 'rejected' | 'verified'}
+     * @memberof DocumentsApiListDocuments
      */
-    readonly id: string
-}
-
-/**
- * Request parameters for listTerminalReaders operation in TerminalReadersApi.
- * @export
- * @interface TerminalReadersApiListTerminalReadersRequest
- */
-export interface TerminalReadersApiListTerminalReadersRequest {
-    /**
-     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-     * @type {string}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly tilled_account: string
-
-    /**
-     * Whether or not to include the results from any connected accounts.
-     * @type {boolean}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly include_connected_accounts?: boolean
-
-    /**
-     * Minimum &#x60;created_at&#x60; value to filter by (inclusive).
-     * @type {string}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly created_at_gte?: string
-
-    /**
-     * Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-     * @type {string}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly created_at_lte?: string
+    readonly status?: 'requested' | 'submitted' | 'rejected' | 'verified'
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
-     * @memberof TerminalReadersApiListTerminalReaders
+     * @memberof DocumentsApiListDocuments
      */
     readonly offset?: number
 
     /**
      * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
      * @type {number}
-     * @memberof TerminalReadersApiListTerminalReaders
+     * @memberof DocumentsApiListDocuments
      */
     readonly limit?: number
 }
 
 /**
- * Request parameters for updateTerminal operation in TerminalReadersApi.
+ * Request parameters for submitDocument operation in DocumentsApi.
  * @export
- * @interface TerminalReadersApiUpdateTerminalRequest
+ * @interface DocumentsApiSubmitDocumentRequest
  */
-export interface TerminalReadersApiUpdateTerminalRequest {
+export interface DocumentsApiSubmitDocumentRequest {
     /**
      * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
      * @type {string}
-     * @memberof TerminalReadersApiUpdateTerminal
+     * @memberof DocumentsApiSubmitDocument
      */
     readonly tilled_account: string
 
     /**
-     * 
+     * The id of the document to be updated.
      * @type {string}
-     * @memberof TerminalReadersApiUpdateTerminal
+     * @memberof DocumentsApiSubmitDocument
      */
     readonly id: string
 
     /**
      * 
-     * @type {TerminalReaderUpdateParams}
-     * @memberof TerminalReadersApiUpdateTerminal
+     * @type {DocumentSubmitRequestParams}
+     * @memberof DocumentsApiSubmitDocument
      */
-    readonly TerminalReaderUpdateParams: TerminalReaderUpdateParams
+    readonly DocumentSubmitRequestParams: DocumentSubmitRequestParams
 }
 
 /**
- * TerminalReadersApi - object-oriented interface
+ * DocumentsApi - object-oriented interface
  * @export
- * @class TerminalReadersApi
+ * @class DocumentsApi
  * @extends {BaseAPI}
  */
-export class TerminalReadersApi extends BaseAPI {
+export class DocumentsApi extends BaseAPI {
     /**
-     * Retrieves the terminal reader with the given ID.
-     * @summary Get a Terminal Reader
-     * @param {TerminalReadersApiGetTerminalRequest} requestParameters Request parameters.
+     * Retrieves the details of an existing document with the given ID.
+     * @summary Get a Document
+     * @param {DocumentsApiGetDocumentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TerminalReadersApi
+     * @memberof DocumentsApi
      */
-    public getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).getDocument(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Retrieves the network connection status of a terminal reader.
-     * @summary Get a Terminal Reader status
-     * @param {TerminalReadersApiGetTerminalStatusRequest} requestParameters Request parameters.
+     * Returns a list of existing documents. The documents are returned sorted by creation date, with the most recent documents appearing first.
+     * @summary List all Documents
+     * @param {DocumentsApiListDocumentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TerminalReadersApi
+     * @memberof DocumentsApi
      */
-    public getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).getTerminalStatus(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).listDocuments(requestParameters.tilled_account, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns a list of an account\'s terminal readers.
-     * @summary List all Terminal Readers
-     * @param {TerminalReadersApiListTerminalReadersRequest} requestParameters Request parameters.
+     * To submit a document, update the corresponding document with either a file ID or a written response. A document of type `file` requires a file ID, and that [File](#tag/Files)\'s type must be of `onboarding_documentation`. A document of type `written` requires a written response. Note that only document\'s with status `requested` can be submitted.
+     * @summary Submit a Document
+     * @param {DocumentsApiSubmitDocumentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TerminalReadersApi
+     * @memberof DocumentsApi
      */
-    public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Updates the terminal reader. Any parameters not provided will be left unchanged.
-     * @summary Update a Terminal Reader
-     * @param {TerminalReadersApiUpdateTerminalRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TerminalReadersApi
-     */
-    public updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).updateTerminal(requestParameters.tilled_account, requestParameters.id, requestParameters.TerminalReaderUpdateParams, options).then((request) => request(this.axios, this.basePath));
+    public submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).submitDocument(requestParameters.tilled_account, requestParameters.id, requestParameters.DocumentSubmitRequestParams, options).then((request) => request(this.axios, this.basePath));
     }
 }

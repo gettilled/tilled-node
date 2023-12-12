@@ -61,7 +61,7 @@ export interface Refund {
      */
     'payment_intent_id': string;
     /**
-     * Status of the refund, one of `pending`, `succeeded`, `failed`, or `canceled`.
+     * Status of the refund, one of `pending`, `succeeded`, `failed`, `canceled` or `requires_action`.
      * @type {string}
      * @memberof Refund
      */
@@ -108,7 +108,8 @@ export const RefundStatus = {
     CANCELED: 'canceled',
     PENDING: 'pending',
     SUCCEEDED: 'succeeded',
-    FAILED: 'failed'
+    FAILED: 'failed',
+    REQUIRES_ACTION: 'requires_action'
 } as const;
 
 export type RefundStatus = typeof RefundStatus[keyof typeof RefundStatus];

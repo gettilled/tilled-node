@@ -13,33 +13,131 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountCapability } from './account-capability';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountDocument } from './account-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { BankAccount } from './bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { TerminalReader } from './terminal-reader';
 
 /**
- * @type RegisterDtoAccount
- * The created account (may be empty when registering via invitation)
+ * 
  * @export
+ * @interface DocumentDto
  */
-export type RegisterDtoAccount = Account;
+export interface DocumentDto {
+    /**
+     * The ID of the account owning the document.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'account_id': string;
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'created_at': string;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'id': string;
+    /**
+     * The status of the document
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'status': DocumentDtoStatus;
+    /**
+     * The subtype of the document
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'subtype': DocumentDtoSubtype;
+    /**
+     * The type of the document
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'type': DocumentDtoType;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'updated_at': string;
+    /**
+     * The file ID of an uploaded [File](#tag/Files) for the document, of type `onboarding_documentation`
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'file_id'?: string;
+    /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof DocumentDto
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
+     * The reason for rejection of the document, if applicable
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'rejected_reason'?: DocumentDtoRejectedReason;
+    /**
+     * Additional notes for the request of a document, offering extra context
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'request_notes'?: string;
+    /**
+     * Written response to a document that has been requested, alternative to a [File](#tag/Files)
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'written_response'?: string;
+}
+
+export const DocumentDtoStatus = {
+    REQUESTED: 'requested',
+    SUBMITTED: 'submitted',
+    REJECTED: 'rejected',
+    VERIFIED: 'verified'
+} as const;
+
+export type DocumentDtoStatus = typeof DocumentDtoStatus[keyof typeof DocumentDtoStatus];
+export const DocumentDtoSubtype = {
+    BANK_LETTER_VOIDED_CHECK: 'bank_letter_voided_check',
+    EIN_LETTER: 'ein_letter',
+    ARTICLES_OF_INCORP: 'articles_of_incorp',
+    BUSINESS_LICENSE: 'business_license',
+    UTILITY_BILL: 'utility_bill',
+    PROCESSING_STATEMENT: 'processing_statement',
+    FINANCIAL_STATEMENT: 'financial_statement',
+    _501C3: '501c3',
+    TAX_RETURN: 'tax_return',
+    DL_PASSPORT: 'dl_passport',
+    DL_BACK: 'dl_back',
+    BUSINESS_MODEL: 'business_model',
+    PRICING_MODEL: 'pricing_model',
+    WEBSITE: 'website',
+    SHOPPING_CART: 'shopping_cart',
+    OTHER: 'other'
+} as const;
+
+export type DocumentDtoSubtype = typeof DocumentDtoSubtype[keyof typeof DocumentDtoSubtype];
+export const DocumentDtoType = {
+    FILE: 'file',
+    WRITTEN: 'written'
+} as const;
+
+export type DocumentDtoType = typeof DocumentDtoType[keyof typeof DocumentDtoType];
+export const DocumentDtoRejectedReason = {
+    BLURRY: 'blurry',
+    CORRUPT: 'corrupt',
+    INVALID: 'invalid',
+    SCANNED: 'scanned',
+    INCOMPLETE: 'incomplete',
+    DAMAGED: 'damaged',
+    NOT_NEEDED: 'not_needed'
+} as const;
+
+export type DocumentDtoRejectedReason = typeof DocumentDtoRejectedReason[keyof typeof DocumentDtoRejectedReason];
 
 

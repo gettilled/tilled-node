@@ -21,6 +21,7 @@ export * from './api/charges-api';
 export * from './api/checkout-sessions-api';
 export * from './api/customers-api';
 export * from './api/disputes-api';
+export * from './api/documents-api';
 export * from './api/events-api';
 export * from './api/files-api';
 export * from './api/health-api';
