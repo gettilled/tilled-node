@@ -22,6 +22,10 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { BulkDocumentSubmitRequestParams } from '../model';
+// @ts-ignore
+import { BulkDocumentSubmitResponse } from '../model';
+// @ts-ignore
 import { DocumentDto } from '../model';
 // @ts-ignore
 import { DocumentSubmitRequestParams } from '../model';
@@ -33,6 +37,56 @@ import { ListDocuments200Response } from '../model';
  */
 export const DocumentsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Bulk submit documents to fulfill requested documents, providing a list of corresponding document IDs with either a file ID or a written response.
+         * @summary Bulk Submit Documents
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {BulkDocumentSubmitRequestParams} BulkDocumentSubmitRequestParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkSubmitDocuments: async (tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('bulkSubmitDocuments', 'tilled_account', tilled_account)
+            // verify required parameter 'BulkDocumentSubmitRequestParams' is not null or undefined
+            assertParamExists('bulkSubmitDocuments', 'BulkDocumentSubmitRequestParams', BulkDocumentSubmitRequestParams)
+            const localVarPath = `/v1/documents/bulk-submit`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(BulkDocumentSubmitRequestParams, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Retrieves the details of an existing document with the given ID.
          * @summary Get a Document
@@ -205,6 +259,18 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DocumentsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Bulk submit documents to fulfill requested documents, providing a list of corresponding document IDs with either a file ID or a written response.
+         * @summary Bulk Submit Documents
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {BulkDocumentSubmitRequestParams} BulkDocumentSubmitRequestParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bulkSubmitDocuments(tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkDocumentSubmitResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkSubmitDocuments(tilled_account, BulkDocumentSubmitRequestParams, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Retrieves the details of an existing document with the given ID.
          * @summary Get a Document
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
@@ -254,6 +320,16 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
     const localVarFp = DocumentsApiFp(configuration)
     return {
         /**
+         * Bulk submit documents to fulfill requested documents, providing a list of corresponding document IDs with either a file ID or a written response.
+         * @summary Bulk Submit Documents
+         * @param {DocumentsApiBulkSubmitDocumentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: AxiosRequestConfig): AxiosPromise<BulkDocumentSubmitResponse> {
+            return localVarFp.bulkSubmitDocuments(requestParameters.tilled_account, requestParameters.BulkDocumentSubmitRequestParams, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves the details of an existing document with the given ID.
          * @summary Get a Document
          * @param {DocumentsApiGetDocumentRequest} requestParameters Request parameters.
@@ -285,6 +361,27 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
         },
     };
 };
+
+/**
+ * Request parameters for bulkSubmitDocuments operation in DocumentsApi.
+ * @export
+ * @interface DocumentsApiBulkSubmitDocumentsRequest
+ */
+export interface DocumentsApiBulkSubmitDocumentsRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof DocumentsApiBulkSubmitDocuments
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {BulkDocumentSubmitRequestParams}
+     * @memberof DocumentsApiBulkSubmitDocuments
+     */
+    readonly BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams
+}
 
 /**
  * Request parameters for getDocument operation in DocumentsApi.
@@ -377,6 +474,18 @@ export interface DocumentsApiSubmitDocumentRequest {
  * @extends {BaseAPI}
  */
 export class DocumentsApi extends BaseAPI {
+    /**
+     * Bulk submit documents to fulfill requested documents, providing a list of corresponding document IDs with either a file ID or a written response.
+     * @summary Bulk Submit Documents
+     * @param {DocumentsApiBulkSubmitDocumentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentsApi
+     */
+    public bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: AxiosRequestConfig) {
+        return DocumentsApiFp(this.configuration).bulkSubmitDocuments(requestParameters.tilled_account, requestParameters.BulkDocumentSubmitRequestParams, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Retrieves the details of an existing document with the given ID.
      * @summary Get a Document

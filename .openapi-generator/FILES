@@ -73,6 +73,10 @@ model/bank-account-create-params.ts
 model/bank-account.ts
 model/base-address.ts
 model/blebank-account.ts
+model/bulk-document-submission-response.ts
+model/bulk-document-submission.ts
+model/bulk-document-submit-request-params.ts
+model/bulk-document-submit-response.ts
 model/business-legal-entity-ach-bank-account.ts
 model/business-legal-entity-address.ts
 model/business-legal-entity-bank-account.ts

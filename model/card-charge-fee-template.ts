@@ -60,6 +60,12 @@ export interface CardChargeFeeTemplate {
      */
     'transaction_fee_type': CardChargeFeeTemplateTransactionFeeType;
     /**
+     * The amount of the fee applied when the merchant bank account information is updated, in currency minor units.
+     * @type {number}
+     * @memberof CardChargeFeeTemplate
+     */
+    'bank_account_change_fee'?: number;
+    /**
      * The amount of the fee applied per card updated, in currency minor units.
      * @type {number}
      * @memberof CardChargeFeeTemplate
