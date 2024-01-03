@@ -15,63 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Markup } from './markup';
+import { BulkDocumentSubmission } from './bulk-document-submission';
 
 /**
  * 
  * @export
- * @interface CardPresentChargeFeeTemplate
+ * @interface BulkDocumentSubmitRequestParams
  */
-export interface CardPresentChargeFeeTemplate {
+export interface BulkDocumentSubmitRequestParams {
     /**
-     * The amount of the fee applied per chargeback, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
+     * 
+     * @type {Array<BulkDocumentSubmission>}
+     * @memberof BulkDocumentSubmitRequestParams
      */
-    'chargeback_fee': number;
-    /**
-     * The list of additional markups applied to a given card type.
-     * @type {Array<Markup>}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'markups': Array<Markup>;
-    /**
-     * The amount of the fee applied per retrieval, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'retrieval_fee': number;
-    /**
-     * The amount of the fee applied per reversal, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'reversal_fee': number;
-    /**
-     * The amount of the transaction fee applied to each transaction, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'transaction_fee': number;
-    /**
-     * The type of transaction fee this pricing template applies.
-     * @type {string}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'transaction_fee_type': CardPresentChargeFeeTemplateTransactionFeeType;
-    /**
-     * The amount of the fee applied when the merchant bank account information is updated, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'bank_account_change_fee'?: number;
+    'submissions': Array<BulkDocumentSubmission>;
 }
-
-export const CardPresentChargeFeeTemplateTransactionFeeType = {
-    FLAT_RATE: 'flat_rate',
-    INTERCHANGE: 'interchange'
-} as const;
-
-export type CardPresentChargeFeeTemplateTransactionFeeType = typeof CardPresentChargeFeeTemplateTransactionFeeType[keyof typeof CardPresentChargeFeeTemplateTransactionFeeType];
-
 

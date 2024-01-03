@@ -13,65 +13,38 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { Markup } from './markup';
 
 /**
  * 
  * @export
- * @interface CardPresentChargeFeeTemplate
+ * @interface BulkDocumentSubmissionResponse
  */
-export interface CardPresentChargeFeeTemplate {
+export interface BulkDocumentSubmissionResponse {
     /**
-     * The amount of the fee applied per chargeback, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'chargeback_fee': number;
-    /**
-     * The list of additional markups applied to a given card type.
-     * @type {Array<Markup>}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'markups': Array<Markup>;
-    /**
-     * The amount of the fee applied per retrieval, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'retrieval_fee': number;
-    /**
-     * The amount of the fee applied per reversal, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'reversal_fee': number;
-    /**
-     * The amount of the transaction fee applied to each transaction, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
-     */
-    'transaction_fee': number;
-    /**
-     * The type of transaction fee this pricing template applies.
+     * The ID of a document submitted
      * @type {string}
-     * @memberof CardPresentChargeFeeTemplate
+     * @memberof BulkDocumentSubmissionResponse
      */
-    'transaction_fee_type': CardPresentChargeFeeTemplateTransactionFeeType;
+    'document_id': string;
     /**
-     * The amount of the fee applied when the merchant bank account information is updated, in currency minor units.
-     * @type {number}
-     * @memberof CardPresentChargeFeeTemplate
+     * The status response of a submission of a document
+     * @type {string}
+     * @memberof BulkDocumentSubmissionResponse
      */
-    'bank_account_change_fee'?: number;
+    'status': BulkDocumentSubmissionResponseStatus;
+    /**
+     * Message detailing the failure reason of a document submission
+     * @type {string}
+     * @memberof BulkDocumentSubmissionResponse
+     */
+    'failure_message'?: string;
 }
 
-export const CardPresentChargeFeeTemplateTransactionFeeType = {
-    FLAT_RATE: 'flat_rate',
-    INTERCHANGE: 'interchange'
+export const BulkDocumentSubmissionResponseStatus = {
+    SUCCEEDED: 'succeeded',
+    FAILED: 'failed'
 } as const;
 
-export type CardPresentChargeFeeTemplateTransactionFeeType = typeof CardPresentChargeFeeTemplateTransactionFeeType[keyof typeof CardPresentChargeFeeTemplateTransactionFeeType];
+export type BulkDocumentSubmissionResponseStatus = typeof BulkDocumentSubmissionResponseStatus[keyof typeof BulkDocumentSubmissionResponseStatus];
 
 
