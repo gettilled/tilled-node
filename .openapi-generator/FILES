@@ -27,7 +27,6 @@ api/subscriptions-api.ts
 api/terminal-readers-api.ts
 api/users-api.ts
 api/webhook-endpoints-api.ts
-base.ts
 common.ts
 git_push.sh
 index.ts
