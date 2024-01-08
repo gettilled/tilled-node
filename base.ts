@@ -58,6 +58,19 @@ export class BaseAPI {
       this.configuration = configuration;
       this.basePath = configuration.basePath || this.basePath;
     }
+
+    this.axios.interceptors.response.use(
+      (response) => {
+        // Modify response headers to hide 'tilled-api-key'
+        if (response.headers && response.headers['tilled-api-key']) {
+          response.headers['tilled-api-key'] = 'sk_************';
+        }
+        return response;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
   }
 }
 
