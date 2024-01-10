@@ -24,8 +24,8 @@ To use any of the modules in this SDK, will need to import an ApiKeys module in 
 
 ```typescript
 import {
+  Configuration,
   PaymentIntentsApi,
-  PaymentIntentsApiApiKeys,
   PaymentIntentCreateParams,
   PaymentIntentConfirmParams
 } from 'tilled-node';
