@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
 
 /**
  * 
@@ -21,11 +24,18 @@
  */
 export interface AccountSettingsBrandingCreateParams {
     /**
-     * Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
+     * *Will set every `global_email_settings` email type to the specified boolean value if `global_email_settings` not provided.*  Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
      * @type {boolean}
      * @memberof AccountSettingsBrandingCreateParams
+     * @deprecated
      */
     'global_email_notifications'?: boolean;
+    /**
+     * 
+     * @type {AccountSettingsBrandingGlobalEmailSettings}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'global_email_settings'?: AccountSettingsBrandingGlobalEmailSettings;
     /**
      * The File ID of an uploaded [File](#tag/Files) of type `logo`
      * @type {string}

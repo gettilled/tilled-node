@@ -57,6 +57,12 @@ export interface TerminalReader {
      */
     'description'?: string;
     /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * @type {{ [key: string]: string; }}
+     * @memberof TerminalReader
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
      * The serial number of the terminal reader.
      * @type {string}
      * @memberof TerminalReader

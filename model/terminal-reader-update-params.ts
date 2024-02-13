@@ -27,6 +27,12 @@ export interface TerminalReaderUpdateParams {
      */
     'description'?: string;
     /**
+     * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
+     * @type {{ [key: string]: string; }}
+     * @memberof TerminalReaderUpdateParams
+     */
+    'metadata'?: { [key: string]: string; };
+    /**
      * 
      * @type {string}
      * @memberof TerminalReaderUpdateParams

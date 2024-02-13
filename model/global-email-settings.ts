@@ -13,18 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBranding } from './account-settings-branding';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
 
 /**
- * @type AccountSettingsBranding
- * The account branding settings.
+ * 
  * @export
+ * @interface GlobalEmailSettings
  */
-export type {AccountSettingsBranding};
-
+export interface GlobalEmailSettings {
+    /**
+     * Flag for dispute email notifications
+     * @type {boolean}
+     * @memberof GlobalEmailSettings
+     */
+    'disputes'?: boolean;
+    /**
+     * Flag for document request email notifications
+     * @type {boolean}
+     * @memberof GlobalEmailSettings
+     */
+    'documents'?: boolean;
+    /**
+     * Flag for onboarding email notifications
+     * @type {boolean}
+     * @memberof GlobalEmailSettings
+     */
+    'onboarding'?: boolean;
+}
 

@@ -49,7 +49,8 @@ export const ReportRunCreateParamsType = {
     PAYOUTS_SUMMARY_2: 'payouts_summary_2',
     FEES_SUMMARY_1: 'fees_summary_1',
     PROCESSING_SUMMARY_1: 'processing_summary_1',
-    DISPUTES_SUMMARY_1: 'disputes_summary_1'
+    DISPUTES_SUMMARY_1: 'disputes_summary_1',
+    INTERCHANGE_DETAIL_1: 'interchange_detail_1'
 } as const;
 
 export type ReportRunCreateParamsType = typeof ReportRunCreateParamsType[keyof typeof ReportRunCreateParamsType];
