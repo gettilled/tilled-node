@@ -135,15 +135,17 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * Returns a list of an account\'s terminal readers.
          * @summary List all Terminal Readers
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;terminal_reader.description&#x60;, &#x60;terminal_reader.serial_number&#x60;, &#x60;terminal_reader.type&#x60;
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
-         * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders: async (tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listTerminalReaders: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listTerminalReaders', 'tilled_account', tilled_account)
             const localVarPath = `/v1/terminal-readers`;
@@ -165,6 +167,14 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
+            if (metadata !== undefined) {
+                localVarQueryParameter['metadata'] = metadata;
+            }
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
+            }
+
             if (include_connected_accounts !== undefined) {
                 localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
             }
@@ -181,12 +191,12 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
                     created_at_lte;
             }
 
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
             if (tilled_account != null) {
@@ -296,16 +306,18 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * Returns a list of an account\'s terminal readers.
          * @summary List all Terminal Readers
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;terminal_reader.description&#x60;, &#x60;terminal_reader.serial_number&#x60;, &#x60;terminal_reader.type&#x60;
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
-         * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+         * @param {number} [limit] 
+         * @param {number} [offset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTerminalReaders(tilled_account: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, include_connected_accounts, created_at_gte, created_at_lte, offset, limit, options);
+        async listTerminalReaders(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, metadata, q, include_connected_accounts, created_at_gte, created_at_lte, limit, offset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -359,7 +371,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
-            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.limit, requestParameters.offset, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the terminal reader. Any parameters not provided will be left unchanged.
@@ -430,6 +442,20 @@ export interface TerminalReadersApiListTerminalReadersRequest {
     readonly tilled_account: string
 
     /**
+     * &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
+     * @type {{ [key: string]: string; }}
+     * @memberof TerminalReadersApiListTerminalReaders
+     */
+    readonly metadata?: { [key: string]: string; }
+
+    /**
+     * The partial search of text fields. Supports searching by &#x60;terminal_reader.description&#x60;, &#x60;terminal_reader.serial_number&#x60;, &#x60;terminal_reader.type&#x60;
+     * @type {string}
+     * @memberof TerminalReadersApiListTerminalReaders
+     */
+    readonly q?: string
+
+    /**
      * Whether or not to include the results from any connected accounts.
      * @type {boolean}
      * @memberof TerminalReadersApiListTerminalReaders
@@ -451,18 +477,18 @@ export interface TerminalReadersApiListTerminalReadersRequest {
     readonly created_at_lte?: string
 
     /**
-     * The (zero-based) offset of the first item in the collection to return.
-     * @type {number}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly offset?: number
-
-    /**
-     * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+     * 
      * @type {number}
      * @memberof TerminalReadersApiListTerminalReaders
      */
     readonly limit?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof TerminalReadersApiListTerminalReaders
+     */
+    readonly offset?: number
 }
 
 /**
@@ -533,7 +559,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @memberof TerminalReadersApi
      */
     public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.limit, requestParameters.offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

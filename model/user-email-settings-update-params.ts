@@ -26,6 +26,18 @@ export interface UserEmailSettingsUpdateParams {
      * @memberof UserEmailSettingsUpdateParams
      */
     'disputes'?: UserEmailSettingsUpdateParamsDisputes;
+    /**
+     * Indicates if the user is receiving document request related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettingsUpdateParams
+     */
+    'documents'?: UserEmailSettingsUpdateParamsDocuments;
+    /**
+     * Indicates if the user is receiving onboarding related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettingsUpdateParams
+     */
+    'onboarding'?: UserEmailSettingsUpdateParamsOnboarding;
 }
 
 export const UserEmailSettingsUpdateParamsDisputes = {
@@ -35,5 +47,19 @@ export const UserEmailSettingsUpdateParamsDisputes = {
 } as const;
 
 export type UserEmailSettingsUpdateParamsDisputes = typeof UserEmailSettingsUpdateParamsDisputes[keyof typeof UserEmailSettingsUpdateParamsDisputes];
+export const UserEmailSettingsUpdateParamsDocuments = {
+    TRUE: true,
+    FALSE: false,
+    NULL: null
+} as const;
+
+export type UserEmailSettingsUpdateParamsDocuments = typeof UserEmailSettingsUpdateParamsDocuments[keyof typeof UserEmailSettingsUpdateParamsDocuments];
+export const UserEmailSettingsUpdateParamsOnboarding = {
+    TRUE: true,
+    FALSE: false,
+    NULL: null
+} as const;
+
+export type UserEmailSettingsUpdateParamsOnboarding = typeof UserEmailSettingsUpdateParamsOnboarding[keyof typeof UserEmailSettingsUpdateParamsOnboarding];
 
 

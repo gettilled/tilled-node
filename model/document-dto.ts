@@ -45,6 +45,12 @@ export interface DocumentDto {
      */
     'status': DocumentDtoStatus;
     /**
+     * Time at which the object was submitted.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'submitted_at': string;
+    /**
      * The subtype of the document
      * @type {string}
      * @memberof DocumentDto
@@ -112,6 +118,7 @@ export const DocumentDtoSubtype = {
     FINANCIAL_STATEMENT: 'financial_statement',
     _501C3: '501c3',
     TAX_RETURN: 'tax_return',
+    INVOICE: 'invoice',
     DL_PASSPORT: 'dl_passport',
     DL_BACK: 'dl_back',
     BUSINESS_MODEL: 'business_model',

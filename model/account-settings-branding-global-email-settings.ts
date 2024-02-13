@@ -15,16 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBranding } from './account-settings-branding';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
+import { GlobalEmailSettings } from './global-email-settings';
 
 /**
- * @type AccountSettingsBranding
- * The account branding settings.
+ * @type AccountSettingsBrandingGlobalEmailSettings
+ * Turn on or off email notifications for different email types, for all merchants, by default. Individual merchants can override these settings later. Defaults to true for all types.
  * @export
  */
-export type {AccountSettingsBranding};
+export type AccountSettingsBrandingGlobalEmailSettings = GlobalEmailSettings;
 
 

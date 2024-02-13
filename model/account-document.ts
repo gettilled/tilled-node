@@ -70,6 +70,7 @@ export const AccountDocumentSubtype = {
     FINANCIAL_STATEMENT: 'financial_statement',
     _501C3: '501c3',
     TAX_RETURN: 'tax_return',
+    INVOICE: 'invoice',
     DL_PASSPORT: 'dl_passport',
     DL_BACK: 'dl_back',
     BUSINESS_MODEL: 'business_model',

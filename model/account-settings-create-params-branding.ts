@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { AccountSettingsBrandingCreateParams } from './account-settings-branding-create-params';
+// May contain unused imports in some cases
+// @ts-ignore
+import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
 
 /**
  * @type AccountSettingsCreateParamsBranding

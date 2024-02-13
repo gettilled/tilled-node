@@ -170,7 +170,9 @@ export const ChargeFailureCode = {
     SERVICE_NOT_ALLOWED: 'service_not_allowed',
     STOP_PAYMENT: 'stop_payment',
     TRY_AGAIN_LATER: 'try_again_later',
-    INTERNAL_ERROR: 'internal_error'
+    INTERNAL_ERROR: 'internal_error',
+    NO_ACTION_TAKEN: 'no_action_taken',
+    CARD_REMOVED: 'card_removed'
 } as const;
 
 export type ChargeFailureCode = typeof ChargeFailureCode[keyof typeof ChargeFailureCode];
