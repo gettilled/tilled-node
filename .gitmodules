@@ -1,0 +1,4 @@
+[submodule "test/project"]
+	path = test/project
+	url = https://github.com/gettilled/tilled-example-monorepo.git
+	branch = master

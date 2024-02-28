@@ -16,6 +16,8 @@
     "prettier:write": "npx prettier --config .prettierrc --write .",
     "prep": "bash sanitize_exports.sh",
     "build": "npm run prep && tsc ",
+    "start-test-project": "cd test/project/react/react-ts-checkout/client && npm install && cd .. && npm install && npm run dev",
+    "test": "npx playwright test",
     "prepare": "npm run build",
     "document": "npx typedoc --options typedoc.json --darkHighlightTheme dark-plus --lightHighlightTheme light-plus",
     "generate": "npx @openapitools/openapi-generator-cli generate -i https://api.tilled.com/docs/spec3.json -g typescript-axios -c ./codegen.conf.json --skip-validate-spec --enable-post-process-file && npx prettier --write '**/*.ts' && npm install && npm run document"
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.6.0",
+    "@playwright/test": "^1.41.2",
     "@types/node": "^12.11.5",
     "prettier": "2.8.8",
     "typedoc": "^0.24.6",
