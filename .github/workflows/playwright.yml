@@ -23,6 +23,7 @@ jobs:
         VITE_TILLED_PUBLIC_KEY: ${{ secrets.TILLED_PUBLIC_KEY }}
         VITE_TILLED_MERCHANT_ACCOUNT_ID: ${{ secrets.TILLED_MERCHANT_ACCOUNT_ID }}
         VITE_TILLED_CUSTOMER_ID: ${{ secrets.TILLED_CUSTOMER_ID }}
+        CI: true
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
