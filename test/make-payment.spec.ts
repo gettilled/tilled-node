@@ -6,6 +6,10 @@ import {
 
 const sleepFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+test.beforeAll(async () => {
+  await sleepFor(5000);
+});
+
 test('creates a new payment intent', async ({ page }) => {
   await page.goto('/');
 
