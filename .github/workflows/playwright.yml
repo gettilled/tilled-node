@@ -15,6 +15,14 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+    - name: Create .env files in submodule
+      run: node test/ci-setup-env.js
+      env: 
+        TILLED_SECRET_KEY: ${{ secrets.tilled_secret_key }}
+        TILLED_PARTNER_ACCOUNT: ${{ secrets.tilled_partner_account }}
+        VITE_TILLED_PUBLIC_KEY: ${{ secrets.tilled_public_key }}
+        VITE_TILLED_MERCHANT_ACCOUNT_ID: ${{ secrets.tilled_merchant_account_id }}
+        VITE_TILLED_CUSTOMER_ID: ${{ secrets.tilled_customer_id }}
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
