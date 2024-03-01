@@ -25,7 +25,8 @@
   "author": "Tilled",
   "license": "Unlicense",
   "dependencies": {
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@dpatt/delimiterized-regex-builder": "^1.0.2",
