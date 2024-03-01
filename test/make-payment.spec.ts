@@ -91,12 +91,7 @@ test('confirm a payment intent with a saved card payment method', async ({
   page
 }) => {
   await page.goto('/');
-  await page.waitForTimeout(1000);
 
-  const paymentFormContainer = page.getByTestId('payment-form-container');
-  const paymentMethodSelect = paymentFormContainer.getByTestId(
-    'payment-method-select'
-  );
   const consoleMsgArr: string[] = [];
 
   // Listen for all console logs and push them to the consoleMsgArr
@@ -109,18 +104,20 @@ test('confirm a payment intent with a saved card payment method', async ({
   });
 
   // expect payment method select to be visible and select the saved card payment method
-  await expect(paymentMethodSelect).toBeVisible();
-  await paymentMethodSelect.click();
+  await expect(page.getByTestId('payment-form-container')).toBeVisible();
+  await page.getByTestId('payment-method-select').click();
   await page.getByTestId('pm-option-visa-1111').click(); // this element is dynamically generated. It's not in the initial HTML
 
   // submit the payment form
-  paymentFormContainer.getByTestId('submit-button').click();
+  page.getByTestId('submit-button').click();
 
-  // Wait for the payment intent to be confirmed
-  await sleepFor(5000);
+  // wait for response from both calls to the subscriptions endpoint
+  await page.waitForResponse('**/subscriptions');
+  await page.waitForResponse('**/subscriptions');
+  await page.waitForTimeout(100); // wait for the console logs to be printed
 
   // expect console.log to show the payment intent status
-  // this confirms that we were able to successfully confirm the payment intent
+  // this confirms that we were able to successfully create the subscription
   expect(consoleMsgArr.join('\n')).toMatch(
     generateRegexFromArray(
       [
