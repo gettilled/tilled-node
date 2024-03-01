@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var dotenv = require("dotenv");
+var dotenv = !process.env.CI ? require("dotenv") : null;
 if (!process.env.CI) dotenv.config();
 var serverEnv = "BASE_PATH=https://staging-api.tilled.com\nTILLED_SECRET_KEY=".concat(process.env.TILLED_SECRET_KEY, "\nTILLED_PARTNER_ACCOUNT=").concat(process.env.TILLED_PARTNER_ACCOUNT);
 var clientEnv = "VITE_TILLED_PUBLIC_KEY=.".concat(process.env.VITE_TILLED_PUBLIC_KEY, "\nVITE_TILLED_MERCHANT_ACCOUNT_ID=").concat(process.env.VITE_TILLED_MERCHANT_ACCOUNT_ID, "\nVITE_TILLED_CUSTOMER_ID=").concat(process.env.VITE_TILLED_CUSTOMER_ID, "\nVITE_TILLED_MERCHANT_NAME=SDK Test\nVITE_TILLED_MERCHANT_TAX=1");
