@@ -8,9 +8,7 @@ const sleepFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 test('creates a new payment intent', async ({ page }) => {
   await page.goto('/');
-  await page.waitForTimeout(1000);
-  // expect to see the cart summary
-  // this confirms that we were able to successfully create a payment intent
+
   await expect(page.getByTestId('cart-summary-container')).toBeVisible();
 });
 
@@ -18,12 +16,7 @@ test('create and confirm a payment intent with a new card payment method', async
   page
 }) => {
   await page.goto('/');
-  await page.waitForTimeout(1000);
 
-  const paymentFormContainer = page.getByTestId('payment-form-container');
-  const billingDetailsNameContainer = paymentFormContainer.getByTestId(
-    'billing-details-name-element'
-  );
   const consoleMsgArr: string[] = [];
 
   // Listen for all console logs and push them to the consoleMsgArr
@@ -36,49 +29,57 @@ test('create and confirm a payment intent with a new card payment method', async
   });
 
   // Fill out the billing details form
-  await billingDetailsNameContainer.locator('input').fill('Testy McTesterson');
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('123 Test St');
-  await page.keyboard.press('Tab');
-  await page.keyboard.press('Enter');
-  await page.getByText('United States').click();
-  await page.keyboard.press('Tab');
-  await page.keyboard.press('Enter');
-  await page.getByText('Alaska').click();
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('Test City');
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('12345');
-
-  // Fill out the payment form
-  // This is a workaround because the payment form is in an iframe
-  await page.keyboard.press('Tab');
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('4111111111111111', { delay: 100 });
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('1234', { delay: 100 });
-  await page.keyboard.press('Tab');
-  await page.keyboard.type('123', { delay: 100 });
-
-  // submit the payment form
-  // await page.keyboard.press('Tab');
-  // await page.keyboard.press('Enter');
-  paymentFormContainer.getByTestId('submit-button').click();
+  await page.getByLabel('Full Name').fill('Testy McTesterson');
+  await page.getByLabel('Address').fill('123 Test St');
+  await page.getByLabel('Country').click();
+  await page.getByRole('option', { name: 'United States' }).click();
+  await page
+    .getByTestId('billing-details-state-element')
+    .getByLabel('State')
+    .click();
+  await page.getByRole('option', { name: 'Alaska' }).click();
+  await page.getByLabel('City').fill('Test City');
+  await page.getByLabel('ZIP').click();
+  await page.getByLabel('ZIP').fill('12345');
+  await page.getByTestId('card-number-element').click();
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardNumber"]')
+    .getByLabel('Card number')
+    .click();
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardNumber"]')
+    .getByLabel('Card number')
+    .fill('4111111111111111');
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardExpiry"]')
+    .getByPlaceholder('MM / YY')
+    .click();
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardExpiry"]')
+    .getByPlaceholder('MM / YY')
+    .fill('12 / 34');
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardCvv"]')
+    .getByLabel('CVV')
+    .click();
+  await page
+    .frameLocator('iframe[name="tilled_iframe_cardCvv"]')
+    .getByLabel('CVV')
+    .fill('123');
+  await page.getByTestId('submit-button').click();
 
   // Wait for the payment intent to be confirmed
-  await sleepFor(5000);
+  await page.waitForResponse('**/confirm');
 
   // expect console.log to show the payment intent status
   // this confirms that we were able to successfully confirm the payment intent
   expect(consoleMsgArr.join('\n')).toMatch(
-    generateRegexFromArray(
-      [
-        'creating new pm card {name: Testy McTesterson, address: Object}',
-        'new pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
-        'attaching pm to customer {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
-        'using saved pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}'
-      ]
-    )
+    generateRegexFromArray([
+      'creating new pm card {name: Testy McTesterson, address: Object}',
+      'new pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
+      'attaching pm to customer {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
+      'using saved pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}'
+    ])
   );
 });
 
