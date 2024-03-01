@@ -122,7 +122,7 @@ VITE_TILLED_CUSTOMER_ID=cus_XXXX
 - Run the env setup script to create the `.env` files in correct locations inside the submodule:
 
 ```bash
-node test/ci-setup-env.js
+node test/local-setup-env.js
 ```
 
 - Serve the test project:
