@@ -95,3 +95,44 @@ npm run generate
   }
 
 ```
+### Test Automation
+
+We also have automated tests in `/test`. They test against a submodule, so you will need to:
+- Generate the SDK:
+
+```bash
+npm run generate
+```
+
+- Install the submodule:
+
+```bash
+git submodule update --init --recursive
+```
+
+- Create an .env file in your root directory with the following:
+```
+TILLED_SECRET_KEY=sk_XXXX
+TILLED_PARTNER_ACCOUNT=acct_XXXX
+VITE_TILLED_PUBLIC_KEY=pk_XXXX
+VITE_TILLED_MERCHANT_ACCOUNT_ID=acct_YYYY
+VITE_TILLED_CUSTOMER_ID=cus_XXXX
+```
+
+- Run the env setup script to create the `.env` files in correct locations inside the submodule:
+
+```bash
+node test/local-setup-env.js
+```
+
+- Serve the test project:
+
+```bash
+npm run start-test-project
+```
+
+- Run the tests
+
+```bash
+npx playwright test
+```

@@ -15,3 +15,7 @@ docs/variables/*.html
 .DS_Store
 .cache
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
