@@ -12,6 +12,13 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
 
@@ -50,3 +57,51 @@ jobs:
         run: npx playwright test
       - name: Print Success
         run: echo "Success!"
+
+      # Publish
+      - name: Publish NPM Package
+        id: publish
+        uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: docs
+          path: docs/
+          retention-days: 3
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: dist
+          path: dist/
+          retention-days: 3
+
+      - name: Setup Pages
+        if: always()
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+      - name: Notify in Slack sdk-builds channel if new changes are published
+        if: ${{ steps.publish.outputs.type }}
+        uses: 8398a7/action-slack@v3
+        with:
+          text: '${{ steps.publish.outputs.id }} has been published. See the latest here https://www.npmjs.com/package/tilled-node'
+          status: ${{ job.status }}
+          fields: workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SDK }}
