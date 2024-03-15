@@ -21,6 +21,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
 
       - name: Setup node
         uses: actions/setup-node@v3
