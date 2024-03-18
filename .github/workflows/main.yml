@@ -2,6 +2,8 @@ name: CI
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: '0 12 * * 2' # Every Tuesday at 8:00 AM EST
   push:
     branches:
       - main
@@ -19,12 +21,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
 
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
+      # Install/cache node_modules
       - name: Cache node_modules
         uses: actions/cache@v3
         id: node-modules-cache
@@ -38,6 +43,22 @@ jobs:
       - name: Build package and generate docs
         run: npm run generate
 
+      # Running tests
+      - name: Create .env files in submodule
+        run: node test/ci-setup-env.js
+        env: 
+          TILLED_SECRET_KEY: ${{ secrets.TILLED_SECRET_KEY }}
+          TILLED_PARTNER_ACCOUNT: ${{ secrets.TILLED_PARTNER_ACCOUNT }}
+          VITE_TILLED_PUBLIC_KEY: ${{ secrets.TILLED_PUBLIC_KEY }}
+          VITE_TILLED_MERCHANT_ACCOUNT_ID: ${{ secrets.TILLED_MERCHANT_ACCOUNT_ID }}
+          VITE_TILLED_CUSTOMER_ID: ${{ secrets.TILLED_CUSTOMER_ID }}
+          CI: true
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      # Publish
       - name: Publish NPM Package
         id: publish
         uses: JS-DevTools/npm-publish@v2
