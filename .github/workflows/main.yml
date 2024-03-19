@@ -41,7 +41,7 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
 
       - run: npm version patch
-        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'schedule' && github.ref == 'refs/heads/main' }}
 
       - name: Build package and generate docs
         run: npm run generate
