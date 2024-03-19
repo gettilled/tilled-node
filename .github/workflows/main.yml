@@ -40,6 +40,9 @@ jobs:
       - run: npm ci --ignore-scripts
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
 
+      - run: npm version patch
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+
       - name: Build package and generate docs
         run: npm run generate
 
