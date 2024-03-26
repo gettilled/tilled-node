@@ -40,7 +40,7 @@ jobs:
       - run: npm ci --ignore-scripts
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
 
-      - run: npm version patch
+      - run: git config --global user.email "svc-gh-actions@tilled.com" && git config --global user.name "svc-gh-actions" && npm version patch
         if: ${{ github.event_name == 'schedule' && github.ref == 'refs/heads/main' }}
 
       - name: Build package and generate docs
