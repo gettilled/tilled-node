@@ -98,14 +98,15 @@ jobs:
         if: always()
         id: deployment
         uses: actions/deploy-pages@v2
+        
 
       - name: Commit Changes
-        run: |
-          new_version=$(npm show tilled-node version)
-          git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update: $new_version" && git push
-        if: always()
-
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: package.json version.ts
+          commit_message: 'Auto-update: ${{ steps.publish.outputs.id }}'
+          commit_user_name: svc-gh-actions
+          
       - name: Notify in Slack sdk-builds channel if new changes are published
         if: ${{ steps.publish.outputs.type }}
         uses: 8398a7/action-slack@v3
