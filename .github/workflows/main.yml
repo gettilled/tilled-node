@@ -106,6 +106,7 @@ jobs:
           file_pattern: package.json version.ts
           commit_message: 'Auto-update: ${{ steps.publish.outputs.id }}'
           commit_user_name: svc-gh-actions
+          skip_dirty_check: true # Working tree will likely be clean after version bump
           
       - name: Notify in Slack sdk-builds channel if new changes are published
         if: ${{ steps.publish.outputs.type }}
