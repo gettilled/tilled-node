@@ -101,6 +101,7 @@ jobs:
         
 
       - name: Commit Changes
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: package.json version.ts
