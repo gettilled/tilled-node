@@ -101,11 +101,13 @@ jobs:
         
 
       - name: Commit Changes
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: package.json version.ts
           commit_message: 'Auto-update: ${{ steps.publish.outputs.id }}'
           commit_user_name: svc-gh-actions
+          skip_dirty_check: true # Working tree will likely be clean after version bump
           
       - name: Notify in Slack sdk-builds channel if new changes are published
         if: ${{ steps.publish.outputs.type }}
