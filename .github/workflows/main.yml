@@ -46,7 +46,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
         run: |
           git config --global user.email "svc_gh_actions@tilled.com"
-          git config --global user.name ""
+          git config --global user.name "svc-gh-actions"
           version=$(npm version patch)
           echo "::set-output name=version::$version"
           
