@@ -43,7 +43,34 @@ jobs:
       - name: Patch version
         id: patch
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
-        run: git config --global user.email "svc_gh_actions@tilled.com" && git config --global user.name "svc_gh_actions" && npm version patch
+        run: |
+          git config --global user.email "svc_gh_actions@tilled.com"
+          git config --global user.name ""
+          version=$(npm version patch)
+          echo "::set-output name=version::$version"
+          
+      - name: Push to temp branch
+        id: push-temp
+        if: ${{ steps.patch.outcome == 'success' }}
+        run: git push origin HEAD:temp-branch --follow-tags
+
+      - name: Create Pull Request
+        id: create_pr
+        if: ${{ steps.push-temp.outcome == 'success'}}
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: temp-branch
+          delete-branch: true
+          reviewers: 'dpatton1992'
+          committer: 'svc-gh-actions <svc_gh_actions@tilled.com>'
+          author: 'svc-gh-actions <svc_gh_actions@tilled.com>'
+          title: "${{ steps.patch.outputs.version }}"
+          body: "Automated PR for ${{ steps.patch.outputs.version }}"
+          labels: "automated"
+        
+      - name: Enable Pull Request Automerge
+        if: ${{ steps.create_pr.outputs.pull-request-number }}
+        run: gh pr merge --merge --auto "${{ steps.create_pr.outputs.pull-request-number }}"
 
       - name: Build package and generate docs
         run: npm run generate
@@ -110,25 +137,4 @@ jobs:
           fields: workflow
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SDK }}
-          
-      - name: Push to temp branch
-        id: push-temp
-        if: ${{ steps.patch.outcome == 'success' }}
-        run: git push origin HEAD:temp-branch --follow-tags
-
-      - name: Create Pull Request
-        id: create_pr
-        if: ${{ steps.push-temp.outcome == 'success'}}
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: temp-branch
-          delete-branch: true
-          reviewers: 'dpatton1992'
-          title: "${{ steps.publish.outputs.id }}"
-          body: "Automated PR for ${{ steps.publish.outputs.id }}"
-          labels: "automated"
-        
-      - name: Enable Pull Request Automerge
-        if: ${{ steps.create_pr.outputs.pull-request-number }}
-        run: gh pr merge --merge --auto "${{ steps.create_pr.outputs.pull-request-number }}"
+    
