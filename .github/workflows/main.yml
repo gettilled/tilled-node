@@ -49,7 +49,7 @@ jobs:
           git config user.name "svc-gh-actions"
           version=$(npm version patch)
           echo "::set-output name=version::$version"
-          
+
       - name: Push to temp branch
         id: push-temp
         if: ${{ steps.patch.outcome == 'success' }}
@@ -65,10 +65,10 @@ jobs:
           reviewers: 'dpatton1992'
           committer: 'svc-gh-actions <svc_gh_actions@tilled.com>'
           author: 'svc-gh-actions <svc_gh_actions@tilled.com>'
-          title: "${{ steps.patch.outputs.version }}"
-          body: "Automated PR for ${{ steps.patch.outputs.version }}"
-          labels: "automated"
-        
+          title: '${{ steps.patch.outputs.version }}'
+          body: 'Automated PR for ${{ steps.patch.outputs.version }}'
+          labels: 'automated'
+
       - name: Enable Pull Request Automerge
         if: ${{ steps.create_pr.outputs.pull-request-number }}
         run: gh pr merge --merge --auto "${{ steps.create_pr.outputs.pull-request-number }}"
@@ -79,7 +79,7 @@ jobs:
       # Running tests
       - name: Create .env files in submodule
         run: node test/ci-setup-env.js
-        env: 
+        env:
           TILLED_SECRET_KEY: ${{ secrets.TILLED_SECRET_KEY }}
           TILLED_PARTNER_ACCOUNT: ${{ secrets.TILLED_PARTNER_ACCOUNT }}
           VITE_TILLED_PUBLIC_KEY: ${{ secrets.TILLED_PUBLIC_KEY }}
@@ -99,7 +99,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
 
       - name: Upload docs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: docs
@@ -107,7 +107,7 @@ jobs:
           retention-days: 3
 
       - name: Upload dist
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: dist
@@ -128,7 +128,7 @@ jobs:
         if: always()
         id: deployment
         uses: actions/deploy-pages@v2
-          
+
       - name: Notify in Slack sdk-builds channel if new changes are published
         if: ${{ steps.publish.outputs.type }}
         uses: 8398a7/action-slack@v3
@@ -138,4 +138,3 @@ jobs:
           fields: workflow
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SDK }}
-    
