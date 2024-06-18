@@ -311,14 +311,15 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [subscription_id] The ID of the subscription whose payment intents will be retrieved.
-         * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
+         * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.id&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
          * @param {string} [customer_id] The ID of the customer whose payment intents will be retrieved.
+         * @param {string} [terminal_reader_id] The ID of the terminal reader for which payment intents will be retrieved.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentIntents: async (tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPaymentIntents: async (tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPaymentIntents', 'tilled_account', tilled_account)
             const localVarPath = `/v1/payment-intents`;
@@ -374,6 +375,10 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
 
             if (customer_id !== undefined) {
                 localVarQueryParameter['customer_id'] = customer_id;
+            }
+
+            if (terminal_reader_id !== undefined) {
+                localVarQueryParameter['terminal_reader_id'] = terminal_reader_id;
             }
 
             if (offset !== undefined) {
@@ -536,15 +541,16 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [subscription_id] The ID of the subscription whose payment intents will be retrieved.
-         * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
+         * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.id&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
          * @param {string} [customer_id] The ID of the customer whose payment intents will be retrieved.
+         * @param {string} [terminal_reader_id] The ID of the terminal reader for which payment intents will be retrieved.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPaymentIntents(tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentIntents200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listPaymentIntents(tilled_account, metadata, created_at_gte, created_at_lte, status, include_connected_accounts, subscription_id, q, customer_id, offset, limit, options);
+        async listPaymentIntents(tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentIntents200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPaymentIntents(tilled_account, metadata, created_at_gte, created_at_lte, status, include_connected_accounts, subscription_id, q, customer_id, terminal_reader_id, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -628,7 +634,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: AxiosRequestConfig): AxiosPromise<ListPaymentIntents200Response> {
-            return localVarFp.listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.terminal_reader_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates properties on a PaymentIntent object without confirming.  Depending on which properties you update, you may need to confirm the PaymentIntent again.
@@ -825,7 +831,7 @@ export interface PaymentIntentsApiListPaymentIntentsRequest {
     readonly subscription_id?: string
 
     /**
-     * Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
+     * Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.id&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
      * @type {string}
      * @memberof PaymentIntentsApiListPaymentIntents
      */
@@ -837,6 +843,13 @@ export interface PaymentIntentsApiListPaymentIntentsRequest {
      * @memberof PaymentIntentsApiListPaymentIntents
      */
     readonly customer_id?: string
+
+    /**
+     * The ID of the terminal reader for which payment intents will be retrieved.
+     * @type {string}
+     * @memberof PaymentIntentsApiListPaymentIntents
+     */
+    readonly terminal_reader_id?: string
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -957,7 +970,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @memberof PaymentIntentsApi
      */
     public listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: AxiosRequestConfig) {
-        return PaymentIntentsApiFp(this.configuration).listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return PaymentIntentsApiFp(this.configuration).listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.terminal_reader_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

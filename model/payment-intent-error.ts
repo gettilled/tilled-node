@@ -71,7 +71,8 @@ export const PaymentIntentErrorCode = {
     TRY_AGAIN_LATER: 'try_again_later',
     INTERNAL_ERROR: 'internal_error',
     NO_ACTION_TAKEN: 'no_action_taken',
-    CARD_REMOVED: 'card_removed'
+    CARD_REMOVED: 'card_removed',
+    CANCELED: 'canceled'
 } as const;
 
 export type PaymentIntentErrorCode = typeof PaymentIntentErrorCode[keyof typeof PaymentIntentErrorCode];

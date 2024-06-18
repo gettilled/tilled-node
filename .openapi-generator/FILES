@@ -235,6 +235,7 @@ model/register-dto-account.ts
 model/register-dto-user.ts
 model/register-dto.ts
 model/register-params.ts
+model/report-additional-filter.ts
 model/report-metadata-key.ts
 model/report-run-create-params-parameters.ts
 model/report-run-create-params.ts
@@ -247,6 +248,7 @@ model/subscription-retry-params.ts
 model/subscription-update-params.ts
 model/subscription.ts
 model/terminal-reader-connection-status.ts
+model/terminal-reader-settings.ts
 model/terminal-reader-update-params.ts
 model/terminal-reader.ts
 model/terms-and-conditions-detail.ts

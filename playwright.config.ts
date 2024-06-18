@@ -37,8 +37,8 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+      use: { ...devices['Desktop Chrome'] }
+    }
 
     // {
     //   name: 'firefox',
@@ -56,6 +56,6 @@ export default defineConfig({
   webServer: {
     command: 'npm run start-test-project',
     url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-  },
+    reuseExistingServer: !process.env.CI
+  }
 });

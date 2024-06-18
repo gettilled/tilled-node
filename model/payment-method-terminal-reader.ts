@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { TerminalReader } from './terminal-reader';
+// May contain unused imports in some cases
+// @ts-ignore
+import { TerminalReaderSettings } from './terminal-reader-settings';
 
 /**
  * @type PaymentMethodTerminalReader

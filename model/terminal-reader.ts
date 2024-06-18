@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { TerminalReaderSettings } from './terminal-reader-settings';
 
 /**
  * 
@@ -68,11 +71,18 @@ export interface TerminalReader {
      * @memberof TerminalReader
      */
     'serial_number'?: string;
+    /**
+     * 
+     * @type {TerminalReaderSettings}
+     * @memberof TerminalReader
+     */
+    'settings'?: TerminalReaderSettings;
 }
 
 export const TerminalReaderType = {
-    _100: 'vl_100',
-    _110: 'vl_110'
+    VL_100: 'vl_100',
+    VL_110: 'vl_110',
+    VP_500: 'vp_500'
 } as const;
 
 export type TerminalReaderType = typeof TerminalReaderType[keyof typeof TerminalReaderType];

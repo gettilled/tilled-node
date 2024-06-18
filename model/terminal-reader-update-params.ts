@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { TerminalReaderSettings } from './terminal-reader-settings';
 
 /**
  * 
@@ -38,5 +41,11 @@ export interface TerminalReaderUpdateParams {
      * @memberof TerminalReaderUpdateParams
      */
     'serial_number'?: string;
+    /**
+     * 
+     * @type {TerminalReaderSettings}
+     * @memberof TerminalReaderUpdateParams
+     */
+    'settings'?: TerminalReaderSettings;
 }
 

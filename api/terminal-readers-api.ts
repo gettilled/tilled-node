@@ -140,12 +140,12 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
+         * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, limit?: number, offset?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listTerminalReaders: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listTerminalReaders', 'tilled_account', tilled_account)
             const localVarPath = `/v1/terminal-readers`;
@@ -191,12 +191,12 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
                     created_at_lte;
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
             if (tilled_account != null) {
@@ -311,13 +311,13 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {number} [limit] 
-         * @param {number} [offset] 
+         * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
+         * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTerminalReaders(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, limit?: number, offset?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, metadata, q, include_connected_accounts, created_at_gte, created_at_lte, limit, offset, options);
+        async listTerminalReaders(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, metadata, q, include_connected_accounts, created_at_gte, created_at_lte, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -371,7 +371,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
-            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.limit, requestParameters.offset, options).then((request) => request(axios, basePath));
+            return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the terminal reader. Any parameters not provided will be left unchanged.
@@ -477,18 +477,18 @@ export interface TerminalReadersApiListTerminalReadersRequest {
     readonly created_at_lte?: string
 
     /**
-     * 
-     * @type {number}
-     * @memberof TerminalReadersApiListTerminalReaders
-     */
-    readonly limit?: number
-
-    /**
-     * 
+     * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
      * @memberof TerminalReadersApiListTerminalReaders
      */
     readonly offset?: number
+
+    /**
+     * The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
+     * @type {number}
+     * @memberof TerminalReadersApiListTerminalReaders
+     */
+    readonly limit?: number
 }
 
 /**
@@ -559,7 +559,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @memberof TerminalReadersApi
      */
     public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig) {
-        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.limit, requestParameters.offset, options).then((request) => request(this.axios, this.basePath));
+        return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { ReportAdditionalFilter } from './report-additional-filter';
+// May contain unused imports in some cases
+// @ts-ignore
 import { ReportMetadataKey } from './report-metadata-key';
 // May contain unused imports in some cases
 // @ts-ignore
