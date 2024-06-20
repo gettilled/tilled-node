@@ -73,6 +73,7 @@ export const AccountDocumentSubtype = {
     INVOICE: 'invoice',
     DL_PASSPORT: 'dl_passport',
     DL_BACK: 'dl_back',
+    BANK_STATEMENT: 'bank_statement',
     BUSINESS_MODEL: 'business_model',
     PRICING_MODEL: 'pricing_model',
     WEBSITE: 'website',

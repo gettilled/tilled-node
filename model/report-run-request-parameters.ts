@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { ReportAdditionalFilter } from './report-additional-filter';
+// May contain unused imports in some cases
+// @ts-ignore
 import { ReportMetadataKey } from './report-metadata-key';
 
 /**
@@ -41,6 +44,12 @@ export interface ReportRunRequestParameters {
      * @memberof ReportRunRequestParameters
      */
     'account_id'?: string;
+    /**
+     * List of additional filters on specific reports Note: Currenlty only supports `payouts_summary_2` report type with a key value of `search_filter`.
+     * @type {Array<ReportAdditionalFilter>}
+     * @memberof ReportRunRequestParameters
+     */
+    'additional_filters'?: Array<ReportAdditionalFilter>;
     /**
      * List of custom metadata keys to include as columns in the report
      * @type {Array<ReportMetadataKey>}

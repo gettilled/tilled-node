@@ -239,7 +239,9 @@ export const BalanceTransactionFeeSubtype = {
     MONTHLY_ACCOUNT: 'monthly_account',
     MONTHLY_MINIMUM_PROCESSING: 'monthly_minimum_processing',
     CARD_ACCOUNT_UPDATE: 'card_account_update',
+    MONTHLY_TERMINAL: 'monthly_terminal',
     RETRIEVAL: 'retrieval',
+    APPLE_PAY_BALANCE_TRANSFER: 'apple_pay_balance_transfer',
     GOODS_AND_SERVICES: 'goods_and_services',
     HARMONIZED_SALES: 'harmonized_sales'
 } as const;

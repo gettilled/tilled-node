@@ -478,13 +478,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * Returns a list of your account\'s users.
          * @summary List all Users
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
-         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers: async (tilled_account: string, offset?: number, limit?: number, include_connected_accounts?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUsers: async (tilled_account: string, include_connected_accounts?: boolean, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listUsers', 'tilled_account', tilled_account)
             const localVarPath = `/v1/users`;
@@ -506,16 +506,16 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // authentication TilledApiKey required
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
+            if (include_connected_accounts !== undefined) {
+                localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
+            }
+
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
             }
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
-            }
-
-            if (include_connected_accounts !== undefined) {
-                localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
             }
 
             if (tilled_account != null) {
@@ -935,14 +935,14 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * Returns a list of your account\'s users.
          * @summary List all Users
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
-         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUsers(tilled_account: string, offset?: number, limit?: number, include_connected_accounts?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsers200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(tilled_account, offset, limit, include_connected_accounts, options);
+        async listUsers(tilled_account: string, include_connected_accounts?: boolean, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsers200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(tilled_account, include_connected_accounts, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1133,7 +1133,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         listUsers(requestParameters: UsersApiListUsersRequest, options?: AxiosRequestConfig): AxiosPromise<ListUsers200Response> {
-            return localVarFp.listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, requestParameters.include_connected_accounts, options).then((request) => request(axios, basePath));
+            return localVarFp.listUsers(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a JSON Web Token with email and password.
@@ -1403,6 +1403,13 @@ export interface UsersApiListUsersRequest {
     readonly tilled_account: string
 
     /**
+     * Whether or not to include the results from any connected accounts.
+     * @type {boolean}
+     * @memberof UsersApiListUsers
+     */
+    readonly include_connected_accounts?: boolean
+
+    /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
      * @memberof UsersApiListUsers
@@ -1415,13 +1422,6 @@ export interface UsersApiListUsersRequest {
      * @memberof UsersApiListUsers
      */
     readonly limit?: number
-
-    /**
-     * Whether or not to include the results from any connected accounts.
-     * @type {boolean}
-     * @memberof UsersApiListUsers
-     */
-    readonly include_connected_accounts?: boolean
 }
 
 /**
@@ -1654,7 +1654,7 @@ export class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     public listUsers(requestParameters: UsersApiListUsersRequest, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).listUsers(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, requestParameters.include_connected_accounts, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).listUsers(requestParameters.tilled_account, requestParameters.include_connected_accounts, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -21,6 +21,18 @@
  */
 export interface Address {
     /**
+     * City, district, suburb, town, or village.
+     * @type {string}
+     * @memberof Address
+     */
+    'city': string;
+    /**
+     * 2-digit Country code (e.g. \'US\', \'CA\') [See ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+     * @type {string}
+     * @memberof Address
+     */
+    'country': string;
+    /**
      * Time at which the object was created.
      * @type {string}
      * @memberof Address
@@ -33,41 +45,29 @@ export interface Address {
      */
     'id': string;
     /**
-     * Time at which the object was last updated.
-     * @type {string}
-     * @memberof Address
-     */
-    'updated_at': string;
-    /**
-     * City, district, suburb, town, or village.
-     * @type {string}
-     * @memberof Address
-     */
-    'city'?: string;
-    /**
-     * 2-digit Country code (e.g. \'US\', \'CA\') [See ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-     * @type {string}
-     * @memberof Address
-     */
-    'country'?: string;
-    /**
      * Zip code or postal code of the address. No special characters.
      * @type {string}
      * @memberof Address
      */
-    'postal_code'?: string;
+    'postal_code': string;
     /**
      * State/province/region of the address. For US and CA use 2-digit state/province codes (e.g. \'AL\', \'AK\', \'BC\', \'ON\', \'etc\'.)
      * @type {string}
      * @memberof Address
      */
-    'state'?: string;
+    'state': string;
     /**
      * Address line 1 (e.g., street, PO Box, or company name).
      * @type {string}
      * @memberof Address
      */
-    'street'?: string;
+    'street': string;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof Address
+     */
+    'updated_at': string;
     /**
      * Address line 2 (e.g., apartment, suite, unit, or building).
      * @type {string}

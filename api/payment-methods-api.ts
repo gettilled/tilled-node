@@ -42,7 +42,7 @@ import { PaymentMethodUpdateParams } from '../model';
 export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.
+         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.  Note: When attaching a `card_present` payment method to a customer, the payment method must have been used successfully on a terminal before this action can be taken.  Note: Payment methods expire 15 minutes after creation. If this time has passed, a payment method can no longer be attached to a `customer`.
          * @summary Attach a Payment Method to a Customer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
@@ -430,7 +430,7 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentMethodsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.
+         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.  Note: When attaching a `card_present` payment method to a customer, the payment method must have been used successfully on a terminal before this action can be taken.  Note: Payment methods expire 15 minutes after creation. If this time has passed, a payment method can no longer be attached to a `customer`.
          * @summary Attach a Payment Method to a Customer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
@@ -531,7 +531,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
     const localVarFp = PaymentMethodsApiFp(configuration)
     return {
         /**
-         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.
+         * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.  Note: When attaching a `card_present` payment method to a customer, the payment method must have been used successfully on a terminal before this action can be taken.  Note: Payment methods expire 15 minutes after creation. If this time has passed, a payment method can no longer be attached to a `customer`.
          * @summary Attach a Payment Method to a Customer
          * @param {PaymentMethodsApiAttachPaymentMethodToCustomerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -801,7 +801,7 @@ export interface PaymentMethodsApiUpdatePaymentMethodRequest {
  */
 export class PaymentMethodsApi extends BaseAPI {
     /**
-     * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.
+     * Attaches a PaymentMethod to a Customer. This effectively changes the payment method from single-use to reusable.  Note: When attaching a `card_present` payment method to a customer, the payment method must have been used successfully on a terminal before this action can be taken.  Note: Payment methods expire 15 minutes after creation. If this time has passed, a payment method can no longer be attached to a `customer`.
      * @summary Attach a Payment Method to a Customer
      * @param {PaymentMethodsApiAttachPaymentMethodToCustomerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

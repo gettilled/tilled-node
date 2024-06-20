@@ -111,7 +111,7 @@ export interface BusinessLegalEntity {
      */
     'type': BusinessLegalEntityType;
     /**
-     * Estimated yearly volume of transactions of the business. * `LOW` = 0-50k * `MEDIUM` = 50-100k * `HIGH` = 100-250k * `VERY_HIGH` = 250k+
+     * Estimated yearly processing volume of transactions of the business. * `LOW` = 0-50k * `MEDIUM` = 50-100k * `HIGH` = 100-250k * `VERY_HIGH` = 250k+
      * @type {string}
      * @memberof BusinessLegalEntity
      */
@@ -129,6 +129,18 @@ export interface BusinessLegalEntity {
      * @memberof BusinessLegalEntity
      */
     'annual_revenue'?: BusinessLegalEntityAnnualRevenue;
+    /**
+     * Average transaction amount, in minor units for Card payments. (e.g. $100.00 = 10000 minor units)
+     * @type {number}
+     * @memberof BusinessLegalEntity
+     */
+    'average_transaction_amount_card'?: number;
+    /**
+     * Average transaction amount, in minor units for Direct Debit payments. (e.g. $100.00 = 10000 minor units)
+     * @type {number}
+     * @memberof BusinessLegalEntity
+     */
+    'average_transaction_amount_debit'?: number;
     /**
      * Average number of transactions per month
      * @type {number}
@@ -165,6 +177,12 @@ export interface BusinessLegalEntity {
      * @memberof BusinessLegalEntity
      */
     'incorporation_year'?: number;
+    /**
+     * Estimated monthly volume amount of the business, in minor units. (e.g. $100.00 = 10000 minor units)
+     * @type {number}
+     * @memberof BusinessLegalEntity
+     */
+    'monthly_volume_amount'?: number;
     /**
      * Website of the business.
      * @type {string}
@@ -207,7 +225,30 @@ export const BusinessLegalEntityCategory = {
     VET: 'VET',
     WEB_DEV: 'WEB_DEV',
     WEB_HOSTING: 'WEB_HOSTING',
-    OTHER: 'OTHER'
+    OTHER: 'OTHER',
+    QUICK_PAY_FAST_FOOD: 'QUICK_PAY_FAST_FOOD',
+    PARKING: 'PARKING',
+    CAR_WASH: 'CAR_WASH',
+    ELEM_SECOND_SCHOOL: 'ELEM_SECOND_SCHOOL',
+    COLLEGE_UNIV_SCHOOL: 'COLLEGE_UNIV_SCHOOL',
+    CHILD_CARE: 'CHILD_CARE',
+    RELIGIOUS_ORG: 'RELIGIOUS_ORG',
+    VOCA_TRADE_SCHOOL: 'VOCA_TRADE_SCHOOL',
+    AMBULANCE: 'AMBULANCE',
+    DOCTOR: 'DOCTOR',
+    OSTEOPATH: 'OSTEOPATH',
+    CHIROPRACTOR: 'CHIROPRACTOR',
+    EYE_DOCTOR: 'EYE_DOCTOR',
+    OPTICAL: 'OPTICAL',
+    PODIATRY: 'PODIATRY',
+    GENERAL_CONTR: 'GENERAL_CONTR',
+    HVAC_PLUMBING_CONTR: 'HVAC_PLUMBING_CONTR',
+    ELEC_CONTR: 'ELEC_CONTR',
+    MASON_CONTR: 'MASON_CONTR',
+    CARPENTRY_CONTR: 'CARPENTRY_CONTR',
+    ROOF_SIDING_METAL_CONTR: 'ROOF_SIDING_METAL_CONTR',
+    CONCRETE_CONTR: 'CONCRETE_CONTR',
+    TRUCKING_STORAGE: 'TRUCKING_STORAGE'
 } as const;
 
 export type BusinessLegalEntityCategory = typeof BusinessLegalEntityCategory[keyof typeof BusinessLegalEntityCategory];

@@ -39,6 +39,12 @@ export interface UserInvitation {
      */
     'email': string;
     /**
+     * Time at which the object will expire.
+     * @type {string}
+     * @memberof UserInvitation
+     */
+    'expires_at': string;
+    /**
      * Unique identifier for the object.
      * @type {string}
      * @memberof UserInvitation
