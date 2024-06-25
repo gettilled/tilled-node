@@ -15,19 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBrandingCreateParams } from './account-settings-branding-create-params';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBrandingGlobalDashboardSettings } from './account-settings-branding-global-dashboard-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
+import { GlobalDashboardSettings } from './global-dashboard-settings';
 
 /**
- * @type AccountSettingsCreateParamsBranding
- * The account branding settings.
+ * @type AccountSettingsBrandingGlobalDashboardSettings
+ * Turn on or off dashboard preferences for all merchants by default. These settings can not be overridden by individual merchants, and are set by the partner. Defaults to true for all types.
  * @export
  */
-export type AccountSettingsCreateParamsBranding = AccountSettingsBrandingCreateParams;
+export type AccountSettingsBrandingGlobalDashboardSettings = GlobalDashboardSettings;
 
 

@@ -44,6 +44,7 @@ model/account-document.ts
 model/account-requirements-error.ts
 model/account-role.ts
 model/account-settings-branding-create-params.ts
+model/account-settings-branding-global-dashboard-settings.ts
 model/account-settings-branding-global-email-settings.ts
 model/account-settings-branding.ts
 model/account-settings-create-params-branding.ts
@@ -115,6 +116,7 @@ model/document-submit-request-params.ts
 model/eft-debit-details.ts
 model/event.ts
 model/forgot-password-params.ts
+model/global-dashboard-settings.ts
 model/global-email-settings.ts
 model/health-output.ts
 model/index.ts
