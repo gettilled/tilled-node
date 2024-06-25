@@ -18,6 +18,9 @@
 import { AccountSettingsBranding } from './account-settings-branding';
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountSettingsBrandingGlobalDashboardSettings } from './account-settings-branding-global-dashboard-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
 
 /**

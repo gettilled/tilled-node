@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountSettingsBrandingGlobalDashboardSettings } from './account-settings-branding-global-dashboard-settings';
+// May contain unused imports in some cases
+// @ts-ignore
 import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
 
 /**
@@ -23,6 +26,12 @@ import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-b
  * @interface AccountSettingsBrandingCreateParams
  */
 export interface AccountSettingsBrandingCreateParams {
+    /**
+     * 
+     * @type {AccountSettingsBrandingGlobalDashboardSettings}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'global_dashboard_settings'?: AccountSettingsBrandingGlobalDashboardSettings;
     /**
      * *Will set every `global_email_settings` email type to the specified boolean value if `global_email_settings` not provided.*  Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
      * @type {boolean}
