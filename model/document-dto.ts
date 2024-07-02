@@ -122,6 +122,7 @@ export const DocumentDtoSubtype = {
     DL_PASSPORT: 'dl_passport',
     DL_BACK: 'dl_back',
     BANK_STATEMENT: 'bank_statement',
+    SIGNED_MERCHANT_AGREEMENT: 'signed_merchant_agreement',
     BUSINESS_MODEL: 'business_model',
     PRICING_MODEL: 'pricing_model',
     WEBSITE: 'website',
