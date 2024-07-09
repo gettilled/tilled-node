@@ -24,8 +24,15 @@ export interface DocumentSubmitRequestParams {
      * The file ID of an uploaded [File](#tag/Files) for the document. File type must be `onboarding_documentation`. Required when document type is `file`
      * @type {string}
      * @memberof DocumentSubmitRequestParams
+     * @deprecated
      */
     'file_id'?: string;
+    /**
+     * The list of file IDs of uploaded [File(s)](#tag/Files) for the document, of type `onboarding_documentation`
+     * @type {Array<string>}
+     * @memberof DocumentSubmitRequestParams
+     */
+    'file_ids'?: Array<string>;
     /**
      * Written response to a document that has been requested, alternative to a [File](#tag/Files). Required when document type is `written`
      * @type {string}

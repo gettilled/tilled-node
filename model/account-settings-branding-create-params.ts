@@ -27,6 +27,12 @@ import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-b
  */
 export interface AccountSettingsBrandingCreateParams {
     /**
+     * The File ID of an uploaded [File](#tag/Files) of type `logo`
+     * @type {string}
+     * @memberof AccountSettingsBrandingCreateParams
+     */
+    'dark_mode_logo_file_id'?: string;
+    /**
      * 
      * @type {AccountSettingsBrandingGlobalDashboardSettings}
      * @memberof AccountSettingsBrandingCreateParams
