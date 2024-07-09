@@ -72,8 +72,15 @@ export interface DocumentDto {
      * The file ID of an uploaded [File](#tag/Files) for the document, of type `onboarding_documentation`
      * @type {string}
      * @memberof DocumentDto
+     * @deprecated
      */
     'file_id'?: string;
+    /**
+     * The list of file IDs of uploaded [File(s)](#tag/Files) for the document, of type `onboarding_documentation`
+     * @type {Array<string>}
+     * @memberof DocumentDto
+     */
+    'file_ids'?: Array<string>;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}
