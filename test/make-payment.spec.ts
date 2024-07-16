@@ -78,12 +78,15 @@ test('create and confirm a payment intent with a new card payment method', async
   // expect console.log to show the payment intent status
   // this confirms that we were able to successfully confirm the payment intent
   expect(consoleMsgArr.join('\n')).toMatch(
-    generateRegexFromArray([
-      'creating new pm card {name: Testy McTesterson, address: Object}',
-      'new pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
-      'attaching pm to customer {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}',
-      'using saved pm {ach_debit: null, billing_details: Object, card: Object, card_present: null, chargeable: true}'
-    ])
+    generateRegexFromArray(
+      [
+        'creating new pm card {name: Testy McTesterson, address: Object}',
+        'new pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
+        'attaching pm to customer {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
+        'using saved pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:'
+      ],
+      DelimiterEnum.wildcards
+    )
   );
 });
 

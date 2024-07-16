@@ -133,7 +133,8 @@ export interface Account {
 
 export const AccountType = {
     PARTNER: 'partner',
-    MERCHANT: 'merchant'
+    MERCHANT: 'merchant',
+    RESELLER: 'reseller'
 } as const;
 
 export type AccountType = typeof AccountType[keyof typeof AccountType];

@@ -97,7 +97,8 @@ export const ModelFileType = {
     JPG: 'jpg',
     PDF: 'pdf',
     CSV: 'csv',
-    TIFF: 'tiff'
+    TIFF: 'tiff',
+    ICO: 'ico'
 } as const;
 
 export type ModelFileType = typeof ModelFileType[keyof typeof ModelFileType];
