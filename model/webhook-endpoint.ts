@@ -95,6 +95,7 @@ export const WebhookEndpointEnabledEvents = {
     PAYMENT_INTENT_AMOUNT_CAPTURABLE_UPDATED: 'payment_intent.amount_capturable_updated',
     PAYMENT_METHOD_ATTACHED: 'payment_method.attached',
     PAYMENT_METHOD_DETACHED: 'payment_method.detached',
+    PAYMENT_METHOD_UPDATED: 'payment_method.updated',
     PAYOUT_CREATED: 'payout.created',
     PAYOUT_FAILED: 'payout.failed',
     PAYOUT_PAID: 'payout.paid',
