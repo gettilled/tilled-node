@@ -219,6 +219,7 @@ export const BalanceTransactionFeeSubtype = {
     DISCOVER_DATA_USAGE: 'discover_data_usage',
     DUES_AND_ASSESSMENTS: 'dues_and_assessments',
     FIXED_ACQUIRER_NETWORK: 'fixed_acquirer_network',
+    MASTERCARD_ACQUIRER_BRAND_VOLUME: 'mastercard_acquirer_brand_volume',
     MASTERCARD_ACQUIRER_MERCHANT_ADVICE_CODE: 'mastercard_acquirer_merchant_advice_code',
     MASTERCARD_ACQUIRER_PROGRAM_SUPPORT: 'mastercard_acquirer_program_support',
     MASTERCARD_ANNUAL_LOCATION: 'mastercard_annual_location',
