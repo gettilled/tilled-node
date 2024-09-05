@@ -244,13 +244,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Returns a list of Files. The Files are sorted with the most recently created appearing first.
          * @summary List all Files
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>} [purposes] A list of file purposes to filter on.
+         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>} [purposes] A list of file purposes to filter on.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFiles: async (tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listFiles: async (tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listFiles', 'tilled_account', tilled_account)
             const localVarPath = `/v1/files`;
@@ -363,13 +363,13 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Returns a list of Files. The Files are sorted with the most recently created appearing first.
          * @summary List all Files
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>} [purposes] A list of file purposes to filter on.
+         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>} [purposes] A list of file purposes to filter on.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFiles(tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFiles200Response>> {
+        async listFiles(tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFiles200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listFiles(tilled_account, purposes, offset, limit, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -549,10 +549,10 @@ export interface FilesApiListFilesRequest {
 
     /**
      * A list of file purposes to filter on.
-     * @type {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>}
+     * @type {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>}
      * @memberof FilesApiListFiles
      */
-    readonly purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation'>
+    readonly purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
