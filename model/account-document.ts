@@ -75,6 +75,7 @@ export const AccountDocumentSubtype = {
     DL_BACK: 'dl_back',
     BANK_STATEMENT: 'bank_statement',
     SIGNED_MERCHANT_AGREEMENT: 'signed_merchant_agreement',
+    ISV_COVER_SHEET: 'isv_cover_sheet',
     BUSINESS_MODEL: 'business_model',
     PRICING_MODEL: 'pricing_model',
     WEBSITE: 'website',
