@@ -13,7 +13,6 @@ api/events-api.ts
 api/files-api.ts
 api/health-api.ts
 api/onboarding-api.ts
-api/outbound-transfers-api.ts
 api/payment-intents-api.ts
 api/payment-methods-api.ts
 api/payouts-api.ts
@@ -142,8 +141,6 @@ model/list-events200-response-all-of.ts
 model/list-events200-response.ts
 model/list-files200-response-all-of.ts
 model/list-files200-response.ts
-model/list-outbound-transfers200-response-all-of.ts
-model/list-outbound-transfers200-response.ts
 model/list-payment-intents200-response-all-of.ts
 model/list-payment-intents200-response.ts
 model/list-payment-methods200-response-all-of.ts
@@ -178,8 +175,6 @@ model/merchant-application-business-legal-entity.ts
 model/merchant-application-create-params.ts
 model/merchant-application.ts
 model/model-file.ts
-model/outbound-transfer-create-params.ts
-model/outbound-transfer.ts
 model/paginated-dto.ts
 model/partial-address.ts
 model/payment-intent-cancel-params.ts

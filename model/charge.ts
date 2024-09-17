@@ -173,7 +173,8 @@ export const ChargeFailureCode = {
     INTERNAL_ERROR: 'internal_error',
     NO_ACTION_TAKEN: 'no_action_taken',
     CARD_REMOVED: 'card_removed',
-    CANCELED: 'canceled'
+    CANCELED: 'canceled',
+    DEVICE_IS_BUSY: 'device_is_busy'
 } as const;
 
 export type ChargeFailureCode = typeof ChargeFailureCode[keyof typeof ChargeFailureCode];
