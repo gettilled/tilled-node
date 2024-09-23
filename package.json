@@ -1,6 +1,6 @@
 {
   "name": "tilled-node",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "NodeJS SDK client for Tilled's API",
   "files": [
     "dist"

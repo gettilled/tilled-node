@@ -262,6 +262,7 @@ export const BalanceTransactionFeeSubtype = {
     MONTHLY_TERMINAL: 'monthly_terminal',
     RETRIEVAL: 'retrieval',
     APPLE_PAY_BALANCE_TRANSFER: 'apple_pay_balance_transfer',
+    CHARGEBACK: 'chargeback',
     GOODS_AND_SERVICES: 'goods_and_services',
     HARMONIZED_SALES: 'harmonized_sales'
 } as const;
