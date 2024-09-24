@@ -97,7 +97,7 @@ export interface Refund {
      */
     'payment_method_id'?: string;
     /**
-     * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated  by Tilled (`expired_uncaptured_charge`)
+     * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated  by Tilled (`expired_uncaptured_charge`, `partial_capture`, or `reversal`)
      * @type {string}
      * @memberof Refund
      */
@@ -132,7 +132,8 @@ export const RefundReason = {
     FRAUDULENT: 'fraudulent',
     REQUESTED_BY_CUSTOMER: 'requested_by_customer',
     EXPIRED_UNCAPTURED_CHARGE: 'expired_uncaptured_charge',
-    PARTIAL_CAPTURE: 'partial_capture'
+    PARTIAL_CAPTURE: 'partial_capture',
+    REVERSAL: 'reversal'
 } as const;
 
 export type RefundReason = typeof RefundReason[keyof typeof RefundReason];
