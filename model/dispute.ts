@@ -102,6 +102,12 @@ export interface Dispute {
      */
     'evidence'?: DisputeEvidence;
     /**
+     * Time at which the a dispute will be marked lost.
+     * @type {string}
+     * @memberof Dispute
+     */
+    'losing_at'?: string;
+    /**
      * Description explaining the reason for a dispute
      * @type {string}
      * @memberof Dispute
