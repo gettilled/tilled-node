@@ -115,7 +115,7 @@ export interface Charge {
      */
     'failed_at'?: string;
     /**
-     * Error code explaining reason for charge failure.
+     * Message to user explaining how to remedy a failure. Error code explaining reason for charge failure.
      * @type {string}
      * @memberof Charge
      */

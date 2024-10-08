@@ -39,6 +39,12 @@ export interface DocumentDto {
      */
     'id': string;
     /**
+     * Time at which the document request needs to be responded to.
+     * @type {string}
+     * @memberof DocumentDto
+     */
+    'respond_by': string;
+    /**
      * The status of the document
      * @type {string}
      * @memberof DocumentDto
