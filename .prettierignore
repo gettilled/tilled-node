@@ -55,3 +55,6 @@ Thumbs.db
 
 # Warnings file
 warnings.log
+
+# ignore submodule
+test/project/
