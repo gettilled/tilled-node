@@ -79,6 +79,7 @@ export const WebhookEndpointEnabledEvents = {
     CHARGE_SUCCEEDED: 'charge.succeeded',
     CHARGE_PENDING: 'charge.pending',
     CHARGE_REFUNDED: 'charge.refunded',
+    CHARGE_REFUND_PENDING: 'charge.refund.pending',
     CHARGE_REFUND_UPDATED: 'charge.refund.updated',
     CHARGE_UPDATED: 'charge.updated',
     CUSTOMER_CREATED: 'customer.created',
