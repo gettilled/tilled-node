@@ -81,7 +81,7 @@ export interface PaymentMethodCreateParams {
      */
     'payment_token'?: string;
     /**
-     * If this is a `card_present` PaymentMethod, this is the id of terminal reader you want to use to collect card information. Starts with a prefix `term_`
+     * Required if this is a `card_present` PaymentMethod, this is the id of terminal reader you want to use to collect card information. Starts with a prefix `term_`
      * @type {string}
      * @memberof PaymentMethodCreateParams
      */
