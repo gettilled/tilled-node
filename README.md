@@ -1,9 +1,5 @@
 # tilled-node
 
-## Disclaimer
-
-This project is still in beta. It is generated and regenerated regularly when we make changes to our spec, but we cannot guarantee it's reliability at this time.
-
 ---
 
 ## Description
