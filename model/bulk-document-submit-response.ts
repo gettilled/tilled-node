@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BulkDocumentSubmissionResponse } from './bulk-document-submission-response';
+import type { BulkDocumentSubmissionResponse } from './bulk-document-submission-response';
 
 /**
  * 

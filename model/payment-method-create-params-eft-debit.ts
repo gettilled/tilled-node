@@ -13,15 +13,36 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { PaymentMethodCreateParamsEftDebit } from './payment-method-create-params-eft-debit';
 
 /**
- * @type PaymentMethodCreateParamsEftDebit
- * If this is an `eft_debit` PaymentMethod, this hash contains details about the EFT Direct Debit bank account.
+ * 
  * @export
+ * @interface PaymentMethodCreateParamsEftDebit
  */
-export type {PaymentMethodCreateParamsEftDebit};
-
+export interface PaymentMethodCreateParamsEftDebit {
+    /**
+     * The name of the customer or company that owns the bank account.
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsEftDebit
+     */
+    'account_holder_name': string;
+    /**
+     * This is the bank account number
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsEftDebit
+     */
+    'account_number': string;
+    /**
+     * The sequence of three-digits used by banks to identify specific financial institutions
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsEftDebit
+     */
+    'institution_id': string;
+    /**
+     * The sequence of five-digits used by banks to identify specific financial institution\'s branch
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsEftDebit
+     */
+    'transit_number': string;
+}
 

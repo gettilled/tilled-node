@@ -14,21 +14,21 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListTerminalReaders200Response } from '../model';
+import type { ListTerminalReaders200Response } from '../model';
 // @ts-ignore
-import { TerminalReader } from '../model';
+import type { TerminalReader } from '../model';
 // @ts-ignore
-import { TerminalReaderConnectionStatus } from '../model';
+import type { TerminalReaderConnectionStatus } from '../model';
 // @ts-ignore
-import { TerminalReaderUpdateParams } from '../model';
+import type { TerminalReaderUpdateParams } from '../model';
 /**
  * TerminalReadersApi - axios parameter creator
  * @export
@@ -43,7 +43,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminal: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTerminal: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getTerminal', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -91,7 +91,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminalStatus: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTerminalStatus: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getTerminalStatus', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -145,7 +145,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listTerminalReaders: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listTerminalReaders', 'tilled_account', tilled_account)
             const localVarPath = `/v1/terminal-readers`;
@@ -168,7 +168,9 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (q !== undefined) {
@@ -223,7 +225,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTerminal: async (tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateTerminal: async (tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateTerminal', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -286,9 +288,11 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTerminal(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
+        async getTerminal(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTerminal(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TerminalReadersApi.getTerminal']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the network connection status of an existing Terminal Reader.
@@ -298,9 +302,11 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTerminalStatus(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReaderConnectionStatus>> {
+        async getTerminalStatus(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReaderConnectionStatus>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTerminalStatus(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TerminalReadersApi.getTerminalStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of an Account\'s Terminal Readers. The Terminal Readers are sorted with the most recently created appearing first.
@@ -316,9 +322,11 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTerminalReaders(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
+        async listTerminalReaders(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTerminalReaders200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTerminalReaders(tilled_account, metadata, q, include_connected_accounts, created_at_gte, created_at_lte, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TerminalReadersApi.listTerminalReaders']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates the Terminal Reader by setting the values of the provided parameters. Any parameters not provided will be left unchanged.
@@ -329,9 +337,11 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTerminal(tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
+        async updateTerminal(tilled_account: string, id: string, TerminalReaderUpdateParams: TerminalReaderUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReader>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTerminal(tilled_account, id, TerminalReaderUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TerminalReadersApi.updateTerminal']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -350,7 +360,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReader> {
+        getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: RawAxiosRequestConfig): AxiosPromise<TerminalReader> {
             return localVarFp.getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -360,7 +370,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReaderConnectionStatus> {
+        getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<TerminalReaderConnectionStatus> {
             return localVarFp.getTerminalStatus(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -370,7 +380,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
+        listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListTerminalReaders200Response> {
             return localVarFp.listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -380,7 +390,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: AxiosRequestConfig): AxiosPromise<TerminalReader> {
+        updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: RawAxiosRequestConfig): AxiosPromise<TerminalReader> {
             return localVarFp.updateTerminal(requestParameters.tilled_account, requestParameters.id, requestParameters.TerminalReaderUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -534,7 +544,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TerminalReadersApi
      */
-    public getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: AxiosRequestConfig) {
+    public getTerminal(requestParameters: TerminalReadersApiGetTerminalRequest, options?: RawAxiosRequestConfig) {
         return TerminalReadersApiFp(this.configuration).getTerminal(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -546,7 +556,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TerminalReadersApi
      */
-    public getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: AxiosRequestConfig) {
+    public getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: RawAxiosRequestConfig) {
         return TerminalReadersApiFp(this.configuration).getTerminalStatus(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -558,7 +568,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TerminalReadersApi
      */
-    public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: AxiosRequestConfig) {
+    public listTerminalReaders(requestParameters: TerminalReadersApiListTerminalReadersRequest, options?: RawAxiosRequestConfig) {
         return TerminalReadersApiFp(this.configuration).listTerminalReaders(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -570,7 +580,8 @@ export class TerminalReadersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TerminalReadersApi
      */
-    public updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: AxiosRequestConfig) {
+    public updateTerminal(requestParameters: TerminalReadersApiUpdateTerminalRequest, options?: RawAxiosRequestConfig) {
         return TerminalReadersApiFp(this.configuration).updateTerminal(requestParameters.tilled_account, requestParameters.id, requestParameters.TerminalReaderUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

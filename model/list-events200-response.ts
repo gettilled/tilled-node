@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Event } from './event';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListEvents200ResponseAllOf } from './list-events200-response-all-of';
+import type { Event } from './event';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { EventsAllOf } from './list-events200-response-all-of';
 
 /**
  * @type ListEvents200Response
  * @export
  */
-export type ListEvents200Response = ListEvents200ResponseAllOf & PaginatedDto;
+export type ListEvents200Response = EventsAllOf & PaginatedDto;
 
 

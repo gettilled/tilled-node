@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ListPaymentMethods200ResponseAllOf } from './list-payment-methods200-response-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { PaymentMethodsAllOf } from './list-payment-methods200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethod } from './payment-method';
+import type { PaymentMethod } from './payment-method';
 
 /**
  * @type ListPaymentMethods200Response
  * @export
  */
-export type ListPaymentMethods200Response = ListPaymentMethods200ResponseAllOf & PaginatedDto;
+export type ListPaymentMethods200Response = PaymentMethodsAllOf & PaginatedDto;
 
 

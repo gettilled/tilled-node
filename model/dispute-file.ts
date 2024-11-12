@@ -13,9 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { DisputeFileFile } from './dispute-file-file';
 
 /**
  * 
@@ -24,11 +21,11 @@ import { DisputeFileFile } from './dispute-file-file';
  */
 export interface DisputeFile {
     /**
-     * 
-     * @type {DisputeFileFile}
+     * The file.
+     * @type {any}
      * @memberof DisputeFile
      */
-    'file': DisputeFileFile;
+    'file': any;
     /**
      * The type of evidence provided in the file.
      * @type {string}

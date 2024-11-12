@@ -15,16 +15,37 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodBillingDetailsAddress } from './payment-method-billing-details-address';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PaymentMethodCreateParamsBillingDetails } from './payment-method-create-params-billing-details';
+import type { PartialAddress } from './partial-address';
 
 /**
- * @type PaymentMethodCreateParamsBillingDetails
- * Billing information associated with the PaymentMethod that may be used or required by most types of payment methods.
+ * 
  * @export
+ * @interface PaymentMethodCreateParamsBillingDetails
  */
-export type {PaymentMethodCreateParamsBillingDetails};
-
+export interface PaymentMethodCreateParamsBillingDetails {
+    /**
+     * The billing address.
+     * @type {PartialAddress}
+     * @memberof PaymentMethodCreateParamsBillingDetails
+     */
+    'address'?: PartialAddress;
+    /**
+     * Email address
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsBillingDetails
+     */
+    'email'?: string;
+    /**
+     * Full name
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsBillingDetails
+     */
+    'name'?: string;
+    /**
+     * Billing phone number (including extension)
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsBillingDetails
+     */
+    'phone'?: string;
+}
 

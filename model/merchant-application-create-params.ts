@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { MerchantApplicationBusinessLegalEntity } from './merchant-application-business-legal-entity';
+import type { BusinessLegalEntity } from './business-legal-entity';
 
 /**
  * 
@@ -30,10 +30,10 @@ export interface MerchantApplicationCreateParams {
      */
     'accept_terms_and_conditions': boolean;
     /**
-     * 
-     * @type {MerchantApplicationBusinessLegalEntity}
+     * Merchant account details
+     * @type {BusinessLegalEntity}
      * @memberof MerchantApplicationCreateParams
      */
-    'business_legal_entity'?: MerchantApplicationBusinessLegalEntity;
+    'business_legal_entity'?: BusinessLegalEntity;
 }
 

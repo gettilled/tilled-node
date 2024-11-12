@@ -14,21 +14,21 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListWebhookEndpoints200Response } from '../model';
+import type { ListWebhookEndpoints200Response } from '../model';
 // @ts-ignore
-import { WebhookEndpoint } from '../model';
+import type { WebhookEndpoint } from '../model';
 // @ts-ignore
-import { WebhookEndpointCreateParams } from '../model';
+import type { WebhookEndpointCreateParams } from '../model';
 // @ts-ignore
-import { WebhookEndpointUpdateParams } from '../model';
+import type { WebhookEndpointUpdateParams } from '../model';
 /**
  * WebhookEndpointsApi - axios parameter creator
  * @export
@@ -43,7 +43,7 @@ export const WebhookEndpointsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhookEndpoint: async (tilled_account: string, WebhookEndpointCreateParams: WebhookEndpointCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createWebhookEndpoint: async (tilled_account: string, WebhookEndpointCreateParams: WebhookEndpointCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createWebhookEndpoint', 'tilled_account', tilled_account)
             // verify required parameter 'WebhookEndpointCreateParams' is not null or undefined
@@ -93,7 +93,7 @@ export const WebhookEndpointsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWebhookEndpoint: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteWebhookEndpoint: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteWebhookEndpoint', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -141,7 +141,7 @@ export const WebhookEndpointsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhookEndpoint: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWebhookEndpoint: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getWebhookEndpoint', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -190,7 +190,7 @@ export const WebhookEndpointsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhookEndpoints: async (tilled_account: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listWebhookEndpoints: async (tilled_account: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listWebhookEndpoints', 'tilled_account', tilled_account)
             const localVarPath = `/v1/webhook-endpoints`;
@@ -244,7 +244,7 @@ export const WebhookEndpointsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWebhookEndpoint: async (tilled_account: string, id: string, WebhookEndpointUpdateParams: WebhookEndpointUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWebhookEndpoint: async (tilled_account: string, id: string, WebhookEndpointUpdateParams: WebhookEndpointUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateWebhookEndpoint', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -307,9 +307,11 @@ export const WebhookEndpointsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createWebhookEndpoint(tilled_account: string, WebhookEndpointCreateParams: WebhookEndpointCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
+        async createWebhookEndpoint(tilled_account: string, WebhookEndpointCreateParams: WebhookEndpointCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhookEndpoint(tilled_account, WebhookEndpointCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhookEndpointsApi.createWebhookEndpoint']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes a Webhook Endpoint. This cannot be undone.
@@ -319,9 +321,11 @@ export const WebhookEndpointsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteWebhookEndpoint(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteWebhookEndpoint(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWebhookEndpoint(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhookEndpointsApi.deleteWebhookEndpoint']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Webhook Endpoint.
@@ -331,9 +335,11 @@ export const WebhookEndpointsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWebhookEndpoint(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
+        async getWebhookEndpoint(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWebhookEndpoint(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhookEndpointsApi.getWebhookEndpoint']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Webhook Endpoints. The Webhook Endpoints are sorted with the most recently created appearing first.
@@ -344,9 +350,11 @@ export const WebhookEndpointsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listWebhookEndpoints(tilled_account: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListWebhookEndpoints200Response>> {
+        async listWebhookEndpoints(tilled_account: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListWebhookEndpoints200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listWebhookEndpoints(tilled_account, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhookEndpointsApi.listWebhookEndpoints']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates the Webhook Endpoint by setting the values of the provided parameters. Any parameters not provided will be left unchanged.
@@ -357,9 +365,11 @@ export const WebhookEndpointsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateWebhookEndpoint(tilled_account: string, id: string, WebhookEndpointUpdateParams: WebhookEndpointUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
+        async updateWebhookEndpoint(tilled_account: string, id: string, WebhookEndpointUpdateParams: WebhookEndpointUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhookEndpoint>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhookEndpoint(tilled_account, id, WebhookEndpointUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WebhookEndpointsApi.updateWebhookEndpoint']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -378,7 +388,7 @@ export const WebhookEndpointsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWebhookEndpoint(requestParameters: WebhookEndpointsApiCreateWebhookEndpointRequest, options?: AxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
+        createWebhookEndpoint(requestParameters: WebhookEndpointsApiCreateWebhookEndpointRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
             return localVarFp.createWebhookEndpoint(requestParameters.tilled_account, requestParameters.WebhookEndpointCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -388,7 +398,7 @@ export const WebhookEndpointsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWebhookEndpoint(requestParameters: WebhookEndpointsApiDeleteWebhookEndpointRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        deleteWebhookEndpoint(requestParameters: WebhookEndpointsApiDeleteWebhookEndpointRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.deleteWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -398,7 +408,7 @@ export const WebhookEndpointsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWebhookEndpoint(requestParameters: WebhookEndpointsApiGetWebhookEndpointRequest, options?: AxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
+        getWebhookEndpoint(requestParameters: WebhookEndpointsApiGetWebhookEndpointRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
             return localVarFp.getWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -408,7 +418,7 @@ export const WebhookEndpointsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listWebhookEndpoints(requestParameters: WebhookEndpointsApiListWebhookEndpointsRequest, options?: AxiosRequestConfig): AxiosPromise<ListWebhookEndpoints200Response> {
+        listWebhookEndpoints(requestParameters: WebhookEndpointsApiListWebhookEndpointsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListWebhookEndpoints200Response> {
             return localVarFp.listWebhookEndpoints(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -418,7 +428,7 @@ export const WebhookEndpointsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWebhookEndpoint(requestParameters: WebhookEndpointsApiUpdateWebhookEndpointRequest, options?: AxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
+        updateWebhookEndpoint(requestParameters: WebhookEndpointsApiUpdateWebhookEndpointRequest, options?: RawAxiosRequestConfig): AxiosPromise<WebhookEndpoint> {
             return localVarFp.updateWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, requestParameters.WebhookEndpointUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -558,7 +568,7 @@ export class WebhookEndpointsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WebhookEndpointsApi
      */
-    public createWebhookEndpoint(requestParameters: WebhookEndpointsApiCreateWebhookEndpointRequest, options?: AxiosRequestConfig) {
+    public createWebhookEndpoint(requestParameters: WebhookEndpointsApiCreateWebhookEndpointRequest, options?: RawAxiosRequestConfig) {
         return WebhookEndpointsApiFp(this.configuration).createWebhookEndpoint(requestParameters.tilled_account, requestParameters.WebhookEndpointCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -570,7 +580,7 @@ export class WebhookEndpointsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WebhookEndpointsApi
      */
-    public deleteWebhookEndpoint(requestParameters: WebhookEndpointsApiDeleteWebhookEndpointRequest, options?: AxiosRequestConfig) {
+    public deleteWebhookEndpoint(requestParameters: WebhookEndpointsApiDeleteWebhookEndpointRequest, options?: RawAxiosRequestConfig) {
         return WebhookEndpointsApiFp(this.configuration).deleteWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -582,7 +592,7 @@ export class WebhookEndpointsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WebhookEndpointsApi
      */
-    public getWebhookEndpoint(requestParameters: WebhookEndpointsApiGetWebhookEndpointRequest, options?: AxiosRequestConfig) {
+    public getWebhookEndpoint(requestParameters: WebhookEndpointsApiGetWebhookEndpointRequest, options?: RawAxiosRequestConfig) {
         return WebhookEndpointsApiFp(this.configuration).getWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -594,7 +604,7 @@ export class WebhookEndpointsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WebhookEndpointsApi
      */
-    public listWebhookEndpoints(requestParameters: WebhookEndpointsApiListWebhookEndpointsRequest, options?: AxiosRequestConfig) {
+    public listWebhookEndpoints(requestParameters: WebhookEndpointsApiListWebhookEndpointsRequest, options?: RawAxiosRequestConfig) {
         return WebhookEndpointsApiFp(this.configuration).listWebhookEndpoints(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -606,7 +616,8 @@ export class WebhookEndpointsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WebhookEndpointsApi
      */
-    public updateWebhookEndpoint(requestParameters: WebhookEndpointsApiUpdateWebhookEndpointRequest, options?: AxiosRequestConfig) {
+    public updateWebhookEndpoint(requestParameters: WebhookEndpointsApiUpdateWebhookEndpointRequest, options?: RawAxiosRequestConfig) {
         return WebhookEndpointsApiFp(this.configuration).updateWebhookEndpoint(requestParameters.tilled_account, requestParameters.id, requestParameters.WebhookEndpointUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

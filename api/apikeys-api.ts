@@ -14,21 +14,21 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ApiKey } from '../model';
+import type { ApiKey } from '../model';
 // @ts-ignore
-import { ApiKeyCreateParams } from '../model';
+import type { ApiKeyCreateParams } from '../model';
 // @ts-ignore
-import { ApiKeyUpdateParams } from '../model';
+import type { ApiKeyUpdateParams } from '../model';
 // @ts-ignore
-import { ListAPIKeys200Response } from '../model';
+import type { ListAPIKeys200Response } from '../model';
 /**
  * APIKeysApi - axios parameter creator
  * @export
@@ -43,7 +43,7 @@ export const APIKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAPIKey: async (tilled_account: string, ApiKeyCreateParams: ApiKeyCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAPIKey: async (tilled_account: string, ApiKeyCreateParams: ApiKeyCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createAPIKey', 'tilled_account', tilled_account)
             // verify required parameter 'ApiKeyCreateParams' is not null or undefined
@@ -93,7 +93,7 @@ export const APIKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAPIKey: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteAPIKey: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteAPIKey', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -142,7 +142,7 @@ export const APIKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAPIKeys: async (tilled_account: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listAPIKeys: async (tilled_account: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listAPIKeys', 'tilled_account', tilled_account)
             const localVarPath = `/v1/api-keys`;
@@ -196,7 +196,7 @@ export const APIKeysApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAPIKey: async (tilled_account: string, id: string, ApiKeyUpdateParams: ApiKeyUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateAPIKey: async (tilled_account: string, id: string, ApiKeyUpdateParams: ApiKeyUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateAPIKey', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -259,9 +259,11 @@ export const APIKeysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createAPIKey(tilled_account: string, ApiKeyCreateParams: ApiKeyCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKey>> {
+        async createAPIKey(tilled_account: string, ApiKeyCreateParams: ApiKeyCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKey>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createAPIKey(tilled_account, ApiKeyCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['APIKeysApi.createAPIKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes an API Key. This cannot be undone.
@@ -271,9 +273,11 @@ export const APIKeysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAPIKey(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteAPIKey(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAPIKey(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['APIKeysApi.deleteAPIKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of API Keys. The API Keys are sorted with the most recently created appearing first.
@@ -284,9 +288,11 @@ export const APIKeysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAPIKeys(tilled_account: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAPIKeys200Response>> {
+        async listAPIKeys(tilled_account: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListAPIKeys200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAPIKeys(tilled_account, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['APIKeysApi.listAPIKeys']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates the API Keys by setting the values of the provided parameters. Any parameters not provided will be left unchanged.
@@ -297,9 +303,11 @@ export const APIKeysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateAPIKey(tilled_account: string, id: string, ApiKeyUpdateParams: ApiKeyUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKey>> {
+        async updateAPIKey(tilled_account: string, id: string, ApiKeyUpdateParams: ApiKeyUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKey>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateAPIKey(tilled_account, id, ApiKeyUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['APIKeysApi.updateAPIKey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -318,7 +326,7 @@ export const APIKeysApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAPIKey(requestParameters: APIKeysApiCreateAPIKeyRequest, options?: AxiosRequestConfig): AxiosPromise<ApiKey> {
+        createAPIKey(requestParameters: APIKeysApiCreateAPIKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ApiKey> {
             return localVarFp.createAPIKey(requestParameters.tilled_account, requestParameters.ApiKeyCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -328,7 +336,7 @@ export const APIKeysApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.deleteAPIKey(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -338,7 +346,7 @@ export const APIKeysApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAPIKeys(requestParameters: APIKeysApiListAPIKeysRequest, options?: AxiosRequestConfig): AxiosPromise<ListAPIKeys200Response> {
+        listAPIKeys(requestParameters: APIKeysApiListAPIKeysRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListAPIKeys200Response> {
             return localVarFp.listAPIKeys(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -348,7 +356,7 @@ export const APIKeysApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAPIKey(requestParameters: APIKeysApiUpdateAPIKeyRequest, options?: AxiosRequestConfig): AxiosPromise<ApiKey> {
+        updateAPIKey(requestParameters: APIKeysApiUpdateAPIKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ApiKey> {
             return localVarFp.updateAPIKey(requestParameters.tilled_account, requestParameters.id, requestParameters.ApiKeyUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -467,7 +475,7 @@ export class APIKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeysApi
      */
-    public createAPIKey(requestParameters: APIKeysApiCreateAPIKeyRequest, options?: AxiosRequestConfig) {
+    public createAPIKey(requestParameters: APIKeysApiCreateAPIKeyRequest, options?: RawAxiosRequestConfig) {
         return APIKeysApiFp(this.configuration).createAPIKey(requestParameters.tilled_account, requestParameters.ApiKeyCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -479,7 +487,7 @@ export class APIKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeysApi
      */
-    public deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: AxiosRequestConfig) {
+    public deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: RawAxiosRequestConfig) {
         return APIKeysApiFp(this.configuration).deleteAPIKey(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -491,7 +499,7 @@ export class APIKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeysApi
      */
-    public listAPIKeys(requestParameters: APIKeysApiListAPIKeysRequest, options?: AxiosRequestConfig) {
+    public listAPIKeys(requestParameters: APIKeysApiListAPIKeysRequest, options?: RawAxiosRequestConfig) {
         return APIKeysApiFp(this.configuration).listAPIKeys(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -503,7 +511,8 @@ export class APIKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeysApi
      */
-    public updateAPIKey(requestParameters: APIKeysApiUpdateAPIKeyRequest, options?: AxiosRequestConfig) {
+    public updateAPIKey(requestParameters: APIKeysApiUpdateAPIKeyRequest, options?: RawAxiosRequestConfig) {
         return APIKeysApiFp(this.configuration).updateAPIKey(requestParameters.tilled_account, requestParameters.id, requestParameters.ApiKeyUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

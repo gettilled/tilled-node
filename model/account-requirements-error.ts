@@ -27,7 +27,7 @@ export interface AccountRequirementsError {
      */
     'reason': string;
     /**
-     * The specific account onboarding requirement field that needs to be resolved.
+     * The specific onboarding application requirement field that needs to be resolved.
      * @type {string}
      * @memberof AccountRequirementsError
      */

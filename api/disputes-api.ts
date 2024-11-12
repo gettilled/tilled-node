@@ -14,19 +14,19 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { Dispute } from '../model';
+import type { Dispute } from '../model';
 // @ts-ignore
-import { DisputeEvidenceCreateParams } from '../model';
+import type { DisputeEvidenceCreateParams } from '../model';
 // @ts-ignore
-import { ListDisputes200Response } from '../model';
+import type { ListDisputes200Response } from '../model';
 /**
  * DisputesApi - axios parameter creator
  * @export
@@ -42,7 +42,7 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDisputeEvidence: async (tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createDisputeEvidence: async (tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createDisputeEvidence', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -95,7 +95,7 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDispute: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDispute: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getDispute', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -143,13 +143,13 @@ export const DisputesApiAxiosParamCreator = function (configuration?: Configurat
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>} [status] String indicating the status to filter the result by.
+         * @param {Array<ListDisputesStatus>} [status] String indicating the status to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDisputes: async (tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listDisputes: async (tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<ListDisputesStatus>, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listDisputes', 'tilled_account', tilled_account)
             const localVarPath = `/v1/disputes`;
@@ -237,9 +237,11 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createDisputeEvidence(tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
+        async createDisputeEvidence(tilled_account: string, id: string, DisputeEvidenceCreateParams: DisputeEvidenceCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDisputeEvidence(tilled_account, id, DisputeEvidenceCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DisputesApi.createDisputeEvidence']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Dispute.
@@ -249,9 +251,11 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDispute(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
+        async getDispute(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dispute>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDispute(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DisputesApi.getDispute']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Disputes. The Disputes are sorted with the most recently created appearing first.
@@ -261,15 +265,17 @@ export const DisputesApiFp = function(configuration?: Configuration) {
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>} [status] String indicating the status to filter the result by.
+         * @param {Array<ListDisputesStatus>} [status] String indicating the status to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDisputes(tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
+        async listDisputes(tilled_account: string, charge_id?: string, include_connected_accounts?: boolean, created_at_gte?: string, created_at_lte?: string, status?: Array<ListDisputesStatus>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDisputes200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listDisputes(tilled_account, charge_id, include_connected_accounts, created_at_gte, created_at_lte, status, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DisputesApi.listDisputes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -288,7 +294,7 @@ export const DisputesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig): AxiosPromise<Dispute> {
+        createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: RawAxiosRequestConfig): AxiosPromise<Dispute> {
             return localVarFp.createDisputeEvidence(requestParameters.tilled_account, requestParameters.id, requestParameters.DisputeEvidenceCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -298,7 +304,7 @@ export const DisputesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: AxiosRequestConfig): AxiosPromise<Dispute> {
+        getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: RawAxiosRequestConfig): AxiosPromise<Dispute> {
             return localVarFp.getDispute(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -308,7 +314,7 @@ export const DisputesApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
+        listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListDisputes200Response> {
             return localVarFp.listDisputes(requestParameters.tilled_account, requestParameters.charge_id, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -409,7 +415,7 @@ export interface DisputesApiListDisputesRequest {
      * @type {Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>}
      * @memberof DisputesApiListDisputes
      */
-    readonly status?: Array<'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'closed' | 'won' | 'lost'>
+    readonly status?: Array<ListDisputesStatus>
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -441,7 +447,7 @@ export class DisputesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DisputesApi
      */
-    public createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: AxiosRequestConfig) {
+    public createDisputeEvidence(requestParameters: DisputesApiCreateDisputeEvidenceRequest, options?: RawAxiosRequestConfig) {
         return DisputesApiFp(this.configuration).createDisputeEvidence(requestParameters.tilled_account, requestParameters.id, requestParameters.DisputeEvidenceCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -453,7 +459,7 @@ export class DisputesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DisputesApi
      */
-    public getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: AxiosRequestConfig) {
+    public getDispute(requestParameters: DisputesApiGetDisputeRequest, options?: RawAxiosRequestConfig) {
         return DisputesApiFp(this.configuration).getDispute(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -465,7 +471,22 @@ export class DisputesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DisputesApi
      */
-    public listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: AxiosRequestConfig) {
+    public listDisputes(requestParameters: DisputesApiListDisputesRequest, options?: RawAxiosRequestConfig) {
         return DisputesApiFp(this.configuration).listDisputes(requestParameters.tilled_account, requestParameters.charge_id, requestParameters.include_connected_accounts, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListDisputesStatus = {
+    WARNING_NEEDS_RESPONSE: 'warning_needs_response',
+    WARNING_UNDER_REVIEW: 'warning_under_review',
+    WARNING_CLOSED: 'warning_closed',
+    NEEDS_RESPONSE: 'needs_response',
+    UNDER_REVIEW: 'under_review',
+    CLOSED: 'closed',
+    WON: 'won',
+    LOST: 'lost'
+} as const;
+export type ListDisputesStatus = typeof ListDisputesStatus[keyof typeof ListDisputesStatus];

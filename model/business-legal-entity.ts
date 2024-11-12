@@ -15,16 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BusinessLegalEntityAchBankAccount } from './business-legal-entity-ach-bank-account';
+import type { BLEBankAccount } from './blebank-account';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BusinessLegalEntityAddress } from './business-legal-entity-address';
+import type { BaseAddress } from './base-address';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BusinessLegalEntityBankAccount } from './business-legal-entity-bank-account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { Principal } from './principal';
+import type { Principal } from './principal';
 
 /**
  * 
@@ -33,11 +30,11 @@ import { Principal } from './principal';
  */
 export interface BusinessLegalEntity {
     /**
-     * 
-     * @type {BusinessLegalEntityAddress}
+     * Registered legal address of the business.
+     * @type {BaseAddress}
      * @memberof BusinessLegalEntity
      */
-    'address': BusinessLegalEntityAddress;
+    'address': BaseAddress;
     /**
      * Average transaction amount, in minor units. (e.g. $100.00 = 10000 minor units)
      * @type {number}
@@ -117,12 +114,12 @@ export interface BusinessLegalEntity {
      */
     'yearly_volume_range': BusinessLegalEntityYearlyVolumeRange;
     /**
-     * 
-     * @type {BusinessLegalEntityAchBankAccount}
+     * Required for US merchant accounts (`region = US`). This field is deprecated. Please use `bank_account`.
+     * @type {BLEBankAccount}
      * @memberof BusinessLegalEntity
      * @deprecated
      */
-    'ach_bank_account'?: BusinessLegalEntityAchBankAccount;
+    'ach_bank_account'?: BLEBankAccount;
     /**
      * Estimated annual revenue of the business. * `LOW` = $0 - 100,000 * `MEDIUM` = $100,001 - 250,000 * `HIGH` = $250,001 - 400,000 * `VERY_HIGH` = $400,001 - 550,000 * `EXTREMELY_HIGH` = $550,000+
      * @type {string}
@@ -148,11 +145,11 @@ export interface BusinessLegalEntity {
      */
     'average_transactions_per_month'?: number;
     /**
-     * 
-     * @type {BusinessLegalEntityBankAccount}
+     * Bank Account Information
+     * @type {BLEBankAccount}
      * @memberof BusinessLegalEntity
      */
-    'bank_account'?: BusinessLegalEntityBankAccount;
+    'bank_account'?: BLEBankAccount;
     /**
      * Email of the business.
      * @type {string}

@@ -15,16 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricingTemplateAchDebit } from './pricing-template-ach-debit';
+import type { CardChargeFeeTemplate } from './card-charge-fee-template';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricingTemplateCard } from './pricing-template-card';
+import type { CardPresentChargeFeeTemplate } from './card-present-charge-fee-template';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricingTemplateCardPresent } from './pricing-template-card-present';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PricingTemplateEftDebit } from './pricing-template-eft-debit';
+import type { DebitFeeTemplate } from './debit-fee-template';
 
 /**
  * 
@@ -93,29 +90,29 @@ export interface PricingTemplate {
      */
     'updated_at': string;
     /**
-     * 
-     * @type {PricingTemplateAchDebit}
+     * If this is an `ach_debit` pricing template, this hash contains the direct debit specific pricing details.
+     * @type {DebitFeeTemplate}
      * @memberof PricingTemplate
      */
-    'ach_debit'?: PricingTemplateAchDebit;
+    'ach_debit'?: DebitFeeTemplate;
     /**
-     * 
-     * @type {PricingTemplateCard}
+     * If this is a `card` pricing template, this hash contains the card specific pricing details.
+     * @type {CardChargeFeeTemplate}
      * @memberof PricingTemplate
      */
-    'card'?: PricingTemplateCard;
+    'card'?: CardChargeFeeTemplate;
     /**
-     * 
-     * @type {PricingTemplateCardPresent}
+     * If this is a `card_present` pricing template, this hash contains the card specific pricing details.
+     * @type {CardPresentChargeFeeTemplate}
      * @memberof PricingTemplate
      */
-    'card_present'?: PricingTemplateCardPresent;
+    'card_present'?: CardPresentChargeFeeTemplate;
     /**
-     * 
-     * @type {PricingTemplateEftDebit}
+     * If this is an `eft_debit` pricing template, this hash contains the direct debit specific pricing details.
+     * @type {DebitFeeTemplate}
      * @memberof PricingTemplate
      */
-    'eft_debit'?: PricingTemplateEftDebit;
+    'eft_debit'?: DebitFeeTemplate;
 }
 
 export const PricingTemplateCurrency = {

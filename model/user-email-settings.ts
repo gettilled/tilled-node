@@ -13,15 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { UserEmailSettings } from './user-email-settings';
 
 /**
- * @type UserEmailSettings
- * User email settings.
+ * 
  * @export
+ * @interface UserEmailSettings
  */
-export type {UserEmailSettings};
-
+export interface UserEmailSettings {
+    /**
+     * Indicates if the user is receiving dispute related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettings
+     */
+    'disputes'?: boolean | null;
+    /**
+     * Indicates if the user is receiving document request related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettings
+     */
+    'documents'?: boolean | null;
+    /**
+     * Indicates if the partner user is receiving onboarding related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettings
+     */
+    'onboarding'?: boolean | null;
+}
 

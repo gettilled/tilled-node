@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateParamsAchDebit } from './payment-method-create-params-ach-debit';
+import type { PaymentMethodCreateParamsAchDebit } from './payment-method-create-params-ach-debit';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateParamsBillingDetails } from './payment-method-create-params-billing-details';
+import type { PaymentMethodCreateParamsBillingDetails } from './payment-method-create-params-billing-details';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateParamsCard } from './payment-method-create-params-card';
+import type { PaymentMethodCreateParamsCard } from './payment-method-create-params-card';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateParamsEftDebit } from './payment-method-create-params-eft-debit';
+import type { PaymentMethodCreateParamsEftDebit } from './payment-method-create-params-eft-debit';
 
 /**
  * 
@@ -39,25 +39,25 @@ export interface PaymentMethodCreateParams {
      */
     'type': PaymentMethodCreateParamsType;
     /**
-     * 
+     * If this is an `ach_debit` PaymentMethod, this hash contains details about the ACH Direct Debit bank account.
      * @type {PaymentMethodCreateParamsAchDebit}
      * @memberof PaymentMethodCreateParams
      */
     'ach_debit'?: PaymentMethodCreateParamsAchDebit;
     /**
-     * 
+     * Billing information associated with the PaymentMethod that may be used or required by most types of payment methods.
      * @type {PaymentMethodCreateParamsBillingDetails}
      * @memberof PaymentMethodCreateParams
      */
     'billing_details'?: PaymentMethodCreateParamsBillingDetails;
     /**
-     * 
+     * If this is a `card` PaymentMethod, this hash contains the user\'s card details. When providing a card number, you must meet the requirements for PCI compliance. We strongly recommend using Tilled.js instead of interacting with this API directly.
      * @type {PaymentMethodCreateParamsCard}
      * @memberof PaymentMethodCreateParams
      */
     'card'?: PaymentMethodCreateParamsCard;
     /**
-     * 
+     * If this is an `eft_debit` PaymentMethod, this hash contains details about the EFT Direct Debit bank account.
      * @type {PaymentMethodCreateParamsEftDebit}
      * @memberof PaymentMethodCreateParams
      */

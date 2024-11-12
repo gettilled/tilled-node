@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSessionLineItemPriceData } from './checkout-session-line-item-price-data';
+import type { Price } from './price';
 
 /**
  * 
@@ -24,11 +24,11 @@ import { CheckoutSessionLineItemPriceData } from './checkout-session-line-item-p
  */
 export interface CheckoutSessionLineItem {
     /**
-     * 
-     * @type {CheckoutSessionLineItemPriceData}
+     * Data about the price of this line item.
+     * @type {Price}
      * @memberof CheckoutSessionLineItem
      */
-    'price_data': CheckoutSessionLineItemPriceData;
+    'price_data': Price;
     /**
      * Quantity of the item. Maximum decimal places 4.
      * @type {number}

@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { MerchantApplication } from '../model';
+import type { MerchantApplication } from '../model';
 // @ts-ignore
-import { MerchantApplicationCreateParams } from '../model';
+import type { MerchantApplicationCreateParams } from '../model';
 /**
  * OnboardingApi - axios parameter creator
  * @export
@@ -38,7 +38,7 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMerchantApplication: async (account_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMerchantApplication: async (account_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'account_id' is not null or undefined
             assertParamExists('getMerchantApplication', 'account_id', account_id)
             const localVarPath = `/v1/applications/{account_id}`
@@ -72,7 +72,7 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitMerchantApplication: async (account_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        submitMerchantApplication: async (account_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'account_id' is not null or undefined
             assertParamExists('submitMerchantApplication', 'account_id', account_id)
             const localVarPath = `/v1/applications/{account_id}/submit`
@@ -107,7 +107,7 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMerchantApplication: async (account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateMerchantApplication: async (account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'account_id' is not null or undefined
             assertParamExists('updateMerchantApplication', 'account_id', account_id)
             // verify required parameter 'MerchantApplicationCreateParams' is not null or undefined
@@ -156,9 +156,11 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMerchantApplication(account_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
+        async getMerchantApplication(account_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMerchantApplication(account_id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.getMerchantApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Submits a merchant application for processing. If there are any validation errors, they must be corrected before re-submitting. Once successfully submitted, the application is no longer accessible.
@@ -167,9 +169,11 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async submitMerchantApplication(account_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async submitMerchantApplication(account_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.submitMerchantApplication(account_id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.submitMerchantApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates a merchant application by overwriting all properties.
@@ -179,9 +183,11 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMerchantApplication(account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
+        async updateMerchantApplication(account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMerchantApplication(account_id, MerchantApplicationCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.updateMerchantApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -200,7 +206,7 @@ export const OnboardingApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMerchantApplication(requestParameters: OnboardingApiGetMerchantApplicationRequest, options?: AxiosRequestConfig): AxiosPromise<MerchantApplication> {
+        getMerchantApplication(requestParameters: OnboardingApiGetMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<MerchantApplication> {
             return localVarFp.getMerchantApplication(requestParameters.account_id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -210,7 +216,7 @@ export const OnboardingApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitMerchantApplication(requestParameters: OnboardingApiSubmitMerchantApplicationRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        submitMerchantApplication(requestParameters: OnboardingApiSubmitMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.submitMerchantApplication(requestParameters.account_id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -220,7 +226,7 @@ export const OnboardingApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: AxiosRequestConfig): AxiosPromise<MerchantApplication> {
+        updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<MerchantApplication> {
             return localVarFp.updateMerchantApplication(requestParameters.account_id, requestParameters.MerchantApplicationCreateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -290,7 +296,7 @@ export class OnboardingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
-    public getMerchantApplication(requestParameters: OnboardingApiGetMerchantApplicationRequest, options?: AxiosRequestConfig) {
+    public getMerchantApplication(requestParameters: OnboardingApiGetMerchantApplicationRequest, options?: RawAxiosRequestConfig) {
         return OnboardingApiFp(this.configuration).getMerchantApplication(requestParameters.account_id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -302,7 +308,7 @@ export class OnboardingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
-    public submitMerchantApplication(requestParameters: OnboardingApiSubmitMerchantApplicationRequest, options?: AxiosRequestConfig) {
+    public submitMerchantApplication(requestParameters: OnboardingApiSubmitMerchantApplicationRequest, options?: RawAxiosRequestConfig) {
         return OnboardingApiFp(this.configuration).submitMerchantApplication(requestParameters.account_id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -314,7 +320,8 @@ export class OnboardingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
-    public updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: AxiosRequestConfig) {
+    public updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: RawAxiosRequestConfig) {
         return OnboardingApiFp(this.configuration).updateMerchantApplication(requestParameters.account_id, requestParameters.MerchantApplicationCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

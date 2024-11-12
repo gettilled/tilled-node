@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListPayouts200Response } from '../model';
+import type { ListPayouts200Response } from '../model';
 // @ts-ignore
-import { Payout } from '../model';
+import type { Payout } from '../model';
 /**
  * PayoutsApi - axios parameter creator
  * @export
@@ -36,11 +36,11 @@ export const PayoutsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get a Payout
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {Array<'transaction_count'>} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
+         * @param {Array<GetPayoutInclude>} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPayout: async (tilled_account: string, id: string, include?: Array<'transaction_count'>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPayout: async (tilled_account: string, id: string, include?: Array<GetPayoutInclude>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPayout', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -92,8 +92,8 @@ export const PayoutsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Cannot be paired with paid_at_gte or paid_at_lte.
          * @param {string} [paid_at_gte] Minimum &#x60;paid_at&#x60; value to filter by (inclusive). Cannot be paired with created_at_gte or created_at_lte.
          * @param {string} [paid_at_lte] Maximum &#x60;paid_at&#x60; value to filter by (inclusive). Cannot be paired with created_at_gte or created_at_lte.
-         * @param {'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending'} [status] Only return payouts that have the given status.
-         * @param {'transaction_count'} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
+         * @param {ListPayoutsStatus} [status] Only return payouts that have the given status.
+         * @param {ListPayoutsInclude} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [q] Supports searching by &#x60;payouts.id&#x60;, &#x60;payouts.amount&#x60;
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -101,7 +101,7 @@ export const PayoutsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPayouts: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, paid_at_gte?: string, paid_at_lte?: string, status?: 'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending', include?: 'transaction_count', include_connected_accounts?: boolean, q?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPayouts: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, paid_at_gte?: string, paid_at_lte?: string, status?: ListPayoutsStatus, include?: ListPayoutsInclude, include_connected_accounts?: boolean, q?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPayouts', 'tilled_account', tilled_account)
             const localVarPath = `/v1/payouts`;
@@ -201,13 +201,15 @@ export const PayoutsApiFp = function(configuration?: Configuration) {
          * @summary Get a Payout
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {Array<'transaction_count'>} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
+         * @param {Array<GetPayoutInclude>} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPayout(tilled_account: string, id: string, include?: Array<'transaction_count'>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payout>> {
+        async getPayout(tilled_account: string, id: string, include?: Array<GetPayoutInclude>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payout>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPayout(tilled_account, id, include, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PayoutsApi.getPayout']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Payouts. The Payouts are sorted with the most recently created appearing first.
@@ -217,8 +219,8 @@ export const PayoutsApiFp = function(configuration?: Configuration) {
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Cannot be paired with paid_at_gte or paid_at_lte.
          * @param {string} [paid_at_gte] Minimum &#x60;paid_at&#x60; value to filter by (inclusive). Cannot be paired with created_at_gte or created_at_lte.
          * @param {string} [paid_at_lte] Maximum &#x60;paid_at&#x60; value to filter by (inclusive). Cannot be paired with created_at_gte or created_at_lte.
-         * @param {'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending'} [status] Only return payouts that have the given status.
-         * @param {'transaction_count'} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
+         * @param {ListPayoutsStatus} [status] Only return payouts that have the given status.
+         * @param {ListPayoutsInclude} [include] An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [q] Supports searching by &#x60;payouts.id&#x60;, &#x60;payouts.amount&#x60;
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -226,9 +228,11 @@ export const PayoutsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPayouts(tilled_account: string, created_at_gte?: string, created_at_lte?: string, paid_at_gte?: string, paid_at_lte?: string, status?: 'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending', include?: 'transaction_count', include_connected_accounts?: boolean, q?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPayouts200Response>> {
+        async listPayouts(tilled_account: string, created_at_gte?: string, created_at_lte?: string, paid_at_gte?: string, paid_at_lte?: string, status?: ListPayoutsStatus, include?: ListPayoutsInclude, include_connected_accounts?: boolean, q?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPayouts200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPayouts(tilled_account, created_at_gte, created_at_lte, paid_at_gte, paid_at_lte, status, include, include_connected_accounts, q, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PayoutsApi.listPayouts']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -247,7 +251,7 @@ export const PayoutsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPayout(requestParameters: PayoutsApiGetPayoutRequest, options?: AxiosRequestConfig): AxiosPromise<Payout> {
+        getPayout(requestParameters: PayoutsApiGetPayoutRequest, options?: RawAxiosRequestConfig): AxiosPromise<Payout> {
             return localVarFp.getPayout(requestParameters.tilled_account, requestParameters.id, requestParameters.include, options).then((request) => request(axios, basePath));
         },
         /**
@@ -257,7 +261,7 @@ export const PayoutsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPayouts(requestParameters: PayoutsApiListPayoutsRequest, options?: AxiosRequestConfig): AxiosPromise<ListPayouts200Response> {
+        listPayouts(requestParameters: PayoutsApiListPayoutsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListPayouts200Response> {
             return localVarFp.listPayouts(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.paid_at_gte, requestParameters.paid_at_lte, requestParameters.status, requestParameters.include, requestParameters.include_connected_accounts, requestParameters.q, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -288,7 +292,7 @@ export interface PayoutsApiGetPayoutRequest {
      * @type {Array<'transaction_count'>}
      * @memberof PayoutsApiGetPayout
      */
-    readonly include?: Array<'transaction_count'>
+    readonly include?: Array<GetPayoutInclude>
 }
 
 /**
@@ -337,14 +341,14 @@ export interface PayoutsApiListPayoutsRequest {
      * @type {'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending'}
      * @memberof PayoutsApiListPayouts
      */
-    readonly status?: 'canceled' | 'failed' | 'in_transit' | 'paid' | 'pending'
+    readonly status?: ListPayoutsStatus
 
     /**
      * An array of optional include parameters, specifying extra properties to return. Currently for this endpoint only accepts \&#39;transaction_count\&#39;. In the query parameters, this is specified as include&#x3D;value1,value2,value3,etc.
      * @type {'transaction_count'}
      * @memberof PayoutsApiListPayouts
      */
-    readonly include?: 'transaction_count'
+    readonly include?: ListPayoutsInclude
 
     /**
      * Whether or not to include the results from any connected accounts.
@@ -390,7 +394,7 @@ export class PayoutsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PayoutsApi
      */
-    public getPayout(requestParameters: PayoutsApiGetPayoutRequest, options?: AxiosRequestConfig) {
+    public getPayout(requestParameters: PayoutsApiGetPayoutRequest, options?: RawAxiosRequestConfig) {
         return PayoutsApiFp(this.configuration).getPayout(requestParameters.tilled_account, requestParameters.id, requestParameters.include, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -402,7 +406,33 @@ export class PayoutsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PayoutsApi
      */
-    public listPayouts(requestParameters: PayoutsApiListPayoutsRequest, options?: AxiosRequestConfig) {
+    public listPayouts(requestParameters: PayoutsApiListPayoutsRequest, options?: RawAxiosRequestConfig) {
         return PayoutsApiFp(this.configuration).listPayouts(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.paid_at_gte, requestParameters.paid_at_lte, requestParameters.status, requestParameters.include, requestParameters.include_connected_accounts, requestParameters.q, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const GetPayoutInclude = {
+    TRANSACTION_COUNT: 'transaction_count'
+} as const;
+export type GetPayoutInclude = typeof GetPayoutInclude[keyof typeof GetPayoutInclude];
+/**
+ * @export
+ */
+export const ListPayoutsStatus = {
+    CANCELED: 'canceled',
+    FAILED: 'failed',
+    IN_TRANSIT: 'in_transit',
+    PAID: 'paid',
+    PENDING: 'pending'
+} as const;
+export type ListPayoutsStatus = typeof ListPayoutsStatus[keyof typeof ListPayoutsStatus];
+/**
+ * @export
+ */
+export const ListPayoutsInclude = {
+    TRANSACTION_COUNT: 'transaction_count'
+} as const;
+export type ListPayoutsInclude = typeof ListPayoutsInclude[keyof typeof ListPayoutsInclude];

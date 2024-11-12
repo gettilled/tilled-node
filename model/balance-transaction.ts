@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransactionFeeDetail } from './balance-transaction-fee-detail';
+import type { BalanceTransactionFeeDetail } from './balance-transaction-fee-detail';
 
 /**
  * 
@@ -222,6 +222,7 @@ export const BalanceTransactionFeeSubtype = {
     INTERLINK_SWITCH: 'interlink_switch',
     INTERLINK_PIN_AUTHENTICATED: 'interlink_pin_authenticated',
     INTERLINK_REGULATED: 'interlink_regulated',
+    MAESTRO_STANDARD: 'maestro_standard',
     MASTERCARD_ACQUIRER_BRAND_VOLUME: 'mastercard_acquirer_brand_volume',
     MASTERCARD_ACQUIRER_MERCHANT_ADVICE_CODE: 'mastercard_acquirer_merchant_advice_code',
     MASTERCARD_ACQUIRER_PROGRAM_SUPPORT: 'mastercard_acquirer_program_support',
@@ -250,6 +251,8 @@ export const BalanceTransactionFeeSubtype = {
     VISA_DEBIT_ASSESSMENT: 'visa_debit_assessment',
     VISA_INTERNATIONAL_ASSESSMENT: 'visa_international_assessment',
     VISA_MISUSE_OF_AUTHORIZATION: 'visa_misuse_of_authorization',
+    VISA_US_ACQUIRER_SERVICE_CREDIT: 'visa_us_acquirer_service_credit',
+    VISA_US_ACQUIRER_SERVICE_DEBIT: 'visa_us_acquirer_service_debit',
     VISA_US_DIGITAL_COMMERCE: 'visa_us_digital_commerce',
     REVERSAL: 'reversal',
     DISCOUNT: 'discount',

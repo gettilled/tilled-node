@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BusinessProfileAddress } from './business-profile-address';
+import type { Address } from './address';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BusinessRepresentative } from './business-representative';
+import type { BusinessRepresentative } from './business-representative';
 
 /**
  * 
@@ -27,11 +27,11 @@ import { BusinessRepresentative } from './business-representative';
  */
 export interface BusinessProfile {
     /**
-     * 
-     * @type {BusinessProfileAddress}
+     * The address for this business.
+     * @type {Address}
      * @memberof BusinessProfile
      */
-    'address': BusinessProfileAddress;
+    'address': Address;
     /**
      * MCC category.
      * @type {string}

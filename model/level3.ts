@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { LineItem } from './line-item';
+import type { LineItem } from './line-item';
 
 /**
  * 

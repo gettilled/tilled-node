@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { AuthLinkCreateParams } from '../model';
+import type { AuthLinkCreateParams } from '../model';
 // @ts-ignore
-import { AuthLinkDto } from '../model';
+import type { AuthLinkDto } from '../model';
 /**
  * AuthLinksApi - axios parameter creator
  * @export
@@ -39,7 +39,7 @@ export const AuthLinksApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAuthLink: async (tilled_account: string, AuthLinkCreateParams: AuthLinkCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAuthLink: async (tilled_account: string, AuthLinkCreateParams: AuthLinkCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createAuthLink', 'tilled_account', tilled_account)
             // verify required parameter 'AuthLinkCreateParams' is not null or undefined
@@ -99,9 +99,11 @@ export const AuthLinksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createAuthLink(tilled_account: string, AuthLinkCreateParams: AuthLinkCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthLinkDto>> {
+        async createAuthLink(tilled_account: string, AuthLinkCreateParams: AuthLinkCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthLinkDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createAuthLink(tilled_account, AuthLinkCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthLinksApi.createAuthLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -120,7 +122,7 @@ export const AuthLinksApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAuthLink(requestParameters: AuthLinksApiCreateAuthLinkRequest, options?: AxiosRequestConfig): AxiosPromise<AuthLinkDto> {
+        createAuthLink(requestParameters: AuthLinksApiCreateAuthLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<AuthLinkDto> {
             return localVarFp.createAuthLink(requestParameters.tilled_account, requestParameters.AuthLinkCreateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -162,7 +164,8 @@ export class AuthLinksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthLinksApi
      */
-    public createAuthLink(requestParameters: AuthLinksApiCreateAuthLinkRequest, options?: AxiosRequestConfig) {
+    public createAuthLink(requestParameters: AuthLinksApiCreateAuthLinkRequest, options?: RawAxiosRequestConfig) {
         return AuthLinksApiFp(this.configuration).createAuthLink(requestParameters.tilled_account, requestParameters.AuthLinkCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

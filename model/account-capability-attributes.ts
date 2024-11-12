@@ -15,37 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PartialAddress } from './partial-address';
+import { PaymentProviderAttributes } from './payment-provider-attributes';
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentProviderAttributesEsignature } from './payment-provider-attributes-esignature';
 
 /**
- * 
+ * @type AccountCapabilityAttributes
+ * The collection of optional or required attributes for onboarding and operation.
  * @export
- * @interface PaymentMethodBillingDetails
  */
-export interface PaymentMethodBillingDetails {
-    /**
-     * The billing address.
-     * @type {PartialAddress}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'address'?: PartialAddress;
-    /**
-     * Email address
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'email'?: string;
-    /**
-     * Full name
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'name'?: string;
-    /**
-     * Billing phone number (including extension)
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'phone'?: string;
-}
+export type AccountCapabilityAttributes = PaymentProviderAttributes;
+
 

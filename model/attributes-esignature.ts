@@ -13,39 +13,26 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PartialAddress } from './partial-address';
 
 /**
  * 
  * @export
- * @interface PaymentMethodBillingDetails
+ * @interface AttributesEsignature
  */
-export interface PaymentMethodBillingDetails {
+export interface AttributesEsignature {
     /**
-     * The billing address.
-     * @type {PartialAddress}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'address'?: PartialAddress;
-    /**
-     * Email address
+     * 
      * @type {string}
-     * @memberof PaymentMethodBillingDetails
+     * @memberof AttributesEsignature
      */
-    'email'?: string;
-    /**
-     * Full name
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'name'?: string;
-    /**
-     * Billing phone number (including extension)
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'phone'?: string;
+    'status': AttributesEsignatureStatus;
 }
+
+export const AttributesEsignatureStatus = {
+    SENT: 'sent',
+    COMPLETED: 'completed'
+} as const;
+
+export type AttributesEsignatureStatus = typeof AttributesEsignatureStatus[keyof typeof AttributesEsignatureStatus];
+
 

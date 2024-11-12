@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { UserUpdateParamsEmailSettings } from './user-update-params-email-settings';
+import type { UserEmailSettingsUpdateParams } from './user-email-settings-update-params';
 
 /**
  * 
@@ -31,11 +31,11 @@ export interface UserUpdateParams {
      */
     'email'?: string;
     /**
-     * 
-     * @type {UserUpdateParamsEmailSettings}
+     * User email settings
+     * @type {UserEmailSettingsUpdateParams}
      * @memberof UserUpdateParams
      */
-    'email_settings'?: UserUpdateParamsEmailSettings;
+    'email_settings'?: UserEmailSettingsUpdateParams;
     /**
      * Full name
      * @type {string}

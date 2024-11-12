@@ -15,37 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PartialAddress } from './partial-address';
+import type { AttributesEsignature } from './attributes-esignature';
 
 /**
  * 
  * @export
- * @interface PaymentMethodBillingDetails
+ * @interface PaymentProviderAttributes
  */
-export interface PaymentMethodBillingDetails {
+export interface PaymentProviderAttributes {
     /**
-     * The billing address.
-     * @type {PartialAddress}
-     * @memberof PaymentMethodBillingDetails
+     * The e-signature details of the account.
+     * @type {AttributesEsignature}
+     * @memberof PaymentProviderAttributes
      */
-    'address'?: PartialAddress;
-    /**
-     * Email address
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'email'?: string;
-    /**
-     * Full name
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'name'?: string;
-    /**
-     * Billing phone number (including extension)
-     * @type {string}
-     * @memberof PaymentMethodBillingDetails
-     */
-    'phone'?: string;
+    'esignature'?: AttributesEsignature;
 }
 

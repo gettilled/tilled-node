@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCreateParamsBankAccount } from './account-create-params-bank-account';
+import type { AccountSettingsCreateParams } from './account-settings-create-params';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCreateParamsSettings } from './account-create-params-settings';
+import type { BankAccountCreateParams } from './bank-account-create-params';
 
 /**
  * 
@@ -33,11 +33,11 @@ export interface AccountCreateParams {
      */
     'email': string;
     /**
-     * 
-     * @type {AccountCreateParamsBankAccount}
+     * A bank account to attach to this account for receiving payouts. (Note: currently this is only used for `partner` account payouts)  By default, providing a bank account sets it as the new default bank account for its currency.
+     * @type {BankAccountCreateParams}
      * @memberof AccountCreateParams
      */
-    'bank_account'?: AccountCreateParamsBankAccount;
+    'bank_account'?: BankAccountCreateParams;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}
@@ -64,10 +64,10 @@ export interface AccountCreateParams {
      */
     'product_code_ids'?: Array<string>;
     /**
-     * 
-     * @type {AccountCreateParamsSettings}
+     * Account Settings
+     * @type {AccountSettingsCreateParams}
      * @memberof AccountCreateParams
      */
-    'settings'?: AccountCreateParamsSettings;
+    'settings'?: AccountSettingsCreateParams;
 }
 

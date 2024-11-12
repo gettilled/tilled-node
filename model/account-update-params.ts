@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCreateParamsBankAccount } from './account-create-params-bank-account';
+import type { AccountSettingsCreateParams } from './account-settings-create-params';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCreateParamsSettings } from './account-create-params-settings';
+import type { BankAccountCreateParams } from './bank-account-create-params';
 
 /**
  * 
@@ -27,11 +27,11 @@ import { AccountCreateParamsSettings } from './account-create-params-settings';
  */
 export interface AccountUpdateParams {
     /**
-     * 
-     * @type {AccountCreateParamsBankAccount}
+     * A bank account to attach to this account for receiving payouts. (Note: currently this is only used for `partner` account payouts)  By default, providing a bank account sets it as the new default bank account for its currency.
+     * @type {BankAccountCreateParams}
      * @memberof AccountUpdateParams
      */
-    'bank_account'?: AccountCreateParamsBankAccount;
+    'bank_account'?: BankAccountCreateParams;
     /**
      * The primary user\'s email address.
      * @type {string}
@@ -51,11 +51,11 @@ export interface AccountUpdateParams {
      */
     'name'?: string;
     /**
-     * 
-     * @type {AccountCreateParamsSettings}
+     * Account Settings
+     * @type {AccountSettingsCreateParams}
      * @memberof AccountUpdateParams
      */
-    'settings'?: AccountCreateParamsSettings;
+    'settings'?: AccountSettingsCreateParams;
     /**
      * The custom domain the `partner` chooses to reflect on all of its `merchant` accounts as part of the white label settings. It requires `paymentsonline.io` to be appended to the string to be accepted as a valid URL (i.e. `https://customdomain.paymentsonline.io`).  *Note: This feature is only available to `Partner` accounts.*
      * @type {string}

@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListPlatformFees200Response } from '../model';
+import type { ListPlatformFees200Response } from '../model';
 // @ts-ignore
-import { PlatformFee } from '../model';
+import type { PlatformFee } from '../model';
 /**
  * PlatformFeesApi - axios parameter creator
  * @export
@@ -39,7 +39,7 @@ export const PlatformFeesApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlatformFee: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPlatformFee: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPlatformFee', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -91,7 +91,7 @@ export const PlatformFeesApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPlatformFees: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, charge_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPlatformFees: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, charge_id?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPlatformFees', 'tilled_account', tilled_account)
             const localVarPath = `/v1/platform-fees`;
@@ -170,9 +170,11 @@ export const PlatformFeesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPlatformFee(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlatformFee>> {
+        async getPlatformFee(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlatformFee>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPlatformFee(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PlatformFeesApi.getPlatformFee']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Platform Fees. The Platform Fees are sorted with the most recently created appearing first.
@@ -186,9 +188,11 @@ export const PlatformFeesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPlatformFees(tilled_account: string, created_at_gte?: string, created_at_lte?: string, charge_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPlatformFees200Response>> {
+        async listPlatformFees(tilled_account: string, created_at_gte?: string, created_at_lte?: string, charge_id?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPlatformFees200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPlatformFees(tilled_account, created_at_gte, created_at_lte, charge_id, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PlatformFeesApi.listPlatformFees']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -207,7 +211,7 @@ export const PlatformFeesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlatformFee(requestParameters: PlatformFeesApiGetPlatformFeeRequest, options?: AxiosRequestConfig): AxiosPromise<PlatformFee> {
+        getPlatformFee(requestParameters: PlatformFeesApiGetPlatformFeeRequest, options?: RawAxiosRequestConfig): AxiosPromise<PlatformFee> {
             return localVarFp.getPlatformFee(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -217,7 +221,7 @@ export const PlatformFeesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPlatformFees(requestParameters: PlatformFeesApiListPlatformFeesRequest, options?: AxiosRequestConfig): AxiosPromise<ListPlatformFees200Response> {
+        listPlatformFees(requestParameters: PlatformFeesApiListPlatformFeesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListPlatformFees200Response> {
             return localVarFp.listPlatformFees(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.charge_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -308,7 +312,7 @@ export class PlatformFeesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlatformFeesApi
      */
-    public getPlatformFee(requestParameters: PlatformFeesApiGetPlatformFeeRequest, options?: AxiosRequestConfig) {
+    public getPlatformFee(requestParameters: PlatformFeesApiGetPlatformFeeRequest, options?: RawAxiosRequestConfig) {
         return PlatformFeesApiFp(this.configuration).getPlatformFee(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -320,7 +324,8 @@ export class PlatformFeesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlatformFeesApi
      */
-    public listPlatformFees(requestParameters: PlatformFeesApiListPlatformFeesRequest, options?: AxiosRequestConfig) {
+    public listPlatformFees(requestParameters: PlatformFeesApiListPlatformFeesRequest, options?: RawAxiosRequestConfig) {
         return PlatformFeesApiFp(this.configuration).listPlatformFees(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.charge_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

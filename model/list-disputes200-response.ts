@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Dispute } from './dispute';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListDisputes200ResponseAllOf } from './list-disputes200-response-all-of';
+import type { Dispute } from './dispute';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { DisputesAllOf } from './list-disputes200-response-all-of';
 
 /**
  * @type ListDisputes200Response
  * @export
  */
-export type ListDisputes200Response = ListDisputes200ResponseAllOf & PaginatedDto;
+export type ListDisputes200Response = DisputesAllOf & PaginatedDto;
 
 

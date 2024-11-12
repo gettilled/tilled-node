@@ -15,19 +15,95 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBranding } from './account-settings-branding';
+import type { GlobalDashboardSettings } from './global-dashboard-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBrandingGlobalDashboardSettings } from './account-settings-branding-global-dashboard-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
+import type { GlobalEmailSettings } from './global-email-settings';
 
 /**
- * @type AccountSettingsBranding
- * The account branding settings.
+ * 
  * @export
+ * @interface AccountSettingsBranding
  */
-export type {AccountSettingsBranding};
-
+export interface AccountSettingsBranding {
+    /**
+     * Time at which the object was created.
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {any}
+     * @memberof AccountSettingsBranding
+     */
+    'dark_mode_logo': any;
+    /**
+     * Turn on or off dashboard preferences for all merchants by default. These settings can not be overridden by individual merchants, and are set by the partner. Defaults to true for all types.
+     * @type {GlobalDashboardSettings}
+     * @memberof AccountSettingsBranding
+     */
+    'global_dashboard_settings': GlobalDashboardSettings;
+    /**
+     * Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
+     * @type {boolean}
+     * @memberof AccountSettingsBranding
+     * @deprecated
+     */
+    'global_email_notifications': boolean;
+    /**
+     * Turn on or off email notifications for different email types, for all merchants, by default. Individual merchants can override these settings later. Defaults to true for all types.
+     * @type {GlobalEmailSettings}
+     * @memberof AccountSettingsBranding
+     */
+    'global_email_settings': GlobalEmailSettings;
+    /**
+     * 
+     * @type {any}
+     * @memberof AccountSettingsBranding
+     */
+    'logo': any;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'updated_at': string;
+    /**
+     * Optional customized Support Center title
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'merchant_support_center_name'?: string;
+    /**
+     * Optional customized Support Center URL
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'merchant_support_center_url'?: string;
+    /**
+     * The primary hexadecimal color value.
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'primary_color'?: string;
+    /**
+     * The secondary hexadecimal color value.
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'secondary_color'?: string;
+    /**
+     * Partner\'s support email address
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'support_email'?: string;
+    /**
+     * Partner\'s support phone number
+     * @type {string}
+     * @memberof AccountSettingsBranding
+     */
+    'support_phone'?: string;
+}
 

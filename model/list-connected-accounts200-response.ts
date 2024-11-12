@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListConnectedAccounts200ResponseAllOf } from './list-connected-accounts200-response-all-of';
+import type { Account } from './account';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { ConnectedAccountsAllOf } from './list-connected-accounts200-response-all-of';
 
 /**
  * @type ListConnectedAccounts200Response
  * @export
  */
-export type ListConnectedAccounts200Response = ListConnectedAccounts200ResponseAllOf & PaginatedDto;
+export type ListConnectedAccounts200Response = ConnectedAccountsAllOf & PaginatedDto;
 
 

@@ -14,27 +14,27 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListPaymentIntents200Response } from '../model';
+import type { ListPaymentIntents200Response } from '../model';
 // @ts-ignore
-import { PaymentIntent } from '../model';
+import type { PaymentIntent } from '../model';
 // @ts-ignore
-import { PaymentIntentCancelParams } from '../model';
+import type { PaymentIntentCancelParams } from '../model';
 // @ts-ignore
-import { PaymentIntentCaptureParams } from '../model';
+import type { PaymentIntentCaptureParams } from '../model';
 // @ts-ignore
-import { PaymentIntentConfirmParams } from '../model';
+import type { PaymentIntentConfirmParams } from '../model';
 // @ts-ignore
-import { PaymentIntentCreateParams } from '../model';
+import type { PaymentIntentCreateParams } from '../model';
 // @ts-ignore
-import { PaymentIntentUpdateParams } from '../model';
+import type { PaymentIntentUpdateParams } from '../model';
 /**
  * PaymentIntentsApi - axios parameter creator
  * @export
@@ -50,7 +50,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelPaymentIntent: async (tilled_account: string, id: string, PaymentIntentCancelParams: PaymentIntentCancelParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelPaymentIntent: async (tilled_account: string, id: string, PaymentIntentCancelParams: PaymentIntentCancelParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('cancelPaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -104,7 +104,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        capturePaymentIntent: async (tilled_account: string, id: string, PaymentIntentCaptureParams: PaymentIntentCaptureParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        capturePaymentIntent: async (tilled_account: string, id: string, PaymentIntentCaptureParams: PaymentIntentCaptureParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('capturePaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -158,7 +158,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        confirmPaymentIntent: async (tilled_account: string, id: string, PaymentIntentConfirmParams: PaymentIntentConfirmParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        confirmPaymentIntent: async (tilled_account: string, id: string, PaymentIntentConfirmParams: PaymentIntentConfirmParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('confirmPaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -211,7 +211,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPaymentIntent: async (tilled_account: string, PaymentIntentCreateParams: PaymentIntentCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createPaymentIntent: async (tilled_account: string, PaymentIntentCreateParams: PaymentIntentCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createPaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'PaymentIntentCreateParams' is not null or undefined
@@ -261,7 +261,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentIntent: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentIntent: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -308,7 +308,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
+         * @param {Array<ListPaymentIntentsStatus>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [subscription_id] The ID of the subscription whose payment intents will be retrieved.
          * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.id&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
@@ -319,7 +319,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentIntents: async (tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPaymentIntents: async (tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<ListPaymentIntentsStatus>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPaymentIntents', 'tilled_account', tilled_account)
             const localVarPath = `/v1/payment-intents`;
@@ -342,7 +342,9 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (created_at_gte !== undefined) {
@@ -413,7 +415,7 @@ export const PaymentIntentsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentIntent: async (tilled_account: string, id: string, PaymentIntentUpdateParams: PaymentIntentUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePaymentIntent: async (tilled_account: string, id: string, PaymentIntentUpdateParams: PaymentIntentUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updatePaymentIntent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -477,9 +479,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelPaymentIntent(tilled_account: string, id: string, PaymentIntentCancelParams: PaymentIntentCancelParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async cancelPaymentIntent(tilled_account: string, id: string, PaymentIntentCancelParams: PaymentIntentCancelParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cancelPaymentIntent(tilled_account, id, PaymentIntentCancelParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.cancelPaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Captures a Payment Intent. Payment Intents can only be captured if their status is `requires_capture`. Uncaptured Payment Intents will be canceled exactly 7 days after creation.
@@ -490,9 +494,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async capturePaymentIntent(tilled_account: string, id: string, PaymentIntentCaptureParams: PaymentIntentCaptureParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async capturePaymentIntent(tilled_account: string, id: string, PaymentIntentCaptureParams: PaymentIntentCaptureParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.capturePaymentIntent(tilled_account, id, PaymentIntentCaptureParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.capturePaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Confirms a Payment Intent. Confirming indicates that the customer intends to pay with the provided payment method.
@@ -503,9 +509,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async confirmPaymentIntent(tilled_account: string, id: string, PaymentIntentConfirmParams: PaymentIntentConfirmParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async confirmPaymentIntent(tilled_account: string, id: string, PaymentIntentConfirmParams: PaymentIntentConfirmParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.confirmPaymentIntent(tilled_account, id, PaymentIntentConfirmParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.confirmPaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Creates a Payment Intent.
@@ -515,9 +523,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createPaymentIntent(tilled_account: string, PaymentIntentCreateParams: PaymentIntentCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async createPaymentIntent(tilled_account: string, PaymentIntentCreateParams: PaymentIntentCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createPaymentIntent(tilled_account, PaymentIntentCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.createPaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Payment Intent.
@@ -527,9 +537,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPaymentIntent(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async getPaymentIntent(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentIntent(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.getPaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Payment Intents. The Payment Intents are sorted with the most recently created appearing first.
@@ -538,7 +550,7 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
+         * @param {Array<ListPaymentIntentsStatus>} [status] Only return PaymentIntents whose status is included by this array. Examples: &#x60;/v1/payment-intents?status&#x3D;succeeded,requires_payment_method&#x60; and &#x60;/v1/payment-intents?status&#x3D;succeeded&amp;status&#x3D;requires_payment_method&#x60;.
          * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {string} [subscription_id] The ID of the subscription whose payment intents will be retrieved.
          * @param {string} [q] Supports searching by &#x60;payment_intent.id&#x60;, &#x60;payment_intent.amount&#x60;, &#x60;payment_method.billing_details.name&#x60;, &#x60;payment_method.id&#x60;, &#x60;payment_method.details.last4&#x60;, &#x60;payment_method.details.last2&#x60;, &#x60;customer.first_name&#x60;, &#x60;customer.last_name&#x60;
@@ -549,9 +561,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPaymentIntents(tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentIntents200Response>> {
+        async listPaymentIntents(tilled_account: string, metadata?: { [key: string]: string; }, created_at_gte?: string, created_at_lte?: string, status?: Array<ListPaymentIntentsStatus>, include_connected_accounts?: boolean, subscription_id?: string, q?: string, customer_id?: string, terminal_reader_id?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentIntents200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPaymentIntents(tilled_account, metadata, created_at_gte, created_at_lte, status, include_connected_accounts, subscription_id, q, customer_id, terminal_reader_id, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.listPaymentIntents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates a Payment Intent by setting the values of the provided parameters. Any parameters not provided will be left unchanged. Depending on which properties are updated, you may need to [Confirm the Payment Intent](https://docs.tilled.com/api-reference#tag/payment-intents/post/v1/payment-intents/{id}/confirm) again.
@@ -562,9 +576,11 @@ export const PaymentIntentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePaymentIntent(tilled_account: string, id: string, PaymentIntentUpdateParams: PaymentIntentUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
+        async updatePaymentIntent(tilled_account: string, id: string, PaymentIntentUpdateParams: PaymentIntentUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentIntent>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePaymentIntent(tilled_account, id, PaymentIntentUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentIntentsApi.updatePaymentIntent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -583,7 +599,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelPaymentIntent(requestParameters: PaymentIntentsApiCancelPaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        cancelPaymentIntent(requestParameters: PaymentIntentsApiCancelPaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.cancelPaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentCancelParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -593,7 +609,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        capturePaymentIntent(requestParameters: PaymentIntentsApiCapturePaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        capturePaymentIntent(requestParameters: PaymentIntentsApiCapturePaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.capturePaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentCaptureParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -603,7 +619,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        confirmPaymentIntent(requestParameters: PaymentIntentsApiConfirmPaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        confirmPaymentIntent(requestParameters: PaymentIntentsApiConfirmPaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.confirmPaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentConfirmParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -613,7 +629,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPaymentIntent(requestParameters: PaymentIntentsApiCreatePaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        createPaymentIntent(requestParameters: PaymentIntentsApiCreatePaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.createPaymentIntent(requestParameters.tilled_account, requestParameters.PaymentIntentCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -623,7 +639,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentIntent(requestParameters: PaymentIntentsApiGetPaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        getPaymentIntent(requestParameters: PaymentIntentsApiGetPaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.getPaymentIntent(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -633,7 +649,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: AxiosRequestConfig): AxiosPromise<ListPaymentIntents200Response> {
+        listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListPaymentIntents200Response> {
             return localVarFp.listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.terminal_reader_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -643,7 +659,7 @@ export const PaymentIntentsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentIntent(requestParameters: PaymentIntentsApiUpdatePaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentIntent> {
+        updatePaymentIntent(requestParameters: PaymentIntentsApiUpdatePaymentIntentRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentIntent> {
             return localVarFp.updatePaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -814,7 +830,7 @@ export interface PaymentIntentsApiListPaymentIntentsRequest {
      * @type {Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>}
      * @memberof PaymentIntentsApiListPaymentIntents
      */
-    readonly status?: Array<'canceled' | 'processing' | 'requires_action' | 'requires_capture' | 'requires_confirmation' | 'requires_payment_method' | 'succeeded'>
+    readonly status?: Array<ListPaymentIntentsStatus>
 
     /**
      * Whether or not to include the results from any connected accounts.
@@ -909,7 +925,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public cancelPaymentIntent(requestParameters: PaymentIntentsApiCancelPaymentIntentRequest, options?: AxiosRequestConfig) {
+    public cancelPaymentIntent(requestParameters: PaymentIntentsApiCancelPaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).cancelPaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentCancelParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -921,7 +937,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public capturePaymentIntent(requestParameters: PaymentIntentsApiCapturePaymentIntentRequest, options?: AxiosRequestConfig) {
+    public capturePaymentIntent(requestParameters: PaymentIntentsApiCapturePaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).capturePaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentCaptureParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -933,7 +949,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public confirmPaymentIntent(requestParameters: PaymentIntentsApiConfirmPaymentIntentRequest, options?: AxiosRequestConfig) {
+    public confirmPaymentIntent(requestParameters: PaymentIntentsApiConfirmPaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).confirmPaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentConfirmParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -945,7 +961,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public createPaymentIntent(requestParameters: PaymentIntentsApiCreatePaymentIntentRequest, options?: AxiosRequestConfig) {
+    public createPaymentIntent(requestParameters: PaymentIntentsApiCreatePaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).createPaymentIntent(requestParameters.tilled_account, requestParameters.PaymentIntentCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -957,7 +973,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public getPaymentIntent(requestParameters: PaymentIntentsApiGetPaymentIntentRequest, options?: AxiosRequestConfig) {
+    public getPaymentIntent(requestParameters: PaymentIntentsApiGetPaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).getPaymentIntent(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -969,7 +985,7 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: AxiosRequestConfig) {
+    public listPaymentIntents(requestParameters: PaymentIntentsApiListPaymentIntentsRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).listPaymentIntents(requestParameters.tilled_account, requestParameters.metadata, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.status, requestParameters.include_connected_accounts, requestParameters.subscription_id, requestParameters.q, requestParameters.customer_id, requestParameters.terminal_reader_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -981,7 +997,21 @@ export class PaymentIntentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentIntentsApi
      */
-    public updatePaymentIntent(requestParameters: PaymentIntentsApiUpdatePaymentIntentRequest, options?: AxiosRequestConfig) {
+    public updatePaymentIntent(requestParameters: PaymentIntentsApiUpdatePaymentIntentRequest, options?: RawAxiosRequestConfig) {
         return PaymentIntentsApiFp(this.configuration).updatePaymentIntent(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentIntentUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListPaymentIntentsStatus = {
+    CANCELED: 'canceled',
+    PROCESSING: 'processing',
+    REQUIRES_ACTION: 'requires_action',
+    REQUIRES_CAPTURE: 'requires_capture',
+    REQUIRES_CONFIRMATION: 'requires_confirmation',
+    REQUIRES_PAYMENT_METHOD: 'requires_payment_method',
+    SUCCEEDED: 'succeeded'
+} as const;
+export type ListPaymentIntentsStatus = typeof ListPaymentIntentsStatus[keyof typeof ListPaymentIntentsStatus];

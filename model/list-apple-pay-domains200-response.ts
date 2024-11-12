@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ApplePayDomain } from './apple-pay-domain';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListApplePayDomains200ResponseAllOf } from './list-apple-pay-domains200-response-all-of';
+import type { ApplePayDomain } from './apple-pay-domain';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { ApplePayDomainsAllOf } from './list-apple-pay-domains200-response-all-of';
 
 /**
  * @type ListApplePayDomains200Response
  * @export
  */
-export type ListApplePayDomains200Response = ListApplePayDomains200ResponseAllOf & PaginatedDto;
+export type ListApplePayDomains200Response = ApplePayDomainsAllOf & PaginatedDto;
 
 

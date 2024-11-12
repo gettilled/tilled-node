@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ReportAdditionalFilter } from './report-additional-filter';
+import type { ReportAdditionalFilter } from './report-additional-filter';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ReportMetadataKey } from './report-metadata-key';
+import type { ReportMetadataKey } from './report-metadata-key';
 
 /**
  * 

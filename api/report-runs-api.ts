@@ -14,21 +14,21 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListReportRuns200Response } from '../model';
+import type { ListReportRuns200Response } from '../model';
 // @ts-ignore
-import { ReportRun } from '../model';
+import type { ReportRun } from '../model';
 // @ts-ignore
-import { ReportRunCreateParams } from '../model';
+import type { ReportRunCreateParams } from '../model';
 // @ts-ignore
-import { ReportRunRetrieveParams } from '../model';
+import type { ReportRunRetrieveParams } from '../model';
 /**
  * ReportRunsApi - axios parameter creator
  * @export
@@ -43,7 +43,7 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createReportRun: async (tilled_account: string, ReportRunCreateParams: ReportRunCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createReportRun: async (tilled_account: string, ReportRunCreateParams: ReportRunCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createReportRun', 'tilled_account', tilled_account)
             // verify required parameter 'ReportRunCreateParams' is not null or undefined
@@ -93,7 +93,7 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReportRun: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReportRun: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getReportRun', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -138,14 +138,14 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
-         * @param {Array<'queued' | 'finished' | 'failed'>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
+         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<ListReportRunsStatus>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listReportRuns: async (tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listReportRuns: async (tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<ListReportRunsType>, status?: Array<ListReportRunsStatus>, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listReportRuns', 'tilled_account', tilled_account)
             // verify required parameter 'ReportRunRetrieveParams' is not null or undefined
@@ -221,9 +221,11 @@ export const ReportRunsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createReportRun(tilled_account: string, ReportRunCreateParams: ReportRunCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportRun>> {
+        async createReportRun(tilled_account: string, ReportRunCreateParams: ReportRunCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createReportRun(tilled_account, ReportRunCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportRunsApi.createReportRun']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Report Run.
@@ -233,25 +235,29 @@ export const ReportRunsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReportRun(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportRun>> {
+        async getReportRun(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReportRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getReportRun(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportRunsApi.getReportRun']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Report Runs. The Report Runs are sorted with the most recently created appearing first.
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
-         * @param {Array<'queued' | 'finished' | 'failed'>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
+         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<ListReportRunsStatus>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listReportRuns(tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>, status?: Array<'queued' | 'finished' | 'failed'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListReportRuns200Response>> {
+        async listReportRuns(tilled_account: string, ReportRunRetrieveParams: ReportRunRetrieveParams, type?: Array<ListReportRunsType>, status?: Array<ListReportRunsStatus>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListReportRuns200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listReportRuns(tilled_account, ReportRunRetrieveParams, type, status, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportRunsApi.listReportRuns']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -270,7 +276,7 @@ export const ReportRunsApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createReportRun(requestParameters: ReportRunsApiCreateReportRunRequest, options?: AxiosRequestConfig): AxiosPromise<ReportRun> {
+        createReportRun(requestParameters: ReportRunsApiCreateReportRunRequest, options?: RawAxiosRequestConfig): AxiosPromise<ReportRun> {
             return localVarFp.createReportRun(requestParameters.tilled_account, requestParameters.ReportRunCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -280,7 +286,7 @@ export const ReportRunsApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: AxiosRequestConfig): AxiosPromise<ReportRun> {
+        getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: RawAxiosRequestConfig): AxiosPromise<ReportRun> {
             return localVarFp.getReportRun(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -290,7 +296,7 @@ export const ReportRunsApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listReportRuns(requestParameters: ReportRunsApiListReportRunsRequest, options?: AxiosRequestConfig): AxiosPromise<ListReportRuns200Response> {
+        listReportRuns(requestParameters: ReportRunsApiListReportRunsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListReportRuns200Response> {
             return localVarFp.listReportRuns(requestParameters.tilled_account, requestParameters.ReportRunRetrieveParams, requestParameters.type, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -363,14 +369,14 @@ export interface ReportRunsApiListReportRunsRequest {
      * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>}
      * @memberof ReportRunsApiListReportRuns
      */
-    readonly type?: Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>
+    readonly type?: Array<ListReportRunsType>
 
     /**
      * Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
      * @type {Array<'queued' | 'finished' | 'failed'>}
      * @memberof ReportRunsApiListReportRuns
      */
-    readonly status?: Array<'queued' | 'finished' | 'failed'>
+    readonly status?: Array<ListReportRunsStatus>
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -402,7 +408,7 @@ export class ReportRunsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportRunsApi
      */
-    public createReportRun(requestParameters: ReportRunsApiCreateReportRunRequest, options?: AxiosRequestConfig) {
+    public createReportRun(requestParameters: ReportRunsApiCreateReportRunRequest, options?: RawAxiosRequestConfig) {
         return ReportRunsApiFp(this.configuration).createReportRun(requestParameters.tilled_account, requestParameters.ReportRunCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -414,7 +420,7 @@ export class ReportRunsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportRunsApi
      */
-    public getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: AxiosRequestConfig) {
+    public getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: RawAxiosRequestConfig) {
         return ReportRunsApiFp(this.configuration).getReportRun(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -426,7 +432,30 @@ export class ReportRunsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportRunsApi
      */
-    public listReportRuns(requestParameters: ReportRunsApiListReportRunsRequest, options?: AxiosRequestConfig) {
+    public listReportRuns(requestParameters: ReportRunsApiListReportRunsRequest, options?: RawAxiosRequestConfig) {
         return ReportRunsApiFp(this.configuration).listReportRuns(requestParameters.tilled_account, requestParameters.ReportRunRetrieveParams, requestParameters.type, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListReportRunsType = {
+    PAYMENTS_SUMMARY_1: 'payments_summary_1',
+    PAYOUTS_SUMMARY_1: 'payouts_summary_1',
+    PAYOUTS_SUMMARY_2: 'payouts_summary_2',
+    FEES_SUMMARY_1: 'fees_summary_1',
+    PROCESSING_SUMMARY_1: 'processing_summary_1',
+    DISPUTES_SUMMARY_1: 'disputes_summary_1',
+    INTERCHANGE_DETAIL_1: 'interchange_detail_1'
+} as const;
+export type ListReportRunsType = typeof ListReportRunsType[keyof typeof ListReportRunsType];
+/**
+ * @export
+ */
+export const ListReportRunsStatus = {
+    QUEUED: 'queued',
+    FINISHED: 'finished',
+    FAILED: 'failed'
+} as const;
+export type ListReportRunsStatus = typeof ListReportRunsStatus[keyof typeof ListReportRunsStatus];

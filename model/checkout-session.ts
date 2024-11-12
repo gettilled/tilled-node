@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSessionCustomerDetails } from './checkout-session-customer-details';
+import type { CheckoutSessionLineItem } from './checkout-session-line-item';
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSessionLineItem } from './checkout-session-line-item';
+import type { CustomerDetails } from './customer-details';
 
 /**
  * 
@@ -99,11 +99,11 @@ export interface CheckoutSession {
      */
     'cancel_url'?: string;
     /**
-     * 
-     * @type {CheckoutSessionCustomerDetails}
+     * The customer details.
+     * @type {CustomerDetails}
      * @memberof CheckoutSession
      */
-    'customer_details'?: CheckoutSessionCustomerDetails;
+    'customer_details'?: CustomerDetails;
     /**
      * The ID of the customer for this checkout session.
      * @type {string}

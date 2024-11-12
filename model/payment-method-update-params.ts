@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateParamsBillingDetails } from './payment-method-create-params-billing-details';
+import type { PaymentMethodCreateParamsBillingDetails } from './payment-method-create-params-billing-details';
 
 /**
  * 
@@ -24,7 +24,7 @@ import { PaymentMethodCreateParamsBillingDetails } from './payment-method-create
  */
 export interface PaymentMethodUpdateParams {
     /**
-     * 
+     * Billing information associated with the PaymentMethod that may be used or required by most types of payment methods.
      * @type {PaymentMethodCreateParamsBillingDetails}
      * @memberof PaymentMethodUpdateParams
      */

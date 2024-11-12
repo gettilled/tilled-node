@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CardDetailsChecks } from './card-details-checks';
+import type { CardChecks } from './card-checks';
 
 /**
  * 
@@ -36,11 +36,11 @@ export interface CardDetails {
      */
     'brand'?: CardDetailsBrand;
     /**
-     * 
-     * @type {CardDetailsChecks}
+     * Checks on Card address and CVC if provided.
+     * @type {CardChecks}
      * @memberof CardDetails
      */
-    'checks'?: CardDetailsChecks;
+    'checks'?: CardChecks;
     /**
      * Two-digit number representing the card\'s expiration month.
      * @type {number}

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Markup } from './markup';
+import type { Markup } from './markup';
 
 /**
  * 

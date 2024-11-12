@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ChargeBalanceTransaction } from './charge-balance-transaction';
+import type { BalanceTransaction } from './balance-transaction';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ChargePlatformFee } from './charge-platform-fee';
+import type { PlatformFee } from './platform-fee';
 // May contain unused imports in some cases
 // @ts-ignore
-import { Refund } from './refund';
+import type { Refund } from './refund';
 
 /**
  * 
@@ -96,12 +96,12 @@ export interface Charge {
      */
     'updated_at': string;
     /**
-     * 
-     * @type {ChargeBalanceTransaction}
+     * The balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes). Note: Multiple balance transactions may be associated with this resource and you can fetch them all with `/balance-transactions?source_id={id}`.
+     * @type {BalanceTransaction}
      * @memberof Charge
      * @deprecated
      */
-    'balance_transaction'?: ChargeBalanceTransaction;
+    'balance_transaction'?: BalanceTransaction;
     /**
      * Time at which the charge was captured.
      * @type {string}
@@ -133,11 +133,11 @@ export interface Charge {
      */
     'next_steps'?: string;
     /**
-     * 
-     * @type {ChargePlatformFee}
+     * The platform fee (if any) for the charge.
+     * @type {PlatformFee}
      * @memberof Charge
      */
-    'platform_fee'?: ChargePlatformFee;
+    'platform_fee'?: PlatformFee;
 }
 
 export const ChargeStatus = {

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PlatformFeeRefundBalanceTransaction } from './platform-fee-refund-balance-transaction';
+import type { BalanceTransaction } from './balance-transaction';
 
 /**
  * 
@@ -30,12 +30,12 @@ export interface PlatformFeeRefund {
      */
     'amount': number;
     /**
-     * 
-     * @type {PlatformFeeRefundBalanceTransaction}
+     * The balance transaction that describes the impact of this refund on your account balance. Note: Multiple balance transactions may be associated with this resource and you can fetch them all with `/balance-transactions?source_id={id}`.
+     * @type {BalanceTransaction}
      * @memberof PlatformFeeRefund
      * @deprecated
      */
-    'balance_transaction': PlatformFeeRefundBalanceTransaction;
+    'balance_transaction': BalanceTransaction;
     /**
      * Time at which the object was created.
      * @type {string}

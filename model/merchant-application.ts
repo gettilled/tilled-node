@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { MerchantApplicationBusinessLegalEntity } from './merchant-application-business-legal-entity';
+import type { BusinessLegalEntity } from './business-legal-entity';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricingTemplate } from './pricing-template';
+import type { PricingTemplate } from './pricing-template';
 // May contain unused imports in some cases
 // @ts-ignore
-import { ProductCode } from './product-code';
+import type { ProductCode } from './product-code';
 // May contain unused imports in some cases
 // @ts-ignore
-import { TermsAndConditionsDetail } from './terms-and-conditions-detail';
+import type { TermsAndConditionsDetail } from './terms-and-conditions-detail';
 
 /**
  * 
@@ -52,11 +52,11 @@ export interface MerchantApplication {
      */
     'product_codes': Array<ProductCode>;
     /**
-     * 
-     * @type {MerchantApplicationBusinessLegalEntity}
+     * Merchant account details
+     * @type {BusinessLegalEntity}
      * @memberof MerchantApplication
      */
-    'business_legal_entity'?: MerchantApplicationBusinessLegalEntity;
+    'business_legal_entity'?: BusinessLegalEntity;
     /**
      * Links to terms and conditions for a merchant application.
      * @type {Array<TermsAndConditionsDetail>}

@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSession } from './checkout-session';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListCheckoutSessions200ResponseAllOf } from './list-checkout-sessions200-response-all-of';
+import type { CheckoutSession } from './checkout-session';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { CheckoutSessionsAllOf } from './list-checkout-sessions200-response-all-of';
 
 /**
  * @type ListCheckoutSessions200Response
  * @export
  */
-export type ListCheckoutSessions200Response = ListCheckoutSessions200ResponseAllOf & PaginatedDto;
+export type ListCheckoutSessions200Response = CheckoutSessionsAllOf & PaginatedDto;
 
 

@@ -15,16 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { DisputeEvidence } from './dispute-evidence';
-// May contain unused imports in some cases
-// @ts-ignore
-import { DisputeFile } from './dispute-file';
+import type { DisputeFile } from './dispute-file';
 
 /**
- * @type DisputeEvidence
- * Evidence submitted to challenge the dispute.
+ * 
  * @export
+ * @interface DisputeEvidence
  */
-export type {DisputeEvidence};
-
+export interface DisputeEvidence {
+    /**
+     * Description of the evidence submitted to challenge the dispute.
+     * @type {string}
+     * @memberof DisputeEvidence
+     */
+    'description': string;
+    /**
+     * Evidentiary files attached to the dispute.
+     * @type {Array<DisputeFile>}
+     * @memberof DisputeEvidence
+     */
+    'files': Array<DisputeFile>;
+}
 

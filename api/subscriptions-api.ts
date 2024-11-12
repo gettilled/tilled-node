@@ -14,25 +14,25 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListSubscriptions200Response } from '../model';
+import type { ListSubscriptions200Response } from '../model';
 // @ts-ignore
-import { Subscription } from '../model';
+import type { Subscription } from '../model';
 // @ts-ignore
-import { SubscriptionCreateParams } from '../model';
+import type { SubscriptionCreateParams } from '../model';
 // @ts-ignore
-import { SubscriptionPauseParams } from '../model';
+import type { SubscriptionPauseParams } from '../model';
 // @ts-ignore
-import { SubscriptionRetryParams } from '../model';
+import type { SubscriptionRetryParams } from '../model';
 // @ts-ignore
-import { SubscriptionUpdateParams } from '../model';
+import type { SubscriptionUpdateParams } from '../model';
 /**
  * SubscriptionsApi - axios parameter creator
  * @export
@@ -47,7 +47,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSubscription: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelSubscription: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('cancelSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -95,7 +95,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSubscription: async (tilled_account: string, SubscriptionCreateParams: SubscriptionCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createSubscription: async (tilled_account: string, SubscriptionCreateParams: SubscriptionCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'SubscriptionCreateParams' is not null or undefined
@@ -145,7 +145,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubscription: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSubscription: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -191,7 +191,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [customer_id] The ID of the customer whose subscriptions will be retrieved.
-         * @param {'active' | 'canceled' | 'past_due' | 'paused' | 'pending'} [status] The status of the subscriptions to retrieve.
+         * @param {ListSubscriptionsStatus} [status] The status of the subscriptions to retrieve.
          * @param {string} [next_payment_at_lte] Maximum &#x60;next_payment_at&#x60; value to filter by (inclusive).
          * @param {string} [next_payment_at_gte] Minimum &#x60;next_payment_at&#x60; value to filter by (inclusive).
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -199,7 +199,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptions: async (tilled_account: string, metadata?: { [key: string]: string; }, customer_id?: string, status?: 'active' | 'canceled' | 'past_due' | 'paused' | 'pending', next_payment_at_lte?: string, next_payment_at_gte?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listSubscriptions: async (tilled_account: string, metadata?: { [key: string]: string; }, customer_id?: string, status?: ListSubscriptionsStatus, next_payment_at_lte?: string, next_payment_at_gte?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listSubscriptions', 'tilled_account', tilled_account)
             const localVarPath = `/v1/subscriptions`;
@@ -222,7 +222,9 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (customer_id !== undefined) {
@@ -277,7 +279,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pauseSubscription: async (tilled_account: string, id: string, SubscriptionPauseParams: SubscriptionPauseParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        pauseSubscription: async (tilled_account: string, id: string, SubscriptionPauseParams: SubscriptionPauseParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('pauseSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -330,7 +332,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resumeSubscription: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        resumeSubscription: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('resumeSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -379,7 +381,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        retrySubscription: async (tilled_account: string, id: string, SubscriptionRetryParams: SubscriptionRetryParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        retrySubscription: async (tilled_account: string, id: string, SubscriptionRetryParams: SubscriptionRetryParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('retrySubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -433,7 +435,7 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSubscription: async (tilled_account: string, id: string, SubscriptionUpdateParams: SubscriptionUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateSubscription: async (tilled_account: string, id: string, SubscriptionUpdateParams: SubscriptionUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateSubscription', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -496,9 +498,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelSubscription(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async cancelSubscription(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cancelSubscription(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.cancelSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Creates a new Subscription.
@@ -508,9 +512,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSubscription(tilled_account: string, SubscriptionCreateParams: SubscriptionCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async createSubscription(tilled_account: string, SubscriptionCreateParams: SubscriptionCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createSubscription(tilled_account, SubscriptionCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.createSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Subscription.
@@ -520,9 +526,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSubscription(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async getSubscription(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubscription(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.getSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Subscriptions. The Subscriptions are sorted with the most recently created appearing first.
@@ -530,7 +538,7 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [customer_id] The ID of the customer whose subscriptions will be retrieved.
-         * @param {'active' | 'canceled' | 'past_due' | 'paused' | 'pending'} [status] The status of the subscriptions to retrieve.
+         * @param {ListSubscriptionsStatus} [status] The status of the subscriptions to retrieve.
          * @param {string} [next_payment_at_lte] Maximum &#x60;next_payment_at&#x60; value to filter by (inclusive).
          * @param {string} [next_payment_at_gte] Minimum &#x60;next_payment_at&#x60; value to filter by (inclusive).
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -538,9 +546,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listSubscriptions(tilled_account: string, metadata?: { [key: string]: string; }, customer_id?: string, status?: 'active' | 'canceled' | 'past_due' | 'paused' | 'pending', next_payment_at_lte?: string, next_payment_at_gte?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListSubscriptions200Response>> {
+        async listSubscriptions(tilled_account: string, metadata?: { [key: string]: string; }, customer_id?: string, status?: ListSubscriptionsStatus, next_payment_at_lte?: string, next_payment_at_gte?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListSubscriptions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listSubscriptions(tilled_account, metadata, customer_id, status, next_payment_at_lte, next_payment_at_gte, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.listSubscriptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Pauses a Subscription from generating payments until the optionally specified `resumes_at` date.
@@ -551,9 +561,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pauseSubscription(tilled_account: string, id: string, SubscriptionPauseParams: SubscriptionPauseParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async pauseSubscription(tilled_account: string, id: string, SubscriptionPauseParams: SubscriptionPauseParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.pauseSubscription(tilled_account, id, SubscriptionPauseParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.pauseSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Resumes a paused Subscription immediately. The next charge will occur on the regular billing cycle.
@@ -563,9 +575,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async resumeSubscription(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async resumeSubscription(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resumeSubscription(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.resumeSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retries a subscription payment at the optionally specified `next_payment_at` date.
@@ -576,9 +590,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async retrySubscription(tilled_account: string, id: string, SubscriptionRetryParams: SubscriptionRetryParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async retrySubscription(tilled_account: string, id: string, SubscriptionRetryParams: SubscriptionRetryParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.retrySubscription(tilled_account, id, SubscriptionRetryParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.retrySubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates an existing Subscription by setting the values of the provided parameters. Any parameters not provided will be left unchanged.
@@ -589,9 +605,11 @@ export const SubscriptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSubscription(tilled_account: string, id: string, SubscriptionUpdateParams: SubscriptionUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
+        async updateSubscription(tilled_account: string, id: string, SubscriptionUpdateParams: SubscriptionUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSubscription(tilled_account, id, SubscriptionUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SubscriptionsApi.updateSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -610,7 +628,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSubscription(requestParameters: SubscriptionsApiCancelSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        cancelSubscription(requestParameters: SubscriptionsApiCancelSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.cancelSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -620,7 +638,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSubscription(requestParameters: SubscriptionsApiCreateSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        createSubscription(requestParameters: SubscriptionsApiCreateSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.createSubscription(requestParameters.tilled_account, requestParameters.SubscriptionCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -630,7 +648,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSubscription(requestParameters: SubscriptionsApiGetSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        getSubscription(requestParameters: SubscriptionsApiGetSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.getSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -640,7 +658,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptions(requestParameters: SubscriptionsApiListSubscriptionsRequest, options?: AxiosRequestConfig): AxiosPromise<ListSubscriptions200Response> {
+        listSubscriptions(requestParameters: SubscriptionsApiListSubscriptionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListSubscriptions200Response> {
             return localVarFp.listSubscriptions(requestParameters.tilled_account, requestParameters.metadata, requestParameters.customer_id, requestParameters.status, requestParameters.next_payment_at_lte, requestParameters.next_payment_at_gte, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -650,7 +668,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        pauseSubscription(requestParameters: SubscriptionsApiPauseSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        pauseSubscription(requestParameters: SubscriptionsApiPauseSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.pauseSubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionPauseParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -660,7 +678,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resumeSubscription(requestParameters: SubscriptionsApiResumeSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        resumeSubscription(requestParameters: SubscriptionsApiResumeSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.resumeSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -670,7 +688,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        retrySubscription(requestParameters: SubscriptionsApiRetrySubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        retrySubscription(requestParameters: SubscriptionsApiRetrySubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.retrySubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionRetryParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -680,7 +698,7 @@ export const SubscriptionsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSubscription(requestParameters: SubscriptionsApiUpdateSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscription> {
+        updateSubscription(requestParameters: SubscriptionsApiUpdateSubscriptionRequest, options?: RawAxiosRequestConfig): AxiosPromise<Subscription> {
             return localVarFp.updateSubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -781,7 +799,7 @@ export interface SubscriptionsApiListSubscriptionsRequest {
      * @type {'active' | 'canceled' | 'past_due' | 'paused' | 'pending'}
      * @memberof SubscriptionsApiListSubscriptions
      */
-    readonly status?: 'active' | 'canceled' | 'past_due' | 'paused' | 'pending'
+    readonly status?: ListSubscriptionsStatus
 
     /**
      * Maximum &#x60;next_payment_at&#x60; value to filter by (inclusive).
@@ -932,7 +950,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public cancelSubscription(requestParameters: SubscriptionsApiCancelSubscriptionRequest, options?: AxiosRequestConfig) {
+    public cancelSubscription(requestParameters: SubscriptionsApiCancelSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).cancelSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -944,7 +962,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public createSubscription(requestParameters: SubscriptionsApiCreateSubscriptionRequest, options?: AxiosRequestConfig) {
+    public createSubscription(requestParameters: SubscriptionsApiCreateSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).createSubscription(requestParameters.tilled_account, requestParameters.SubscriptionCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -956,7 +974,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public getSubscription(requestParameters: SubscriptionsApiGetSubscriptionRequest, options?: AxiosRequestConfig) {
+    public getSubscription(requestParameters: SubscriptionsApiGetSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).getSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -968,7 +986,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public listSubscriptions(requestParameters: SubscriptionsApiListSubscriptionsRequest, options?: AxiosRequestConfig) {
+    public listSubscriptions(requestParameters: SubscriptionsApiListSubscriptionsRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).listSubscriptions(requestParameters.tilled_account, requestParameters.metadata, requestParameters.customer_id, requestParameters.status, requestParameters.next_payment_at_lte, requestParameters.next_payment_at_gte, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -980,7 +998,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public pauseSubscription(requestParameters: SubscriptionsApiPauseSubscriptionRequest, options?: AxiosRequestConfig) {
+    public pauseSubscription(requestParameters: SubscriptionsApiPauseSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).pauseSubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionPauseParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -992,7 +1010,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public resumeSubscription(requestParameters: SubscriptionsApiResumeSubscriptionRequest, options?: AxiosRequestConfig) {
+    public resumeSubscription(requestParameters: SubscriptionsApiResumeSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).resumeSubscription(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1004,7 +1022,7 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public retrySubscription(requestParameters: SubscriptionsApiRetrySubscriptionRequest, options?: AxiosRequestConfig) {
+    public retrySubscription(requestParameters: SubscriptionsApiRetrySubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).retrySubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionRetryParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1016,7 +1034,19 @@ export class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    public updateSubscription(requestParameters: SubscriptionsApiUpdateSubscriptionRequest, options?: AxiosRequestConfig) {
+    public updateSubscription(requestParameters: SubscriptionsApiUpdateSubscriptionRequest, options?: RawAxiosRequestConfig) {
         return SubscriptionsApiFp(this.configuration).updateSubscription(requestParameters.tilled_account, requestParameters.id, requestParameters.SubscriptionUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListSubscriptionsStatus = {
+    ACTIVE: 'active',
+    CANCELED: 'canceled',
+    PAST_DUE: 'past_due',
+    PAUSED: 'paused',
+    PENDING: 'pending'
+} as const;
+export type ListSubscriptionsStatus = typeof ListSubscriptionsStatus[keyof typeof ListSubscriptionsStatus];

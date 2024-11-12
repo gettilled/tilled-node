@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsCreateParamsBranding } from './account-settings-create-params-branding';
+import type { AccountSettingsBrandingCreateParams } from './account-settings-branding-create-params';
 
 /**
  * 
@@ -24,10 +24,10 @@ import { AccountSettingsCreateParamsBranding } from './account-settings-create-p
  */
 export interface AccountSettingsCreateParams {
     /**
-     * 
-     * @type {AccountSettingsCreateParamsBranding}
+     * The account branding settings.
+     * @type {AccountSettingsBrandingCreateParams}
      * @memberof AccountSettingsCreateParams
      */
-    'branding'?: AccountSettingsCreateParamsBranding;
+    'branding'?: AccountSettingsBrandingCreateParams;
 }
 

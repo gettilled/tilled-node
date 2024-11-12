@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ListSubscriptions200ResponseAllOf } from './list-subscriptions200-response-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { SubscriptionsAllOf } from './list-subscriptions200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
-import { Subscription } from './subscription';
+import type { Subscription } from './subscription';
 
 /**
  * @type ListSubscriptions200Response
  * @export
  */
-export type ListSubscriptions200Response = ListSubscriptions200ResponseAllOf & PaginatedDto;
+export type ListSubscriptions200Response = SubscriptionsAllOf & PaginatedDto;
 
 
