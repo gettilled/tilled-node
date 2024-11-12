@@ -31,6 +31,7 @@ git_push.sh
 index.ts
 model/access-token-refresh-params.ts
 model/account-business-profile.ts
+model/account-capability-attributes.ts
 model/account-capability-create-params.ts
 model/account-capability-pricing-template.ts
 model/account-capability-product-code.ts
@@ -60,6 +61,7 @@ model/api-key-update-params.ts
 model/api-key.ts
 model/apple-pay-domain-create-params.ts
 model/apple-pay-domain.ts
+model/attributes-esignature.ts
 model/auth-link-create-params.ts
 model/auth-link-dto.ts
 model/balance-transaction-fee-detail.ts
@@ -208,6 +210,8 @@ model/payment-method-eft-debit.ts
 model/payment-method-terminal-reader.ts
 model/payment-method-update-params.ts
 model/payment-method.ts
+model/payment-provider-attributes-esignature.ts
+model/payment-provider-attributes.ts
 model/payout-balance-transaction.ts
 model/payout.ts
 model/platform-fee-balance-transaction.ts

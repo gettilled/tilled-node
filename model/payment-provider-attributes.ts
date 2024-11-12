@@ -13,24 +13,21 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentProviderAttributesEsignature } from './payment-provider-attributes-esignature';
 
 /**
  * 
  * @export
- * @interface AccountRequirementsError
+ * @interface PaymentProviderAttributes
  */
-export interface AccountRequirementsError {
+export interface PaymentProviderAttributes {
     /**
-     * The informative message that indicates the error type and additional details about the error.
-     * @type {string}
-     * @memberof AccountRequirementsError
+     * 
+     * @type {PaymentProviderAttributesEsignature}
+     * @memberof PaymentProviderAttributes
      */
-    'reason': string;
-    /**
-     * The specific onboarding application requirement field that needs to be resolved.
-     * @type {string}
-     * @memberof AccountRequirementsError
-     */
-    'requirement': string;
+    'esignature'?: PaymentProviderAttributesEsignature;
 }
 

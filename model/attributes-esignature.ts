@@ -17,20 +17,22 @@
 /**
  * 
  * @export
- * @interface AccountRequirementsError
+ * @interface AttributesEsignature
  */
-export interface AccountRequirementsError {
+export interface AttributesEsignature {
     /**
-     * The informative message that indicates the error type and additional details about the error.
+     * 
      * @type {string}
-     * @memberof AccountRequirementsError
+     * @memberof AttributesEsignature
      */
-    'reason': string;
-    /**
-     * The specific onboarding application requirement field that needs to be resolved.
-     * @type {string}
-     * @memberof AccountRequirementsError
-     */
-    'requirement': string;
+    'status': AttributesEsignatureStatus;
 }
+
+export const AttributesEsignatureStatus = {
+    SENT: 'sent',
+    COMPLETED: 'completed'
+} as const;
+
+export type AttributesEsignatureStatus = typeof AttributesEsignatureStatus[keyof typeof AttributesEsignatureStatus];
+
 

@@ -13,24 +13,18 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentProviderAttributes } from './payment-provider-attributes';
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaymentProviderAttributesEsignature } from './payment-provider-attributes-esignature';
 
 /**
- * 
+ * @type AccountCapabilityAttributes
+ * The collection of optional or required attributes for onboarding and operation.
  * @export
- * @interface AccountRequirementsError
  */
-export interface AccountRequirementsError {
-    /**
-     * The informative message that indicates the error type and additional details about the error.
-     * @type {string}
-     * @memberof AccountRequirementsError
-     */
-    'reason': string;
-    /**
-     * The specific onboarding application requirement field that needs to be resolved.
-     * @type {string}
-     * @memberof AccountRequirementsError
-     */
-    'requirement': string;
-}
+export type AccountCapabilityAttributes = PaymentProviderAttributes;
+
 
