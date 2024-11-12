@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountCapabilityAttributes } from './account-capability-attributes';
+// May contain unused imports in some cases
+// @ts-ignore
 import { AccountCapabilityPricingTemplate } from './account-capability-pricing-template';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -66,6 +69,12 @@ export interface AccountCapability {
      * @memberof AccountCapability
      */
     'status': AccountCapabilityStatus;
+    /**
+     * 
+     * @type {AccountCapabilityAttributes}
+     * @memberof AccountCapability
+     */
+    'attributes'?: AccountCapabilityAttributes;
     /**
      * The URL for the merchant\'s onboarding application.
      * @type {string}
