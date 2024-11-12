@@ -14,7 +14,7 @@
   "scripts": {
     "prettier:check": "npx prettier --config .prettierrc --check .",
     "prettier:write": "npx prettier --config .prettierrc --write .",
-    "prep": "bash sanitize_exports.sh",
+    "prep": "bash handle-paginated-models.sh model && bash handle-paginated-models.sh dist/model",
     "build": "npm run prep && tsc ",
     "start-test-project": "cd test/project/react/react-ts-checkout/client && npm install && cd .. && npm install && npm run dev",
     "test": "npx playwright test",
