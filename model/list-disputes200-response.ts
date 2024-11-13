@@ -20,12 +20,12 @@ import type { Dispute } from './dispute';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { DisputesAllOf } from './list-disputes200-response-all-of';
+    import { ListDisputes200ResponseAllOf } from './list-disputes200-response-all-of';
 
 /**
  * @type ListDisputes200Response
  * @export
  */
-export type ListDisputes200Response = DisputesAllOf & PaginatedDto;
+export type ListDisputes200Response = ListDisputes200ResponseAllOf & PaginatedDto;
 
 

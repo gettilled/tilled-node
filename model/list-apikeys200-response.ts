@@ -20,12 +20,12 @@ import type { ApiKey } from './api-key';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { APIKeysAllOf } from './list-apikeys200-response-all-of';
+    import { ListAPIKeys200ResponseAllOf } from './list-apikeys200-response-all-of';
 
 /**
  * @type ListAPIKeys200Response
  * @export
  */
-export type ListAPIKeys200Response = APIKeysAllOf & PaginatedDto;
+export type ListAPIKeys200Response = ApiKey & PaginatedDto;
 
 

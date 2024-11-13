@@ -17,7 +17,7 @@
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { RefundsAllOf } from './list-refunds200-response-all-of';
+    import { ListRefunds200ResponseAllOf } from './list-refunds200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { Refund } from './refund';
@@ -26,6 +26,6 @@ import type { Refund } from './refund';
  * @type ListRefunds200Response
  * @export
  */
-export type ListRefunds200Response = RefundsAllOf & PaginatedDto;
+export type ListRefunds200Response = ListRefunds200ResponseAllOf & PaginatedDto;
 
 

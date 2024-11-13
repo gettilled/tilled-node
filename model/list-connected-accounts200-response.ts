@@ -20,12 +20,12 @@ import type { Account } from './account';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { ConnectedAccountsAllOf } from './list-connected-accounts200-response-all-of';
+    import { ListConnectedAccounts200ResponseAllOf } from './list-connected-accounts200-response-all-of';
 
 /**
  * @type ListConnectedAccounts200Response
  * @export
  */
-export type ListConnectedAccounts200Response = ConnectedAccountsAllOf & PaginatedDto;
+export type ListConnectedAccounts200Response = ListConnectedAccounts200ResponseAllOf & PaginatedDto;
 
 

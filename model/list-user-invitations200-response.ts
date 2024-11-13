@@ -17,7 +17,7 @@
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { UserInvitationsAllOf } from './list-user-invitations200-response-all-of';
+    import { ListUserInvitations200ResponseAllOf } from './list-user-invitations200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UserInvitation } from './user-invitation';
@@ -26,6 +26,6 @@ import type { UserInvitation } from './user-invitation';
  * @type ListUserInvitations200Response
  * @export
  */
-export type ListUserInvitations200Response = UserInvitationsAllOf & PaginatedDto;
+export type ListUserInvitations200Response = ListUserInvitations200ResponseAllOf & PaginatedDto;
 
 
