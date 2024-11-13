@@ -20,12 +20,12 @@ import type { BalanceTransaction } from './balance-transaction';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { BalanceTransactionsAllOf } from './list-balance-transactions200-response-all-of';
+    import { ListBalanceTransactions200ResponseAllOf } from './list-balance-transactions200-response-all-of';
 
 /**
  * @type ListBalanceTransactions200Response
  * @export
  */
-export type ListBalanceTransactions200Response = BalanceTransactionsAllOf & PaginatedDto;
+export type ListBalanceTransactions200Response = ListBalanceTransactions200ResponseAllOf & PaginatedDto;
 
 

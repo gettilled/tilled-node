@@ -20,12 +20,12 @@ import type { CheckoutSession } from './checkout-session';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { CheckoutSessionsAllOf } from './list-checkout-sessions200-response-all-of';
+    import { ListCheckoutSessions200ResponseAllOf } from './list-checkout-sessions200-response-all-of';
 
 /**
  * @type ListCheckoutSessions200Response
  * @export
  */
-export type ListCheckoutSessions200Response = CheckoutSessionsAllOf & PaginatedDto;
+export type ListCheckoutSessions200Response = ListCheckoutSessions200ResponseAllOf & PaginatedDto;
 
 

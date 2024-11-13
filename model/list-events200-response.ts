@@ -20,12 +20,12 @@ import type { Event } from './event';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { EventsAllOf } from './list-events200-response-all-of';
+    import { ListEvents200ResponseAllOf } from './list-events200-response-all-of';
 
 /**
  * @type ListEvents200Response
  * @export
  */
-export type ListEvents200Response = EventsAllOf & PaginatedDto;
+export type ListEvents200Response = ListEvents200ResponseAllOf & PaginatedDto;
 
 
