@@ -20,12 +20,12 @@ import type { ApplePayDomain } from './apple-pay-domain';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { ApplePayDomainsAllOf } from './list-apple-pay-domains200-response-all-of';
+    import { ListApplePayDomains200ResponseAllOf } from './list-apple-pay-domains200-response-all-of';
 
 /**
  * @type ListApplePayDomains200Response
  * @export
  */
-export type ListApplePayDomains200Response = ApplePayDomainsAllOf & PaginatedDto;
+export type ListApplePayDomains200Response = ListApplePayDomains200ResponseAllOf & PaginatedDto;
 
 

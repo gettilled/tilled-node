@@ -17,12 +17,12 @@
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { FilesAllOf } from './list-files200-response-all-of';
+    import { ListFiles200ResponseAllOf } from './list-files200-response-all-of';
 
 /**
  * @type ListFiles200Response
  * @export
  */
-export type ListFiles200Response = FilesAllOf & PaginatedDto;
+export type ListFiles200Response = ListFiles200ResponseAllOf & PaginatedDto;
 
 

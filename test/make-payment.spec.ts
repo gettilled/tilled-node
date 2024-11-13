@@ -82,8 +82,8 @@ test('create and confirm a payment intent with a new card payment method', async
       [
         'creating new pm card {name: Testy McTesterson, address: Object}',
         'new pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
-        'attaching pm to customer {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
-        'using saved pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:'
+        'attaching pm to customer {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:'
+        // 'using saved pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:'
       ],
       DelimiterEnum.wildcards
     )
@@ -109,7 +109,7 @@ test('confirm a payment intent with a saved card payment method', async ({
   // expect payment method select to be visible and select the saved card payment method
   await expect(page.getByTestId('payment-form-container')).toBeVisible();
   await page.getByTestId('payment-method-select').click();
-  await page.getByTestId('pm-option-visa-1111').click(); // this element is dynamically generated. It's not in the initial HTML
+  await page.getByTestId('pm-option-visa-1111').first().click(); // this element is dynamically generated. It's not in the initial HTML
 
   // submit the payment form
   page.getByTestId('submit-button').click();

@@ -17,7 +17,7 @@
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { ReportRunsAllOf } from './list-report-runs200-response-all-of';
+    import { ListReportRuns200ResponseAllOf } from './list-report-runs200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReportRun } from './report-run';
@@ -26,6 +26,6 @@ import type { ReportRun } from './report-run';
  * @type ListReportRuns200Response
  * @export
  */
-export type ListReportRuns200Response = ReportRunsAllOf & PaginatedDto;
+export type ListReportRuns200Response = ListReportRuns200ResponseAllOf & PaginatedDto;
 
 

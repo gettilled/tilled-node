@@ -20,12 +20,12 @@ import type { Customer } from './customer';
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
     // @ts-ignore
-    import { CustomersAllOf } from './list-customers200-response-all-of';
+    import { ListCustomers200ResponseAllOf } from './list-customers200-response-all-of';
 
 /**
  * @type ListCustomers200Response
  * @export
  */
-export type ListCustomers200Response = CustomersAllOf & PaginatedDto;
+export type ListCustomers200Response = ListCustomers200ResponseAllOf & PaginatedDto;
 
 
