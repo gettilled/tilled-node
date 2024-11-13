@@ -26,7 +26,7 @@ function createNewCustomer() {
       })
       .then((data) => {
           console.log(data);
-        var customerId = process.env.VITE_TILLED_CUSTOMER_ID || data.id;
+        var customerId = data.id || process.env.VITE_TILLED_CUSTOMER_ID;
   
         var serverEnv =
           'BASE_PATH=https://staging-api.tilled.com\nTILLED_SECRET_KEY='

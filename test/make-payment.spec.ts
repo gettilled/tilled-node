@@ -83,6 +83,7 @@ test('create and confirm a payment intent with a new card payment method', async
         'creating new pm card {name: Testy McTesterson, address: Object}',
         'new pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
         'attaching pm to customer {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:',
+        'using saved pm {ach_debit: null, billing_details: Object, card_present: null, chargeable: true, created_at:'
       ],
       DelimiterEnum.wildcards
     )
