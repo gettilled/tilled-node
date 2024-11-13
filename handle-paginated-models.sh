@@ -12,13 +12,6 @@ elif [ ! -d "$MODEL_DIR" ]; then
   exit 1
 fi
 
-# Determine if we’re on macOS or Linux
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  SED_INPLACE_FLAG="-i ''"
-else
-  SED_INPLACE_FLAG="-i"
-fi
-
 # Loop over all .ts files in the directory
 for file in "$MODEL_DIR"/*.ts; do
   echo "Processing $file..."
@@ -39,17 +32,17 @@ for file in "$MODEL_DIR"/*.ts; do
 
     # Handle both `import type` and `import` variants for `PaginatedDto`
     if grep -q "import type { PaginatedDto" "$file"; then
-      sed $SED_INPLACE_FLAG -e "s/import type { PaginatedDto }/import { PaginatedDto }/" "$file"
+      sed -i '' -e "s/import type { PaginatedDto }/import { PaginatedDto }/" "$file"
     fi
 
     # Insert import for `<TypeName>AllOf` right after the `PaginatedDto` import with correct kebab-case formatting
-    sed $SED_INPLACE_FLAG -e "/import { PaginatedDto } from '.\/paginated-dto';/a\\
+    sed -i '' -e "/import { PaginatedDto } from '.\/paginated-dto';/a\\
     // @ts-ignore\\
     import { ${type_name}AllOf } from './list-${kebab_case_name}200-response-all-of';
     " "$file"
 
     # Update the export line to use `<TypeName>AllOf & PaginatedDto`
-    sed $SED_INPLACE_FLAG -e "s/export type List${type_name}200Response = PaginatedDto;/export type List${type_name}200Response = ${type_name}AllOf \& PaginatedDto;/g" "$file"
+    sed -i '' -e "s/export type List${type_name}200Response = PaginatedDto;/export type List${type_name}200Response = ${type_name}AllOf \& PaginatedDto;/g" "$file"
 
     echo "Processed $file"
   else
