@@ -5,28 +5,33 @@ var tilled = require('../dist');
 var dotenv = require('dotenv');
 dotenv.config();
 function createNewCustomer() {
-  var config = new tilled.Configuration({
-    apiKey: process.env.TILLED_SECRET_KEY,
-    basePath: process.env.BASE_PATH || 'https://staging-api.tilled.com',
-    baseOptions: { timeout: 2000 }
-  });
-  var customersApi = new tilled.CustomersApi(config);
   var customerId = process.env.VITE_TILLED_CUSTOMER_ID;
 
   console.log('Creating a new customer');
 
-  customersApi
-    .createCustomer({
-      tilled_account: process.env.VITE_TILLED_MERCHANT_ACCOUNT_ID,
-      CustomerCreateParams: {
+  fetch(
+    `${process.env.BASE_PATH || 'https://staging-api.tilled.com'}/v1/customers`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'tilled-api-key': `${process.env.TILLED_SECRET_KEY}`,
+        'tilled-account': `${process.env.VITE_TILLED_MERCHANT_ACCOUNT_ID}`
+      },
+      body: JSON.stringify({
+        tilled_account: process.env.VITE_TILLED_MERCHANT_ACCOUNT_ID,
         email: 'testymctesterface@test.com',
         first_name: 'Testy',
         last_name: 'McTesterface'
-      }
-    })
+      })
+    }
+  )
     .then((response) => {
-      console.log(response.data);
-      customerId = response.data.id;
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+      var customerId = process.env.VITE_TILLED_CUSTOMER_ID || data.id;
 
       var serverEnv =
         'BASE_PATH=https://staging-api.tilled.com\nTILLED_SECRET_KEY='

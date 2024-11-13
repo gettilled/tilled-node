@@ -15,8 +15,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Build the package
-        run: npm run build
       - name: Create .env files in submodule
         run: node test/ci-setup-env.js
         env:
