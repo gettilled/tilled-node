@@ -13,15 +13,44 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { PaymentMethodCreateParamsAchDebit } from './payment-method-create-params-ach-debit';
 
 /**
- * @type PaymentMethodCreateParamsAchDebit
- * If this is an `ach_debit` PaymentMethod, this hash contains details about the ACH Direct Debit bank account.
+ * 
  * @export
+ * @interface PaymentMethodCreateParamsAchDebit
  */
-export type {PaymentMethodCreateParamsAchDebit};
+export interface PaymentMethodCreateParamsAchDebit {
+    /**
+     * The name of the customer or company that owns the bank account.
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsAchDebit
+     */
+    'account_holder_name': string;
+    /**
+     * This is the bank account number
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsAchDebit
+     */
+    'account_number': string;
+    /**
+     * Bank account type.
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsAchDebit
+     */
+    'account_type': PaymentMethodCreateParamsAchDebitAccountType;
+    /**
+     * The sequence of 9-digits used by banks to identify specific financial institutions (i.e. ABA routing number)
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsAchDebit
+     */
+    'routing_number': string;
+}
+
+export const PaymentMethodCreateParamsAchDebitAccountType = {
+    CHECKING: 'checking',
+    SAVINGS: 'savings'
+} as const;
+
+export type PaymentMethodCreateParamsAchDebitAccountType = typeof PaymentMethodCreateParamsAchDebitAccountType[keyof typeof PaymentMethodCreateParamsAchDebitAccountType];
 
 

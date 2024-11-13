@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AchDebitSingleUseTokenDetails } from './ach-debit-single-use-token-details';
+import type { AchDebitDetails } from './ach-debit-details';
 
 /**
  * 
@@ -48,10 +48,10 @@ export interface AchDebitSingleUseToken {
      */
     'updated_at': string;
     /**
-     * 
-     * @type {AchDebitSingleUseTokenDetails}
+     * This hash contains details about the ACH Debit bank account.
+     * @type {AchDebitDetails}
      * @memberof AchDebitSingleUseToken
      */
-    'details'?: AchDebitSingleUseTokenDetails;
+    'details'?: AchDebitDetails;
 }
 

@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ApiKey } from './api-key';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListAPIKeys200ResponseAllOf } from './list-apikeys200-response-all-of';
+import type { ApiKey } from './api-key';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { APIKeysAllOf } from './list-apikeys200-response-all-of';
 
 /**
  * @type ListAPIKeys200Response
  * @export
  */
-export type ListAPIKeys200Response = ListAPIKeys200ResponseAllOf & PaginatedDto;
+export type ListAPIKeys200Response = APIKeysAllOf & PaginatedDto;
 
 

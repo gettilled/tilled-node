@@ -14,27 +14,27 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { AchDebitSingleUseToken } from '../model';
+import type { AchDebitSingleUseToken } from '../model';
 // @ts-ignore
-import { ListPaymentMethods200Response } from '../model';
+import type { ListPaymentMethods200Response } from '../model';
 // @ts-ignore
-import { PaymentMethod } from '../model';
+import type { PaymentMethod } from '../model';
 // @ts-ignore
-import { PaymentMethodAttachParams } from '../model';
+import type { PaymentMethodAttachParams } from '../model';
 // @ts-ignore
-import { PaymentMethodCreateAchDebitSingleUseTokenParams } from '../model';
+import type { PaymentMethodCreateAchDebitSingleUseTokenParams } from '../model';
 // @ts-ignore
-import { PaymentMethodCreateParams } from '../model';
+import type { PaymentMethodCreateParams } from '../model';
 // @ts-ignore
-import { PaymentMethodUpdateParams } from '../model';
+import type { PaymentMethodUpdateParams } from '../model';
 /**
  * PaymentMethodsApi - axios parameter creator
  * @export
@@ -50,7 +50,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        attachPaymentMethodToCustomer: async (tilled_account: string, id: string, PaymentMethodAttachParams: PaymentMethodAttachParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        attachPaymentMethodToCustomer: async (tilled_account: string, id: string, PaymentMethodAttachParams: PaymentMethodAttachParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('attachPaymentMethodToCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -104,7 +104,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @deprecated
          * @throws {RequiredError}
          */
-        createAchDebitSingleUseToken: async (tilled_account: string, PaymentMethodCreateAchDebitSingleUseTokenParams: PaymentMethodCreateAchDebitSingleUseTokenParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAchDebitSingleUseToken: async (tilled_account: string, PaymentMethodCreateAchDebitSingleUseTokenParams: PaymentMethodCreateAchDebitSingleUseTokenParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createAchDebitSingleUseToken', 'tilled_account', tilled_account)
             // verify required parameter 'PaymentMethodCreateAchDebitSingleUseTokenParams' is not null or undefined
@@ -154,7 +154,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPaymentMethod: async (tilled_account: string, PaymentMethodCreateParams: PaymentMethodCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createPaymentMethod: async (tilled_account: string, PaymentMethodCreateParams: PaymentMethodCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createPaymentMethod', 'tilled_account', tilled_account)
             // verify required parameter 'PaymentMethodCreateParams' is not null or undefined
@@ -204,7 +204,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        detachPaymentMethodFromCustomer: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        detachPaymentMethodFromCustomer: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('detachPaymentMethodFromCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -252,7 +252,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentMethod: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentMethod: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPaymentMethod', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -296,7 +296,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * Returns a list of Payment Methods for a given Customer. The Payment Methods are sorted with the most recently created appearing first.
          * @summary List a Customer\'s Payment Methods
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'eft_debit' | 'card_present'} type Only return payment methods of the given type.
+         * @param {ListPaymentMethodsType} type Only return payment methods of the given type.
          * @param {string} customer_id Customer identifier
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -304,7 +304,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentMethods: async (tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPaymentMethods: async (tilled_account: string, type: ListPaymentMethodsType, customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPaymentMethods', 'tilled_account', tilled_account)
             // verify required parameter 'type' is not null or undefined
@@ -331,7 +331,9 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (type !== undefined) {
@@ -374,7 +376,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentMethod: async (tilled_account: string, id: string, PaymentMethodUpdateParams: PaymentMethodUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePaymentMethod: async (tilled_account: string, id: string, PaymentMethodUpdateParams: PaymentMethodUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updatePaymentMethod', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -438,9 +440,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async attachPaymentMethodToCustomer(tilled_account: string, id: string, PaymentMethodAttachParams: PaymentMethodAttachParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
+        async attachPaymentMethodToCustomer(tilled_account: string, id: string, PaymentMethodAttachParams: PaymentMethodAttachParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.attachPaymentMethodToCustomer(tilled_account, id, PaymentMethodAttachParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.attachPaymentMethodToCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Creates a single-use token for ACH debit which is used to create a Payment Method.
@@ -451,9 +455,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @deprecated
          * @throws {RequiredError}
          */
-        async createAchDebitSingleUseToken(tilled_account: string, PaymentMethodCreateAchDebitSingleUseTokenParams: PaymentMethodCreateAchDebitSingleUseTokenParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AchDebitSingleUseToken>> {
+        async createAchDebitSingleUseToken(tilled_account: string, PaymentMethodCreateAchDebitSingleUseTokenParams: PaymentMethodCreateAchDebitSingleUseTokenParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AchDebitSingleUseToken>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createAchDebitSingleUseToken(tilled_account, PaymentMethodCreateAchDebitSingleUseTokenParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.createAchDebitSingleUseToken']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Creates a Payment Method. To use this endpoint, you must first submit your PCI Attestation of Compliance (AOC). Please contact integrations@tilled.com for information on how to submit your documentation.
@@ -463,9 +469,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createPaymentMethod(tilled_account: string, PaymentMethodCreateParams: PaymentMethodCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
+        async createPaymentMethod(tilled_account: string, PaymentMethodCreateParams: PaymentMethodCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createPaymentMethod(tilled_account, PaymentMethodCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.createPaymentMethod']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Detaches a Payment Method from a Customer. Once detached, the Payment Method can no longer be used to confirm a Payment Intent.
@@ -475,9 +483,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async detachPaymentMethodFromCustomer(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
+        async detachPaymentMethodFromCustomer(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.detachPaymentMethodFromCustomer(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.detachPaymentMethodFromCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Payment Method.
@@ -487,15 +497,17 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPaymentMethod(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
+        async getPaymentMethod(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentMethod(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.getPaymentMethod']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Payment Methods for a given Customer. The Payment Methods are sorted with the most recently created appearing first.
          * @summary List a Customer\'s Payment Methods
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'eft_debit' | 'card_present'} type Only return payment methods of the given type.
+         * @param {ListPaymentMethodsType} type Only return payment methods of the given type.
          * @param {string} customer_id Customer identifier
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -503,9 +515,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPaymentMethods(tilled_account: string, type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present', customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentMethods200Response>> {
+        async listPaymentMethods(tilled_account: string, type: ListPaymentMethodsType, customer_id: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPaymentMethods200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPaymentMethods(tilled_account, type, customer_id, metadata, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.listPaymentMethods']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates a Payment Method by setting the values of the provided parameters. Any parameters not provided will be left unchanged. The Payment Method must be attached to a Customer to be updated.
@@ -516,9 +530,11 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePaymentMethod(tilled_account: string, id: string, PaymentMethodUpdateParams: PaymentMethodUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
+        async updatePaymentMethod(tilled_account: string, id: string, PaymentMethodUpdateParams: PaymentMethodUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePaymentMethod(tilled_account, id, PaymentMethodUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentMethodsApi.updatePaymentMethod']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -537,7 +553,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        attachPaymentMethodToCustomer(requestParameters: PaymentMethodsApiAttachPaymentMethodToCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentMethod> {
+        attachPaymentMethodToCustomer(requestParameters: PaymentMethodsApiAttachPaymentMethodToCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentMethod> {
             return localVarFp.attachPaymentMethodToCustomer(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentMethodAttachParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -548,7 +564,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @deprecated
          * @throws {RequiredError}
          */
-        createAchDebitSingleUseToken(requestParameters: PaymentMethodsApiCreateAchDebitSingleUseTokenRequest, options?: AxiosRequestConfig): AxiosPromise<AchDebitSingleUseToken> {
+        createAchDebitSingleUseToken(requestParameters: PaymentMethodsApiCreateAchDebitSingleUseTokenRequest, options?: RawAxiosRequestConfig): AxiosPromise<AchDebitSingleUseToken> {
             return localVarFp.createAchDebitSingleUseToken(requestParameters.tilled_account, requestParameters.PaymentMethodCreateAchDebitSingleUseTokenParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -558,7 +574,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPaymentMethod(requestParameters: PaymentMethodsApiCreatePaymentMethodRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentMethod> {
+        createPaymentMethod(requestParameters: PaymentMethodsApiCreatePaymentMethodRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentMethod> {
             return localVarFp.createPaymentMethod(requestParameters.tilled_account, requestParameters.PaymentMethodCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -568,7 +584,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        detachPaymentMethodFromCustomer(requestParameters: PaymentMethodsApiDetachPaymentMethodFromCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentMethod> {
+        detachPaymentMethodFromCustomer(requestParameters: PaymentMethodsApiDetachPaymentMethodFromCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentMethod> {
             return localVarFp.detachPaymentMethodFromCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -578,7 +594,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentMethod(requestParameters: PaymentMethodsApiGetPaymentMethodRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentMethod> {
+        getPaymentMethod(requestParameters: PaymentMethodsApiGetPaymentMethodRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentMethod> {
             return localVarFp.getPaymentMethod(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -588,7 +604,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPaymentMethods(requestParameters: PaymentMethodsApiListPaymentMethodsRequest, options?: AxiosRequestConfig): AxiosPromise<ListPaymentMethods200Response> {
+        listPaymentMethods(requestParameters: PaymentMethodsApiListPaymentMethodsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListPaymentMethods200Response> {
             return localVarFp.listPaymentMethods(requestParameters.tilled_account, requestParameters.type, requestParameters.customer_id, requestParameters.metadata, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -598,7 +614,7 @@ export const PaymentMethodsApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentMethod(requestParameters: PaymentMethodsApiUpdatePaymentMethodRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentMethod> {
+        updatePaymentMethod(requestParameters: PaymentMethodsApiUpdatePaymentMethodRequest, options?: RawAxiosRequestConfig): AxiosPromise<PaymentMethod> {
             return localVarFp.updatePaymentMethod(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentMethodUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -734,7 +750,7 @@ export interface PaymentMethodsApiListPaymentMethodsRequest {
      * @type {'card' | 'ach_debit' | 'eft_debit' | 'card_present'}
      * @memberof PaymentMethodsApiListPaymentMethods
      */
-    readonly type: 'card' | 'ach_debit' | 'eft_debit' | 'card_present'
+    readonly type: ListPaymentMethodsType
 
     /**
      * Customer identifier
@@ -808,7 +824,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public attachPaymentMethodToCustomer(requestParameters: PaymentMethodsApiAttachPaymentMethodToCustomerRequest, options?: AxiosRequestConfig) {
+    public attachPaymentMethodToCustomer(requestParameters: PaymentMethodsApiAttachPaymentMethodToCustomerRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).attachPaymentMethodToCustomer(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentMethodAttachParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -821,7 +837,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public createAchDebitSingleUseToken(requestParameters: PaymentMethodsApiCreateAchDebitSingleUseTokenRequest, options?: AxiosRequestConfig) {
+    public createAchDebitSingleUseToken(requestParameters: PaymentMethodsApiCreateAchDebitSingleUseTokenRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).createAchDebitSingleUseToken(requestParameters.tilled_account, requestParameters.PaymentMethodCreateAchDebitSingleUseTokenParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -833,7 +849,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public createPaymentMethod(requestParameters: PaymentMethodsApiCreatePaymentMethodRequest, options?: AxiosRequestConfig) {
+    public createPaymentMethod(requestParameters: PaymentMethodsApiCreatePaymentMethodRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).createPaymentMethod(requestParameters.tilled_account, requestParameters.PaymentMethodCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -845,7 +861,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public detachPaymentMethodFromCustomer(requestParameters: PaymentMethodsApiDetachPaymentMethodFromCustomerRequest, options?: AxiosRequestConfig) {
+    public detachPaymentMethodFromCustomer(requestParameters: PaymentMethodsApiDetachPaymentMethodFromCustomerRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).detachPaymentMethodFromCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -857,7 +873,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public getPaymentMethod(requestParameters: PaymentMethodsApiGetPaymentMethodRequest, options?: AxiosRequestConfig) {
+    public getPaymentMethod(requestParameters: PaymentMethodsApiGetPaymentMethodRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).getPaymentMethod(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -869,7 +885,7 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public listPaymentMethods(requestParameters: PaymentMethodsApiListPaymentMethodsRequest, options?: AxiosRequestConfig) {
+    public listPaymentMethods(requestParameters: PaymentMethodsApiListPaymentMethodsRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).listPaymentMethods(requestParameters.tilled_account, requestParameters.type, requestParameters.customer_id, requestParameters.metadata, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -881,7 +897,18 @@ export class PaymentMethodsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentMethodsApi
      */
-    public updatePaymentMethod(requestParameters: PaymentMethodsApiUpdatePaymentMethodRequest, options?: AxiosRequestConfig) {
+    public updatePaymentMethod(requestParameters: PaymentMethodsApiUpdatePaymentMethodRequest, options?: RawAxiosRequestConfig) {
         return PaymentMethodsApiFp(this.configuration).updatePaymentMethod(requestParameters.tilled_account, requestParameters.id, requestParameters.PaymentMethodUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListPaymentMethodsType = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    EFT_DEBIT: 'eft_debit',
+    CARD_PRESENT: 'card_present'
+} as const;
+export type ListPaymentMethodsType = typeof ListPaymentMethodsType[keyof typeof ListPaymentMethodsType];

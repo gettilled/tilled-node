@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransactionTypeSummaries } from './balance-transaction-type-summaries';
+import type { BalanceTransactionTypeSummaries } from './balance-transaction-type-summaries';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransactionsSummaryParameters } from './balance-transactions-summary-parameters';
+import type { BalanceTransactionsSummaryQueryParams } from './balance-transactions-summary-query-params';
 
 /**
  * 
@@ -33,10 +33,10 @@ export interface BalanceTransactionsSummary {
      */
     'data': Array<BalanceTransactionTypeSummaries>;
     /**
-     * 
-     * @type {BalanceTransactionsSummaryParameters}
+     * The query parameters used to fetch these results, including default parameters.
+     * @type {BalanceTransactionsSummaryQueryParams}
      * @memberof BalanceTransactionsSummary
      */
-    'parameters': BalanceTransactionsSummaryParameters;
+    'parameters': BalanceTransactionsSummaryQueryParams;
 }
 

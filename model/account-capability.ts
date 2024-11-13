@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCapabilityAttributes } from './account-capability-attributes';
+import type { AccountRequirementsError } from './account-requirements-error';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCapabilityPricingTemplate } from './account-capability-pricing-template';
+import type { PaymentProviderAttributes } from './payment-provider-attributes';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCapabilityProductCode } from './account-capability-product-code';
+import type { PricingTemplate } from './pricing-template';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountRequirementsError } from './account-requirements-error';
+import type { ProductCode } from './product-code';
 
 /**
  * 
@@ -45,18 +45,18 @@ export interface AccountCapability {
      */
     'onboarding_application_progress': number;
     /**
-     * 
-     * @type {AccountCapabilityPricingTemplate}
+     * The pricing applied to/associated with this account.
+     * @type {PricingTemplate}
      * @memberof AccountCapability
      */
-    'pricing_template': AccountCapabilityPricingTemplate;
+    'pricing_template': PricingTemplate;
     /**
-     * 
-     * @type {AccountCapabilityProductCode}
+     * *Deprecated: See `pricing_template` for account details.*  The product code applied to/associated with this account.
+     * @type {ProductCode}
      * @memberof AccountCapability
      * @deprecated
      */
-    'product_code': AccountCapabilityProductCode;
+    'product_code': ProductCode;
     /**
      * The fields that need to be collected again because validation failed for some reason.
      * @type {Array<AccountRequirementsError>}
@@ -70,11 +70,11 @@ export interface AccountCapability {
      */
     'status': AccountCapabilityStatus;
     /**
-     * 
-     * @type {AccountCapabilityAttributes}
+     * The collection of optional or required attributes for onboarding and operation.
+     * @type {PaymentProviderAttributes}
      * @memberof AccountCapability
      */
-    'attributes'?: AccountCapabilityAttributes;
+    'attributes'?: PaymentProviderAttributes;
     /**
      * The URL for the merchant\'s onboarding application.
      * @type {string}

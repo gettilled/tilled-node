@@ -14,21 +14,21 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { Customer } from '../model';
+import type { Customer } from '../model';
 // @ts-ignore
-import { CustomerCreateParams } from '../model';
+import type { CustomerCreateParams } from '../model';
 // @ts-ignore
-import { CustomerUpdateParams } from '../model';
+import type { CustomerUpdateParams } from '../model';
 // @ts-ignore
-import { ListCustomers200Response } from '../model';
+import type { ListCustomers200Response } from '../model';
 /**
  * CustomersApi - axios parameter creator
  * @export
@@ -43,7 +43,7 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCustomer: async (tilled_account: string, CustomerCreateParams: CustomerCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCustomer: async (tilled_account: string, CustomerCreateParams: CustomerCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'CustomerCreateParams' is not null or undefined
@@ -93,7 +93,7 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCustomer: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCustomer: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -141,7 +141,7 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomer: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCustomer: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -192,7 +192,7 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCustomers: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listCustomers: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listCustomers', 'tilled_account', tilled_account)
             const localVarPath = `/v1/customers`;
@@ -215,7 +215,9 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (q !== undefined) {
@@ -254,7 +256,7 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCustomer: async (tilled_account: string, id: string, CustomerUpdateParams: CustomerUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateCustomer: async (tilled_account: string, id: string, CustomerUpdateParams: CustomerUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateCustomer', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -317,9 +319,11 @@ export const CustomersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCustomer(tilled_account: string, CustomerCreateParams: CustomerCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
+        async createCustomer(tilled_account: string, CustomerCreateParams: CustomerCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(tilled_account, CustomerCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.createCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes a Customer. This cannot be undone.
@@ -329,9 +333,11 @@ export const CustomersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCustomer(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteCustomer(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomer(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.deleteCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Customer.
@@ -341,9 +347,11 @@ export const CustomersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCustomer(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
+        async getCustomer(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomer(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Customers. The Customers are sorted with the most recently created appearing first.
@@ -356,9 +364,11 @@ export const CustomersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCustomers(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCustomers200Response>> {
+        async listCustomers(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCustomers200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listCustomers(tilled_account, metadata, q, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.listCustomers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates a Customer by setting the values of the provided parameters. Any parameters not provided will be left unchanged.
@@ -369,9 +379,11 @@ export const CustomersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomer(tilled_account: string, id: string, CustomerUpdateParams: CustomerUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
+        async updateCustomer(tilled_account: string, id: string, CustomerUpdateParams: CustomerUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateCustomer(tilled_account, id, CustomerUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.updateCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -390,7 +402,7 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCustomer(requestParameters: CustomersApiCreateCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<Customer> {
+        createCustomer(requestParameters: CustomersApiCreateCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<Customer> {
             return localVarFp.createCustomer(requestParameters.tilled_account, requestParameters.CustomerCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -400,7 +412,7 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCustomer(requestParameters: CustomersApiDeleteCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        deleteCustomer(requestParameters: CustomersApiDeleteCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.deleteCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -410,7 +422,7 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomer(requestParameters: CustomersApiGetCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<Customer> {
+        getCustomer(requestParameters: CustomersApiGetCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<Customer> {
             return localVarFp.getCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -420,7 +432,7 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCustomers(requestParameters: CustomersApiListCustomersRequest, options?: AxiosRequestConfig): AxiosPromise<ListCustomers200Response> {
+        listCustomers(requestParameters: CustomersApiListCustomersRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListCustomers200Response> {
             return localVarFp.listCustomers(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -430,7 +442,7 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateCustomer(requestParameters: CustomersApiUpdateCustomerRequest, options?: AxiosRequestConfig): AxiosPromise<Customer> {
+        updateCustomer(requestParameters: CustomersApiUpdateCustomerRequest, options?: RawAxiosRequestConfig): AxiosPromise<Customer> {
             return localVarFp.updateCustomer(requestParameters.tilled_account, requestParameters.id, requestParameters.CustomerUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -584,7 +596,7 @@ export class CustomersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomersApi
      */
-    public createCustomer(requestParameters: CustomersApiCreateCustomerRequest, options?: AxiosRequestConfig) {
+    public createCustomer(requestParameters: CustomersApiCreateCustomerRequest, options?: RawAxiosRequestConfig) {
         return CustomersApiFp(this.configuration).createCustomer(requestParameters.tilled_account, requestParameters.CustomerCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -596,7 +608,7 @@ export class CustomersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomersApi
      */
-    public deleteCustomer(requestParameters: CustomersApiDeleteCustomerRequest, options?: AxiosRequestConfig) {
+    public deleteCustomer(requestParameters: CustomersApiDeleteCustomerRequest, options?: RawAxiosRequestConfig) {
         return CustomersApiFp(this.configuration).deleteCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -608,7 +620,7 @@ export class CustomersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomersApi
      */
-    public getCustomer(requestParameters: CustomersApiGetCustomerRequest, options?: AxiosRequestConfig) {
+    public getCustomer(requestParameters: CustomersApiGetCustomerRequest, options?: RawAxiosRequestConfig) {
         return CustomersApiFp(this.configuration).getCustomer(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -620,7 +632,7 @@ export class CustomersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomersApi
      */
-    public listCustomers(requestParameters: CustomersApiListCustomersRequest, options?: AxiosRequestConfig) {
+    public listCustomers(requestParameters: CustomersApiListCustomersRequest, options?: RawAxiosRequestConfig) {
         return CustomersApiFp(this.configuration).listCustomers(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -632,7 +644,8 @@ export class CustomersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomersApi
      */
-    public updateCustomer(requestParameters: CustomersApiUpdateCustomerRequest, options?: AxiosRequestConfig) {
+    public updateCustomer(requestParameters: CustomersApiUpdateCustomerRequest, options?: RawAxiosRequestConfig) {
         return CustomersApiFp(this.configuration).updateCustomer(requestParameters.tilled_account, requestParameters.id, requestParameters.CustomerUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

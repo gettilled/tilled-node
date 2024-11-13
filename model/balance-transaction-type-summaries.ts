@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransactionTypeSummary } from './balance-transaction-type-summary';
+import type { BalanceTransactionTypeSummary } from './balance-transaction-type-summary';
 
 /**
  * 

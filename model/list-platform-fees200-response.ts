@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ListPlatformFees200ResponseAllOf } from './list-platform-fees200-response-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { PlatformFeesAllOf } from './list-platform-fees200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PlatformFee } from './platform-fee';
+import type { PlatformFee } from './platform-fee';
 
 /**
  * @type ListPlatformFees200Response
  * @export
  */
-export type ListPlatformFees200Response = ListPlatformFees200ResponseAllOf & PaginatedDto;
+export type ListPlatformFees200Response = PlatformFeesAllOf & PaginatedDto;
 
 

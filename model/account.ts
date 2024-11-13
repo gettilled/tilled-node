@@ -15,22 +15,22 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountBusinessProfile } from './account-business-profile';
+import type { AccountCapability } from './account-capability';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountCapability } from './account-capability';
+import type { AccountDocument } from './account-document';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountDocument } from './account-document';
+import type { AccountSettings } from './account-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettings } from './account-settings';
+import type { BankAccount } from './bank-account';
 // May contain unused imports in some cases
 // @ts-ignore
-import { BankAccount } from './bank-account';
+import type { BusinessProfile } from './business-profile';
 // May contain unused imports in some cases
 // @ts-ignore
-import { TerminalReader } from './terminal-reader';
+import type { TerminalReader } from './terminal-reader';
 
 /**
  * 
@@ -81,11 +81,11 @@ export interface Account {
      */
     'updated_at': string;
     /**
-     * 
-     * @type {AccountBusinessProfile}
+     * The Business Profile for this account.
+     * @type {BusinessProfile}
      * @memberof Account
      */
-    'business_profile'?: AccountBusinessProfile;
+    'business_profile'?: BusinessProfile;
     /**
      * Capabilities represent the assigned product codes to a given merchant account and their status.
      * @type {Array<AccountCapability>}
@@ -118,7 +118,7 @@ export interface Account {
      */
     'name'?: string;
     /**
-     * 
+     * The account settings object.
      * @type {AccountSettings}
      * @memberof Account
      */

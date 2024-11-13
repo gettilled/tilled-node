@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { RegisterDtoAccount } from './register-dto-account';
+import type { Account } from './account';
 // May contain unused imports in some cases
 // @ts-ignore
-import { RegisterDtoUser } from './register-dto-user';
+import type { User } from './user';
 
 /**
  * 
@@ -27,11 +27,11 @@ import { RegisterDtoUser } from './register-dto-user';
  */
 export interface RegisterDto {
     /**
-     * 
-     * @type {RegisterDtoAccount}
+     * The created account (may be empty when registering via invitation)
+     * @type {Account}
      * @memberof RegisterDto
      */
-    'account': RegisterDtoAccount;
+    'account': Account;
     /**
      * JSON Web Token used for authentication.
      * @type {string}
@@ -39,10 +39,10 @@ export interface RegisterDto {
      */
     'token': string;
     /**
-     * 
-     * @type {RegisterDtoUser}
+     * The created user.
+     * @type {User}
      * @memberof RegisterDto
      */
-    'user': RegisterDtoUser;
+    'user': User;
 }
 

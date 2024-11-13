@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PriceProductData } from './price-product-data';
+import type { Product } from './product';
 
 /**
  * 
@@ -30,11 +30,11 @@ export interface Price {
      */
     'currency': PriceCurrency;
     /**
-     * 
-     * @type {PriceProductData}
+     * Data about the specific goods or services offered at this price.
+     * @type {Product}
      * @memberof Price
      */
-    'product_data': PriceProductData;
+    'product_data': Product;
     /**
      * A non-negative integer in minor units (i.e. cents) representing how much to charge.
      * @type {number}

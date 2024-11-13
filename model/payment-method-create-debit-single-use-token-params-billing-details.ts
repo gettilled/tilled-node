@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateDebitSingleUseTokenParamsBillingDetailsAddress } from './payment-method-create-debit-single-use-token-params-billing-details-address';
+import type { BaseAddress } from './base-address';
 
 /**
  * 
@@ -24,11 +24,11 @@ import { PaymentMethodCreateDebitSingleUseTokenParamsBillingDetailsAddress } fro
  */
 export interface PaymentMethodCreateDebitSingleUseTokenParamsBillingDetails {
     /**
-     * 
-     * @type {PaymentMethodCreateDebitSingleUseTokenParamsBillingDetailsAddress}
+     * The billing address.
+     * @type {BaseAddress}
      * @memberof PaymentMethodCreateDebitSingleUseTokenParamsBillingDetails
      */
-    'address': PaymentMethodCreateDebitSingleUseTokenParamsBillingDetailsAddress;
+    'address': BaseAddress;
     /**
      * Email address
      * @type {string}

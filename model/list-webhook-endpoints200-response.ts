@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ListWebhookEndpoints200ResponseAllOf } from './list-webhook-endpoints200-response-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { WebhookEndpointsAllOf } from './list-webhook-endpoints200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
-import { WebhookEndpoint } from './webhook-endpoint';
+import type { WebhookEndpoint } from './webhook-endpoint';
 
 /**
  * @type ListWebhookEndpoints200Response
  * @export
  */
-export type ListWebhookEndpoints200Response = ListWebhookEndpoints200ResponseAllOf & PaginatedDto;
+export type ListWebhookEndpoints200Response = WebhookEndpointsAllOf & PaginatedDto;
 
 

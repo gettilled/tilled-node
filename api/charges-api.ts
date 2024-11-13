@@ -14,15 +14,15 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { Charge } from '../model';
+import type { Charge } from '../model';
 /**
  * ChargesApi - axios parameter creator
  * @export
@@ -37,7 +37,7 @@ export const ChargesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCharge: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCharge: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getCharge', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -95,9 +95,11 @@ export const ChargesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCharge(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Charge>> {
+        async getCharge(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Charge>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCharge(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ChargesApi.getCharge']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -116,7 +118,7 @@ export const ChargesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCharge(requestParameters: ChargesApiGetChargeRequest, options?: AxiosRequestConfig): AxiosPromise<Charge> {
+        getCharge(requestParameters: ChargesApiGetChargeRequest, options?: RawAxiosRequestConfig): AxiosPromise<Charge> {
             return localVarFp.getCharge(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
     };
@@ -158,7 +160,8 @@ export class ChargesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ChargesApi
      */
-    public getCharge(requestParameters: ChargesApiGetChargeRequest, options?: AxiosRequestConfig) {
+    public getCharge(requestParameters: ChargesApiGetChargeRequest, options?: RawAxiosRequestConfig) {
         return ChargesApiFp(this.configuration).getCharge(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

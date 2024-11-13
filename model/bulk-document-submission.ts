@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { DocumentSubmitRequestParams } from './document-submit-request-params';
+import type { DocumentSubmitRequestParams } from './document-submit-request-params';
 
 /**
  * 

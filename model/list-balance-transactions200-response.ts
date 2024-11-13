@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransaction } from './balance-transaction';
-// May contain unused imports in some cases
-// @ts-ignore
-import { ListBalanceTransactions200ResponseAllOf } from './list-balance-transactions200-response-all-of';
+import type { BalanceTransaction } from './balance-transaction';
 // May contain unused imports in some cases
 // @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { BalanceTransactionsAllOf } from './list-balance-transactions200-response-all-of';
 
 /**
  * @type ListBalanceTransactions200Response
  * @export
  */
-export type ListBalanceTransactions200Response = ListBalanceTransactions200ResponseAllOf & PaginatedDto;
+export type ListBalanceTransactions200Response = BalanceTransactionsAllOf & PaginatedDto;
 
 

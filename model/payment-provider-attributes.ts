@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentProviderAttributesEsignature } from './payment-provider-attributes-esignature';
+import type { AttributesEsignature } from './attributes-esignature';
 
 /**
  * 
@@ -24,10 +24,10 @@ import { PaymentProviderAttributesEsignature } from './payment-provider-attribut
  */
 export interface PaymentProviderAttributes {
     /**
-     * 
-     * @type {PaymentProviderAttributesEsignature}
+     * The e-signature details of the account.
+     * @type {AttributesEsignature}
      * @memberof PaymentProviderAttributes
      */
-    'esignature'?: PaymentProviderAttributesEsignature;
+    'esignature'?: AttributesEsignature;
 }
 

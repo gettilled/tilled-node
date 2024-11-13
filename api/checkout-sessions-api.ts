@@ -14,19 +14,19 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { CheckoutSession } from '../model';
+import type { CheckoutSession } from '../model';
 // @ts-ignore
-import { CheckoutSessionCreateParams } from '../model';
+import type { CheckoutSessionCreateParams } from '../model';
 // @ts-ignore
-import { ListCheckoutSessions200Response } from '../model';
+import type { ListCheckoutSessions200Response } from '../model';
 /**
  * CheckoutSessionsApi - axios parameter creator
  * @export
@@ -41,7 +41,7 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCheckoutSession: async (tilled_account: string, CheckoutSessionCreateParams: CheckoutSessionCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCheckoutSession: async (tilled_account: string, CheckoutSessionCreateParams: CheckoutSessionCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createCheckoutSession', 'tilled_account', tilled_account)
             // verify required parameter 'CheckoutSessionCreateParams' is not null or undefined
@@ -91,7 +91,7 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        expireCheckoutSession: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        expireCheckoutSession: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('expireCheckoutSession', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -139,7 +139,7 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCheckoutSession: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCheckoutSession: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getCheckoutSession', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -191,7 +191,7 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCheckoutSessions: async (tilled_account: string, metadata?: { [key: string]: string; }, payment_intent_id?: string, customer_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listCheckoutSessions: async (tilled_account: string, metadata?: { [key: string]: string; }, payment_intent_id?: string, customer_id?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listCheckoutSessions', 'tilled_account', tilled_account)
             const localVarPath = `/v1/checkout-sessions`;
@@ -214,7 +214,9 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (payment_intent_id !== undefined) {
@@ -266,9 +268,11 @@ export const CheckoutSessionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createCheckoutSession(tilled_account: string, CheckoutSessionCreateParams: CheckoutSessionCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
+        async createCheckoutSession(tilled_account: string, CheckoutSessionCreateParams: CheckoutSessionCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createCheckoutSession(tilled_account, CheckoutSessionCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CheckoutSessionsApi.createCheckoutSession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Expires a Checkout Session. A Checkout Session can only be expired if its status is `open`. Once expired, the customer cannot complete the Checkout Session and will see a message about the expiration.
@@ -278,9 +282,11 @@ export const CheckoutSessionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async expireCheckoutSession(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
+        async expireCheckoutSession(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.expireCheckoutSession(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CheckoutSessionsApi.expireCheckoutSession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Checkout Session.
@@ -290,9 +296,11 @@ export const CheckoutSessionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCheckoutSession(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
+        async getCheckoutSession(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckoutSession>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCheckoutSession(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CheckoutSessionsApi.getCheckoutSession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Checkout Sessions. The Checkout Sessions are sorted with the most recently created Checkout Session appearing first.
@@ -306,9 +314,11 @@ export const CheckoutSessionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCheckoutSessions(tilled_account: string, metadata?: { [key: string]: string; }, payment_intent_id?: string, customer_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCheckoutSessions200Response>> {
+        async listCheckoutSessions(tilled_account: string, metadata?: { [key: string]: string; }, payment_intent_id?: string, customer_id?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCheckoutSessions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listCheckoutSessions(tilled_account, metadata, payment_intent_id, customer_id, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CheckoutSessionsApi.listCheckoutSessions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -327,7 +337,7 @@ export const CheckoutSessionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createCheckoutSession(requestParameters: CheckoutSessionsApiCreateCheckoutSessionRequest, options?: AxiosRequestConfig): AxiosPromise<CheckoutSession> {
+        createCheckoutSession(requestParameters: CheckoutSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CheckoutSession> {
             return localVarFp.createCheckoutSession(requestParameters.tilled_account, requestParameters.CheckoutSessionCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -337,7 +347,7 @@ export const CheckoutSessionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        expireCheckoutSession(requestParameters: CheckoutSessionsApiExpireCheckoutSessionRequest, options?: AxiosRequestConfig): AxiosPromise<CheckoutSession> {
+        expireCheckoutSession(requestParameters: CheckoutSessionsApiExpireCheckoutSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CheckoutSession> {
             return localVarFp.expireCheckoutSession(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -347,7 +357,7 @@ export const CheckoutSessionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCheckoutSession(requestParameters: CheckoutSessionsApiGetCheckoutSessionRequest, options?: AxiosRequestConfig): AxiosPromise<CheckoutSession> {
+        getCheckoutSession(requestParameters: CheckoutSessionsApiGetCheckoutSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<CheckoutSession> {
             return localVarFp.getCheckoutSession(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -357,7 +367,7 @@ export const CheckoutSessionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCheckoutSessions(requestParameters: CheckoutSessionsApiListCheckoutSessionsRequest, options?: AxiosRequestConfig): AxiosPromise<ListCheckoutSessions200Response> {
+        listCheckoutSessions(requestParameters: CheckoutSessionsApiListCheckoutSessionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListCheckoutSessions200Response> {
             return localVarFp.listCheckoutSessions(requestParameters.tilled_account, requestParameters.metadata, requestParameters.payment_intent_id, requestParameters.customer_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -490,7 +500,7 @@ export class CheckoutSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CheckoutSessionsApi
      */
-    public createCheckoutSession(requestParameters: CheckoutSessionsApiCreateCheckoutSessionRequest, options?: AxiosRequestConfig) {
+    public createCheckoutSession(requestParameters: CheckoutSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig) {
         return CheckoutSessionsApiFp(this.configuration).createCheckoutSession(requestParameters.tilled_account, requestParameters.CheckoutSessionCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -502,7 +512,7 @@ export class CheckoutSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CheckoutSessionsApi
      */
-    public expireCheckoutSession(requestParameters: CheckoutSessionsApiExpireCheckoutSessionRequest, options?: AxiosRequestConfig) {
+    public expireCheckoutSession(requestParameters: CheckoutSessionsApiExpireCheckoutSessionRequest, options?: RawAxiosRequestConfig) {
         return CheckoutSessionsApiFp(this.configuration).expireCheckoutSession(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -514,7 +524,7 @@ export class CheckoutSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CheckoutSessionsApi
      */
-    public getCheckoutSession(requestParameters: CheckoutSessionsApiGetCheckoutSessionRequest, options?: AxiosRequestConfig) {
+    public getCheckoutSession(requestParameters: CheckoutSessionsApiGetCheckoutSessionRequest, options?: RawAxiosRequestConfig) {
         return CheckoutSessionsApiFp(this.configuration).getCheckoutSession(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -526,7 +536,8 @@ export class CheckoutSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CheckoutSessionsApi
      */
-    public listCheckoutSessions(requestParameters: CheckoutSessionsApiListCheckoutSessionsRequest, options?: AxiosRequestConfig) {
+    public listCheckoutSessions(requestParameters: CheckoutSessionsApiListCheckoutSessionsRequest, options?: RawAxiosRequestConfig) {
         return CheckoutSessionsApiFp(this.configuration).listCheckoutSessions(requestParameters.tilled_account, requestParameters.metadata, requestParameters.payment_intent_id, requestParameters.customer_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

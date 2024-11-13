@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBrandingGlobalDashboardSettings } from './account-settings-branding-global-dashboard-settings';
+import type { GlobalDashboardSettings } from './global-dashboard-settings';
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettingsBrandingGlobalEmailSettings } from './account-settings-branding-global-email-settings';
+import type { GlobalEmailSettings } from './global-email-settings';
 
 /**
  * 
@@ -33,11 +33,11 @@ export interface AccountSettingsBrandingCreateParams {
      */
     'dark_mode_logo_file_id'?: string;
     /**
-     * 
-     * @type {AccountSettingsBrandingGlobalDashboardSettings}
+     * Turn on or off dashboard preferences for all merchants by default. These settings can not be overridden by individual merchants, and are set by the partner. Defaults to true for all types.
+     * @type {GlobalDashboardSettings}
      * @memberof AccountSettingsBrandingCreateParams
      */
-    'global_dashboard_settings'?: AccountSettingsBrandingGlobalDashboardSettings;
+    'global_dashboard_settings'?: GlobalDashboardSettings;
     /**
      * *Will set every `global_email_settings` email type to the specified boolean value if `global_email_settings` not provided.*  Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
      * @type {boolean}
@@ -46,11 +46,11 @@ export interface AccountSettingsBrandingCreateParams {
      */
     'global_email_notifications'?: boolean;
     /**
-     * 
-     * @type {AccountSettingsBrandingGlobalEmailSettings}
+     * Turn on or off email notifications for different email types, for all merchants, by default. Individual merchants can override these settings later. Defaults to true for all types.
+     * @type {GlobalEmailSettings}
      * @memberof AccountSettingsBrandingCreateParams
      */
-    'global_email_settings'?: AccountSettingsBrandingGlobalEmailSettings;
+    'global_email_settings'?: GlobalEmailSettings;
     /**
      * The File ID of an uploaded [File](#tag/Files) of type `logo`
      * @type {string}

@@ -15,19 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Charge } from './charge';
+import type { Charge } from './charge';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentIntentCustomer } from './payment-intent-customer';
+import type { Customer } from './customer';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentIntentLastPaymentError } from './payment-intent-last-payment-error';
+import type { Level3 } from './level3';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentIntentLevel3 } from './payment-intent-level3';
+import type { PaymentIntentError } from './payment-intent-error';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentIntentPaymentMethod } from './payment-intent-payment-method';
+import type { PaymentMethod } from './payment-method';
 
 /**
  * 
@@ -126,23 +126,23 @@ export interface PaymentIntent {
      */
     'cancellation_reason'?: PaymentIntentCancellationReason;
     /**
-     * 
-     * @type {PaymentIntentCustomer}
+     * The Customer this PaymentIntent belongs to, if one exists. Payment methods attached to other Customers cannot be used with this PaymentIntent.
+     * @type {Customer}
      * @memberof PaymentIntent
      */
-    'customer'?: PaymentIntentCustomer;
+    'customer'?: Customer;
     /**
-     * 
-     * @type {PaymentIntentLastPaymentError}
+     * The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.
+     * @type {PaymentIntentError}
      * @memberof PaymentIntent
      */
-    'last_payment_error'?: PaymentIntentLastPaymentError;
+    'last_payment_error'?: PaymentIntentError;
     /**
-     * 
-     * @type {PaymentIntentLevel3}
+     * Level 2 and Level 3 (L2/L3) credit card processing refers to certain B2B card transactions for which the merchant might be eligible for lower credit card interchange rates. The lower rates may be available for merchants who provide more detailed information when processing card-not-present transactions.
+     * @type {Level3}
      * @memberof PaymentIntent
      */
-    'level3'?: PaymentIntentLevel3;
+    'level3'?: Level3;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
      * @type {{ [key: string]: string; }}
@@ -156,11 +156,11 @@ export interface PaymentIntent {
      */
     'occurrence_type'?: PaymentIntentOccurrenceType;
     /**
-     * 
-     * @type {PaymentIntentPaymentMethod}
+     * The PaymentMethod used in this PaymentIntent.
+     * @type {PaymentMethod}
      * @memberof PaymentIntent
      */
-    'payment_method'?: PaymentIntentPaymentMethod;
+    'payment_method'?: PaymentMethod;
     /**
      * The amount of the fee (if any) that will be requested to be applied to the payment and transferred to the `partner` account. The amount of the fee collected will be capped a the total payment amount.
      * @type {number}

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransactionFeeDetail } from './balance-transaction-fee-detail';
+import type { BalanceTransactionFeeDetail } from './balance-transaction-fee-detail';
 
 /**
  * 

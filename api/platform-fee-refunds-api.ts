@@ -14,15 +14,15 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { PlatformFeeRefund } from '../model';
+import type { PlatformFeeRefund } from '../model';
 /**
  * PlatformFeeRefundsApi - axios parameter creator
  * @export
@@ -38,7 +38,7 @@ export const PlatformFeeRefundsApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlatformFeeRefund: async (tilled_account: string, id: string, refund_id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPlatformFeeRefund: async (tilled_account: string, id: string, refund_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPlatformFeeRefund', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -100,9 +100,11 @@ export const PlatformFeeRefundsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPlatformFeeRefund(tilled_account: string, id: string, refund_id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlatformFeeRefund>> {
+        async getPlatformFeeRefund(tilled_account: string, id: string, refund_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlatformFeeRefund>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPlatformFeeRefund(tilled_account, id, refund_id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PlatformFeeRefundsApi.getPlatformFeeRefund']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -121,7 +123,7 @@ export const PlatformFeeRefundsApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPlatformFeeRefund(requestParameters: PlatformFeeRefundsApiGetPlatformFeeRefundRequest, options?: AxiosRequestConfig): AxiosPromise<PlatformFeeRefund> {
+        getPlatformFeeRefund(requestParameters: PlatformFeeRefundsApiGetPlatformFeeRefundRequest, options?: RawAxiosRequestConfig): AxiosPromise<PlatformFeeRefund> {
             return localVarFp.getPlatformFeeRefund(requestParameters.tilled_account, requestParameters.id, requestParameters.refund_id, options).then((request) => request(axios, basePath));
         },
     };
@@ -170,7 +172,8 @@ export class PlatformFeeRefundsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlatformFeeRefundsApi
      */
-    public getPlatformFeeRefund(requestParameters: PlatformFeeRefundsApiGetPlatformFeeRefundRequest, options?: AxiosRequestConfig) {
+    public getPlatformFeeRefund(requestParameters: PlatformFeeRefundsApiGetPlatformFeeRefundRequest, options?: RawAxiosRequestConfig) {
         return PlatformFeeRefundsApiFp(this.configuration).getPlatformFeeRefund(requestParameters.tilled_account, requestParameters.id, requestParameters.refund_id, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

@@ -15,18 +15,17 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ListUsers200ResponseAllOf } from './list-users200-response-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
 import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { UsersAllOf } from './list-users200-response-all-of';
 // May contain unused imports in some cases
 // @ts-ignore
-import { User } from './user';
+import type { User } from './user';
 
 /**
  * @type ListUsers200Response
  * @export
  */
-export type ListUsers200Response = ListUsers200ResponseAllOf & PaginatedDto;
+export type ListUsers200Response = UsersAllOf & PaginatedDto;
 
 

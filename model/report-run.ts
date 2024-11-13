@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ReportRunRequestParameters } from './report-run-request-parameters';
+import type { ReportRunRequestParameters } from './report-run-request-parameters';
 
 /**
  * 

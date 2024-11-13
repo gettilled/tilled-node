@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { LoginDtoUser } from './login-dto-user';
+import type { User } from './user';
 
 /**
  * 
@@ -36,10 +36,10 @@ export interface LoginDto {
      */
     'token': string;
     /**
-     * 
-     * @type {LoginDtoUser}
+     * The logged in user.
+     * @type {User}
      * @memberof LoginDto
      */
-    'user': LoginDtoUser;
+    'user': User;
 }
 

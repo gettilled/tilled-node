@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateAchDebitSingleUseTokenParamsAchDebit } from './payment-method-create-ach-debit-single-use-token-params-ach-debit';
+import type { PaymentMethodCreateDebitSingleUseTokenParamsBillingDetails } from './payment-method-create-debit-single-use-token-params-billing-details';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails } from './payment-method-create-ach-debit-single-use-token-params-billing-details';
+import type { PaymentMethodCreateParamsAchDebit } from './payment-method-create-params-ach-debit';
 
 /**
  * 
@@ -27,16 +27,16 @@ import { PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails } from '.
  */
 export interface PaymentMethodCreateAchDebitSingleUseTokenParams {
     /**
-     * 
-     * @type {PaymentMethodCreateAchDebitSingleUseTokenParamsAchDebit}
+     * Details about the ACH Direct Debit bank account.
+     * @type {PaymentMethodCreateParamsAchDebit}
      * @memberof PaymentMethodCreateAchDebitSingleUseTokenParams
      */
-    'ach_debit': PaymentMethodCreateAchDebitSingleUseTokenParamsAchDebit;
+    'ach_debit': PaymentMethodCreateParamsAchDebit;
     /**
-     * 
-     * @type {PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails}
+     * Billing information associated with the PaymentMethod that may be used or required by particular types of payment methods.
+     * @type {PaymentMethodCreateDebitSingleUseTokenParamsBillingDetails}
      * @memberof PaymentMethodCreateAchDebitSingleUseTokenParams
      */
-    'billing_details': PaymentMethodCreateAchDebitSingleUseTokenParamsBillingDetails;
+    'billing_details': PaymentMethodCreateDebitSingleUseTokenParamsBillingDetails;
 }
 

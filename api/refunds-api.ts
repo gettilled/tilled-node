@@ -14,19 +14,19 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListRefunds200Response } from '../model';
+import type { ListRefunds200Response } from '../model';
 // @ts-ignore
-import { Refund } from '../model';
+import type { Refund } from '../model';
 // @ts-ignore
-import { RefundCreateParams } from '../model';
+import type { RefundCreateParams } from '../model';
 /**
  * RefundsApi - axios parameter creator
  * @export
@@ -41,7 +41,7 @@ export const RefundsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createRefund: async (tilled_account: string, RefundCreateParams: RefundCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRefund: async (tilled_account: string, RefundCreateParams: RefundCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createRefund', 'tilled_account', tilled_account)
             // verify required parameter 'RefundCreateParams' is not null or undefined
@@ -91,7 +91,7 @@ export const RefundsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRefund: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRefund: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getRefund', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -141,7 +141,7 @@ export const RefundsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRefunds: async (tilled_account: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listRefunds: async (tilled_account: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listRefunds', 'tilled_account', tilled_account)
             const localVarPath = `/v1/refunds`;
@@ -164,7 +164,9 @@ export const RefundsApiAxiosParamCreator = function (configuration?: Configurati
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (offset !== undefined) {
@@ -208,9 +210,11 @@ export const RefundsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createRefund(tilled_account: string, RefundCreateParams: RefundCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Refund>> {
+        async createRefund(tilled_account: string, RefundCreateParams: RefundCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Refund>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRefund(tilled_account, RefundCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RefundsApi.createRefund']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Refund.
@@ -220,9 +224,11 @@ export const RefundsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRefund(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Refund>> {
+        async getRefund(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Refund>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRefund(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RefundsApi.getRefund']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Refunds. The Refunds are sorted with the most recently created appearing first.
@@ -234,9 +240,11 @@ export const RefundsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listRefunds(tilled_account: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListRefunds200Response>> {
+        async listRefunds(tilled_account: string, metadata?: { [key: string]: string; }, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListRefunds200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listRefunds(tilled_account, metadata, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RefundsApi.listRefunds']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -255,7 +263,7 @@ export const RefundsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createRefund(requestParameters: RefundsApiCreateRefundRequest, options?: AxiosRequestConfig): AxiosPromise<Refund> {
+        createRefund(requestParameters: RefundsApiCreateRefundRequest, options?: RawAxiosRequestConfig): AxiosPromise<Refund> {
             return localVarFp.createRefund(requestParameters.tilled_account, requestParameters.RefundCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -265,7 +273,7 @@ export const RefundsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRefund(requestParameters: RefundsApiGetRefundRequest, options?: AxiosRequestConfig): AxiosPromise<Refund> {
+        getRefund(requestParameters: RefundsApiGetRefundRequest, options?: RawAxiosRequestConfig): AxiosPromise<Refund> {
             return localVarFp.getRefund(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -275,7 +283,7 @@ export const RefundsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRefunds(requestParameters: RefundsApiListRefundsRequest, options?: AxiosRequestConfig): AxiosPromise<ListRefunds200Response> {
+        listRefunds(requestParameters: RefundsApiListRefundsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListRefunds200Response> {
             return localVarFp.listRefunds(requestParameters.tilled_account, requestParameters.metadata, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -373,7 +381,7 @@ export class RefundsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RefundsApi
      */
-    public createRefund(requestParameters: RefundsApiCreateRefundRequest, options?: AxiosRequestConfig) {
+    public createRefund(requestParameters: RefundsApiCreateRefundRequest, options?: RawAxiosRequestConfig) {
         return RefundsApiFp(this.configuration).createRefund(requestParameters.tilled_account, requestParameters.RefundCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -385,7 +393,7 @@ export class RefundsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RefundsApi
      */
-    public getRefund(requestParameters: RefundsApiGetRefundRequest, options?: AxiosRequestConfig) {
+    public getRefund(requestParameters: RefundsApiGetRefundRequest, options?: RawAxiosRequestConfig) {
         return RefundsApiFp(this.configuration).getRefund(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -397,7 +405,8 @@ export class RefundsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RefundsApi
      */
-    public listRefunds(requestParameters: RefundsApiListRefundsRequest, options?: AxiosRequestConfig) {
+    public listRefunds(requestParameters: RefundsApiListRefundsRequest, options?: RawAxiosRequestConfig) {
         return RefundsApiFp(this.configuration).listRefunds(requestParameters.tilled_account, requestParameters.metadata, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

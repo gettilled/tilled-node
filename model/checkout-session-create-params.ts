@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSessionCreateParamsPaymentIntentData } from './checkout-session-create-params-payment-intent-data';
+import type { CheckoutSessionLineItem } from './checkout-session-line-item';
 // May contain unused imports in some cases
 // @ts-ignore
-import { CheckoutSessionLineItem } from './checkout-session-line-item';
+import type { PaymentIntentDataCreateParams } from './payment-intent-data-create-params';
 
 /**
  * 
@@ -33,11 +33,11 @@ export interface CheckoutSessionCreateParams {
      */
     'line_items': Array<CheckoutSessionLineItem>;
     /**
-     * 
-     * @type {CheckoutSessionCreateParamsPaymentIntentData}
+     * A subset of parameters to be passed to the payment intent creation.
+     * @type {PaymentIntentDataCreateParams}
      * @memberof CheckoutSessionCreateParams
      */
-    'payment_intent_data': CheckoutSessionCreateParamsPaymentIntentData;
+    'payment_intent_data': PaymentIntentDataCreateParams;
     /**
      * If set, checkout will display a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
      * @type {string}

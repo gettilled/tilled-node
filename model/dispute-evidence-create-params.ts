@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { DisputeFileCreateParams } from './dispute-file-create-params';
+import type { DisputeFileCreateParams } from './dispute-file-create-params';
 
 /**
  * 

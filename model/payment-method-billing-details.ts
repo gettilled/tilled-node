@@ -15,16 +15,37 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentMethodBillingDetails } from './payment-method-billing-details';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PaymentMethodBillingDetailsAddress } from './payment-method-billing-details-address';
+import type { PartialAddress } from './partial-address';
 
 /**
- * @type PaymentMethodBillingDetails
- * Billing information associated with the PaymentMethod that may be used or required by particular types of payment methods. (e.g. it is required for `ach_debit` and Apple Pay)
+ * 
  * @export
+ * @interface PaymentMethodBillingDetails
  */
-export type {PaymentMethodBillingDetails};
-
+export interface PaymentMethodBillingDetails {
+    /**
+     * The billing address.
+     * @type {PartialAddress}
+     * @memberof PaymentMethodBillingDetails
+     */
+    'address'?: PartialAddress;
+    /**
+     * Email address
+     * @type {string}
+     * @memberof PaymentMethodBillingDetails
+     */
+    'email'?: string;
+    /**
+     * Full name
+     * @type {string}
+     * @memberof PaymentMethodBillingDetails
+     */
+    'name'?: string;
+    /**
+     * Billing phone number (including extension)
+     * @type {string}
+     * @memberof PaymentMethodBillingDetails
+     */
+    'phone'?: string;
+}
 

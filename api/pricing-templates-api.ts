@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListPricingTemplates200Response } from '../model';
+import type { ListPricingTemplates200Response } from '../model';
 // @ts-ignore
-import { PricingTemplate } from '../model';
+import type { PricingTemplate } from '../model';
 /**
  * PricingTemplatesApi - axios parameter creator
  * @export
@@ -39,7 +39,7 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPricingTemplate: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPricingTemplate: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getPricingTemplate', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -83,13 +83,13 @@ export const PricingTemplatesApiAxiosParamCreator = function (configuration?: Co
          * Returns a list of Pricing Templates. The Pricing Templates are sorted with the most recently created appearing first.
          * @summary List all Pricing Templates
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'card_present' | 'eft_debit'} [type] String indicating the type to filter the result by.
+         * @param {ListPricingTemplatesType} [type] String indicating the type to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingTemplates: async (tilled_account: string, type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listPricingTemplates: async (tilled_account: string, type?: ListPricingTemplatesType, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listPricingTemplates', 'tilled_account', tilled_account)
             const localVarPath = `/v1/pricing-templates`;
@@ -156,23 +156,27 @@ export const PricingTemplatesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPricingTemplate(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricingTemplate>> {
+        async getPricingTemplate(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PricingTemplate>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPricingTemplate(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PricingTemplatesApi.getPricingTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Pricing Templates. The Pricing Templates are sorted with the most recently created appearing first.
          * @summary List all Pricing Templates
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'card' | 'ach_debit' | 'card_present' | 'eft_debit'} [type] String indicating the type to filter the result by.
+         * @param {ListPricingTemplatesType} [type] String indicating the type to filter the result by.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPricingTemplates(tilled_account: string, type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPricingTemplates200Response>> {
+        async listPricingTemplates(tilled_account: string, type?: ListPricingTemplatesType, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListPricingTemplates200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPricingTemplates(tilled_account, type, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PricingTemplatesApi.listPricingTemplates']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -191,7 +195,7 @@ export const PricingTemplatesApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: AxiosRequestConfig): AxiosPromise<PricingTemplate> {
+        getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: RawAxiosRequestConfig): AxiosPromise<PricingTemplate> {
             return localVarFp.getPricingTemplate(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -201,7 +205,7 @@ export const PricingTemplatesApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig): AxiosPromise<ListPricingTemplates200Response> {
+        listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListPricingTemplates200Response> {
             return localVarFp.listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -246,7 +250,7 @@ export interface PricingTemplatesApiListPricingTemplatesRequest {
      * @type {'card' | 'ach_debit' | 'card_present' | 'eft_debit'}
      * @memberof PricingTemplatesApiListPricingTemplates
      */
-    readonly type?: 'card' | 'ach_debit' | 'card_present' | 'eft_debit'
+    readonly type?: ListPricingTemplatesType
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -278,7 +282,7 @@ export class PricingTemplatesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PricingTemplatesApi
      */
-    public getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: AxiosRequestConfig) {
+    public getPricingTemplate(requestParameters: PricingTemplatesApiGetPricingTemplateRequest, options?: RawAxiosRequestConfig) {
         return PricingTemplatesApiFp(this.configuration).getPricingTemplate(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -290,7 +294,18 @@ export class PricingTemplatesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PricingTemplatesApi
      */
-    public listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: AxiosRequestConfig) {
+    public listPricingTemplates(requestParameters: PricingTemplatesApiListPricingTemplatesRequest, options?: RawAxiosRequestConfig) {
         return PricingTemplatesApiFp(this.configuration).listPricingTemplates(requestParameters.tilled_account, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListPricingTemplatesType = {
+    CARD: 'card',
+    ACH_DEBIT: 'ach_debit',
+    CARD_PRESENT: 'card_present',
+    EFT_DEBIT: 'eft_debit'
+} as const;
+export type ListPricingTemplatesType = typeof ListPricingTemplatesType[keyof typeof ListPricingTemplatesType];

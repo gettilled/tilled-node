@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PayoutBalanceTransaction } from './payout-balance-transaction';
+import type { BalanceTransaction } from './balance-transaction';
 
 /**
  * 
@@ -36,12 +36,12 @@ export interface Payout {
      */
     'amount': number;
     /**
-     * 
-     * @type {PayoutBalanceTransaction}
+     * The balance transaction that describes the impact of this payout on your account balance. Note: Multiple balance transactions may be associated with this resource and you can fetch them all with `/balance-transactions?source_id={id}`.
+     * @type {BalanceTransaction}
      * @memberof Payout
      * @deprecated
      */
-    'balance_transaction': PayoutBalanceTransaction;
+    'balance_transaction': BalanceTransaction;
     /**
      * Time at which the object was created.
      * @type {string}

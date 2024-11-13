@@ -15,10 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PrincipalAddress } from './principal-address';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PrincipalPreviousAddress } from './principal-previous-address';
+import type { PrincipalAddress } from './principal-address';
 
 /**
  * 
@@ -27,7 +24,7 @@ import { PrincipalPreviousAddress } from './principal-previous-address';
  */
 export interface Principal {
     /**
-     * 
+     * Registered *residential* address for this principal
      * @type {PrincipalAddress}
      * @memberof Principal
      */
@@ -105,11 +102,11 @@ export interface Principal {
      */
     'nationality'?: PrincipalNationality;
     /**
-     * 
-     * @type {PrincipalPreviousAddress}
+     * Previous registered *residential* address for this principal. Require for Canadian principals and have lived at their current address for fewer than 3 years.
+     * @type {PrincipalAddress}
      * @memberof Principal
      */
-    'previous_address'?: PrincipalPreviousAddress;
+    'previous_address'?: PrincipalAddress;
     /**
      * Social Security Number (US) or Social Insurance Number (CA). Optional when business type is `NPCORP`, `CHARITY`, or `GOV`. Expected format: 9-digit string of numbers (e.g. \"111444777\"). Optional in CA.
      * @type {string}

@@ -14,25 +14,25 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { Account } from '../model';
+import type { Account } from '../model';
 // @ts-ignore
-import { AccountCapabilityCreateParams } from '../model';
+import type { AccountCapabilityCreateParams } from '../model';
 // @ts-ignore
-import { AccountCapabilityUpdateParams } from '../model';
+import type { AccountCapabilityUpdateParams } from '../model';
 // @ts-ignore
-import { AccountCreateParams } from '../model';
+import type { AccountCreateParams } from '../model';
 // @ts-ignore
-import { AccountUpdateParams } from '../model';
+import type { AccountUpdateParams } from '../model';
 // @ts-ignore
-import { ListConnectedAccounts200Response } from '../model';
+import type { ListConnectedAccounts200Response } from '../model';
 /**
  * AccountsApi - axios parameter creator
  * @export
@@ -47,7 +47,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addAccountCapability: async (tilled_account: string, AccountCapabilityCreateParams: AccountCapabilityCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addAccountCapability: async (tilled_account: string, AccountCapabilityCreateParams: AccountCapabilityCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('addAccountCapability', 'tilled_account', tilled_account)
             // verify required parameter 'AccountCapabilityCreateParams' is not null or undefined
@@ -97,7 +97,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createConnectedAccount: async (tilled_account: string, AccountCreateParams: AccountCreateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createConnectedAccount: async (tilled_account: string, AccountCreateParams: AccountCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createConnectedAccount', 'tilled_account', tilled_account)
             // verify required parameter 'AccountCreateParams' is not null or undefined
@@ -147,7 +147,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAccountCapability: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteAccountCapability: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteAccountCapability', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -194,7 +194,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteConnectedAccount: async (tilled_account: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteConnectedAccount: async (tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteConnectedAccount', 'tilled_account', tilled_account)
             const localVarPath = `/v1/accounts/connected`;
@@ -238,7 +238,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccount: async (tilled_account: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccount: async (tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getAccount', 'tilled_account', tilled_account)
             const localVarPath = `/v1/accounts`;
@@ -287,7 +287,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listConnectedAccounts', 'tilled_account', tilled_account)
             const localVarPath = `/v1/accounts/connected`;
@@ -310,7 +310,9 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
 
             if (metadata !== undefined) {
-                localVarQueryParameter['metadata'] = metadata;
+                for (const [key, value] of Object.entries(metadata)) {
+                    localVarQueryParameter[key] = value;
+                }
             }
 
             if (q !== undefined) {
@@ -352,7 +354,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAccount: async (tilled_account: string, AccountUpdateParams: AccountUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateAccount: async (tilled_account: string, AccountUpdateParams: AccountUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateAccount', 'tilled_account', tilled_account)
             // verify required parameter 'AccountUpdateParams' is not null or undefined
@@ -403,7 +405,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAccountCapability: async (tilled_account: string, id: string, AccountCapabilityUpdateParams: AccountCapabilityUpdateParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateAccountCapability: async (tilled_account: string, id: string, AccountCapabilityUpdateParams: AccountCapabilityUpdateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('updateAccountCapability', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -466,9 +468,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addAccountCapability(tilled_account: string, AccountCapabilityCreateParams: AccountCapabilityCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async addAccountCapability(tilled_account: string, AccountCapabilityCreateParams: AccountCapabilityCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addAccountCapability(tilled_account, AccountCapabilityCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.addAccountCapability']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Creates a merchant Account associated with your partner Account.
@@ -478,9 +482,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createConnectedAccount(tilled_account: string, AccountCreateParams: AccountCreateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+        async createConnectedAccount(tilled_account: string, AccountCreateParams: AccountCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedAccount(tilled_account, AccountCreateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.createConnectedAccount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes an Account capability. Account capabilities can only be managed before the onboarding application is submitted.
@@ -490,9 +496,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAccountCapability(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteAccountCapability(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAccountCapability(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.deleteAccountCapability']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes a merchant Account. This cannot be undone.
@@ -501,9 +509,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteConnectedAccount(tilled_account: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteConnectedAccount(tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteConnectedAccount(tilled_account, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.deleteConnectedAccount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Account.
@@ -512,9 +522,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccount(tilled_account: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+        async getAccount(tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccount(tilled_account, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.getAccount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of merchant Accounts. The Accounts are sorted with the most recently created appearing first. If the provided account type is merchant, the list is empty.
@@ -528,9 +540,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
+        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedAccounts(tilled_account, metadata, q, sort, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.listConnectedAccounts']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates an Account by setting the values of the provided parameters. Any parameters not provided remain unchanged.
@@ -540,9 +554,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateAccount(tilled_account: string, AccountUpdateParams: AccountUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+        async updateAccount(tilled_account: string, AccountUpdateParams: AccountUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateAccount(tilled_account, AccountUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.updateAccount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Updates an Account capability. Account capabilities can only be managed before the onboarding application is submitted.
@@ -553,9 +569,11 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateAccountCapability(tilled_account: string, id: string, AccountCapabilityUpdateParams: AccountCapabilityUpdateParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async updateAccountCapability(tilled_account: string, id: string, AccountCapabilityUpdateParams: AccountCapabilityUpdateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateAccountCapability(tilled_account, id, AccountCapabilityUpdateParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AccountsApi.updateAccountCapability']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -574,7 +592,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addAccountCapability(requestParameters: AccountsApiAddAccountCapabilityRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        addAccountCapability(requestParameters: AccountsApiAddAccountCapabilityRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.addAccountCapability(requestParameters.tilled_account, requestParameters.AccountCapabilityCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -584,7 +602,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: AxiosRequestConfig): AxiosPromise<Account> {
+        createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: RawAxiosRequestConfig): AxiosPromise<Account> {
             return localVarFp.createConnectedAccount(requestParameters.tilled_account, requestParameters.AccountCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -594,7 +612,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAccountCapability(requestParameters: AccountsApiDeleteAccountCapabilityRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        deleteAccountCapability(requestParameters: AccountsApiDeleteAccountCapabilityRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteAccountCapability(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -604,7 +622,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteConnectedAccount(requestParameters: AccountsApiDeleteConnectedAccountRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        deleteConnectedAccount(requestParameters: AccountsApiDeleteConnectedAccountRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteConnectedAccount(requestParameters.tilled_account, options).then((request) => request(axios, basePath));
         },
         /**
@@ -614,7 +632,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccount(requestParameters: AccountsApiGetAccountRequest, options?: AxiosRequestConfig): AxiosPromise<Account> {
+        getAccount(requestParameters: AccountsApiGetAccountRequest, options?: RawAxiosRequestConfig): AxiosPromise<Account> {
             return localVarFp.getAccount(requestParameters.tilled_account, options).then((request) => request(axios, basePath));
         },
         /**
@@ -624,7 +642,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: AxiosRequestConfig): AxiosPromise<ListConnectedAccounts200Response> {
+        listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListConnectedAccounts200Response> {
             return localVarFp.listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -634,7 +652,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAccount(requestParameters: AccountsApiUpdateAccountRequest, options?: AxiosRequestConfig): AxiosPromise<Account> {
+        updateAccount(requestParameters: AccountsApiUpdateAccountRequest, options?: RawAxiosRequestConfig): AxiosPromise<Account> {
             return localVarFp.updateAccount(requestParameters.tilled_account, requestParameters.AccountUpdateParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -644,7 +662,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAccountCapability(requestParameters: AccountsApiUpdateAccountCapabilityRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
+        updateAccountCapability(requestParameters: AccountsApiUpdateAccountCapabilityRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.updateAccountCapability(requestParameters.tilled_account, requestParameters.id, requestParameters.AccountCapabilityUpdateParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -854,7 +872,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public addAccountCapability(requestParameters: AccountsApiAddAccountCapabilityRequest, options?: AxiosRequestConfig) {
+    public addAccountCapability(requestParameters: AccountsApiAddAccountCapabilityRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).addAccountCapability(requestParameters.tilled_account, requestParameters.AccountCapabilityCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -866,7 +884,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: AxiosRequestConfig) {
+    public createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).createConnectedAccount(requestParameters.tilled_account, requestParameters.AccountCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -878,7 +896,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public deleteAccountCapability(requestParameters: AccountsApiDeleteAccountCapabilityRequest, options?: AxiosRequestConfig) {
+    public deleteAccountCapability(requestParameters: AccountsApiDeleteAccountCapabilityRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).deleteAccountCapability(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -890,7 +908,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public deleteConnectedAccount(requestParameters: AccountsApiDeleteConnectedAccountRequest, options?: AxiosRequestConfig) {
+    public deleteConnectedAccount(requestParameters: AccountsApiDeleteConnectedAccountRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).deleteConnectedAccount(requestParameters.tilled_account, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -902,7 +920,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public getAccount(requestParameters: AccountsApiGetAccountRequest, options?: AxiosRequestConfig) {
+    public getAccount(requestParameters: AccountsApiGetAccountRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).getAccount(requestParameters.tilled_account, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -914,7 +932,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: AxiosRequestConfig) {
+    public listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -926,7 +944,7 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public updateAccount(requestParameters: AccountsApiUpdateAccountRequest, options?: AxiosRequestConfig) {
+    public updateAccount(requestParameters: AccountsApiUpdateAccountRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).updateAccount(requestParameters.tilled_account, requestParameters.AccountUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -938,7 +956,8 @@ export class AccountsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountsApi
      */
-    public updateAccountCapability(requestParameters: AccountsApiUpdateAccountCapabilityRequest, options?: AxiosRequestConfig) {
+    public updateAccountCapability(requestParameters: AccountsApiUpdateAccountCapabilityRequest, options?: RawAxiosRequestConfig) {
         return AccountsApiFp(this.configuration).updateAccountCapability(requestParameters.tilled_account, requestParameters.id, requestParameters.AccountCapabilityUpdateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

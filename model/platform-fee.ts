@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PlatformFeeBalanceTransaction } from './platform-fee-balance-transaction';
+import type { BalanceTransaction } from './balance-transaction';
 // May contain unused imports in some cases
 // @ts-ignore
-import { PlatformFeeRefund } from './platform-fee-refund';
+import type { PlatformFeeRefund } from './platform-fee-refund';
 
 /**
  * 
@@ -39,12 +39,12 @@ export interface PlatformFee {
      */
     'amount_refunded': number;
     /**
-     * 
-     * @type {PlatformFeeBalanceTransaction}
+     * The balance transaction that describes the impact of this collected platform fee on your account balance (not including refunds). Note: Multiple balance transactions may be associated with this resource and you can fetch them all with `/balance-transactions?source_id={id}`.
+     * @type {BalanceTransaction}
      * @memberof PlatformFee
      * @deprecated
      */
-    'balance_transaction': PlatformFeeBalanceTransaction;
+    'balance_transaction': BalanceTransaction;
     /**
      * Id of the charge this fee was taken from.
      * @type {string}

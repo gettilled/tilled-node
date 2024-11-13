@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { ReportRunCreateParamsParameters } from './report-run-create-params-parameters';
+import type { ReportRunRequestParameters } from './report-run-request-parameters';
 
 /**
  * 
@@ -24,11 +24,11 @@ import { ReportRunCreateParamsParameters } from './report-run-create-params-para
  */
 export interface ReportRunCreateParams {
     /**
-     * 
-     * @type {ReportRunCreateParamsParameters}
+     * The request paramaters of a Report Run
+     * @type {ReportRunRequestParameters}
      * @memberof ReportRunCreateParams
      */
-    'parameters': ReportRunCreateParamsParameters;
+    'parameters': ReportRunRequestParameters;
     /**
      * The type of a Report Run.
      * @type {string}

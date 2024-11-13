@@ -13,15 +13,36 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { PaymentMethodCreateParamsCard } from './payment-method-create-params-card';
 
 /**
- * @type PaymentMethodCreateParamsCard
- * If this is a `card` PaymentMethod, this hash contains the user\'s card details. When providing a card number, you must meet the requirements for PCI compliance. We strongly recommend using Tilled.js instead of interacting with this API directly.
+ * 
  * @export
+ * @interface PaymentMethodCreateParamsCard
  */
-export type {PaymentMethodCreateParamsCard};
-
+export interface PaymentMethodCreateParamsCard {
+    /**
+     * Two-digit number representing the card\'s expiration month.
+     * @type {number}
+     * @memberof PaymentMethodCreateParamsCard
+     */
+    'exp_month': number;
+    /**
+     * Four-digit number representing the card\'s expiration year.
+     * @type {number}
+     * @memberof PaymentMethodCreateParamsCard
+     */
+    'exp_year': number;
+    /**
+     * The card number, as a string without any separators.
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsCard
+     */
+    'number': string;
+    /**
+     * The card\'s security code (aka CVC, CVV, etc). It is highly recommended to always include this value.
+     * @type {string}
+     * @memberof PaymentMethodCreateParamsCard
+     */
+    'cvc'?: string;
+}
 

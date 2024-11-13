@@ -14,15 +14,15 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListFiles200Response } from '../model';
+import type { ListFiles200Response } from '../model';
 /**
  * FilesApi - axios parameter creator
  * @export
@@ -34,12 +34,12 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Create a File
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {File} file A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the multipart/form-data protocol).
-         * @param {string} purpose The file purpose.
+         * @param {CreateFilePurpose} purpose The file purpose.
          * @param {string} [title] The user friendly file title.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFile: async (tilled_account: string, file: File, purpose: string, title?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFile: async (tilled_account: string, file: File, purpose: CreateFilePurpose, title?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createFile', 'tilled_account', tilled_account)
             // verify required parameter 'file' is not null or undefined
@@ -104,7 +104,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteFile: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteFile: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('deleteFile', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -152,7 +152,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getContentsOfFile: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getContentsOfFile: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getContentsOfFile', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -200,7 +200,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFile: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFile: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getFile', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -244,13 +244,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Returns a list of Files. The Files are sorted with the most recently created appearing first.
          * @summary List all Files
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>} [purposes] A list of file purposes to filter on.
+         * @param {Array<ListFilesPurposes>} [purposes] A list of file purposes to filter on.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFiles: async (tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listFiles: async (tilled_account: string, purposes?: Array<ListFilesPurposes>, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listFiles', 'tilled_account', tilled_account)
             const localVarPath = `/v1/files`;
@@ -314,14 +314,16 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * @summary Create a File
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {File} file A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the multipart/form-data protocol).
-         * @param {string} purpose The file purpose.
+         * @param {CreateFilePurpose} purpose The file purpose.
          * @param {string} [title] The user friendly file title.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createFile(tilled_account: string, file: File, purpose: string, title?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async createFile(tilled_account: string, file: File, purpose: CreateFilePurpose, title?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFile(tilled_account, file, purpose, title, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.createFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Deletes a File. This cannot be undone.
@@ -331,9 +333,11 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteFile(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteFile(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFile(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.deleteFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Gets the contents of a File.
@@ -343,9 +347,11 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getContentsOfFile(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+        async getContentsOfFile(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getContentsOfFile(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.getContentsOfFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing File.
@@ -355,23 +361,27 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFile(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async getFile(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFile(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.getFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Files. The Files are sorted with the most recently created appearing first.
          * @summary List all Files
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>} [purposes] A list of file purposes to filter on.
+         * @param {Array<ListFilesPurposes>} [purposes] A list of file purposes to filter on.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listFiles(tilled_account: string, purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFiles200Response>> {
+        async listFiles(tilled_account: string, purposes?: Array<ListFilesPurposes>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFiles200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listFiles(tilled_account, purposes, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.listFiles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -390,7 +400,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createFile(requestParameters: FilesApiCreateFileRequest, options?: AxiosRequestConfig): AxiosPromise<any> {
+        createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.createFile(requestParameters.tilled_account, requestParameters.file, requestParameters.purpose, requestParameters.title, options).then((request) => request(axios, basePath));
         },
         /**
@@ -400,7 +410,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+        deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.deleteFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -410,7 +420,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getContentsOfFile(requestParameters: FilesApiGetContentsOfFileRequest, options?: AxiosRequestConfig): AxiosPromise<File> {
+        getContentsOfFile(requestParameters: FilesApiGetContentsOfFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
             return localVarFp.getContentsOfFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -420,7 +430,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFile(requestParameters: FilesApiGetFileRequest, options?: AxiosRequestConfig): AxiosPromise<any> {
+        getFile(requestParameters: FilesApiGetFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.getFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -430,7 +440,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFiles(requestParameters: FilesApiListFilesRequest, options?: AxiosRequestConfig): AxiosPromise<ListFiles200Response> {
+        listFiles(requestParameters: FilesApiListFilesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListFiles200Response> {
             return localVarFp.listFiles(requestParameters.tilled_account, requestParameters.purposes, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -461,7 +471,7 @@ export interface FilesApiCreateFileRequest {
      * @type {string}
      * @memberof FilesApiCreateFile
      */
-    readonly purpose: string
+    readonly purpose: CreateFilePurpose
 
     /**
      * The user friendly file title.
@@ -552,7 +562,7 @@ export interface FilesApiListFilesRequest {
      * @type {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>}
      * @memberof FilesApiListFiles
      */
-    readonly purposes?: Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>
+    readonly purposes?: Array<ListFilesPurposes>
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -584,7 +594,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createFile(requestParameters: FilesApiCreateFileRequest, options?: AxiosRequestConfig) {
+    public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).createFile(requestParameters.tilled_account, requestParameters.file, requestParameters.purpose, requestParameters.title, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -596,7 +606,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: AxiosRequestConfig) {
+    public deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).deleteFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -608,7 +618,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getContentsOfFile(requestParameters: FilesApiGetContentsOfFileRequest, options?: AxiosRequestConfig) {
+    public getContentsOfFile(requestParameters: FilesApiGetContentsOfFileRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getContentsOfFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -620,7 +630,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getFile(requestParameters: FilesApiGetFileRequest, options?: AxiosRequestConfig) {
+    public getFile(requestParameters: FilesApiGetFileRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getFile(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -632,7 +642,30 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public listFiles(requestParameters: FilesApiListFilesRequest, options?: AxiosRequestConfig) {
+    public listFiles(requestParameters: FilesApiListFilesRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).listFiles(requestParameters.tilled_account, requestParameters.purposes, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const CreateFilePurpose = {
+    LOGO: 'logo',
+    ICON: 'icon',
+    DISPUTE_EVIDENCE: 'dispute_evidence',
+    ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
+    ISV_COVER_SHEET: 'isv_cover_sheet'
+} as const;
+export type CreateFilePurpose = typeof CreateFilePurpose[keyof typeof CreateFilePurpose];
+/**
+ * @export
+ */
+export const ListFilesPurposes = {
+    LOGO: 'logo',
+    ICON: 'icon',
+    DISPUTE_EVIDENCE: 'dispute_evidence',
+    ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
+    ISV_COVER_SHEET: 'isv_cover_sheet'
+} as const;
+export type ListFilesPurposes = typeof ListFilesPurposes[keyof typeof ListFilesPurposes];

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PaymentIntentLevel3 } from './payment-intent-level3';
+import type { Level3 } from './level3';
 
 /**
  * 
@@ -42,11 +42,11 @@ export interface PaymentIntentUpdateParams {
      */
     'currency'?: PaymentIntentUpdateParamsCurrency;
     /**
-     * 
-     * @type {PaymentIntentLevel3}
+     * Level 2 and Level 3 (L2/L3) credit card processing refers to certain B2B card transactions for which the merchant might be eligible for lower credit card interchange rates. The lower rates may be available for merchants who provide more detailed information when processing card-not-present transactions.
+     * @type {Level3}
      * @memberof PaymentIntentUpdateParams
      */
-    'level3'?: PaymentIntentLevel3;
+    'level3'?: Level3;
     /**
      * Set of [key-value pairs](#section/Metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value (i.e. `\'\'` or `null`) to them. All keys can be unset by posting an empty value (i.e. `{}` or `null`) to `metadata`.
      * @type {{ [key: string]: string; }}

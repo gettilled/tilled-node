@@ -15,16 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountSettings } from './account-settings';
-// May contain unused imports in some cases
-// @ts-ignore
-import { AccountSettingsBranding } from './account-settings-branding';
+import type { AccountSettingsBranding } from './account-settings-branding';
 
 /**
- * @type AccountSettings
- * The account settings object.
+ * 
  * @export
+ * @interface AccountSettings
  */
-export type {AccountSettings};
-
+export interface AccountSettings {
+    /**
+     * The account branding settings.
+     * @type {AccountSettingsBranding}
+     * @memberof AccountSettings
+     */
+    'branding'?: AccountSettingsBranding;
+}
 

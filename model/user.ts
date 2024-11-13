@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AccountRole } from './account-role';
+import type { AccountRole } from './account-role';
 // May contain unused imports in some cases
 // @ts-ignore
-import { UserEmailSettings } from './user-email-settings';
+import type { UserEmailSettings } from './user-email-settings';
 
 /**
  * 
@@ -52,7 +52,7 @@ export interface User {
      */
     'email': string;
     /**
-     * 
+     * User email settings.
      * @type {UserEmailSettings}
      * @memberof User
      */

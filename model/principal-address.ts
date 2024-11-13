@@ -13,15 +13,54 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { PrincipalAddress } from './principal-address';
 
 /**
- * @type PrincipalAddress
- * Registered *residential* address for this principal
+ * 
  * @export
+ * @interface PrincipalAddress
  */
-export type {PrincipalAddress};
-
+export interface PrincipalAddress {
+    /**
+     * City where address is located.
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'city': string;
+    /**
+     * 2-digit Country code (e.g. \'US\', \'CA\') [See ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'country': string;
+    /**
+     * State/province/region of the address. For US and CA use 2-digit state/province codes (e.g. \'AL\', \'AK\', \'BC\', \'ON\', \'etc\'.)
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'state': string;
+    /**
+     * First line of the street address
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'street': string;
+    /**
+     * Zip code or postal code of the address. No special characters.
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'zip': string;
+    /**
+     * Second line of the street address, if required.
+     * @type {string}
+     * @memberof PrincipalAddress
+     */
+    'street2'?: string;
+    /**
+     * Years at given address. Required for CA merchant accounts (`region = CA`).
+     * @type {number}
+     * @memberof PrincipalAddress
+     */
+    'years_at_address'?: number;
+}
 

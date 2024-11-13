@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BalanceTransaction } from './balance-transaction';
+import type { BalanceTransaction } from './balance-transaction';
 // May contain unused imports in some cases
 // @ts-ignore
-import { DisputeEvidence } from './dispute-evidence';
+import type { DisputeEvidence } from './dispute-evidence';
 // May contain unused imports in some cases
 // @ts-ignore
-import { DisputeStatusHistory } from './dispute-status-history';
+import type { DisputeStatusHistory } from './dispute-status-history';
 
 /**
  * 
@@ -96,7 +96,7 @@ export interface Dispute {
      */
     'closing_at'?: string;
     /**
-     * 
+     * Evidence submitted to challenge the dispute.
      * @type {DisputeEvidence}
      * @memberof Dispute
      */

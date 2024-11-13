@@ -14,23 +14,23 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { BulkDocumentSubmitRequestParams } from '../model';
+import type { BulkDocumentSubmitRequestParams } from '../model';
 // @ts-ignore
-import { BulkDocumentSubmitResponse } from '../model';
+import type { BulkDocumentSubmitResponse } from '../model';
 // @ts-ignore
-import { DocumentDto } from '../model';
+import type { DocumentDto } from '../model';
 // @ts-ignore
-import { DocumentSubmitRequestParams } from '../model';
+import type { DocumentSubmitRequestParams } from '../model';
 // @ts-ignore
-import { ListDocuments200Response } from '../model';
+import type { ListDocuments200Response } from '../model';
 /**
  * DocumentsApi - axios parameter creator
  * @export
@@ -45,7 +45,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkSubmitDocuments: async (tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bulkSubmitDocuments: async (tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('bulkSubmitDocuments', 'tilled_account', tilled_account)
             // verify required parameter 'BulkDocumentSubmitRequestParams' is not null or undefined
@@ -95,7 +95,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDocument: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDocument: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getDocument', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -139,13 +139,13 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * Returns a list of Documents. The Documents are sorted with the most recently created appearing first.
          * @summary List all Documents
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'requested' | 'submitted' | 'rejected' | 'verified'} [status] 
+         * @param {ListDocumentsStatus} [status] 
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDocuments: async (tilled_account: string, status?: 'requested' | 'submitted' | 'rejected' | 'verified', offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listDocuments: async (tilled_account: string, status?: ListDocumentsStatus, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listDocuments', 'tilled_account', tilled_account)
             const localVarPath = `/v1/documents`;
@@ -203,7 +203,7 @@ export const DocumentsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitDocument: async (tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        submitDocument: async (tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('submitDocument', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -266,9 +266,11 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bulkSubmitDocuments(tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkDocumentSubmitResponse>> {
+        async bulkSubmitDocuments(tilled_account: string, BulkDocumentSubmitRequestParams: BulkDocumentSubmitRequestParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkDocumentSubmitResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bulkSubmitDocuments(tilled_account, BulkDocumentSubmitRequestParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentsApi.bulkSubmitDocuments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieves the details of an existing Document.
@@ -278,23 +280,27 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDocument(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
+        async getDocument(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDocument(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentsApi.getDocument']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Documents. The Documents are sorted with the most recently created appearing first.
          * @summary List all Documents
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {'requested' | 'submitted' | 'rejected' | 'verified'} [status] 
+         * @param {ListDocumentsStatus} [status] 
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listDocuments(tilled_account: string, status?: 'requested' | 'submitted' | 'rejected' | 'verified', offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDocuments200Response>> {
+        async listDocuments(tilled_account: string, status?: ListDocumentsStatus, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListDocuments200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listDocuments(tilled_account, status, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentsApi.listDocuments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Submits a Document.
@@ -305,9 +311,11 @@ export const DocumentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async submitDocument(tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
+        async submitDocument(tilled_account: string, id: string, DocumentSubmitRequestParams: DocumentSubmitRequestParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.submitDocument(tilled_account, id, DocumentSubmitRequestParams, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DocumentsApi.submitDocument']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -326,7 +334,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: AxiosRequestConfig): AxiosPromise<BulkDocumentSubmitResponse> {
+        bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<BulkDocumentSubmitResponse> {
             return localVarFp.bulkSubmitDocuments(requestParameters.tilled_account, requestParameters.BulkDocumentSubmitRequestParams, options).then((request) => request(axios, basePath));
         },
         /**
@@ -336,7 +344,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentDto> {
+        getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: RawAxiosRequestConfig): AxiosPromise<DocumentDto> {
             return localVarFp.getDocument(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -346,7 +354,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: AxiosRequestConfig): AxiosPromise<ListDocuments200Response> {
+        listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListDocuments200Response> {
             return localVarFp.listDocuments(requestParameters.tilled_account, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -356,7 +364,7 @@ export const DocumentsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: AxiosRequestConfig): AxiosPromise<DocumentDto> {
+        submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: RawAxiosRequestConfig): AxiosPromise<DocumentDto> {
             return localVarFp.submitDocument(requestParameters.tilled_account, requestParameters.id, requestParameters.DocumentSubmitRequestParams, options).then((request) => request(axios, basePath));
         },
     };
@@ -422,7 +430,7 @@ export interface DocumentsApiListDocumentsRequest {
      * @type {'requested' | 'submitted' | 'rejected' | 'verified'}
      * @memberof DocumentsApiListDocuments
      */
-    readonly status?: 'requested' | 'submitted' | 'rejected' | 'verified'
+    readonly status?: ListDocumentsStatus
 
     /**
      * The (zero-based) offset of the first item in the collection to return.
@@ -482,7 +490,7 @@ export class DocumentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentsApi
      */
-    public bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: AxiosRequestConfig) {
+    public bulkSubmitDocuments(requestParameters: DocumentsApiBulkSubmitDocumentsRequest, options?: RawAxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).bulkSubmitDocuments(requestParameters.tilled_account, requestParameters.BulkDocumentSubmitRequestParams, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -494,7 +502,7 @@ export class DocumentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentsApi
      */
-    public getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: AxiosRequestConfig) {
+    public getDocument(requestParameters: DocumentsApiGetDocumentRequest, options?: RawAxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).getDocument(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -506,7 +514,7 @@ export class DocumentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentsApi
      */
-    public listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: AxiosRequestConfig) {
+    public listDocuments(requestParameters: DocumentsApiListDocumentsRequest, options?: RawAxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).listDocuments(requestParameters.tilled_account, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -518,7 +526,18 @@ export class DocumentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DocumentsApi
      */
-    public submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: AxiosRequestConfig) {
+    public submitDocument(requestParameters: DocumentsApiSubmitDocumentRequest, options?: RawAxiosRequestConfig) {
         return DocumentsApiFp(this.configuration).submitDocument(requestParameters.tilled_account, requestParameters.id, requestParameters.DocumentSubmitRequestParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListDocumentsStatus = {
+    REQUESTED: 'requested',
+    SUBMITTED: 'submitted',
+    REJECTED: 'rejected',
+    VERIFIED: 'verified'
+} as const;
+export type ListDocumentsStatus = typeof ListDocumentsStatus[keyof typeof ListDocumentsStatus];

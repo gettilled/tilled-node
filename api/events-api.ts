@@ -14,17 +14,17 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { Event } from '../model';
+import type { Event } from '../model';
 // @ts-ignore
-import { ListEvents200Response } from '../model';
+import type { ListEvents200Response } from '../model';
 /**
  * EventsApi - axios parameter creator
  * @export
@@ -39,7 +39,7 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEvent: async (tilled_account: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEvent: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('getEvent', 'tilled_account', tilled_account)
             // verify required parameter 'id' is not null or undefined
@@ -85,14 +85,14 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
+         * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listEvents: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>, object_id?: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listEvents: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listEvents', 'tilled_account', tilled_account)
             const localVarPath = `/v1/events`;
@@ -175,9 +175,11 @@ export const EventsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEvent(tilled_account: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Event>> {
+        async getEvent(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Event>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEvent(tilled_account, id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EventsApi.getEvent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns a list of Events from the past 30 days. The Events are sorted with the most recently created appearing first.
@@ -185,16 +187,18 @@ export const EventsApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
+         * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listEvents(tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>, object_id?: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListEvents200Response>> {
+        async listEvents(tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListEvents200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listEvents(tilled_account, created_at_gte, created_at_lte, types, object_id, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EventsApi.listEvents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -213,7 +217,7 @@ export const EventsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEvent(requestParameters: EventsApiGetEventRequest, options?: AxiosRequestConfig): AxiosPromise<Event> {
+        getEvent(requestParameters: EventsApiGetEventRequest, options?: RawAxiosRequestConfig): AxiosPromise<Event> {
             return localVarFp.getEvent(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -223,7 +227,7 @@ export const EventsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listEvents(requestParameters: EventsApiListEventsRequest, options?: AxiosRequestConfig): AxiosPromise<ListEvents200Response> {
+        listEvents(requestParameters: EventsApiListEventsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListEvents200Response> {
             return localVarFp.listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -282,7 +286,7 @@ export interface EventsApiListEventsRequest {
      * @type {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>}
      * @memberof EventsApiListEvents
      */
-    readonly types?: Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>
+    readonly types?: Array<ListEventsTypes>
 
     /**
      * Id of related resource. The list will be filtered to include events that are related to the resource with this id.
@@ -321,7 +325,7 @@ export class EventsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof EventsApi
      */
-    public getEvent(requestParameters: EventsApiGetEventRequest, options?: AxiosRequestConfig) {
+    public getEvent(requestParameters: EventsApiGetEventRequest, options?: RawAxiosRequestConfig) {
         return EventsApiFp(this.configuration).getEvent(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -333,7 +337,54 @@ export class EventsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof EventsApi
      */
-    public listEvents(requestParameters: EventsApiListEventsRequest, options?: AxiosRequestConfig) {
+    public listEvents(requestParameters: EventsApiListEventsRequest, options?: RawAxiosRequestConfig) {
         return EventsApiFp(this.configuration).listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
+/**
+ * @export
+ */
+export const ListEventsTypes = {
+    ACCOUNT_UPDATED: 'account.updated',
+    CHARGE_CAPTURED: 'charge.captured',
+    CHARGE_EXPIRED: 'charge.expired',
+    CHARGE_FAILED: 'charge.failed',
+    CHARGE_SUCCEEDED: 'charge.succeeded',
+    CHARGE_PENDING: 'charge.pending',
+    CHARGE_REFUNDED: 'charge.refunded',
+    CHARGE_REFUND_PENDING: 'charge.refund.pending',
+    CHARGE_REFUND_UPDATED: 'charge.refund.updated',
+    CHARGE_UPDATED: 'charge.updated',
+    CUSTOMER_CREATED: 'customer.created',
+    CUSTOMER_DELETED: 'customer.deleted',
+    CUSTOMER_UPDATED: 'customer.updated',
+    DISPUTE_CREATED: 'dispute.created',
+    DISPUTE_UPDATED: 'dispute.updated',
+    PAYMENT_INTENT_CANCELED: 'payment_intent.canceled',
+    PAYMENT_INTENT_CREATED: 'payment_intent.created',
+    PAYMENT_INTENT_PAYMENT_FAILED: 'payment_intent.payment_failed',
+    PAYMENT_INTENT_PROCESSING: 'payment_intent.processing',
+    PAYMENT_INTENT_REQUIRES_ACTION: 'payment_intent.requires_action',
+    PAYMENT_INTENT_SUCCEEDED: 'payment_intent.succeeded',
+    PAYMENT_INTENT_AMOUNT_CAPTURABLE_UPDATED: 'payment_intent.amount_capturable_updated',
+    PAYMENT_METHOD_ATTACHED: 'payment_method.attached',
+    PAYMENT_METHOD_DETACHED: 'payment_method.detached',
+    PAYMENT_METHOD_UPDATED: 'payment_method.updated',
+    PAYOUT_CREATED: 'payout.created',
+    PAYOUT_FAILED: 'payout.failed',
+    PAYOUT_PAID: 'payout.paid',
+    PAYOUT_UPDATED: 'payout.updated',
+    PLATFORM_FEE_CREATED: 'platform_fee.created',
+    PLATFORM_FEE_REFUNDED: 'platform_fee.refunded',
+    SUBSCRIPTION_CREATED: 'subscription.created',
+    SUBSCRIPTION_CANCELED: 'subscription.canceled',
+    SUBSCRIPTION_UPDATED: 'subscription.updated',
+    REPORT_RUN_SUCCEEDED: 'report_run.succeeded',
+    REPORT_RUN_FAILED: 'report_run.failed',
+    OUTBOUND_TRANSFER_PENDING: 'outbound_transfer.pending',
+    OUTBOUND_TRANSFER_FAILED: 'outbound_transfer.failed',
+    OUTBOUND_TRANSFER_CANCELED: 'outbound_transfer.canceled',
+    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded'
+} as const;
+export type ListEventsTypes = typeof ListEventsTypes[keyof typeof ListEventsTypes];

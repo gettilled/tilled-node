@@ -14,15 +14,15 @@
 
 
 import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { ListProductCodes200Response } from '../model';
+import type { ListProductCodes200Response } from '../model';
 /**
  * ProductCodesApi - axios parameter creator
  * @export
@@ -39,7 +39,7 @@ export const ProductCodesApiAxiosParamCreator = function (configuration?: Config
          * @deprecated
          * @throws {RequiredError}
          */
-        listProductCodes: async (tilled_account: string, offset?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listProductCodes: async (tilled_account: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listProductCodes', 'tilled_account', tilled_account)
             const localVarPath = `/v1/product-codes`;
@@ -104,9 +104,11 @@ export const ProductCodesApiFp = function(configuration?: Configuration) {
          * @deprecated
          * @throws {RequiredError}
          */
-        async listProductCodes(tilled_account: string, offset?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProductCodes200Response>> {
+        async listProductCodes(tilled_account: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListProductCodes200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listProductCodes(tilled_account, offset, limit, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProductCodesApi.listProductCodes']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -126,7 +128,7 @@ export const ProductCodesApiFactory = function (configuration?: Configuration, b
          * @deprecated
          * @throws {RequiredError}
          */
-        listProductCodes(requestParameters: ProductCodesApiListProductCodesRequest, options?: AxiosRequestConfig): AxiosPromise<ListProductCodes200Response> {
+        listProductCodes(requestParameters: ProductCodesApiListProductCodesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListProductCodes200Response> {
             return localVarFp.listProductCodes(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
@@ -176,7 +178,8 @@ export class ProductCodesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProductCodesApi
      */
-    public listProductCodes(requestParameters: ProductCodesApiListProductCodesRequest, options?: AxiosRequestConfig) {
+    public listProductCodes(requestParameters: ProductCodesApiListProductCodesRequest, options?: RawAxiosRequestConfig) {
         return ProductCodesApiFp(this.configuration).listProductCodes(requestParameters.tilled_account, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
