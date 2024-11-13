@@ -1,12 +1,9 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var fs = require('fs');
-var tilled = require('../dist');
 var dotenv = require('dotenv');
 dotenv.config();
 function createNewCustomer() {
-  var customerId = process.env.VITE_TILLED_CUSTOMER_ID;
-
   console.log('Creating a new customer');
 
   fetch(
