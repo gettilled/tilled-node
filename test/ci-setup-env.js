@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var fs = require('fs');
+console.log(fs.readdirSync('.'));
 var tilled = require('../dist');
 function createNewCustomer() {
     var config = new tilled.Configuration({
