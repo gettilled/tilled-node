@@ -26,6 +26,6 @@ import { PaginatedDto } from './paginated-dto';
  * @type ListAPIKeys200Response
  * @export
  */
-export type ListAPIKeys200Response = ApiKey & PaginatedDto;
+export type ListAPIKeys200Response = ListAPIKeys200ResponseAllOf & PaginatedDto;
 
 
