@@ -162,7 +162,8 @@ export const BalanceTransactionSourceType = {
     PLATFORM_FEE_REFUND: 'platform_fee_refund',
     DISPUTE: 'dispute',
     ACCOUNT: 'account',
-    OUTBOUND_TRANSFER: 'outbound_transfer'
+    OUTBOUND_TRANSFER: 'outbound_transfer',
+    TERMINAL_READER: 'terminal_reader'
 } as const;
 
 export type BalanceTransactionSourceType = typeof BalanceTransactionSourceType[keyof typeof BalanceTransactionSourceType];
@@ -223,6 +224,7 @@ export const BalanceTransactionFeeSubtype = {
     INTERLINK_PIN_AUTHENTICATED: 'interlink_pin_authenticated',
     INTERLINK_REGULATED: 'interlink_regulated',
     MAESTRO_STANDARD: 'maestro_standard',
+    MAESTRO_SWITCH: 'maestro_switch',
     MASTERCARD_ACQUIRER_BRAND_VOLUME: 'mastercard_acquirer_brand_volume',
     MASTERCARD_ACQUIRER_MERCHANT_ADVICE_CODE: 'mastercard_acquirer_merchant_advice_code',
     MASTERCARD_ACQUIRER_PROGRAM_SUPPORT: 'mastercard_acquirer_program_support',
