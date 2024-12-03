@@ -109,6 +109,12 @@ export interface Charge {
      */
     'captured_at'?: string;
     /**
+     * AVS and CVS checks and other payment details.
+     * @type {object}
+     * @memberof Charge
+     */
+    'details'?: object;
+    /**
      * Time at which the charge failed.
      * @type {string}
      * @memberof Charge
