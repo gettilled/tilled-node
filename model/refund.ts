@@ -123,7 +123,8 @@ export const RefundFailureCode = {
     BLACKLISTED_CARD: 'blacklisted_card',
     NOT_PERMITTED: 'not_permitted',
     PROCESSING_ERROR: 'processing_error',
-    DEVICE_IS_BUSY: 'device_is_busy'
+    DEVICE_IS_BUSY: 'device_is_busy',
+    TRY_AGAIN_LATER: 'try_again_later'
 } as const;
 
 export type RefundFailureCode = typeof RefundFailureCode[keyof typeof RefundFailureCode];
