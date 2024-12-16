@@ -15,7 +15,7 @@
 import type { Configuration } from './configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import type { AxiosRequestHeaders, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
 export const BASE_PATH = 'https://api.tilled.com'.replace(/\/+$/, '');
@@ -60,23 +60,75 @@ export class BaseAPI {
     }
     this.axios.interceptors.response.use(
       (response) => {
-        // Modify response headers to hide 'tilled-api-key'
-        if (response?.config?.headers['tilled-api-key']) {
-          response.config.headers['tilled-api-key'] = 'sk_************';
+        // Redact sensitive headers
+        if (response?.config?.headers) {
+          response.config.headers = redactHeaders(response.config.headers) as AxiosRequestHeaders;
         }
+    
+        // Redact sensitive request data
+        if (response?.config?.data) {
+            const parsedData = JSON.parse(response.config.data);
+            response.config.data = JSON.stringify(redactData(parsedData, sensitiveKeys));
+        }
+    
+        // Redact raw request headers
         if (response?.request?._header) {
           response.request._header = response.request._header.replace(
             /tilled-api-key: .+/,
             'tilled-api-key: sk_************'
           );
         }
-
+    
         return response;
       },
       (error) => {
+        // Redact sensitive headers in error
+        if (error?.config?.headers) {
+          error.config.headers = redactHeaders(error.config.headers);
+        }
+    
+        // Redact sensitive request data in error
+        if (error?.config?.data) {
+            const parsedData = JSON.parse(error.config.data);
+            error.config.data = JSON.stringify(redactData(parsedData, sensitiveKeys));
+        }
+    
+        // Redact raw request headers in error
+        if (error?.request?._header) {
+          error.request._header = error.request._header.replace(
+            /tilled-api-key: .+/,
+            'tilled-api-key: sk_************'
+          );
+        }
+    
         return Promise.reject(error);
       }
     );
+    
+    function redactHeaders(headers: Record<string, string>, sensitiveHeaders = ['tilled-api-key', 'Authorization']) {
+      return Object.fromEntries(
+        Object.entries(headers).map(([key, value]) =>
+          sensitiveHeaders.includes(key) ? [key, '***'] : [key, value]
+        )
+      );
+    }
+    
+    function redactData(obj: any, sensitiveKeys: string[]): any {
+      if (Array.isArray(obj)) {
+        return obj.map((item) => redactData(item, sensitiveKeys));
+      } else if (obj && typeof obj === 'object') {
+        return Object.fromEntries(
+          Object.entries(obj).map(([key, value]) => [
+            key,
+            sensitiveKeys.includes(key) ? '***' : redactData(value, sensitiveKeys),
+          ])
+        );
+      }
+      return obj;
+    }
+    
+    const sensitiveKeys = ['number', 'cvc','account_number', 'institution_id', 'transit_number', 'routing_number', 'street', 'email', 'phone'];
+    
   }
 }
 

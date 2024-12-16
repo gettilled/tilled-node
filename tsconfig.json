@@ -6,7 +6,7 @@
     "module": "commonjs",
     "outDir": "dist",
     "rootDir": ".",
-    "lib": ["es6", "dom"],
+    "lib": ["es2019", "dom"],
     "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types"],
     "skipLibCheck": true,
