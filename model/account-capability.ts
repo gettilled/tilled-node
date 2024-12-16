@@ -51,7 +51,7 @@ export interface AccountCapability {
      */
     'pricing_template': PricingTemplate;
     /**
-     * *Deprecated: See `pricing_template` for account details.*  The product code applied to/associated with this account.
+     * *Deprecated: See `pricing_template` for account details.*  The capability applied to/associated with this account.
      * @type {ProductCode}
      * @memberof AccountCapability
      * @deprecated
@@ -64,7 +64,7 @@ export interface AccountCapability {
      */
     'requirements_errors': Array<AccountRequirementsError>;
     /**
-     * Status of the associated product code as part of the onboarding process. Only the `active` status represents that payments can be handled by this account for this given product code.  `created` The capability has been created but no further action taken. Generally, this is the state of all capabilities when a merchant has been created but the onboarding process has not yet started.  `started` The onboarding process has been started but not yet submitted.  `submitted` The onboarding process for this product code has been submitted.  `active` This associated product code is active for payments on this account.  `disabled` This associated product code is not valid for payments on this account.
+     * Status of the associated capability as part of the onboarding process. Only the `active` status represents that payments can be handled by this account for this given capability.  `created` The capability has been created but no further action taken. Generally, this is the state of all capabilities when a merchant has been created but the onboarding process has not yet started.  `started` The onboarding process has been started but not yet submitted.  `submitted` The onboarding process for this capability has been submitted.  `active` This associated capability is active for payments on this account.  `disabled` This associated capability is not valid for payments on this account.
      * @type {string}
      * @memberof AccountCapability
      */

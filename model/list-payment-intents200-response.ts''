@@ -13,40 +13,19 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { PaginatedDto } from './paginated-dto';
+    // @ts-ignore
+    import { ListPaymentIntents200ResponseAllOf } from './list-payment-intents200-response-all-of';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PaymentIntent } from './payment-intent';
 
 /**
- * 
+ * @type ListPaymentIntents200Response
  * @export
- * @interface AccountRole
  */
-export interface AccountRole {
-    /**
-     * The ID of the account associated with this role.
-     * @type {string}
-     * @memberof AccountRole
-     */
-    'account_id': string;
-    /**
-     * The user\'s role in this account. The roles have varied restrictions on the actions they can take.
-     * @type {string}
-     * @memberof AccountRole
-     */
-    'role': AccountRoleRole;
-}
-
-export const AccountRoleRole = {
-    OWNER: 'owner',
-    ADMIN: 'admin',
-    DEVELOPER: 'developer',
-    ANALYST: 'analyst',
-    VIEW_ONLY: 'view_only',
-    MERCHANT_OWNER: 'merchant_owner',
-    MERCHANT_ADMIN: 'merchant_admin',
-    RESELLER_OWNER: 'reseller_owner',
-    RESELLER_ADMIN: 'reseller_admin',
-    RESELLER_VIEW_ONLY: 'reseller_view_only'
-} as const;
-
-export type AccountRoleRole = typeof AccountRoleRole[keyof typeof AccountRoleRole];
+export type ListPaymentIntents200Response = PaginatedDto;
 
 

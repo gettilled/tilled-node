@@ -89,7 +89,10 @@ export const UserInvitationRole = {
     ANALYST: 'analyst',
     VIEW_ONLY: 'view_only',
     MERCHANT_OWNER: 'merchant_owner',
-    MERCHANT_ADMIN: 'merchant_admin'
+    MERCHANT_ADMIN: 'merchant_admin',
+    RESELLER_OWNER: 'reseller_owner',
+    RESELLER_ADMIN: 'reseller_admin',
+    RESELLER_VIEW_ONLY: 'reseller_view_only'
 } as const;
 
 export type UserInvitationRole = typeof UserInvitationRole[keyof typeof UserInvitationRole];
