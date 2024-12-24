@@ -21,7 +21,7 @@
  */
 export interface AuthLinkCreateParams {
     /**
-     * Expiration of the Auth Link (i.e.. 1d, 7d, 30d)
+     * Expiration of the Auth Link (i.e.. 1d, 7d, 30d). Value must be between 0d and 30d.
      * @type {string}
      * @memberof AuthLinkCreateParams
      */
