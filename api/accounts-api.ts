@@ -28,9 +28,9 @@ import type { AccountCapabilityCreateParams } from '../model';
 // @ts-ignore
 import type { AccountCapabilityUpdateParams } from '../model';
 // @ts-ignore
-import type { AccountCreateParams } from '../model';
-// @ts-ignore
 import type { AccountUpdateParams } from '../model';
+// @ts-ignore
+import type { CreateConnectedAccountRequest } from '../model';
 // @ts-ignore
 import type { ListConnectedAccounts200Response } from '../model';
 /**
@@ -90,18 +90,18 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Creates a merchant Account associated with your partner Account.
+         * Creates a connected Account associated with your partner/parent Account.
          * @summary Create a Connected Account
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {AccountCreateParams} AccountCreateParams 
+         * @param {CreateConnectedAccountRequest} CreateConnectedAccountRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createConnectedAccount: async (tilled_account: string, AccountCreateParams: AccountCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createConnectedAccount: async (tilled_account: string, CreateConnectedAccountRequest: CreateConnectedAccountRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('createConnectedAccount', 'tilled_account', tilled_account)
-            // verify required parameter 'AccountCreateParams' is not null or undefined
-            assertParamExists('createConnectedAccount', 'AccountCreateParams', AccountCreateParams)
+            // verify required parameter 'CreateConnectedAccountRequest' is not null or undefined
+            assertParamExists('createConnectedAccount', 'CreateConnectedAccountRequest', CreateConnectedAccountRequest)
             const localVarPath = `/v1/accounts/connected`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -132,7 +132,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(AccountCreateParams, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateConnectedAccountRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -282,12 +282,13 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
          * @param {string} [sort] The sort parameters, value:direction. Possible values: &#x60;name&#x60;, &#x60;created_at&#x60;. Possible directions:  &#x60;asc&#x60;, &#x60;desc&#x60;  For example &#x60;name:asc&#x60;.  Default: &#x60;created_at:desc&#x60;
+         * @param {ListConnectedAccountsType} [type] Only return Connected Accounts where the type matches the specified value.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listConnectedAccounts', 'tilled_account', tilled_account)
             const localVarPath = `/v1/accounts/connected`;
@@ -321,6 +322,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
 
             if (sort !== undefined) {
                 localVarQueryParameter['sort'] = sort;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
             }
 
             if (offset !== undefined) {
@@ -475,15 +480,15 @@ export const AccountsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a merchant Account associated with your partner Account.
+         * Creates a connected Account associated with your partner/parent Account.
          * @summary Create a Connected Account
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {AccountCreateParams} AccountCreateParams 
+         * @param {CreateConnectedAccountRequest} CreateConnectedAccountRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createConnectedAccount(tilled_account: string, AccountCreateParams: AccountCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedAccount(tilled_account, AccountCreateParams, options);
+        async createConnectedAccount(tilled_account: string, CreateConnectedAccountRequest: CreateConnectedAccountRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createConnectedAccount(tilled_account, CreateConnectedAccountRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AccountsApi.createConnectedAccount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -535,13 +540,14 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
          * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
          * @param {string} [sort] The sort parameters, value:direction. Possible values: &#x60;name&#x60;, &#x60;created_at&#x60;. Possible directions:  &#x60;asc&#x60;, &#x60;desc&#x60;  For example &#x60;name:asc&#x60;.  Default: &#x60;created_at:desc&#x60;
+         * @param {ListConnectedAccountsType} [type] Only return Connected Accounts where the type matches the specified value.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedAccounts(tilled_account, metadata, q, sort, offset, limit, options);
+        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedAccounts(tilled_account, metadata, q, sort, type, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AccountsApi.listConnectedAccounts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -596,14 +602,14 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.addAccountCapability(requestParameters.tilled_account, requestParameters.AccountCapabilityCreateParams, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a merchant Account associated with your partner Account.
+         * Creates a connected Account associated with your partner/parent Account.
          * @summary Create a Connected Account
          * @param {AccountsApiCreateConnectedAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: RawAxiosRequestConfig): AxiosPromise<Account> {
-            return localVarFp.createConnectedAccount(requestParameters.tilled_account, requestParameters.AccountCreateParams, options).then((request) => request(axios, basePath));
+            return localVarFp.createConnectedAccount(requestParameters.tilled_account, requestParameters.CreateConnectedAccountRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes an Account capability. Account capabilities can only be managed before the onboarding application is submitted.
@@ -643,7 +649,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListConnectedAccounts200Response> {
-            return localVarFp.listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates an Account by setting the values of the provided parameters. Any parameters not provided remain unchanged.
@@ -704,10 +710,10 @@ export interface AccountsApiCreateConnectedAccountRequest {
 
     /**
      * 
-     * @type {AccountCreateParams}
+     * @type {CreateConnectedAccountRequest}
      * @memberof AccountsApiCreateConnectedAccount
      */
-    readonly AccountCreateParams: AccountCreateParams
+    readonly CreateConnectedAccountRequest: CreateConnectedAccountRequest
 }
 
 /**
@@ -794,6 +800,13 @@ export interface AccountsApiListConnectedAccountsRequest {
     readonly sort?: string
 
     /**
+     * Only return Connected Accounts where the type matches the specified value.
+     * @type {'partner' | 'merchant' | 'reseller'}
+     * @memberof AccountsApiListConnectedAccounts
+     */
+    readonly type?: ListConnectedAccountsType
+
+    /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
      * @memberof AccountsApiListConnectedAccounts
@@ -877,7 +890,7 @@ export class AccountsApi extends BaseAPI {
     }
 
     /**
-     * Creates a merchant Account associated with your partner Account.
+     * Creates a connected Account associated with your partner/parent Account.
      * @summary Create a Connected Account
      * @param {AccountsApiCreateConnectedAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -885,7 +898,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public createConnectedAccount(requestParameters: AccountsApiCreateConnectedAccountRequest, options?: RawAxiosRequestConfig) {
-        return AccountsApiFp(this.configuration).createConnectedAccount(requestParameters.tilled_account, requestParameters.AccountCreateParams, options).then((request) => request(this.axios, this.basePath));
+        return AccountsApiFp(this.configuration).createConnectedAccount(requestParameters.tilled_account, requestParameters.CreateConnectedAccountRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -933,7 +946,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig) {
-        return AccountsApiFp(this.configuration).listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return AccountsApiFp(this.configuration).listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -961,3 +974,12 @@ export class AccountsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const ListConnectedAccountsType = {
+    PARTNER: 'partner',
+    MERCHANT: 'merchant',
+    RESELLER: 'reseller'
+} as const;
+export type ListConnectedAccountsType = typeof ListConnectedAccountsType[keyof typeof ListConnectedAccountsType];
