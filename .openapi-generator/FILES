@@ -33,7 +33,6 @@ model/access-token-refresh-params.ts
 model/account-capability-create-params.ts
 model/account-capability-update-params.ts
 model/account-capability.ts
-model/account-create-params.ts
 model/account-document.ts
 model/account-requirements-error.ts
 model/account-role.ts
@@ -79,6 +78,7 @@ model/charge.ts
 model/checkout-session-create-params.ts
 model/checkout-session-line-item.ts
 model/checkout-session.ts
+model/create-connected-account-request.ts
 model/customer-create-params.ts
 model/customer-details.ts
 model/customer-update-params.ts
@@ -127,11 +127,13 @@ model/list-webhook-endpoints200-response.ts
 model/login-dto.ts
 model/login-params.ts
 model/markup.ts
+model/merchant-account-create-params.ts
 model/merchant-application-create-params.ts
 model/merchant-application.ts
 model/model-file.ts
 model/paginated-dto.ts
 model/partial-address.ts
+model/partner-account-create-params.ts
 model/payment-intent-cancel-params.ts
 model/payment-intent-capture-params.ts
 model/payment-intent-confirm-params.ts
