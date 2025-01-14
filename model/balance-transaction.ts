@@ -223,6 +223,7 @@ export const BalanceTransactionFeeSubtype = {
     INTERLINK_SWITCH: 'interlink_switch',
     INTERLINK_PIN_AUTHENTICATED: 'interlink_pin_authenticated',
     INTERLINK_REGULATED: 'interlink_regulated',
+    MAESTRO_REGULATED: 'maestro_regulated',
     MAESTRO_STANDARD: 'maestro_standard',
     MAESTRO_SWITCH: 'maestro_switch',
     MASTERCARD_ACQUIRER_BRAND_VOLUME: 'mastercard_acquirer_brand_volume',
