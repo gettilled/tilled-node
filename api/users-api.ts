@@ -92,12 +92,11 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Creates a User.
+         * Creates a User. Note: While the `Create User` endpoint has been un-deprecated for use cases requiring seamless authentication, we strongly encourage developers to utilize [User Invitations](https://docs.tilled.com/api-reference#tag/users/POST/v1/user-invitations) for a more secure and user-friendly experience. User Invitations ensure email verification and allow users to set their own credentials, aligning with best practices for account management.
          * @summary Create a User
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {UserCreateParams} UserCreateParams 
          * @param {*} [options] Override http request option.
-         * @deprecated
          * @throws {RequiredError}
          */
         createUser: async (tilled_account: string, UserCreateParams: UserCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -837,12 +836,11 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a User.
+         * Creates a User. Note: While the `Create User` endpoint has been un-deprecated for use cases requiring seamless authentication, we strongly encourage developers to utilize [User Invitations](https://docs.tilled.com/api-reference#tag/users/POST/v1/user-invitations) for a more secure and user-friendly experience. User Invitations ensure email verification and allow users to set their own credentials, aligning with best practices for account management.
          * @summary Create a User
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {UserCreateParams} UserCreateParams 
          * @param {*} [options] Override http request option.
-         * @deprecated
          * @throws {RequiredError}
          */
         async createUser(tilled_account: string, UserCreateParams: UserCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
@@ -1079,11 +1077,10 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.checkUserInvitation(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a User.
+         * Creates a User. Note: While the `Create User` endpoint has been un-deprecated for use cases requiring seamless authentication, we strongly encourage developers to utilize [User Invitations](https://docs.tilled.com/api-reference#tag/users/POST/v1/user-invitations) for a more secure and user-friendly experience. User Invitations ensure email verification and allow users to set their own credentials, aligning with best practices for account management.
          * @summary Create a User
          * @param {UsersApiCreateUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * @deprecated
          * @throws {RequiredError}
          */
         createUser(requestParameters: UsersApiCreateUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<User> {
@@ -1583,11 +1580,10 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Creates a User.
+     * Creates a User. Note: While the `Create User` endpoint has been un-deprecated for use cases requiring seamless authentication, we strongly encourage developers to utilize [User Invitations](https://docs.tilled.com/api-reference#tag/users/POST/v1/user-invitations) for a more secure and user-friendly experience. User Invitations ensure email verification and allow users to set their own credentials, aligning with best practices for account management.
      * @summary Create a User
      * @param {UsersApiCreateUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
-     * @deprecated
      * @throws {RequiredError}
      * @memberof UsersApi
      */

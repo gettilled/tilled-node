@@ -124,6 +124,12 @@ export interface Account {
      */
     'settings'?: AccountSettings;
     /**
+     * The status of the account. Only available for merchant accounts.
+     * @type {string}
+     * @memberof Account
+     */
+    'status'?: AccountStatus;
+    /**
      * The `partner` white label domain.
      * @type {string}
      * @memberof Account
@@ -138,5 +144,20 @@ export const AccountType = {
 } as const;
 
 export type AccountType = typeof AccountType[keyof typeof AccountType];
+export const AccountStatus = {
+    ACTIVE: 'active',
+    REQUIRES_PRICING: 'requires_pricing',
+    FUNDING_HOLD: 'funding_hold',
+    ACCOUNT_REVIEW: 'account_review',
+    PARTIALLY_ACTIVE: 'partially_active',
+    ACTION_REQUIRED: 'action_required',
+    CREATED: 'created',
+    STARTED: 'started',
+    DISABLED: 'disabled',
+    REJECTED: 'rejected',
+    WITHDRAWN: 'withdrawn'
+} as const;
+
+export type AccountStatus = typeof AccountStatus[keyof typeof AccountStatus];
 
 
