@@ -124,7 +124,7 @@ jobs:
       - name: Create Pull Request
         id: create_pr
         if: ${{ steps.push-temp.outcome == 'success'}}
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: temp-branch
           delete-branch: true
