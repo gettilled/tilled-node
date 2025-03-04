@@ -21,18 +21,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       # Install/cache node_modules
       - name: Cache node_modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: node-modules-cache
         with:
           path: |
@@ -71,7 +71,7 @@ jobs:
       # Publish
       - name: Publish NPM Package
         id: publish
-        uses: JS-DevTools/npm-publish@v2
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
@@ -93,18 +93,18 @@ jobs:
 
       - name: Setup Pages
         if: always()
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         if: always()
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: docs/
 
       - name: Deploy to GitHub Pages
         if: always()
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
 
       - name: Notify in Slack sdk-builds channel if new changes are published
         if: ${{ steps.publish.outputs.type }}
@@ -115,12 +115,12 @@ jobs:
           fields: workflow
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SDK }}
-        
+
       - name: Push to temp branch
         id: push-temp
         if: ${{ steps.patch.outcome == 'success' }}
         run: git push origin HEAD:temp-branch --follow-tags
-  
+
       - name: Create Pull Request
         id: create_pr
         if: ${{ steps.push-temp.outcome == 'success'}}
