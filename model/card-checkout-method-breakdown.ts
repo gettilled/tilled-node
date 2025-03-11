@@ -13,30 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface CardCheckoutMethodBreakdown
  */
-export interface AttributesEsignature {
+export interface CardCheckoutMethodBreakdown {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * Percentage of payments accepted through online websites or hosted payment pages.
+     * @type {number}
+     * @memberof CardCheckoutMethodBreakdown
      */
-    'document': EsignatureDocument;
+    'percent_e_commerce': number;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * Percentage of payments accepted through MOTO (Mail Order / Telephone Order).
+     * @type {number}
+     * @memberof CardCheckoutMethodBreakdown
      */
-    'signers': Array<EsignatureSigner>;
+    'percent_manual_card_not_present': number;
+    /**
+     * Percentage of payments accepted through swipe. Swipe are POS transactions made through a card reader.
+     * @type {number}
+     * @memberof CardCheckoutMethodBreakdown
+     */
+    'percent_swiped': number;
 }
 

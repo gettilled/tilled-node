@@ -13,30 +13,32 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface EsignatureDocument
  */
-export interface AttributesEsignature {
+export interface EsignatureDocument {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof EsignatureDocument
      */
-    'document': EsignatureDocument;
+    'id': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The status of the Esignature Document.
+     * @type {string}
+     * @memberof EsignatureDocument
      */
-    'signers': Array<EsignatureSigner>;
+    'status': EsignatureDocumentStatus;
 }
+
+export const EsignatureDocumentStatus = {
+    SENT: 'sent',
+    COMPLETED: 'completed'
+} as const;
+
+export type EsignatureDocumentStatus = typeof EsignatureDocumentStatus[keyof typeof EsignatureDocumentStatus];
+
 

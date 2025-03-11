@@ -283,7 +283,7 @@ export interface EventsApiListEventsRequest {
 
     /**
      * An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
-     * @type {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>}
+     * @type {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'esignature_document.sent' | 'esignature_document.completed' | 'esignature_signer.sent' | 'esignature_signer.viewed' | 'esignature_signer.completed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>}
      * @memberof EventsApiListEvents
      */
     readonly types?: Array<ListEventsTypes>
@@ -382,6 +382,11 @@ export const ListEventsTypes = {
     SUBSCRIPTION_UPDATED: 'subscription.updated',
     REPORT_RUN_SUCCEEDED: 'report_run.succeeded',
     REPORT_RUN_FAILED: 'report_run.failed',
+    ESIGNATURE_DOCUMENT_SENT: 'esignature_document.sent',
+    ESIGNATURE_DOCUMENT_COMPLETED: 'esignature_document.completed',
+    ESIGNATURE_SIGNER_SENT: 'esignature_signer.sent',
+    ESIGNATURE_SIGNER_VIEWED: 'esignature_signer.viewed',
+    ESIGNATURE_SIGNER_COMPLETED: 'esignature_signer.completed',
     OUTBOUND_TRANSFER_PENDING: 'outbound_transfer.pending',
     OUTBOUND_TRANSFER_FAILED: 'outbound_transfer.failed',
     OUTBOUND_TRANSFER_CANCELED: 'outbound_transfer.canceled',

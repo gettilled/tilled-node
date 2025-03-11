@@ -15,28 +15,64 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
+import type { OnboardingBankVerification } from './onboarding-bank-verification';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
+import type { OnboardingLegalEntity } from './onboarding-legal-entity';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PricingTemplate } from './pricing-template';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TermsAndConditionsDetail } from './terms-and-conditions-detail';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface OnboardingApplication
  */
-export interface AttributesEsignature {
+export interface OnboardingApplication {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * Merchant account details
+     * @type {OnboardingLegalEntity}
+     * @memberof OnboardingApplication
      */
-    'document': EsignatureDocument;
+    'legal_entity': OnboardingLegalEntity;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The pricing templates applied to/associated with this merchant application.
+     * @type {Array<PricingTemplate>}
+     * @memberof OnboardingApplication
      */
-    'signers': Array<EsignatureSigner>;
+    'pricing_templates': Array<PricingTemplate>;
+    /**
+     * Indicates whether or not the merchant has accepted the terms of service.
+     * @type {boolean}
+     * @memberof OnboardingApplication
+     */
+    'tos_acceptance': boolean;
+    /**
+     * The bank verification used during onboarding.
+     * @type {OnboardingBankVerification}
+     * @memberof OnboardingApplication
+     */
+    'bank_verification'?: OnboardingBankVerification;
+    /**
+     * Links to terms and conditions for a merchant application.
+     * @type {Array<TermsAndConditionsDetail>}
+     * @memberof OnboardingApplication
+     */
+    'terms_and_conditions_links'?: Array<TermsAndConditionsDetail>;
+    /**
+     * Time at which the object was last updated.
+     * @type {string}
+     * @memberof OnboardingApplication
+     */
+    'updated_at'?: string;
+    /**
+     * If an application contains any validation errors they will appear here. If they are not addressed before submission then the submission will fail.
+     * @type {Array<string>}
+     * @memberof OnboardingApplication
+     */
+    'validation_errors'?: Array<string>;
 }
 

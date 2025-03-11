@@ -13,30 +13,48 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface OnboardingBankVerification
  */
-export interface AttributesEsignature {
+export interface OnboardingBankVerification {
     /**
      * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * @type {string}
+     * @memberof OnboardingBankVerification
      */
-    'document': EsignatureDocument;
+    'bank_account_id'?: string;
     /**
      * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * @type {string}
+     * @memberof OnboardingBankVerification
      */
-    'signers': Array<EsignatureSigner>;
+    'verification_method'?: OnboardingBankVerificationVerificationMethod;
+    /**
+     * 
+     * @type {string}
+     * @memberof OnboardingBankVerification
+     */
+    'verification_status'?: OnboardingBankVerificationVerificationStatus;
 }
+
+export const OnboardingBankVerificationVerificationMethod = {
+    PLAID: 'plaid',
+    PAYSAFE: 'paysafe',
+    TILLED_MANUAL: 'tilled_manual'
+} as const;
+
+export type OnboardingBankVerificationVerificationMethod = typeof OnboardingBankVerificationVerificationMethod[keyof typeof OnboardingBankVerificationVerificationMethod];
+export const OnboardingBankVerificationVerificationStatus = {
+    NEW: 'new',
+    VALIDATED: 'validated',
+    VERIFIED: 'verified',
+    VERIFICATION_FAILED: 'verification_failed',
+    ERRORED: 'errored'
+} as const;
+
+export type OnboardingBankVerificationVerificationStatus = typeof OnboardingBankVerificationVerificationStatus[keyof typeof OnboardingBankVerificationVerificationStatus];
+
 

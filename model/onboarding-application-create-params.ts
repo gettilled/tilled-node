@@ -15,28 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
+import type { OnboardingLegalEntity } from './onboarding-legal-entity';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface OnboardingApplicationCreateParams
  */
-export interface AttributesEsignature {
+export interface OnboardingApplicationCreateParams {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * Merchant account details
+     * @type {OnboardingLegalEntity}
+     * @memberof OnboardingApplicationCreateParams
      */
-    'document': EsignatureDocument;
+    'legal_entity': OnboardingLegalEntity;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * Indicates whether or not the merchant has accepted the terms of service.
+     * @type {boolean}
+     * @memberof OnboardingApplicationCreateParams
      */
-    'signers': Array<EsignatureSigner>;
+    'tos_acceptance': boolean;
 }
 

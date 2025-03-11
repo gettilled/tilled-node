@@ -13,30 +13,98 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface PAArticlesOfIncorporation
  */
-export interface AttributesEsignature {
+export interface PAArticlesOfIncorporation {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The date on which the business Articles of Incorporation were issued.
+     * @type {string}
+     * @memberof PAArticlesOfIncorporation
      */
-    'document': EsignatureDocument;
+    'issued_at': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The state where the business Articles of Incorporation were issued.
+     * @type {string}
+     * @memberof PAArticlesOfIncorporation
      */
-    'signers': Array<EsignatureSigner>;
+    'state': PAArticlesOfIncorporationState;
+    /**
+     * The Document ID of an uploaded [Document](#tag/Documents) of type `file` and subtype `articles_of_incorp`
+     * @type {string}
+     * @memberof PAArticlesOfIncorporation
+     */
+    'document_id'?: string;
 }
+
+export const PAArticlesOfIncorporationState = {
+    AL: 'AL',
+    AK: 'AK',
+    AS: 'AS',
+    AZ: 'AZ',
+    AR: 'AR',
+    AA: 'AA',
+    AE: 'AE',
+    AP: 'AP',
+    CA: 'CA',
+    CO: 'CO',
+    CT: 'CT',
+    DE: 'DE',
+    DC: 'DC',
+    FL: 'FL',
+    GA: 'GA',
+    GU: 'GU',
+    HI: 'HI',
+    ID: 'ID',
+    IL: 'IL',
+    IN: 'IN',
+    IT: 'IT',
+    IA: 'IA',
+    KS: 'KS',
+    KY: 'KY',
+    LA: 'LA',
+    ME: 'ME',
+    MD: 'MD',
+    MA: 'MA',
+    MI: 'MI',
+    MN: 'MN',
+    MS: 'MS',
+    MO: 'MO',
+    MT: 'MT',
+    NE: 'NE',
+    NV: 'NV',
+    NH: 'NH',
+    NJ: 'NJ',
+    NM: 'NM',
+    NY: 'NY',
+    NC: 'NC',
+    ND: 'ND',
+    MP: 'MP',
+    OH: 'OH',
+    OK: 'OK',
+    OR: 'OR',
+    PW: 'PW',
+    PA: 'PA',
+    PR: 'PR',
+    RI: 'RI',
+    SC: 'SC',
+    SD: 'SD',
+    TN: 'TN',
+    TX: 'TX',
+    VI: 'VI',
+    US: 'US',
+    UT: 'UT',
+    VT: 'VT',
+    VA: 'VA',
+    WA: 'WA',
+    WV: 'WV',
+    WI: 'WI',
+    WY: 'WY'
+} as const;
+
+export type PAArticlesOfIncorporationState = typeof PAArticlesOfIncorporationState[keyof typeof PAArticlesOfIncorporationState];
+
 

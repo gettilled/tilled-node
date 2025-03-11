@@ -13,30 +13,67 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface ProcessingVolume
  */
-export interface AttributesEsignature {
+export interface ProcessingVolume {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * Three-letter ISO currency code, in lowercase.
+     * @type {string}
+     * @memberof ProcessingVolume
      */
-    'document': EsignatureDocument;
+    'currency': ProcessingVolumeCurrency;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * Estimated high ticket amount, in minor units (e.g. $100.00 = 10000 minor units). This represents the highest amount the merchant expects to process in a single transaction.
+     * @type {number}
+     * @memberof ProcessingVolume
      */
-    'signers': Array<EsignatureSigner>;
+    'high_ticket_amount': number;
+    /**
+     * Estimated monthly processing volume amount of the business, in minor units. (e.g. $1,000,000.00 = 100,000,000 minor units)
+     * @type {number}
+     * @memberof ProcessingVolume
+     */
+    'monthly_processing_volume': number;
+    /**
+     * Estimated monthly number of transactions of the business.
+     * @type {number}
+     * @memberof ProcessingVolume
+     */
+    'monthly_transaction_count': number;
+    /**
+     * Average transaction amount, in minor units for Card payments (e.g. $100.00 = 10000 minor units). This field is required for merchants with a card or card-present pricing template assigned to them.
+     * @type {number}
+     * @memberof ProcessingVolume
+     */
+    'average_transaction_amount_card'?: number;
+    /**
+     * Average transaction amount, in minor units for Direct Debit payments (e.g. $100.00 = 10000 minor units). This field is required for merchants with a debit pricing template assigned to them.
+     * @type {number}
+     * @memberof ProcessingVolume
+     */
+    'average_transaction_amount_debit'?: number;
 }
+
+export const ProcessingVolumeCurrency = {
+    AUD: 'aud',
+    CAD: 'cad',
+    DKK: 'dkk',
+    EUR: 'eur',
+    HKD: 'hkd',
+    JPY: 'jpy',
+    NZD: 'nzd',
+    NOK: 'nok',
+    GBP: 'gbp',
+    ZAR: 'zar',
+    SEK: 'sek',
+    CHF: 'chf',
+    USD: 'usd'
+} as const;
+
+export type ProcessingVolumeCurrency = typeof ProcessingVolumeCurrency[keyof typeof ProcessingVolumeCurrency];
+
 

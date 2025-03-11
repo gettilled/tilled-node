@@ -124,7 +124,7 @@ export interface Account {
      */
     'settings'?: AccountSettings;
     /**
-     * The status of the account. Only available for merchant accounts.
+     * The status of the account.
      * @type {string}
      * @memberof Account
      */
@@ -155,7 +155,8 @@ export const AccountStatus = {
     STARTED: 'started',
     DISABLED: 'disabled',
     REJECTED: 'rejected',
-    WITHDRAWN: 'withdrawn'
+    WITHDRAWN: 'withdrawn',
+    ONBOARDING: 'onboarding'
 } as const;
 
 export type AccountStatus = typeof AccountStatus[keyof typeof AccountStatus];

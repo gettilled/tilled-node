@@ -127,13 +127,13 @@ export interface BusinessLegalEntity {
      */
     'annual_revenue'?: BusinessLegalEntityAnnualRevenue;
     /**
-     * Average transaction amount, in minor units for Card payments. (e.g. $100.00 = 10000 minor units)
+     * Average transaction amount, in minor units for Card payments (e.g. $100.00 = 10000 minor units). This field is required for merchants with a card or card-present pricing template assigned to them.
      * @type {number}
      * @memberof BusinessLegalEntity
      */
     'average_transaction_amount_card'?: number;
     /**
-     * Average transaction amount, in minor units for Direct Debit payments. (e.g. $100.00 = 10000 minor units)
+     * Average transaction amount, in minor units for Direct Debit payments (e.g. $100.00 = 10000 minor units). This field is required for merchants with a debit pricing template assigned to them.
      * @type {number}
      * @memberof BusinessLegalEntity
      */

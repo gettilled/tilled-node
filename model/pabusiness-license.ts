@@ -13,30 +13,110 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface PABusinessLicense
  */
-export interface AttributesEsignature {
+export interface PABusinessLicense {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The date when the business license will expire.
+     * @type {string}
+     * @memberof PABusinessLicense
      */
-    'document': EsignatureDocument;
+    'expires_at': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The date when the business license was issued.
+     * @type {string}
+     * @memberof PABusinessLicense
      */
-    'signers': Array<EsignatureSigner>;
+    'issued_at': string;
+    /**
+     * The name of the business on the business license.
+     * @type {string}
+     * @memberof PABusinessLicense
+     */
+    'name': string;
+    /**
+     * The US state (2-digit code) in which the business license was issued.
+     * @type {string}
+     * @memberof PABusinessLicense
+     */
+    'state': PABusinessLicenseState;
+    /**
+     * The Document ID of an uploaded [Document](#tag/Documents) of type `file` and subtype `business_license`
+     * @type {string}
+     * @memberof PABusinessLicense
+     */
+    'document_id'?: string;
 }
+
+export const PABusinessLicenseState = {
+    AL: 'AL',
+    AK: 'AK',
+    AS: 'AS',
+    AZ: 'AZ',
+    AR: 'AR',
+    AA: 'AA',
+    AE: 'AE',
+    AP: 'AP',
+    CA: 'CA',
+    CO: 'CO',
+    CT: 'CT',
+    DE: 'DE',
+    DC: 'DC',
+    FL: 'FL',
+    GA: 'GA',
+    GU: 'GU',
+    HI: 'HI',
+    ID: 'ID',
+    IL: 'IL',
+    IN: 'IN',
+    IT: 'IT',
+    IA: 'IA',
+    KS: 'KS',
+    KY: 'KY',
+    LA: 'LA',
+    ME: 'ME',
+    MD: 'MD',
+    MA: 'MA',
+    MI: 'MI',
+    MN: 'MN',
+    MS: 'MS',
+    MO: 'MO',
+    MT: 'MT',
+    NE: 'NE',
+    NV: 'NV',
+    NH: 'NH',
+    NJ: 'NJ',
+    NM: 'NM',
+    NY: 'NY',
+    NC: 'NC',
+    ND: 'ND',
+    MP: 'MP',
+    OH: 'OH',
+    OK: 'OK',
+    OR: 'OR',
+    PW: 'PW',
+    PA: 'PA',
+    PR: 'PR',
+    RI: 'RI',
+    SC: 'SC',
+    SD: 'SD',
+    TN: 'TN',
+    TX: 'TX',
+    VI: 'VI',
+    US: 'US',
+    UT: 'UT',
+    VT: 'VT',
+    VA: 'VA',
+    WA: 'WA',
+    WV: 'WV',
+    WI: 'WI',
+    WY: 'WY'
+} as const;
+
+export type PABusinessLicenseState = typeof PABusinessLicenseState[keyof typeof PABusinessLicenseState];
+
 
