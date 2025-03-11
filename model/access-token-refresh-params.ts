@@ -21,7 +21,7 @@
  */
 export interface AccessTokenRefreshParams {
     /**
-     * The bcrypted refresh token data.
+     * The encrypted refresh token data.
      * @type {string}
      * @memberof AccessTokenRefreshParams
      */

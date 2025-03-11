@@ -280,8 +280,10 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @summary List all Connected Accounts
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
-         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
          * @param {Array<ListConnectedAccountsStatus>} [status] Only return Connected Accounts whose status is included in this array. Examples: &#x60;/v1/accounts/connected?status&#x3D;active,partially_active&#x60; and &#x60;/v1/accounts/connected?status&#x3D;account_review&#x60;.
+         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
+         * @param {Array<ListConnectedAccountsPartnerApplicationStatus>} [partner_application_status] Only return Connected Partner Accounts whose partner application status is included in this array. Examples: &#x60;/v1/accounts/connected?partner_application_status&#x3D;created,started&#x60; and &#x60;/v1/accounts/connected?partner_application_status&#x3D;submitted&#x60;.
+         * @param {Array<ListConnectedAccountsProcessingCapabilities>} [processing_capabilities] Only return Connected Partner Accounts who have an active capability with the specified processing capabilities.  Examples: &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card,debit&#x60; and &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card&#x60;.
          * @param {string} [sort] The sort parameters, value:direction. Possible values: &#x60;name&#x60;, &#x60;created_at&#x60;. Possible directions:  &#x60;asc&#x60;, &#x60;desc&#x60;  For example &#x60;name:asc&#x60;.  Default: &#x60;created_at:desc&#x60;
          * @param {ListConnectedAccountsType} [type] Only return Connected Accounts where the type matches the specified value.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -289,7 +291,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, q?: string, status?: Array<ListConnectedAccountsStatus>, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listConnectedAccounts: async (tilled_account: string, metadata?: { [key: string]: string; }, status?: Array<ListConnectedAccountsStatus>, q?: string, partner_application_status?: Array<ListConnectedAccountsPartnerApplicationStatus>, processing_capabilities?: Array<ListConnectedAccountsProcessingCapabilities>, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listConnectedAccounts', 'tilled_account', tilled_account)
             const localVarPath = `/v1/accounts/connected`;
@@ -317,12 +319,20 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
                 }
             }
 
+            if (status) {
+                localVarQueryParameter['status'] = status;
+            }
+
             if (q !== undefined) {
                 localVarQueryParameter['q'] = q;
             }
 
-            if (status) {
-                localVarQueryParameter['status'] = status;
+            if (partner_application_status) {
+                localVarQueryParameter['partner_application_status'] = partner_application_status;
+            }
+
+            if (processing_capabilities) {
+                localVarQueryParameter['processing_capabilities'] = processing_capabilities;
             }
 
             if (sort !== undefined) {
@@ -543,8 +553,10 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @summary List all Connected Accounts
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {{ [key: string]: string; }} [metadata] &#x60;metadata&#x60; key-value pairs to filter by. Only exact matches on the key-value pair(s) will be returned. Example: &#x60;?metadata[internal_customer_id]&#x3D;7cb1159d-875e-47ae-a309-319fa7ff395b&#x60;.
-         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
          * @param {Array<ListConnectedAccountsStatus>} [status] Only return Connected Accounts whose status is included in this array. Examples: &#x60;/v1/accounts/connected?status&#x3D;active,partially_active&#x60; and &#x60;/v1/accounts/connected?status&#x3D;account_review&#x60;.
+         * @param {string} [q] The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
+         * @param {Array<ListConnectedAccountsPartnerApplicationStatus>} [partner_application_status] Only return Connected Partner Accounts whose partner application status is included in this array. Examples: &#x60;/v1/accounts/connected?partner_application_status&#x3D;created,started&#x60; and &#x60;/v1/accounts/connected?partner_application_status&#x3D;submitted&#x60;.
+         * @param {Array<ListConnectedAccountsProcessingCapabilities>} [processing_capabilities] Only return Connected Partner Accounts who have an active capability with the specified processing capabilities.  Examples: &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card,debit&#x60; and &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card&#x60;.
          * @param {string} [sort] The sort parameters, value:direction. Possible values: &#x60;name&#x60;, &#x60;created_at&#x60;. Possible directions:  &#x60;asc&#x60;, &#x60;desc&#x60;  For example &#x60;name:asc&#x60;.  Default: &#x60;created_at:desc&#x60;
          * @param {ListConnectedAccountsType} [type] Only return Connected Accounts where the type matches the specified value.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -552,8 +564,8 @@ export const AccountsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, q?: string, status?: Array<ListConnectedAccountsStatus>, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedAccounts(tilled_account, metadata, q, status, sort, type, offset, limit, options);
+        async listConnectedAccounts(tilled_account: string, metadata?: { [key: string]: string; }, status?: Array<ListConnectedAccountsStatus>, q?: string, partner_application_status?: Array<ListConnectedAccountsPartnerApplicationStatus>, processing_capabilities?: Array<ListConnectedAccountsProcessingCapabilities>, sort?: string, type?: ListConnectedAccountsType, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListConnectedAccounts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectedAccounts(tilled_account, metadata, status, q, partner_application_status, processing_capabilities, sort, type, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AccountsApi.listConnectedAccounts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -655,7 +667,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListConnectedAccounts200Response> {
-            return localVarFp.listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.status, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.status, requestParameters.q, requestParameters.partner_application_status, requestParameters.processing_capabilities, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates an Account by setting the values of the provided parameters. Any parameters not provided remain unchanged.
@@ -792,6 +804,13 @@ export interface AccountsApiListConnectedAccountsRequest {
     readonly metadata?: { [key: string]: string; }
 
     /**
+     * Only return Connected Accounts whose status is included in this array. Examples: &#x60;/v1/accounts/connected?status&#x3D;active,partially_active&#x60; and &#x60;/v1/accounts/connected?status&#x3D;account_review&#x60;.
+     * @type {Array<'active' | 'requires_pricing' | 'funding_hold' | 'account_review' | 'partially_active' | 'action_required' | 'created' | 'started' | 'disabled' | 'rejected' | 'withdrawn' | 'onboarding'>}
+     * @memberof AccountsApiListConnectedAccounts
+     */
+    readonly status?: Array<ListConnectedAccountsStatus>
+
+    /**
      * The partial search of text fields. Supports searching by &#x60;account.name&#x60;, &#x60;account.business_profile.legal_name&#x60;, &#x60;account.id&#x60;, &#x60;account.email&#x60;, &#x60;user.name&#x60;, &#x60;user.email&#x60;
      * @type {string}
      * @memberof AccountsApiListConnectedAccounts
@@ -799,11 +818,18 @@ export interface AccountsApiListConnectedAccountsRequest {
     readonly q?: string
 
     /**
-     * Only return Connected Accounts whose status is included in this array. Examples: &#x60;/v1/accounts/connected?status&#x3D;active,partially_active&#x60; and &#x60;/v1/accounts/connected?status&#x3D;account_review&#x60;.
-     * @type {Array<'active' | 'requires_pricing' | 'funding_hold' | 'account_review' | 'partially_active' | 'action_required' | 'created' | 'started' | 'disabled' | 'rejected' | 'withdrawn'>}
+     * Only return Connected Partner Accounts whose partner application status is included in this array. Examples: &#x60;/v1/accounts/connected?partner_application_status&#x3D;created,started&#x60; and &#x60;/v1/accounts/connected?partner_application_status&#x3D;submitted&#x60;.
+     * @type {Array<'created' | 'started' | 'submitted'>}
      * @memberof AccountsApiListConnectedAccounts
      */
-    readonly status?: Array<ListConnectedAccountsStatus>
+    readonly partner_application_status?: Array<ListConnectedAccountsPartnerApplicationStatus>
+
+    /**
+     * Only return Connected Partner Accounts who have an active capability with the specified processing capabilities.  Examples: &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card,debit&#x60; and &#x60;/v1/accounts/connected?processing_capabilities&#x3D;card&#x60;.
+     * @type {Array<'card' | 'card_present' | 'debit'>}
+     * @memberof AccountsApiListConnectedAccounts
+     */
+    readonly processing_capabilities?: Array<ListConnectedAccountsProcessingCapabilities>
 
     /**
      * The sort parameters, value:direction. Possible values: &#x60;name&#x60;, &#x60;created_at&#x60;. Possible directions:  &#x60;asc&#x60;, &#x60;desc&#x60;  For example &#x60;name:asc&#x60;.  Default: &#x60;created_at:desc&#x60;
@@ -959,7 +985,7 @@ export class AccountsApi extends BaseAPI {
      * @memberof AccountsApi
      */
     public listConnectedAccounts(requestParameters: AccountsApiListConnectedAccountsRequest, options?: RawAxiosRequestConfig) {
-        return AccountsApiFp(this.configuration).listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.q, requestParameters.status, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return AccountsApiFp(this.configuration).listConnectedAccounts(requestParameters.tilled_account, requestParameters.metadata, requestParameters.status, requestParameters.q, requestParameters.partner_application_status, requestParameters.processing_capabilities, requestParameters.sort, requestParameters.type, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1001,9 +1027,28 @@ export const ListConnectedAccountsStatus = {
     STARTED: 'started',
     DISABLED: 'disabled',
     REJECTED: 'rejected',
-    WITHDRAWN: 'withdrawn'
+    WITHDRAWN: 'withdrawn',
+    ONBOARDING: 'onboarding'
 } as const;
 export type ListConnectedAccountsStatus = typeof ListConnectedAccountsStatus[keyof typeof ListConnectedAccountsStatus];
+/**
+ * @export
+ */
+export const ListConnectedAccountsPartnerApplicationStatus = {
+    CREATED: 'created',
+    STARTED: 'started',
+    SUBMITTED: 'submitted'
+} as const;
+export type ListConnectedAccountsPartnerApplicationStatus = typeof ListConnectedAccountsPartnerApplicationStatus[keyof typeof ListConnectedAccountsPartnerApplicationStatus];
+/**
+ * @export
+ */
+export const ListConnectedAccountsProcessingCapabilities = {
+    CARD: 'card',
+    CARD_PRESENT: 'card_present',
+    DEBIT: 'debit'
+} as const;
+export type ListConnectedAccountsProcessingCapabilities = typeof ListConnectedAccountsProcessingCapabilities[keyof typeof ListConnectedAccountsProcessingCapabilities];
 /**
  * @export
  */

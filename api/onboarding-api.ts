@@ -22,9 +22,25 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { EsignatureSigner } from '../model';
+// @ts-ignore
+import type { MccDescription } from '../model';
+// @ts-ignore
 import type { MerchantApplication } from '../model';
 // @ts-ignore
 import type { MerchantApplicationCreateParams } from '../model';
+// @ts-ignore
+import type { OnboardingApplication } from '../model';
+// @ts-ignore
+import type { OnboardingApplicationCreateParams } from '../model';
+// @ts-ignore
+import type { RegenerateSigningLinksParams } from '../model';
+// @ts-ignore
+import type { SigningLink } from '../model';
+// @ts-ignore
+import type { SubmitApplicationParams } from '../model';
+// @ts-ignore
+import type { SubmitApplicationResponse } from '../model';
 /**
  * OnboardingApi - axios parameter creator
  * @export
@@ -32,10 +48,107 @@ import type { MerchantApplicationCreateParams } from '../model';
 export const OnboardingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Retrieves an Esignature Signer.
+         * @summary Get Esignature Signer
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} id 
+         * @param {string} document_id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEsignatureSigner: async (tilled_account: string, id: string, document_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('getEsignatureSigner', 'tilled_account', tilled_account)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getEsignatureSigner', 'id', id)
+            // verify required parameter 'document_id' is not null or undefined
+            assertParamExists('getEsignatureSigner', 'document_id', document_id)
+            const localVarPath = `/v1/onboarding/esignature/{document_id}/signer/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"document_id"}}`, encodeURIComponent(String(document_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieves descriptions for all valid merchant category codes (MCC).
+         * @summary Get MCC Descriptions
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMccDescriptions: async (tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('getMccDescriptions', 'tilled_account', tilled_account)
+            const localVarPath = `/v1/onboarding/mcc`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieves the details of an existing merchant application. The application can only be accessed if its status is `created` or `started`. Once the application is `submitted` or `active`, it is no longer accessible.
          * @summary Get a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getMerchantApplication: async (account_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -66,10 +179,157 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Retrieves an onboarding application.
+         * @summary Get an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOnboardingApplication: async (tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('getOnboardingApplication', 'tilled_account', tilled_account)
+            const localVarPath = `/v1/onboarding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of Signing Links if the merchant signature has not been acquired yet.
+         * @summary Regenerate Signing Links
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {RegenerateSigningLinksParams} RegenerateSigningLinksParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateSigningLinks: async (tilled_account: string, RegenerateSigningLinksParams: RegenerateSigningLinksParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('regenerateSigningLinks', 'tilled_account', tilled_account)
+            // verify required parameter 'RegenerateSigningLinksParams' is not null or undefined
+            assertParamExists('regenerateSigningLinks', 'RegenerateSigningLinksParams', RegenerateSigningLinksParams)
+            const localVarPath = `/v1/onboarding/signing-links`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(RegenerateSigningLinksParams, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resend an Esignature Document email to a specific Esignature Signer.
+         * @summary Resend Esignature Document email
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} id 
+         * @param {string} document_id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resendEsignatureDocumentEmail: async (tilled_account: string, id: string, document_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('resendEsignatureDocumentEmail', 'tilled_account', tilled_account)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('resendEsignatureDocumentEmail', 'id', id)
+            // verify required parameter 'document_id' is not null or undefined
+            assertParamExists('resendEsignatureDocumentEmail', 'document_id', document_id)
+            const localVarPath = `/v1/onboarding/esignature/{document_id}/signer/{id}/resend`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"document_id"}}`, encodeURIComponent(String(document_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Submits a merchant application for processing. If there are any validation errors, they must be corrected before re-submitting. Once successfully submitted, the application is no longer accessible.
          * @summary Submit a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         submitMerchantApplication: async (account_id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -100,11 +360,62 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
+         * Submits an onboarding application to be processed. If any validation errors exist, they must be corrected before re-submitting. Returns an array of Signing Links if a merchant signature is required.
+         * @summary Submit an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {SubmitApplicationParams} SubmitApplicationParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        submitOnboardingApplication: async (tilled_account: string, SubmitApplicationParams: SubmitApplicationParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('submitOnboardingApplication', 'tilled_account', tilled_account)
+            // verify required parameter 'SubmitApplicationParams' is not null or undefined
+            assertParamExists('submitOnboardingApplication', 'SubmitApplicationParams', SubmitApplicationParams)
+            const localVarPath = `/v1/onboarding/submit`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SubmitApplicationParams, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Updates a merchant application by overwriting all properties.
          * @summary Update a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {MerchantApplicationCreateParams} MerchantApplicationCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateMerchantApplication: async (account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -139,6 +450,56 @@ export const OnboardingApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Updates an onboarding application by overwriting all properties. You must pass the entire payload each time.
+         * @summary Update an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {OnboardingApplicationCreateParams} OnboardingApplicationCreateParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOnboardingApplication: async (tilled_account: string, OnboardingApplicationCreateParams: OnboardingApplicationCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('updateOnboardingApplication', 'tilled_account', tilled_account)
+            // verify required parameter 'OnboardingApplicationCreateParams' is not null or undefined
+            assertParamExists('updateOnboardingApplication', 'OnboardingApplicationCreateParams', OnboardingApplicationCreateParams)
+            const localVarPath = `/v1/onboarding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(OnboardingApplicationCreateParams, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -150,10 +511,39 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OnboardingApiAxiosParamCreator(configuration)
     return {
         /**
+         * Retrieves an Esignature Signer.
+         * @summary Get Esignature Signer
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} id 
+         * @param {string} document_id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEsignatureSigner(tilled_account: string, id: string, document_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EsignatureSigner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEsignatureSigner(tilled_account, id, document_id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.getEsignatureSigner']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieves descriptions for all valid merchant category codes (MCC).
+         * @summary Get MCC Descriptions
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMccDescriptions(tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MccDescription>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMccDescriptions(tilled_account, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.getMccDescriptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieves the details of an existing merchant application. The application can only be accessed if its status is `created` or `started`. Once the application is `submitted` or `active`, it is no longer accessible.
          * @summary Get a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getMerchantApplication(account_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
@@ -163,10 +553,53 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieves an onboarding application.
+         * @summary Get an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOnboardingApplication(tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OnboardingApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOnboardingApplication(tilled_account, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.getOnboardingApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns an array of Signing Links if the merchant signature has not been acquired yet.
+         * @summary Regenerate Signing Links
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {RegenerateSigningLinksParams} RegenerateSigningLinksParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async regenerateSigningLinks(tilled_account: string, RegenerateSigningLinksParams: RegenerateSigningLinksParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SigningLink>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.regenerateSigningLinks(tilled_account, RegenerateSigningLinksParams, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.regenerateSigningLinks']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resend an Esignature Document email to a specific Esignature Signer.
+         * @summary Resend Esignature Document email
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} id 
+         * @param {string} document_id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async resendEsignatureDocumentEmail(tilled_account: string, id: string, document_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resendEsignatureDocumentEmail(tilled_account, id, document_id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.resendEsignatureDocumentEmail']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Submits a merchant application for processing. If there are any validation errors, they must be corrected before re-submitting. Once successfully submitted, the application is no longer accessible.
          * @summary Submit a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async submitMerchantApplication(account_id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
@@ -176,17 +609,46 @@ export const OnboardingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Submits an onboarding application to be processed. If any validation errors exist, they must be corrected before re-submitting. Returns an array of Signing Links if a merchant signature is required.
+         * @summary Submit an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {SubmitApplicationParams} SubmitApplicationParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async submitOnboardingApplication(tilled_account: string, SubmitApplicationParams: SubmitApplicationParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubmitApplicationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.submitOnboardingApplication(tilled_account, SubmitApplicationParams, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.submitOnboardingApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Updates a merchant application by overwriting all properties.
          * @summary Update a Merchant Application
          * @param {string} account_id The id of the associated connected (i.e. merchant) account.
          * @param {MerchantApplicationCreateParams} MerchantApplicationCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateMerchantApplication(account_id: string, MerchantApplicationCreateParams: MerchantApplicationCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MerchantApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMerchantApplication(account_id, MerchantApplicationCreateParams, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OnboardingApi.updateMerchantApplication']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates an onboarding application by overwriting all properties. You must pass the entire payload each time.
+         * @summary Update an Onboarding Application
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {OnboardingApplicationCreateParams} OnboardingApplicationCreateParams 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateOnboardingApplication(tilled_account: string, OnboardingApplicationCreateParams: OnboardingApplicationCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OnboardingApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateOnboardingApplication(tilled_account, OnboardingApplicationCreateParams, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OnboardingApi.updateOnboardingApplication']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -200,37 +662,152 @@ export const OnboardingApiFactory = function (configuration?: Configuration, bas
     const localVarFp = OnboardingApiFp(configuration)
     return {
         /**
+         * Retrieves an Esignature Signer.
+         * @summary Get Esignature Signer
+         * @param {OnboardingApiGetEsignatureSignerRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEsignatureSigner(requestParameters: OnboardingApiGetEsignatureSignerRequest, options?: RawAxiosRequestConfig): AxiosPromise<EsignatureSigner> {
+            return localVarFp.getEsignatureSigner(requestParameters.tilled_account, requestParameters.id, requestParameters.document_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieves descriptions for all valid merchant category codes (MCC).
+         * @summary Get MCC Descriptions
+         * @param {OnboardingApiGetMccDescriptionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMccDescriptions(requestParameters: OnboardingApiGetMccDescriptionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<MccDescription>> {
+            return localVarFp.getMccDescriptions(requestParameters.tilled_account, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves the details of an existing merchant application. The application can only be accessed if its status is `created` or `started`. Once the application is `submitted` or `active`, it is no longer accessible.
          * @summary Get a Merchant Application
          * @param {OnboardingApiGetMerchantApplicationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getMerchantApplication(requestParameters: OnboardingApiGetMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<MerchantApplication> {
             return localVarFp.getMerchantApplication(requestParameters.account_id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieves an onboarding application.
+         * @summary Get an Onboarding Application
+         * @param {OnboardingApiGetOnboardingApplicationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOnboardingApplication(requestParameters: OnboardingApiGetOnboardingApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<OnboardingApplication> {
+            return localVarFp.getOnboardingApplication(requestParameters.tilled_account, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns an array of Signing Links if the merchant signature has not been acquired yet.
+         * @summary Regenerate Signing Links
+         * @param {OnboardingApiRegenerateSigningLinksRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        regenerateSigningLinks(requestParameters: OnboardingApiRegenerateSigningLinksRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<SigningLink>> {
+            return localVarFp.regenerateSigningLinks(requestParameters.tilled_account, requestParameters.RegenerateSigningLinksParams, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resend an Esignature Document email to a specific Esignature Signer.
+         * @summary Resend Esignature Document email
+         * @param {OnboardingApiResendEsignatureDocumentEmailRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resendEsignatureDocumentEmail(requestParameters: OnboardingApiResendEsignatureDocumentEmailRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.resendEsignatureDocumentEmail(requestParameters.tilled_account, requestParameters.id, requestParameters.document_id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Submits a merchant application for processing. If there are any validation errors, they must be corrected before re-submitting. Once successfully submitted, the application is no longer accessible.
          * @summary Submit a Merchant Application
          * @param {OnboardingApiSubmitMerchantApplicationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         submitMerchantApplication(requestParameters: OnboardingApiSubmitMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.submitMerchantApplication(requestParameters.account_id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Submits an onboarding application to be processed. If any validation errors exist, they must be corrected before re-submitting. Returns an array of Signing Links if a merchant signature is required.
+         * @summary Submit an Onboarding Application
+         * @param {OnboardingApiSubmitOnboardingApplicationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        submitOnboardingApplication(requestParameters: OnboardingApiSubmitOnboardingApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<SubmitApplicationResponse> {
+            return localVarFp.submitOnboardingApplication(requestParameters.tilled_account, requestParameters.SubmitApplicationParams, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Updates a merchant application by overwriting all properties.
          * @summary Update a Merchant Application
          * @param {OnboardingApiUpdateMerchantApplicationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<MerchantApplication> {
             return localVarFp.updateMerchantApplication(requestParameters.account_id, requestParameters.MerchantApplicationCreateParams, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Updates an onboarding application by overwriting all properties. You must pass the entire payload each time.
+         * @summary Update an Onboarding Application
+         * @param {OnboardingApiUpdateOnboardingApplicationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOnboardingApplication(requestParameters: OnboardingApiUpdateOnboardingApplicationRequest, options?: RawAxiosRequestConfig): AxiosPromise<OnboardingApplication> {
+            return localVarFp.updateOnboardingApplication(requestParameters.tilled_account, requestParameters.OnboardingApplicationCreateParams, options).then((request) => request(axios, basePath));
+        },
     };
 };
+
+/**
+ * Request parameters for getEsignatureSigner operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiGetEsignatureSignerRequest
+ */
+export interface OnboardingApiGetEsignatureSignerRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiGetEsignatureSigner
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OnboardingApiGetEsignatureSigner
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OnboardingApiGetEsignatureSigner
+     */
+    readonly document_id: string
+}
+
+/**
+ * Request parameters for getMccDescriptions operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiGetMccDescriptionsRequest
+ */
+export interface OnboardingApiGetMccDescriptionsRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiGetMccDescriptions
+     */
+    readonly tilled_account: string
+}
 
 /**
  * Request parameters for getMerchantApplication operation in OnboardingApi.
@@ -247,6 +824,69 @@ export interface OnboardingApiGetMerchantApplicationRequest {
 }
 
 /**
+ * Request parameters for getOnboardingApplication operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiGetOnboardingApplicationRequest
+ */
+export interface OnboardingApiGetOnboardingApplicationRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiGetOnboardingApplication
+     */
+    readonly tilled_account: string
+}
+
+/**
+ * Request parameters for regenerateSigningLinks operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiRegenerateSigningLinksRequest
+ */
+export interface OnboardingApiRegenerateSigningLinksRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiRegenerateSigningLinks
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {RegenerateSigningLinksParams}
+     * @memberof OnboardingApiRegenerateSigningLinks
+     */
+    readonly RegenerateSigningLinksParams: RegenerateSigningLinksParams
+}
+
+/**
+ * Request parameters for resendEsignatureDocumentEmail operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiResendEsignatureDocumentEmailRequest
+ */
+export interface OnboardingApiResendEsignatureDocumentEmailRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiResendEsignatureDocumentEmail
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OnboardingApiResendEsignatureDocumentEmail
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OnboardingApiResendEsignatureDocumentEmail
+     */
+    readonly document_id: string
+}
+
+/**
  * Request parameters for submitMerchantApplication operation in OnboardingApi.
  * @export
  * @interface OnboardingApiSubmitMerchantApplicationRequest
@@ -258,6 +898,27 @@ export interface OnboardingApiSubmitMerchantApplicationRequest {
      * @memberof OnboardingApiSubmitMerchantApplication
      */
     readonly account_id: string
+}
+
+/**
+ * Request parameters for submitOnboardingApplication operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiSubmitOnboardingApplicationRequest
+ */
+export interface OnboardingApiSubmitOnboardingApplicationRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiSubmitOnboardingApplication
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {SubmitApplicationParams}
+     * @memberof OnboardingApiSubmitOnboardingApplication
+     */
+    readonly SubmitApplicationParams: SubmitApplicationParams
 }
 
 /**
@@ -282,6 +943,27 @@ export interface OnboardingApiUpdateMerchantApplicationRequest {
 }
 
 /**
+ * Request parameters for updateOnboardingApplication operation in OnboardingApi.
+ * @export
+ * @interface OnboardingApiUpdateOnboardingApplicationRequest
+ */
+export interface OnboardingApiUpdateOnboardingApplicationRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof OnboardingApiUpdateOnboardingApplication
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {OnboardingApplicationCreateParams}
+     * @memberof OnboardingApiUpdateOnboardingApplication
+     */
+    readonly OnboardingApplicationCreateParams: OnboardingApplicationCreateParams
+}
+
+/**
  * OnboardingApi - object-oriented interface
  * @export
  * @class OnboardingApi
@@ -289,10 +971,35 @@ export interface OnboardingApiUpdateMerchantApplicationRequest {
  */
 export class OnboardingApi extends BaseAPI {
     /**
+     * Retrieves an Esignature Signer.
+     * @summary Get Esignature Signer
+     * @param {OnboardingApiGetEsignatureSignerRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public getEsignatureSigner(requestParameters: OnboardingApiGetEsignatureSignerRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).getEsignatureSigner(requestParameters.tilled_account, requestParameters.id, requestParameters.document_id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieves descriptions for all valid merchant category codes (MCC).
+     * @summary Get MCC Descriptions
+     * @param {OnboardingApiGetMccDescriptionsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public getMccDescriptions(requestParameters: OnboardingApiGetMccDescriptionsRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).getMccDescriptions(requestParameters.tilled_account, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Retrieves the details of an existing merchant application. The application can only be accessed if its status is `created` or `started`. Once the application is `submitted` or `active`, it is no longer accessible.
      * @summary Get a Merchant Application
      * @param {OnboardingApiGetMerchantApplicationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
@@ -301,10 +1008,47 @@ export class OnboardingApi extends BaseAPI {
     }
 
     /**
+     * Retrieves an onboarding application.
+     * @summary Get an Onboarding Application
+     * @param {OnboardingApiGetOnboardingApplicationRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public getOnboardingApplication(requestParameters: OnboardingApiGetOnboardingApplicationRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).getOnboardingApplication(requestParameters.tilled_account, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns an array of Signing Links if the merchant signature has not been acquired yet.
+     * @summary Regenerate Signing Links
+     * @param {OnboardingApiRegenerateSigningLinksRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public regenerateSigningLinks(requestParameters: OnboardingApiRegenerateSigningLinksRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).regenerateSigningLinks(requestParameters.tilled_account, requestParameters.RegenerateSigningLinksParams, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resend an Esignature Document email to a specific Esignature Signer.
+     * @summary Resend Esignature Document email
+     * @param {OnboardingApiResendEsignatureDocumentEmailRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public resendEsignatureDocumentEmail(requestParameters: OnboardingApiResendEsignatureDocumentEmailRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).resendEsignatureDocumentEmail(requestParameters.tilled_account, requestParameters.id, requestParameters.document_id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Submits a merchant application for processing. If there are any validation errors, they must be corrected before re-submitting. Once successfully submitted, the application is no longer accessible.
      * @summary Submit a Merchant Application
      * @param {OnboardingApiSubmitMerchantApplicationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
@@ -313,15 +1057,40 @@ export class OnboardingApi extends BaseAPI {
     }
 
     /**
+     * Submits an onboarding application to be processed. If any validation errors exist, they must be corrected before re-submitting. Returns an array of Signing Links if a merchant signature is required.
+     * @summary Submit an Onboarding Application
+     * @param {OnboardingApiSubmitOnboardingApplicationRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public submitOnboardingApplication(requestParameters: OnboardingApiSubmitOnboardingApplicationRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).submitOnboardingApplication(requestParameters.tilled_account, requestParameters.SubmitApplicationParams, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Updates a merchant application by overwriting all properties.
      * @summary Update a Merchant Application
      * @param {OnboardingApiUpdateMerchantApplicationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof OnboardingApi
      */
     public updateMerchantApplication(requestParameters: OnboardingApiUpdateMerchantApplicationRequest, options?: RawAxiosRequestConfig) {
         return OnboardingApiFp(this.configuration).updateMerchantApplication(requestParameters.account_id, requestParameters.MerchantApplicationCreateParams, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates an onboarding application by overwriting all properties. You must pass the entire payload each time.
+     * @summary Update an Onboarding Application
+     * @param {OnboardingApiUpdateOnboardingApplicationRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OnboardingApi
+     */
+    public updateOnboardingApplication(requestParameters: OnboardingApiUpdateOnboardingApplicationRequest, options?: RawAxiosRequestConfig) {
+        return OnboardingApiFp(this.configuration).updateOnboardingApplication(requestParameters.tilled_account, requestParameters.OnboardingApplicationCreateParams, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

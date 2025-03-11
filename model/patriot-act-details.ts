@@ -15,28 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
+import type { PAArticlesOfIncorporation } from './paarticles-of-incorporation';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
+import type { PABusinessLicense } from './pabusiness-license';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface PatriotActDetails
  */
-export interface AttributesEsignature {
+export interface PatriotActDetails {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The details of the business Articles of Incorporation document.
+     * @type {PAArticlesOfIncorporation}
+     * @memberof PatriotActDetails
      */
-    'document': EsignatureDocument;
+    'articles_of_incorporation'?: PAArticlesOfIncorporation;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The details of the government issued business license document.
+     * @type {PABusinessLicense}
+     * @memberof PatriotActDetails
      */
-    'signers': Array<EsignatureSigner>;
+    'business_license'?: PABusinessLicense;
 }
 

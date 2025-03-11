@@ -89,6 +89,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getTerminalStatus: async (tilled_account: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -300,6 +301,7 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getTerminalStatus(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalReaderConnectionStatus>> {
@@ -368,6 +370,7 @@ export const TerminalReadersApiFactory = function (configuration?: Configuration
          * @summary Get a Terminal Reader status
          * @param {TerminalReadersApiGetTerminalStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getTerminalStatus(requestParameters: TerminalReadersApiGetTerminalStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<TerminalReaderConnectionStatus> {
@@ -553,6 +556,7 @@ export class TerminalReadersApi extends BaseAPI {
      * @summary Get a Terminal Reader status
      * @param {TerminalReadersApiGetTerminalStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TerminalReadersApi
      */

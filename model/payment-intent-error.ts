@@ -41,6 +41,7 @@ export interface PaymentIntentError {
 }
 
 export const PaymentIntentErrorCode = {
+    PARTIAL_AUTHORIZATION: 'partial_authorization',
     ACCOUNT_CLOSED: 'account_closed',
     ACCOUNT_FROZEN: 'account_frozen',
     ACCOUNT_NUMBER_INVALID: 'account_number_invalid',

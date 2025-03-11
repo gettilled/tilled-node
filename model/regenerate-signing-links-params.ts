@@ -13,30 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface RegenerateSigningLinksParams
  */
-export interface AttributesEsignature {
+export interface RegenerateSigningLinksParams {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The unique identifier for the merchant application. This is optional and will default to the most recent application if not provided.
+     * @type {string}
+     * @memberof RegenerateSigningLinksParams
      */
-    'document': EsignatureDocument;
+    'application_id'?: string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The redirect URL to send the merchant to after signing the application. This is optional and will default to the application\'s redirect URL if not provided.
+     * @type {string}
+     * @memberof RegenerateSigningLinksParams
      */
-    'signers': Array<EsignatureSigner>;
+    'redirect_url'?: string;
 }
 

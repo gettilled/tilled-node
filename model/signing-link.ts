@@ -13,30 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface SigningLink
  */
-export interface AttributesEsignature {
+export interface SigningLink {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The time at which the Signing Link was generated.
+     * @type {string}
+     * @memberof SigningLink
      */
-    'document': EsignatureDocument;
+    'created_at'?: string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * The URL to sign the merchant application.
+     * @type {string}
+     * @memberof SigningLink
      */
-    'signers': Array<EsignatureSigner>;
+    'url'?: string;
 }
 

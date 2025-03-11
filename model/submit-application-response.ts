@@ -15,28 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
+import type { SigningLink } from './signing-link';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface SubmitApplicationResponse
  */
-export interface AttributesEsignature {
+export interface SubmitApplicationResponse {
     /**
      * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * @type {Array<SigningLink>}
+     * @memberof SubmitApplicationResponse
      */
-    'document': EsignatureDocument;
-    /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
-     */
-    'signers': Array<EsignatureSigner>;
+    'signing_links': Array<SigningLink>;
 }
 

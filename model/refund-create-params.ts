@@ -39,7 +39,7 @@ export interface RefundCreateParams {
      */
     'metadata'?: { [key: string]: string; };
     /**
-     * String indicating the reason for the refund. If set, possible values are `duplicate`, `fraudulent`, and `requested_by_customer`.
+     * String indicating the reason for the refund. If set, possible values are `duplicate`, `fraudulent`, and `requested_by_customer`. Providing a refund reason is recommended to reduce the need for merchant contact in the event of a risk inquiry.
      * @type {string}
      * @memberof RefundCreateParams
      */

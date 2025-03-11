@@ -13,30 +13,57 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface EsignatureSigner
  */
-export interface AttributesEsignature {
+export interface EsignatureSigner {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The email of the Esignature Signer.
+     * @type {string}
+     * @memberof EsignatureSigner
      */
-    'document': EsignatureDocument;
+    'email': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * Whether or not the Esignature Signer is signing an embedded document (other Esignature Signers will sign via email).
+     * @type {boolean}
+     * @memberof EsignatureSigner
      */
-    'signers': Array<EsignatureSigner>;
+    'embedded': boolean;
+    /**
+     * Unique identifier for corresponding Esignature Document of the Esignature Signer.
+     * @type {string}
+     * @memberof EsignatureSigner
+     */
+    'esignature_document_id': string;
+    /**
+     * Unique identifier for the object.
+     * @type {string}
+     * @memberof EsignatureSigner
+     */
+    'id': string;
+    /**
+     * The name of the Esignature Signer.
+     * @type {string}
+     * @memberof EsignatureSigner
+     */
+    'name': string;
+    /**
+     * The status of the Esignature Signer.
+     * @type {string}
+     * @memberof EsignatureSigner
+     */
+    'status': EsignatureSignerStatus;
 }
+
+export const EsignatureSignerStatus = {
+    SENT: 'sent',
+    VIEWED: 'viewed',
+    COMPLETED: 'completed'
+} as const;
+
+export type EsignatureSignerStatus = typeof EsignatureSignerStatus[keyof typeof EsignatureSignerStatus];
+
 

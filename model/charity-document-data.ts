@@ -13,30 +13,32 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface CharityDocumentData
  */
-export interface AttributesEsignature {
+export interface CharityDocumentData {
+    /**
+     * The ID of the document requested for the 501c3 documentation.
+     * @type {string}
+     * @memberof CharityDocumentData
+     */
+    'document_id': string;
     /**
      * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * @type {string}
+     * @memberof CharityDocumentData
      */
-    'document': EsignatureDocument;
-    /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
-     */
-    'signers': Array<EsignatureSigner>;
+    'status': CharityDocumentDataStatus;
 }
+
+export const CharityDocumentDataStatus = {
+    SUBMITTED: 'submitted',
+    VERIFIED: 'verified'
+} as const;
+
+export type CharityDocumentDataStatus = typeof CharityDocumentDataStatus[keyof typeof CharityDocumentDataStatus];
+
 

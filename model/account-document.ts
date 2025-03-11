@@ -50,6 +50,12 @@ export interface AccountDocument {
      * @memberof AccountDocument
      */
     'requestNotes'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountDocument
+     */
+    'respond_by'?: string;
 }
 
 export const AccountDocumentStatus = {

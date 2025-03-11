@@ -13,30 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface MccDescription
  */
-export interface AttributesEsignature {
+export interface MccDescription {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * The 4-digit merchant category code for the business. MCCs are used to classify businesses based on the goods or services they provide.
+     * @type {string}
+     * @memberof MccDescription
      */
-    'document': EsignatureDocument;
+    'code': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * A description of the merchant category code.
+     * @type {string}
+     * @memberof MccDescription
      */
-    'signers': Array<EsignatureSigner>;
+    'description': string;
+    /**
+     * The same 4-digit MCC as the `code` field, to be passed into the API.
+     * @type {string}
+     * @memberof MccDescription
+     */
+    'enum': string;
 }
 

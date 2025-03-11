@@ -13,30 +13,48 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureDocument } from './esignature-document';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EsignatureSigner } from './esignature-signer';
 
 /**
  * 
  * @export
- * @interface AttributesEsignature
+ * @interface OnboardingAddress
  */
-export interface AttributesEsignature {
+export interface OnboardingAddress {
     /**
-     * 
-     * @type {EsignatureDocument}
-     * @memberof AttributesEsignature
+     * City, district, suburb, town, or village.
+     * @type {string}
+     * @memberof OnboardingAddress
      */
-    'document': EsignatureDocument;
+    'city': string;
     /**
-     * 
-     * @type {Array<EsignatureSigner>}
-     * @memberof AttributesEsignature
+     * 2-digit Country code (e.g. \'US\', \'CA\') [See ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+     * @type {string}
+     * @memberof OnboardingAddress
      */
-    'signers': Array<EsignatureSigner>;
+    'country': string;
+    /**
+     * Zip code or postal code of the address. No special characters.
+     * @type {string}
+     * @memberof OnboardingAddress
+     */
+    'postal_code': string;
+    /**
+     * State/province/region of the address. For US and CA use 2-digit state/province codes (e.g. \'AL\', \'AK\', \'BC\', \'ON\', \'etc\'.)
+     * @type {string}
+     * @memberof OnboardingAddress
+     */
+    'state': string;
+    /**
+     * Address line 1 (Street address, P.O. boxes are not accepted).
+     * @type {string}
+     * @memberof OnboardingAddress
+     */
+    'street': string;
+    /**
+     * Address line 2 (e.g., apartment, suite, unit, or building).
+     * @type {string}
+     * @memberof OnboardingAddress
+     */
+    'street2'?: string;
 }
 
