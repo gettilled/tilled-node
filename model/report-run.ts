@@ -90,6 +90,7 @@ export const ReportRunType = {
     PAYMENTS_SUMMARY_1: 'payments_summary_1',
     PAYOUTS_SUMMARY_1: 'payouts_summary_1',
     PAYOUTS_SUMMARY_2: 'payouts_summary_2',
+    PAYOUTS_DETAIL_1: 'payouts_detail_1',
     FEES_SUMMARY_1: 'fees_summary_1',
     PROCESSING_SUMMARY_1: 'processing_summary_1',
     DISPUTES_SUMMARY_1: 'disputes_summary_1',
