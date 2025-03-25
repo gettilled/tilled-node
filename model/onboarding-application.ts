@@ -57,6 +57,12 @@ export interface OnboardingApplication {
      */
     'bank_verification'?: OnboardingBankVerification;
     /**
+     * Canadian merchants only. If set to true, the merchant opts into processing visa and mastercard.
+     * @type {boolean}
+     * @memberof OnboardingApplication
+     */
+    'canada_visa_mc_processing'?: boolean;
+    /**
      * Links to terms and conditions for a merchant application.
      * @type {Array<TermsAndConditionsDetail>}
      * @memberof OnboardingApplication

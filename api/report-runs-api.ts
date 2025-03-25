@@ -366,7 +366,7 @@ export interface ReportRunsApiListReportRunsRequest {
 
     /**
      * Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
-     * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'payouts_detail_1' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1'>}
+     * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'payouts_detail_1' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1' | 'interchange_detail_2'>}
      * @memberof ReportRunsApiListReportRuns
      */
     readonly type?: Array<ListReportRunsType>
@@ -448,7 +448,8 @@ export const ListReportRunsType = {
     FEES_SUMMARY_1: 'fees_summary_1',
     PROCESSING_SUMMARY_1: 'processing_summary_1',
     DISPUTES_SUMMARY_1: 'disputes_summary_1',
-    INTERCHANGE_DETAIL_1: 'interchange_detail_1'
+    INTERCHANGE_DETAIL_1: 'interchange_detail_1',
+    INTERCHANGE_DETAIL_2: 'interchange_detail_2'
 } as const;
 export type ListReportRunsType = typeof ListReportRunsType[keyof typeof ListReportRunsType];
 /**

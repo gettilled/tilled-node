@@ -144,6 +144,12 @@ export interface Charge {
      * @memberof Charge
      */
     'platform_fee'?: PlatformFee;
+    /**
+     * Indicates whether the transaction was external.
+     * @type {string}
+     * @memberof Charge
+     */
+    'source_type'?: ChargeSourceType;
 }
 
 export const ChargeStatus = {
@@ -285,5 +291,10 @@ export const ChargeFailureCode = {
 } as const;
 
 export type ChargeFailureCode = typeof ChargeFailureCode[keyof typeof ChargeFailureCode];
+export const ChargeSourceType = {
+    EXTERNAL: 'external'
+} as const;
+
+export type ChargeSourceType = typeof ChargeSourceType[keyof typeof ChargeSourceType];
 
 

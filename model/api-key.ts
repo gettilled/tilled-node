@@ -118,6 +118,8 @@ export const ApiKeyScopes = {
     REFUNDSWRITE: 'refunds:write',
     REPORT_RUNSREAD: 'report_runs:read',
     REPORT_RUNSWRITE: 'report_runs:write',
+    REQUEST_LOGSREAD: 'request_logs:read',
+    STATEMENTSREAD: 'statements:read',
     SUBSCRIPTIONSREAD: 'subscriptions:read',
     SUBSCRIPTIONSWRITE: 'subscriptions:write',
     TERMINAL_READERSREAD: 'terminal_readers:read',
