@@ -273,7 +273,7 @@ export const APIKeysApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAPIKey(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async deleteAPIKey(tilled_account: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAPIKey(tilled_account, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['APIKeysApi.deleteAPIKey']?.[localVarOperationServerIndex]?.url;
@@ -336,7 +336,7 @@ export const APIKeysApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+        deleteAPIKey(requestParameters: APIKeysApiDeleteAPIKeyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteAPIKey(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**

@@ -35,5 +35,11 @@ export interface OnboardingApplicationCreateParams {
      * @memberof OnboardingApplicationCreateParams
      */
     'tos_acceptance': boolean;
+    /**
+     * Canadian merchants only. If set to true, the merchant opts into processing visa and mastercard.
+     * @type {boolean}
+     * @memberof OnboardingApplicationCreateParams
+     */
+    'canada_visa_mc_processing'?: boolean;
 }
 

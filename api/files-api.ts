@@ -559,7 +559,7 @@ export interface FilesApiListFilesRequest {
 
     /**
      * A list of file purposes to filter on.
-     * @type {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet'>}
+     * @type {Array<'logo' | 'icon' | 'dispute_evidence' | 'onboarding_documentation' | 'isv_cover_sheet' | 'statement'>}
      * @memberof FilesApiListFiles
      */
     readonly purposes?: Array<ListFilesPurposes>
@@ -655,7 +655,8 @@ export const CreateFilePurpose = {
     ICON: 'icon',
     DISPUTE_EVIDENCE: 'dispute_evidence',
     ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
-    ISV_COVER_SHEET: 'isv_cover_sheet'
+    ISV_COVER_SHEET: 'isv_cover_sheet',
+    STATEMENT: 'statement'
 } as const;
 export type CreateFilePurpose = typeof CreateFilePurpose[keyof typeof CreateFilePurpose];
 /**
@@ -666,6 +667,7 @@ export const ListFilesPurposes = {
     ICON: 'icon',
     DISPUTE_EVIDENCE: 'dispute_evidence',
     ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
-    ISV_COVER_SHEET: 'isv_cover_sheet'
+    ISV_COVER_SHEET: 'isv_cover_sheet',
+    STATEMENT: 'statement'
 } as const;
 export type ListFilesPurposes = typeof ListFilesPurposes[keyof typeof ListFilesPurposes];

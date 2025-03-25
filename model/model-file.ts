@@ -89,7 +89,8 @@ export const ModelFilePurpose = {
     REPORT: 'report',
     DISPUTE_EVIDENCE: 'dispute_evidence',
     ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
-    ISV_COVER_SHEET: 'isv_cover_sheet'
+    ISV_COVER_SHEET: 'isv_cover_sheet',
+    STATEMENT: 'statement'
 } as const;
 
 export type ModelFilePurpose = typeof ModelFilePurpose[keyof typeof ModelFilePurpose];
@@ -99,7 +100,9 @@ export const ModelFileType = {
     PDF: 'pdf',
     CSV: 'csv',
     TIFF: 'tiff',
-    ICO: 'ico'
+    ICO: 'ico',
+    XLSX: 'xlsx',
+    XLS: 'xls'
 } as const;
 
 export type ModelFileType = typeof ModelFileType[keyof typeof ModelFileType];
