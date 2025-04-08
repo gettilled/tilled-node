@@ -86,7 +86,8 @@ export const WebhookEndpointUpdateParamsEnabledEvents = {
     OUTBOUND_TRANSFER_PENDING: 'outbound_transfer.pending',
     OUTBOUND_TRANSFER_FAILED: 'outbound_transfer.failed',
     OUTBOUND_TRANSFER_CANCELED: 'outbound_transfer.canceled',
-    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded'
+    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded',
+    INDEPENDENT_CREDIT_SUCCEEDED: 'independent_credit.succeeded'
 } as const;
 
 export type WebhookEndpointUpdateParamsEnabledEvents = typeof WebhookEndpointUpdateParamsEnabledEvents[keyof typeof WebhookEndpointUpdateParamsEnabledEvents];

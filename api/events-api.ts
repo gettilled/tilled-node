@@ -83,8 +83,8 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
          * Returns a list of Events from the past 30 days. The Events are sorted with the most recently created appearing first.
          * @summary List all Events
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
+         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive). Default is 30 days in the past.
+         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Default is current date.
          * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -185,8 +185,8 @@ export const EventsApiFp = function(configuration?: Configuration) {
          * Returns a list of Events from the past 30 days. The Events are sorted with the most recently created appearing first.
          * @summary List all Events
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
-         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive).
-         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive).
+         * @param {string} [created_at_gte] Minimum &#x60;created_at&#x60; value to filter by (inclusive). Default is 30 days in the past.
+         * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Default is current date.
          * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
@@ -268,14 +268,14 @@ export interface EventsApiListEventsRequest {
     readonly tilled_account: string
 
     /**
-     * Minimum &#x60;created_at&#x60; value to filter by (inclusive).
+     * Minimum &#x60;created_at&#x60; value to filter by (inclusive). Default is 30 days in the past.
      * @type {string}
      * @memberof EventsApiListEvents
      */
     readonly created_at_gte?: string
 
     /**
-     * Maximum &#x60;created_at&#x60; value to filter by (inclusive).
+     * Maximum &#x60;created_at&#x60; value to filter by (inclusive). Default is current date.
      * @type {string}
      * @memberof EventsApiListEvents
      */
@@ -283,7 +283,7 @@ export interface EventsApiListEventsRequest {
 
     /**
      * An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
-     * @type {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'esignature_document.sent' | 'esignature_document.completed' | 'esignature_signer.sent' | 'esignature_signer.viewed' | 'esignature_signer.completed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded'>}
+     * @type {Array<'account.updated' | 'charge.captured' | 'charge.expired' | 'charge.failed' | 'charge.succeeded' | 'charge.pending' | 'charge.refunded' | 'charge.refund.pending' | 'charge.refund.updated' | 'charge.updated' | 'customer.created' | 'customer.deleted' | 'customer.updated' | 'dispute.created' | 'dispute.updated' | 'payment_intent.canceled' | 'payment_intent.created' | 'payment_intent.payment_failed' | 'payment_intent.processing' | 'payment_intent.requires_action' | 'payment_intent.succeeded' | 'payment_intent.amount_capturable_updated' | 'payment_method.attached' | 'payment_method.detached' | 'payment_method.updated' | 'payout.created' | 'payout.failed' | 'payout.paid' | 'payout.updated' | 'platform_fee.created' | 'platform_fee.refunded' | 'subscription.created' | 'subscription.canceled' | 'subscription.updated' | 'report_run.succeeded' | 'report_run.failed' | 'esignature_document.sent' | 'esignature_document.completed' | 'esignature_signer.sent' | 'esignature_signer.viewed' | 'esignature_signer.completed' | 'outbound_transfer.pending' | 'outbound_transfer.failed' | 'outbound_transfer.canceled' | 'outbound_transfer.succeeded' | 'independent_credit.succeeded'>}
      * @memberof EventsApiListEvents
      */
     readonly types?: Array<ListEventsTypes>
@@ -390,6 +390,7 @@ export const ListEventsTypes = {
     OUTBOUND_TRANSFER_PENDING: 'outbound_transfer.pending',
     OUTBOUND_TRANSFER_FAILED: 'outbound_transfer.failed',
     OUTBOUND_TRANSFER_CANCELED: 'outbound_transfer.canceled',
-    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded'
+    OUTBOUND_TRANSFER_SUCCEEDED: 'outbound_transfer.succeeded',
+    INDEPENDENT_CREDIT_SUCCEEDED: 'independent_credit.succeeded'
 } as const;
 export type ListEventsTypes = typeof ListEventsTypes[keyof typeof ListEventsTypes];
