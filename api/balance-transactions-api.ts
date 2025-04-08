@@ -412,7 +412,7 @@ export interface BalanceTransactionsApiGetBalanceTransactionsSummaryRequest {
 
     /**
      * An array containing specific balance transaction types. The data will be filtered to include only transactions with a matching type property.
-     * @type {Array<'charge' | 'charge_failure_refund' | 'dispute' | 'dispute_won' | 'refund' | 'refund_failure' | 'adjustment' | 'commission' | 'payout' | 'payout_cancel' | 'payout_failure' | 'fee' | 'platform_fee' | 'platform_fee_refund' | 'outbound_transfer' | 'outbound_transfer_cancel' | 'outbound_transfer_failure' | 'charge_fee' | 'refund_fee' | 'account_fee' | 'payment_method_fee' | 'tilled_fee'>}
+     * @type {Array<'charge' | 'charge_failure_refund' | 'dispute' | 'dispute_won' | 'refund' | 'refund_failure' | 'adjustment' | 'commission' | 'payout' | 'payout_cancel' | 'payout_failure' | 'fee' | 'platform_fee' | 'platform_fee_refund' | 'outbound_transfer' | 'outbound_transfer_cancel' | 'outbound_transfer_failure' | 'independent_credit' | 'charge_fee' | 'refund_fee' | 'account_fee' | 'payment_method_fee' | 'tilled_fee'>}
      * @memberof BalanceTransactionsApiGetBalanceTransactionsSummary
      */
     readonly types?: Array<GetBalanceTransactionsSummaryTypes>
@@ -454,7 +454,7 @@ export interface BalanceTransactionsApiListBalanceTransactionsRequest {
 
     /**
      * Only return transaction of the given type.
-     * @type {'charge' | 'charge_failure_refund' | 'dispute' | 'dispute_won' | 'refund' | 'refund_failure' | 'adjustment' | 'commission' | 'payout' | 'payout_cancel' | 'payout_failure' | 'fee' | 'platform_fee' | 'platform_fee_refund' | 'outbound_transfer' | 'outbound_transfer_cancel' | 'outbound_transfer_failure' | 'charge_fee' | 'refund_fee' | 'account_fee' | 'payment_method_fee' | 'tilled_fee'}
+     * @type {'charge' | 'charge_failure_refund' | 'dispute' | 'dispute_won' | 'refund' | 'refund_failure' | 'adjustment' | 'commission' | 'payout' | 'payout_cancel' | 'payout_failure' | 'fee' | 'platform_fee' | 'platform_fee_refund' | 'outbound_transfer' | 'outbound_transfer_cancel' | 'outbound_transfer_failure' | 'independent_credit' | 'charge_fee' | 'refund_fee' | 'account_fee' | 'payment_method_fee' | 'tilled_fee'}
      * @memberof BalanceTransactionsApiListBalanceTransactions
      */
     readonly type?: ListBalanceTransactionsType
@@ -1090,6 +1090,7 @@ export const GetBalanceTransactionsSummaryTypes = {
     OUTBOUND_TRANSFER: 'outbound_transfer',
     OUTBOUND_TRANSFER_CANCEL: 'outbound_transfer_cancel',
     OUTBOUND_TRANSFER_FAILURE: 'outbound_transfer_failure',
+    INDEPENDENT_CREDIT: 'independent_credit',
     CHARGE_FEE: 'charge_fee',
     REFUND_FEE: 'refund_fee',
     ACCOUNT_FEE: 'account_fee',
@@ -1118,6 +1119,7 @@ export const ListBalanceTransactionsType = {
     OUTBOUND_TRANSFER: 'outbound_transfer',
     OUTBOUND_TRANSFER_CANCEL: 'outbound_transfer_cancel',
     OUTBOUND_TRANSFER_FAILURE: 'outbound_transfer_failure',
+    INDEPENDENT_CREDIT: 'independent_credit',
     CHARGE_FEE: 'charge_fee',
     REFUND_FEE: 'refund_fee',
     ACCOUNT_FEE: 'account_fee',

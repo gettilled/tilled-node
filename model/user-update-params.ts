@@ -59,7 +59,10 @@ export const UserUpdateParamsRole = {
     MERCHANT_ADMIN: 'merchant_admin',
     RESELLER_OWNER: 'reseller_owner',
     RESELLER_ADMIN: 'reseller_admin',
-    RESELLER_VIEW_ONLY: 'reseller_view_only'
+    RESELLER_VIEW_ONLY: 'reseller_view_only',
+    RESELLER_SALES_REP: 'reseller_sales_rep',
+    RESELLER_SUPPORT_SPECIALIST: 'reseller_support_specialist',
+    RESELLER_INTEGRATION_ANALYST: 'reseller_integration_analyst'
 } as const;
 
 export type UserUpdateParamsRole = typeof UserUpdateParamsRole[keyof typeof UserUpdateParamsRole];

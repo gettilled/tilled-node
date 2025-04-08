@@ -58,6 +58,7 @@ export const ApiKeyUpdateParamsScopes = {
     EVENTSREAD: 'events:read',
     FILESREAD: 'files:read',
     FILESWRITE: 'files:write',
+    INDEPENDENT_CREDITSREAD: 'independent_credits:read',
     ONBOARDINGREAD: 'onboarding:read',
     ONBOARDINGWRITE: 'onboarding:write',
     OUTBOUND_TRANSFERSREAD: 'outbound_transfers:read',

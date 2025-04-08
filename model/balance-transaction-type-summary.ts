@@ -93,6 +93,7 @@ export const BalanceTransactionTypeSummaryType = {
     OUTBOUND_TRANSFER: 'outbound_transfer',
     OUTBOUND_TRANSFER_CANCEL: 'outbound_transfer_cancel',
     OUTBOUND_TRANSFER_FAILURE: 'outbound_transfer_failure',
+    INDEPENDENT_CREDIT: 'independent_credit',
     CHARGE_FEE: 'charge_fee',
     REFUND_FEE: 'refund_fee',
     ACCOUNT_FEE: 'account_fee',
