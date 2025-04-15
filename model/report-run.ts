@@ -88,6 +88,7 @@ export const ReportRunStatus = {
 export type ReportRunStatus = typeof ReportRunStatus[keyof typeof ReportRunStatus];
 export const ReportRunType = {
     PAYMENTS_SUMMARY_1: 'payments_summary_1',
+    PAYMENTS_SUMMARY_2: 'payments_summary_2',
     PAYOUTS_SUMMARY_1: 'payouts_summary_1',
     PAYOUTS_SUMMARY_2: 'payouts_summary_2',
     PAYOUTS_SUMMARY_3: 'payouts_summary_3',

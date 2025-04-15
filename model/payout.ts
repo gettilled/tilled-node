@@ -24,7 +24,7 @@ import type { BalanceTransaction } from './balance-transaction';
  */
 export interface Payout {
     /**
-     * 
+     * The ID of the Account associated with this dispute.
      * @type {string}
      * @memberof Payout
      */
@@ -67,7 +67,7 @@ export interface Payout {
      */
     'status': PayoutStatus;
     /**
-     * Time at which the object was last updated.
+     * Time at which the object was updated.
      * @type {string}
      * @memberof Payout
      */

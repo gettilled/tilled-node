@@ -84,6 +84,7 @@ export const CardDetailsBrand = {
     VISA: 'visa',
     VISA_DEBIT: 'visa_debit',
     VISA_ELECTRON: 'visa_electron',
+    INTERAC: 'interac',
     UNKNOWN: 'unknown'
 } as const;
 
