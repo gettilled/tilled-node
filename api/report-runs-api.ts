@@ -138,7 +138,7 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_2,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
          * @param {Array<ListReportRunsStatus>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
@@ -246,7 +246,7 @@ export const ReportRunsApiFp = function(configuration?: Configuration) {
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ReportRunRetrieveParams} ReportRunRetrieveParams 
-         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+         * @param {Array<ListReportRunsType>} [type] Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_2,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
          * @param {Array<ListReportRunsStatus>} [status] Only return ReportRuns whose status is included by this array. Examples: &#x60;?status&#x3D;finished&#x60; and &#x60;?status&#x3D;finished,queued&#x60;.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
@@ -365,8 +365,8 @@ export interface ReportRunsApiListReportRunsRequest {
     readonly ReportRunRetrieveParams: ReportRunRetrieveParams
 
     /**
-     * Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_1,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
-     * @type {Array<'payments_summary_1' | 'payouts_summary_1' | 'payouts_summary_2' | 'payouts_summary_3' | 'payouts_detail_1' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1' | 'interchange_detail_2'>}
+     * Only return ReportRuns whose type is included by this array. Examples: &#x60;?type&#x3D;payments_summary_2,payouts_summary_2&#x60; and &#x60;?type&#x3D;payouts_summary_2&#x60;.
+     * @type {Array<'payments_summary_1' | 'payments_summary_2' | 'payouts_summary_1' | 'payouts_summary_2' | 'payouts_summary_3' | 'payouts_detail_1' | 'fees_summary_1' | 'processing_summary_1' | 'disputes_summary_1' | 'interchange_detail_1' | 'interchange_detail_2'>}
      * @memberof ReportRunsApiListReportRuns
      */
     readonly type?: Array<ListReportRunsType>
@@ -442,6 +442,7 @@ export class ReportRunsApi extends BaseAPI {
  */
 export const ListReportRunsType = {
     PAYMENTS_SUMMARY_1: 'payments_summary_1',
+    PAYMENTS_SUMMARY_2: 'payments_summary_2',
     PAYOUTS_SUMMARY_1: 'payouts_summary_1',
     PAYOUTS_SUMMARY_2: 'payouts_summary_2',
     PAYOUTS_SUMMARY_3: 'payouts_summary_3',

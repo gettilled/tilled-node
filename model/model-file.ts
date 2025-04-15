@@ -90,7 +90,8 @@ export const ModelFilePurpose = {
     DISPUTE_EVIDENCE: 'dispute_evidence',
     ONBOARDING_DOCUMENTATION: 'onboarding_documentation',
     ISV_COVER_SHEET: 'isv_cover_sheet',
-    STATEMENT: 'statement'
+    STATEMENT: 'statement',
+    BANK_VERIFICATION: 'bank_verification'
 } as const;
 
 export type ModelFilePurpose = typeof ModelFilePurpose[keyof typeof ModelFilePurpose];
