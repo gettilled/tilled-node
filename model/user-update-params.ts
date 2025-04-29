@@ -43,7 +43,7 @@ export interface UserUpdateParams {
      */
     'name'?: string;
     /**
-     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.
+     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.  `account_manager` Best for people who are responsible for managing existing merchant accounts.
      * @type {string}
      * @memberof UserUpdateParams
      */
@@ -51,10 +51,12 @@ export interface UserUpdateParams {
 }
 
 export const UserUpdateParamsRole = {
+    OWNER: 'owner',
     ADMIN: 'admin',
     DEVELOPER: 'developer',
     ANALYST: 'analyst',
     VIEW_ONLY: 'view_only',
+    ACCOUNT_MANAGER: 'account_manager',
     MERCHANT_OWNER: 'merchant_owner',
     MERCHANT_ADMIN: 'merchant_admin',
     RESELLER_OWNER: 'reseller_owner',

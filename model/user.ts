@@ -108,6 +108,7 @@ export const UserRole = {
     DEVELOPER: 'developer',
     ANALYST: 'analyst',
     VIEW_ONLY: 'view_only',
+    ACCOUNT_MANAGER: 'account_manager',
     MERCHANT_OWNER: 'merchant_owner',
     MERCHANT_ADMIN: 'merchant_admin',
     RESELLER_OWNER: 'reseller_owner',

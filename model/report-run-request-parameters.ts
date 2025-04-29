@@ -18,6 +18,9 @@
 import type { ReportAdditionalFilter } from './report-additional-filter';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ReportColumnDefinition } from './report-column-definition';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ReportMetadataKey } from './report-metadata-key';
 
 /**
@@ -50,6 +53,12 @@ export interface ReportRunRequestParameters {
      * @memberof ReportRunRequestParameters
      */
     'additional_filters'?: Array<ReportAdditionalFilter>;
+    /**
+     * 
+     * @type {Array<ReportColumnDefinition>}
+     * @memberof ReportRunRequestParameters
+     */
+    'custom_columns_to_include'?: Array<ReportColumnDefinition>;
     /**
      * List of custom metadata keys to include as columns in the report
      * @type {Array<ReportMetadataKey>}

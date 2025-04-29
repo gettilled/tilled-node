@@ -184,6 +184,7 @@ model/regenerate-signing-links-params.ts
 model/register-dto.ts
 model/register-params.ts
 model/report-additional-filter.ts
+model/report-column-definition.ts
 model/report-metadata-key.ts
 model/report-run-create-params.ts
 model/report-run-request-parameters.ts

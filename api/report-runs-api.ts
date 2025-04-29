@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ListReportRuns200Response } from '../model';
 // @ts-ignore
+import type { ReportColumnDefinition } from '../model';
+// @ts-ignore
 import type { ReportRun } from '../model';
 // @ts-ignore
 import type { ReportRunCreateParams } from '../model';
@@ -100,6 +102,54 @@ export const ReportRunsApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('getReportRun', 'id', id)
             const localVarPath = `/v1/report-runs/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication JWT required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication TilledApiKey required
+            await setApiKeyToObject(localVarHeaderParameter, "tilled-api-key", configuration)
+
+            if (tilled_account != null) {
+                localVarHeaderParameter['tilled-account'] = String(tilled_account);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieves a list of available columns for a given report run type.
+         * @summary List available columns for customization by report run type
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} report_type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listReportCustomColumns: async (tilled_account: string, report_type: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tilled_account' is not null or undefined
+            assertParamExists('listReportCustomColumns', 'tilled_account', tilled_account)
+            // verify required parameter 'report_type' is not null or undefined
+            assertParamExists('listReportCustomColumns', 'report_type', report_type)
+            const localVarPath = `/v1/report-runs/{report_type}/report_columns`
+                .replace(`{${"report_type"}}`, encodeURIComponent(String(report_type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -242,6 +292,20 @@ export const ReportRunsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieves a list of available columns for a given report run type.
+         * @summary List available columns for customization by report run type
+         * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+         * @param {string} report_type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listReportCustomColumns(tilled_account: string, report_type: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ReportColumnDefinition>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listReportCustomColumns(tilled_account, report_type, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportRunsApi.listReportCustomColumns']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a list of Report Runs. The Report Runs are sorted with the most recently created appearing first.
          * @summary List all Report Runs
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
@@ -288,6 +352,16 @@ export const ReportRunsApiFactory = function (configuration?: Configuration, bas
          */
         getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: RawAxiosRequestConfig): AxiosPromise<ReportRun> {
             return localVarFp.getReportRun(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieves a list of available columns for a given report run type.
+         * @summary List available columns for customization by report run type
+         * @param {ReportRunsApiListReportCustomColumnsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listReportCustomColumns(requestParameters: ReportRunsApiListReportCustomColumnsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<ReportColumnDefinition>> {
+            return localVarFp.listReportCustomColumns(requestParameters.tilled_account, requestParameters.report_type, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of Report Runs. The Report Runs are sorted with the most recently created appearing first.
@@ -342,6 +416,27 @@ export interface ReportRunsApiGetReportRunRequest {
      * @memberof ReportRunsApiGetReportRun
      */
     readonly id: string
+}
+
+/**
+ * Request parameters for listReportCustomColumns operation in ReportRunsApi.
+ * @export
+ * @interface ReportRunsApiListReportCustomColumnsRequest
+ */
+export interface ReportRunsApiListReportCustomColumnsRequest {
+    /**
+     * The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
+     * @type {string}
+     * @memberof ReportRunsApiListReportCustomColumns
+     */
+    readonly tilled_account: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ReportRunsApiListReportCustomColumns
+     */
+    readonly report_type: string
 }
 
 /**
@@ -422,6 +517,18 @@ export class ReportRunsApi extends BaseAPI {
      */
     public getReportRun(requestParameters: ReportRunsApiGetReportRunRequest, options?: RawAxiosRequestConfig) {
         return ReportRunsApiFp(this.configuration).getReportRun(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieves a list of available columns for a given report run type.
+     * @summary List available columns for customization by report run type
+     * @param {ReportRunsApiListReportCustomColumnsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportRunsApi
+     */
+    public listReportCustomColumns(requestParameters: ReportRunsApiListReportCustomColumnsRequest, options?: RawAxiosRequestConfig) {
+        return ReportRunsApiFp(this.configuration).listReportCustomColumns(requestParameters.tilled_account, requestParameters.report_type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
