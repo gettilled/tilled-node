@@ -17,52 +17,40 @@
 /**
  * 
  * @export
- * @interface UserCreateParams
+ * @interface ReportColumnDefinition
  */
-export interface UserCreateParams {
+export interface ReportColumnDefinition {
     /**
-     * Email address
+     * 
      * @type {string}
-     * @memberof UserCreateParams
+     * @memberof ReportColumnDefinition
      */
-    'email': string;
+    'column': string;
     /**
-     * Full name
+     * 
      * @type {string}
-     * @memberof UserCreateParams
+     * @memberof ReportColumnDefinition
      */
-    'name': string;
+    'description': string;
     /**
-     * Password. Requires 1 alphabetic and 1 numeric character and a minimum length of 7.
+     * 
      * @type {string}
-     * @memberof UserCreateParams
+     * @memberof ReportColumnDefinition
      */
-    'password': string;
-    /**
-     * The user\'s role, primarily used in the Tilled Dashboard. The roles have varied restrictions on the actions they can take.  `admin` Best for business owners and company administrators.  `developer` Best for developers or people primarily using the Tilled API.  `analyst` Best for people who need full access to Tilled data, but don\'t need to update business settings.  `view_only` Best for people who need to view Tilled data, but don\'t need to make any updates.  `account_manager` Best for people who are responsible for managing existing merchant accounts.
-     * @type {string}
-     * @memberof UserCreateParams
-     */
-    'role': UserCreateParamsRole;
+    'grouping': ReportColumnDefinitionGrouping;
 }
 
-export const UserCreateParamsRole = {
-    OWNER: 'owner',
-    ADMIN: 'admin',
-    DEVELOPER: 'developer',
-    ANALYST: 'analyst',
-    VIEW_ONLY: 'view_only',
-    ACCOUNT_MANAGER: 'account_manager',
-    MERCHANT_OWNER: 'merchant_owner',
-    MERCHANT_ADMIN: 'merchant_admin',
-    RESELLER_OWNER: 'reseller_owner',
-    RESELLER_ADMIN: 'reseller_admin',
-    RESELLER_VIEW_ONLY: 'reseller_view_only',
-    RESELLER_SALES_REP: 'reseller_sales_rep',
-    RESELLER_SUPPORT_SPECIALIST: 'reseller_support_specialist',
-    RESELLER_INTEGRATION_ANALYST: 'reseller_integration_analyst'
+export const ReportColumnDefinitionGrouping = {
+    CUSTOMER_DETAILS: 'customer details',
+    PAYMENT_DETAILS: 'payment details',
+    PAYMENT_METHOD_DETAILS: 'payment method details',
+    PAYOUT_DETAILS: 'payout details',
+    RESELLER_DETAILS: 'reseller details',
+    SOFTWARE_PLATFORM_DETAILS: 'software platform details',
+    SUBSCRIPTION_DETAILS: 'subscription details',
+    TERMINAL_DETAILS: 'terminal details'
 } as const;
 
-export type UserCreateParamsRole = typeof UserCreateParamsRole[keyof typeof UserCreateParamsRole];
+export type ReportColumnDefinitionGrouping = typeof ReportColumnDefinitionGrouping[keyof typeof ReportColumnDefinitionGrouping];
 
 

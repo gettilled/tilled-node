@@ -152,6 +152,7 @@ export * from './regenerate-signing-links-params';
 export * from './register-dto';
 export * from './register-params';
 export * from './report-additional-filter';
+export * from './report-column-definition';
 export * from './report-metadata-key';
 export * from './report-run';
 export * from './report-run-create-params';
