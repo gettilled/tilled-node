@@ -222,7 +222,7 @@ export const TerminalReadersApiAxiosParamCreator = function (configuration?: Con
          * @summary Update a Terminal Reader
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams 
+         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams The parameters to update the Terminal Reader
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -335,7 +335,7 @@ export const TerminalReadersApiFp = function(configuration?: Configuration) {
          * @summary Update a Terminal Reader
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams 
+         * @param {TerminalReaderUpdateParams} TerminalReaderUpdateParams The parameters to update the Terminal Reader
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -525,7 +525,7 @@ export interface TerminalReadersApiUpdateTerminalRequest {
     readonly id: string
 
     /**
-     * 
+     * The parameters to update the Terminal Reader
      * @type {TerminalReaderUpdateParams}
      * @memberof TerminalReadersApiUpdateTerminal
      */

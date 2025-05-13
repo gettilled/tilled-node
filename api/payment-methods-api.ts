@@ -46,7 +46,7 @@ export const PaymentMethodsApiAxiosParamCreator = function (configuration?: Conf
          * @summary Attach a Payment Method to a Customer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {PaymentMethodAttachParams} PaymentMethodAttachParams 
+         * @param {PaymentMethodAttachParams} PaymentMethodAttachParams The parameters to attach the Payment Method
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -436,7 +436,7 @@ export const PaymentMethodsApiFp = function(configuration?: Configuration) {
          * @summary Attach a Payment Method to a Customer
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {string} id 
-         * @param {PaymentMethodAttachParams} PaymentMethodAttachParams 
+         * @param {PaymentMethodAttachParams} PaymentMethodAttachParams The parameters to attach the Payment Method
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -641,7 +641,7 @@ export interface PaymentMethodsApiAttachPaymentMethodToCustomerRequest {
     readonly id: string
 
     /**
-     * 
+     * The parameters to attach the Payment Method
      * @type {PaymentMethodAttachParams}
      * @memberof PaymentMethodsApiAttachPaymentMethodToCustomer
      */

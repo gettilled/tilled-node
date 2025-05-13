@@ -21,12 +21,6 @@
  */
 export interface RegenerateSigningLinksParams {
     /**
-     * The unique identifier for the merchant application. This is optional and will default to the most recent application if not provided.
-     * @type {string}
-     * @memberof RegenerateSigningLinksParams
-     */
-    'application_id'?: string;
-    /**
      * The redirect URL to send the merchant to after signing the application. This is optional and will default to the application\'s redirect URL if not provided.
      * @type {string}
      * @memberof RegenerateSigningLinksParams
