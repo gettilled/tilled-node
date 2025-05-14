@@ -55,6 +55,7 @@ export const UserCreateParamsRole = {
     ACCOUNT_MANAGER: 'account_manager',
     MERCHANT_OWNER: 'merchant_owner',
     MERCHANT_ADMIN: 'merchant_admin',
+    MERCHANT_VIEW_ONLY: 'merchant_view_only',
     RESELLER_OWNER: 'reseller_owner',
     RESELLER_ADMIN: 'reseller_admin',
     RESELLER_VIEW_ONLY: 'reseller_view_only',
