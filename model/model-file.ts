@@ -103,7 +103,8 @@ export const ModelFileType = {
     TIFF: 'tiff',
     ICO: 'ico',
     XLSX: 'xlsx',
-    XLS: 'xls'
+    XLS: 'xls',
+    ZIP: 'zip'
 } as const;
 
 export type ModelFileType = typeof ModelFileType[keyof typeof ModelFileType];
