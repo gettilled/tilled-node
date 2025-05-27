@@ -91,6 +91,7 @@ export const ApiKeyCreateParamsScopes = {
     REPORT_RUNSWRITE: 'report_runs:write',
     REQUEST_LOGSREAD: 'request_logs:read',
     STATEMENTSREAD: 'statements:read',
+    STATEMENTSWRITE: 'statements:write',
     SUBSCRIPTIONSREAD: 'subscriptions:read',
     SUBSCRIPTIONSWRITE: 'subscriptions:write',
     TERMINAL_READERSREAD: 'terminal_readers:read',
