@@ -144,6 +144,12 @@ export interface OnboardingLegalEntity {
      */
     'tax_id_number': string;
     /**
+     * Required for Paysafe merchants.  The average refund days for which refund policy is applicable after the transaction. Supported values are 0-100 days.
+     * @type {number}
+     * @memberof OnboardingLegalEntity
+     */
+    'average_refund_days'?: number;
+    /**
      * Required for TSYS merchants. The number of days billed prior to goods being shipped.
      * @type {number}
      * @memberof OnboardingLegalEntity
