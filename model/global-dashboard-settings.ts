@@ -21,6 +21,12 @@
  */
 export interface GlobalDashboardSettings {
     /**
+     * Flag for controlling ability to access the developers page from the dashboard
+     * @type {boolean}
+     * @memberof GlobalDashboardSettings
+     */
+    'developers'?: boolean | null;
+    /**
      * Flag for controlling ability to create payments from the dashboard
      * @type {boolean}
      * @memberof GlobalDashboardSettings

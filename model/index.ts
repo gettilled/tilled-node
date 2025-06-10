@@ -69,6 +69,7 @@ export * from './esignature-signer';
 export * from './event';
 export * from './forgot-password-params';
 export * from './global-dashboard-settings';
+export * from './global-dashboard-settings-create-params';
 export * from './global-email-settings';
 export * from './health-output';
 export * from './level3';

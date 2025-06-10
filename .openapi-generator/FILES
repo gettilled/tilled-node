@@ -99,6 +99,7 @@ model/esignature-document.ts
 model/esignature-signer.ts
 model/event.ts
 model/forgot-password-params.ts
+model/global-dashboard-settings-create-params.ts
 model/global-dashboard-settings.ts
 model/global-email-settings.ts
 model/health-output.ts
