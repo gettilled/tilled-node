@@ -52,7 +52,7 @@ export interface AccountSettingsBranding {
      */
     'global_email_notifications': boolean;
     /**
-     * Turn on or off email notifications for different email types, for all merchants, by default. Individual merchants can override these settings later. Defaults to true for all types.
+     * Turn on or off email notifications for different email types, for direct children accounts, by default. Individual accounts can override these settings later. Defaults to true for all types.
      * @type {GlobalEmailSettings}
      * @memberof AccountSettingsBranding
      */

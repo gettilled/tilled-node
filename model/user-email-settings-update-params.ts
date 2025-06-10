@@ -21,6 +21,12 @@
  */
 export interface UserEmailSettingsUpdateParams {
     /**
+     * Indicates if the user is receiving commission related emails.
+     * @type {boolean}
+     * @memberof UserEmailSettingsUpdateParams
+     */
+    'commissions'?: boolean | null;
+    /**
      * Indicates if the user is receiving dispute related emails.
      * @type {boolean}
      * @memberof UserEmailSettingsUpdateParams

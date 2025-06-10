@@ -17,32 +17,14 @@
 /**
  * 
  * @export
- * @interface UserEmailSettings
+ * @interface GlobalDashboardSettingsCreateParams
  */
-export interface UserEmailSettings {
+export interface GlobalDashboardSettingsCreateParams {
     /**
-     * Indicates if the user is receiving commission related emails.
+     * Flag for controlling ability to create payments from the dashboard
      * @type {boolean}
-     * @memberof UserEmailSettings
+     * @memberof GlobalDashboardSettingsCreateParams
      */
-    'commissions'?: boolean | null;
-    /**
-     * Indicates if the user is receiving dispute related emails.
-     * @type {boolean}
-     * @memberof UserEmailSettings
-     */
-    'disputes'?: boolean | null;
-    /**
-     * Indicates if the user is receiving document request related emails.
-     * @type {boolean}
-     * @memberof UserEmailSettings
-     */
-    'documents'?: boolean | null;
-    /**
-     * Indicates if the partner user is receiving onboarding related emails.
-     * @type {boolean}
-     * @memberof UserEmailSettings
-     */
-    'onboarding'?: boolean | null;
+    'payments'?: boolean;
 }
 

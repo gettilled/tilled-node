@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GlobalDashboardSettings } from './global-dashboard-settings';
+import type { GlobalDashboardSettingsCreateParams } from './global-dashboard-settings-create-params';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GlobalEmailSettings } from './global-email-settings';
@@ -34,10 +34,10 @@ export interface AccountSettingsBrandingCreateParams {
     'dark_mode_logo_file_id'?: string;
     /**
      * Turn on or off dashboard preferences for all merchants by default. These settings can not be overridden by individual merchants, and are set by the partner. Defaults to true for all types.
-     * @type {GlobalDashboardSettings}
+     * @type {GlobalDashboardSettingsCreateParams}
      * @memberof AccountSettingsBrandingCreateParams
      */
-    'global_dashboard_settings'?: GlobalDashboardSettings;
+    'global_dashboard_settings'?: GlobalDashboardSettingsCreateParams;
     /**
      * *Will set every `global_email_settings` email type to the specified boolean value if `global_email_settings` not provided.*  Turn on or off email notifications for all merchants by default. Individual merchants can override these settings later. Defaults to true.
      * @type {boolean}
@@ -46,7 +46,7 @@ export interface AccountSettingsBrandingCreateParams {
      */
     'global_email_notifications'?: boolean;
     /**
-     * Turn on or off email notifications for different email types, for all merchants, by default. Individual merchants can override these settings later. Defaults to true for all types.
+     * Turn on or off email notifications for different email types, for direct children accounts, by default. Individual accounts can override these settings later. Defaults to true for all types.
      * @type {GlobalEmailSettings}
      * @memberof AccountSettingsBrandingCreateParams
      */
