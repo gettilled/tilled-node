@@ -21,6 +21,12 @@
  */
 export interface GlobalEmailSettings {
     /**
+     * Flag for commission statement email notifications
+     * @type {boolean}
+     * @memberof GlobalEmailSettings
+     */
+    'commissions'?: boolean;
+    /**
      * Flag for dispute email notifications
      * @type {boolean}
      * @memberof GlobalEmailSettings
