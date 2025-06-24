@@ -25,12 +25,24 @@ export interface GlobalDashboardSettings {
      * @type {boolean}
      * @memberof GlobalDashboardSettings
      */
-    'developers'?: boolean | null;
+    'developers'?: boolean;
     /**
      * Flag for controlling ability to create payments from the dashboard
      * @type {boolean}
      * @memberof GlobalDashboardSettings
      */
     'payments'?: boolean;
+    /**
+     * Flag for controlling ability to create and manage pricing templates from the dashboard
+     * @type {boolean}
+     * @memberof GlobalDashboardSettings
+     */
+    'pricing_templates'?: boolean;
+    /**
+     * Flag for controlling ability to configure white label settings or access the page from the dashboard
+     * @type {boolean}
+     * @memberof GlobalDashboardSettings
+     */
+    'white_label'?: boolean;
 }
 
