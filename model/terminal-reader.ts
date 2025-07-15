@@ -81,6 +81,7 @@ export interface TerminalReader {
 
 export const TerminalReaderType = {
     VL_100: 'vl_100',
+    VL_100_PRO: 'vl_100_pro',
     VL_110: 'vl_110',
     VP_500: 'vp_500'
 } as const;
