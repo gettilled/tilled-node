@@ -83,7 +83,10 @@ export const TerminalReaderType = {
     VL_100: 'vl_100',
     VL_100_PRO: 'vl_100_pro',
     VL_110: 'vl_110',
-    VP_500: 'vp_500'
+    VL_550: 'vl_550',
+    VP_500: 'vp_500',
+    VP_550: 'vp_550',
+    VP_550E: 'vp_550e'
 } as const;
 
 export type TerminalReaderType = typeof TerminalReaderType[keyof typeof TerminalReaderType];
