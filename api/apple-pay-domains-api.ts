@@ -39,6 +39,7 @@ export const ApplePayDomainsApiAxiosParamCreator = function (configuration?: Con
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ApplePayDomainCreateParams} ApplePayDomainCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createApplePayDomain: async (tilled_account: string, ApplePayDomainCreateParams: ApplePayDomainCreateParams, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -89,6 +90,7 @@ export const ApplePayDomainsApiAxiosParamCreator = function (configuration?: Con
          * @param {string} id 
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteApplePayDomain: async (id: string, tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -137,6 +139,7 @@ export const ApplePayDomainsApiAxiosParamCreator = function (configuration?: Con
          * @param {string} id 
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getApplePayDomain: async (id: string, tilled_account: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -186,6 +189,7 @@ export const ApplePayDomainsApiAxiosParamCreator = function (configuration?: Con
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         listApplePayDomains: async (tilled_account: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -249,6 +253,7 @@ export const ApplePayDomainsApiFp = function(configuration?: Configuration) {
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {ApplePayDomainCreateParams} ApplePayDomainCreateParams 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createApplePayDomain(tilled_account: string, ApplePayDomainCreateParams: ApplePayDomainCreateParams, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApplePayDomain>> {
@@ -263,6 +268,7 @@ export const ApplePayDomainsApiFp = function(configuration?: Configuration) {
          * @param {string} id 
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteApplePayDomain(id: string, tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
@@ -277,6 +283,7 @@ export const ApplePayDomainsApiFp = function(configuration?: Configuration) {
          * @param {string} id 
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getApplePayDomain(id: string, tilled_account: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApplePayDomain>> {
@@ -292,6 +299,7 @@ export const ApplePayDomainsApiFp = function(configuration?: Configuration) {
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async listApplePayDomains(tilled_account: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListApplePayDomains200Response>> {
@@ -315,6 +323,7 @@ export const ApplePayDomainsApiFactory = function (configuration?: Configuration
          * @summary Create an Apple Pay Domain
          * @param {ApplePayDomainsApiCreateApplePayDomainRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createApplePayDomain(requestParameters: ApplePayDomainsApiCreateApplePayDomainRequest, options?: RawAxiosRequestConfig): AxiosPromise<ApplePayDomain> {
@@ -325,6 +334,7 @@ export const ApplePayDomainsApiFactory = function (configuration?: Configuration
          * @summary Delete an Apple Pay Domain
          * @param {ApplePayDomainsApiDeleteApplePayDomainRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteApplePayDomain(requestParameters: ApplePayDomainsApiDeleteApplePayDomainRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
@@ -335,6 +345,7 @@ export const ApplePayDomainsApiFactory = function (configuration?: Configuration
          * @summary Get an Apple Pay Domain
          * @param {ApplePayDomainsApiGetApplePayDomainRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getApplePayDomain(requestParameters: ApplePayDomainsApiGetApplePayDomainRequest, options?: RawAxiosRequestConfig): AxiosPromise<ApplePayDomain> {
@@ -345,6 +356,7 @@ export const ApplePayDomainsApiFactory = function (configuration?: Configuration
          * @summary List all Apple Pay Domains
          * @param {ApplePayDomainsApiListApplePayDomainsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         listApplePayDomains(requestParameters: ApplePayDomainsApiListApplePayDomainsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListApplePayDomains200Response> {
@@ -456,6 +468,7 @@ export class ApplePayDomainsApi extends BaseAPI {
      * @summary Create an Apple Pay Domain
      * @param {ApplePayDomainsApiCreateApplePayDomainRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ApplePayDomainsApi
      */
@@ -468,6 +481,7 @@ export class ApplePayDomainsApi extends BaseAPI {
      * @summary Delete an Apple Pay Domain
      * @param {ApplePayDomainsApiDeleteApplePayDomainRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ApplePayDomainsApi
      */
@@ -480,6 +494,7 @@ export class ApplePayDomainsApi extends BaseAPI {
      * @summary Get an Apple Pay Domain
      * @param {ApplePayDomainsApiGetApplePayDomainRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ApplePayDomainsApi
      */
@@ -492,6 +507,7 @@ export class ApplePayDomainsApi extends BaseAPI {
      * @summary List all Apple Pay Domains
      * @param {ApplePayDomainsApiListApplePayDomainsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ApplePayDomainsApi
      */

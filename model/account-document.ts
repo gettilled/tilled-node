@@ -75,6 +75,7 @@ export const AccountDocumentSubtype = {
     PROCESSING_STATEMENT: 'processing_statement',
     FINANCIAL_STATEMENT: 'financial_statement',
     _501C3: '501c3',
+    T3010: 't3010',
     TAX_RETURN: 'tax_return',
     INVOICE: 'invoice',
     DL_PASSPORT: 'dl_passport',
@@ -87,6 +88,9 @@ export const AccountDocumentSubtype = {
     PRICING_MODEL: 'pricing_model',
     WEBSITE: 'website',
     SHOPPING_CART: 'shopping_cart',
+    ADMIN_RETURN: 'admin_return',
+    UNAUTHORIZED_RETURN: 'unauthorized_return',
+    INSUFFICIENT_FUNDS_RETURN: 'insufficient_funds_return',
     OTHER: 'other'
 } as const;
 

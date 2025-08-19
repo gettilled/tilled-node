@@ -188,7 +188,7 @@ export const AccountsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Deletes a merchant Account. This cannot be undone.
+         * Deletes a connected Account. This cannot be undone.
          * @summary Delete a Connected Account
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
@@ -523,7 +523,7 @@ export const AccountsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a merchant Account. This cannot be undone.
+         * Deletes a connected Account. This cannot be undone.
          * @summary Delete a Connected Account
          * @param {string} tilled_account The id of the Tilled Account (usually starting with the prefix &#x60;acct_&#x60;) that the request is performed on behalf of.
          * @param {*} [options] Override http request option.
@@ -640,7 +640,7 @@ export const AccountsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.deleteAccountCapability(requestParameters.tilled_account, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a merchant Account. This cannot be undone.
+         * Deletes a connected Account. This cannot be undone.
          * @summary Delete a Connected Account
          * @param {AccountsApiDeleteConnectedAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -953,7 +953,7 @@ export class AccountsApi extends BaseAPI {
     }
 
     /**
-     * Deletes a merchant Account. This cannot be undone.
+     * Deletes a connected Account. This cannot be undone.
      * @summary Delete a Connected Account
      * @param {AccountsApiDeleteConnectedAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
