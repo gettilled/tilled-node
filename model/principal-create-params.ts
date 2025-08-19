@@ -30,7 +30,7 @@ export interface PrincipalCreateParams {
      */
     'address': OnboardingAddress;
     /**
-     * This person\'s date of birth. Format must be ISO8601 (e.g. \'2000-01-25\'; format \'YYYY-MM-DD\'). Currently the person must be older than 18 years of age.
+     * This person\'s date of birth. Format must be ISO8601 (e.g. \'2000-01-25\' or \'2000-01-25T00:00:00Z\'; format \'YYYY-MM-DD\' or \'YYYY-MM-DDTHH:mm:ssZ\'). Currently the person must be older than 18 years of age.
      * @type {string}
      * @memberof PrincipalCreateParams
      */
