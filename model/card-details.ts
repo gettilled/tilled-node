@@ -93,6 +93,7 @@ export const CardDetailsFunding = {
     CREDIT: 'credit',
     DEBIT: 'debit',
     PREPAID: 'prepaid',
+    CHARGE_CARD: 'charge_card',
     UNKNOWN: 'unknown'
 } as const;
 
