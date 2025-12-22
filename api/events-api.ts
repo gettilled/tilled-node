@@ -87,12 +87,13 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Default is current date.
          * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listEvents: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listEvents: async (tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, include_connected_accounts?: boolean, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tilled_account' is not null or undefined
             assertParamExists('listEvents', 'tilled_account', tilled_account)
             const localVarPath = `/v1/events`;
@@ -132,6 +133,10 @@ export const EventsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (object_id !== undefined) {
                 localVarQueryParameter['object_id'] = object_id;
+            }
+
+            if (include_connected_accounts !== undefined) {
+                localVarQueryParameter['include_connected_accounts'] = include_connected_accounts;
             }
 
             if (offset !== undefined) {
@@ -189,13 +194,14 @@ export const EventsApiFp = function(configuration?: Configuration) {
          * @param {string} [created_at_lte] Maximum &#x60;created_at&#x60; value to filter by (inclusive). Default is current date.
          * @param {Array<ListEventsTypes>} [types] An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property.
          * @param {string} [object_id] Id of related resource. The list will be filtered to include events that are related to the resource with this id.
+         * @param {boolean} [include_connected_accounts] Whether or not to include the results from any connected accounts.
          * @param {number} [offset] The (zero-based) offset of the first item in the collection to return.
          * @param {number} [limit] The maximum number of entries to return. If the value exceeds the maximum, then the maximum value will be used.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listEvents(tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListEvents200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listEvents(tilled_account, created_at_gte, created_at_lte, types, object_id, offset, limit, options);
+        async listEvents(tilled_account: string, created_at_gte?: string, created_at_lte?: string, types?: Array<ListEventsTypes>, object_id?: string, include_connected_accounts?: boolean, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListEvents200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listEvents(tilled_account, created_at_gte, created_at_lte, types, object_id, include_connected_accounts, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EventsApi.listEvents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -228,7 +234,7 @@ export const EventsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         listEvents(requestParameters: EventsApiListEventsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListEvents200Response> {
-            return localVarFp.listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.include_connected_accounts, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -296,6 +302,13 @@ export interface EventsApiListEventsRequest {
     readonly object_id?: string
 
     /**
+     * Whether or not to include the results from any connected accounts.
+     * @type {boolean}
+     * @memberof EventsApiListEvents
+     */
+    readonly include_connected_accounts?: boolean
+
+    /**
      * The (zero-based) offset of the first item in the collection to return.
      * @type {number}
      * @memberof EventsApiListEvents
@@ -338,7 +351,7 @@ export class EventsApi extends BaseAPI {
      * @memberof EventsApi
      */
     public listEvents(requestParameters: EventsApiListEventsRequest, options?: RawAxiosRequestConfig) {
-        return EventsApiFp(this.configuration).listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return EventsApiFp(this.configuration).listEvents(requestParameters.tilled_account, requestParameters.created_at_gte, requestParameters.created_at_lte, requestParameters.types, requestParameters.object_id, requestParameters.include_connected_accounts, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
